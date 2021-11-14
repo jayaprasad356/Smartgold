@@ -42,17 +42,17 @@ class custom_functions
             }
         }
         function users_rows_count($table, $field = '*')
-    {
-        
-        // Total count
-        
-        $sql = "SELECT COUNT(" . $field . ") as total FROM " . $table;
-        $this->db->sql($sql);
-        $res = $this->db->getResult();
-        foreach ($res as $row)
-            return ($row['total'] != "") ? $row['total'] : 0;
+        {
             
-    }
+            // Total count
+            
+            $sql = "SELECT COUNT(" . $field . ") as total FROM " . $table;
+            $this->db->sql($sql);
+            $res = $this->db->getResult();
+            foreach ($res as $row)
+                return ($row['total'] != "") ? $row['total'] : 0;
+                
+        }
     function products_my_rows_count($table,$id, $field = '*')
     {
         

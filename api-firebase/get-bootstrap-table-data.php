@@ -151,6 +151,61 @@ if (isset($_GET['table']) && $_GET['table'] == 'category') {
     $bulkData['rows'] = $rows;
     print_r(json_encode($bulkData));
 }
+// data of 'Sellers Nickename' table goes here
+if (isset($_GET['table']) && $_GET['table'] == 'nickname') {
+
+    
+
+
+    $sql = "SELECT * FROM `nickname`";
+    $db->sql($sql);
+    $res = $db->getResult();
+
+    
+    $rows = array();
+    $tempRow = array();
+
+    foreach ($res as $row) {
+
+        
+        
+        $tempRow['id'] = $row['id'];
+        $tempRow['name'] = $row['nickname'];
+        
+    
+        $rows[] = $tempRow;
+    }
+    $bulkData['rows'] = $rows;
+    print_r(json_encode($bulkData));
+}
+// data of 'Price/Duration' table goes here
+if (isset($_GET['table']) && $_GET['table'] == 'settings') {
+
+    
+
+
+    $sql = "SELECT * FROM `settings`";
+    $db->sql($sql);
+    $res = $db->getResult();
+
+    
+    $rows = array();
+    $tempRow = array();
+
+    foreach ($res as $row) {
+
+        
+        
+        $tempRow['id'] = $row['id'];
+        $tempRow['price'] = $row['price'];
+        $tempRow['days'] = $row['days'];
+        
+    
+        $rows[] = $tempRow;
+    }
+    $bulkData['rows'] = $rows;
+    print_r(json_encode($bulkData));
+}
 
 
 
