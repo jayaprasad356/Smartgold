@@ -33,7 +33,7 @@ if (empty($_POST['budget_range_id'])) {
 $latitude = $db->escapeString($_POST['latitude']);
 $longitude = $db->escapeString($_POST['longitude']);
 $budget_range_id = $db->escapeString($_POST['budget_range_id']);
-$sql = "SELECT * FROM offers,seller,budget WHERE offers.seller_id = seller.id AND offers.budget_id = budget.id";
+$sql = "SELECT * FROM offers,seller,budget WHERE offers.seller_id = seller.id AND offers.budget_id = budget.id AND offers.budget_id = $budget_range_id";
 $db->sql($sql);
 $res = $db->getResult();
 $num = $db->numRows($res);
@@ -46,6 +46,7 @@ if ($num >= 1) {
     foreach ($res as $row) 
     {
         $tempRow['nick_name'] = 'Reputed Shop';
+        $tempRow['seller_id'] = $row['seller_id'];
         $tempRow['budget'] = $row['budget'];
         $tempRow['gram_price'] = $row['gram_price'];
         $tempRow['wastage'] = $row['wastage'];
