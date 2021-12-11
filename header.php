@@ -204,36 +204,13 @@ $db->sql("SET NAMES 'utf8'");
                         
                     </a>
                     <ul class="treeview-menu">
-                        
-                        
-                        <li><a href="sellers-nickname.php"><i class="fa fa-plus"></i>Add Seller Nick Name</a></li>
-
-                        <li><a href="price-duration.php"><i class="fa fa-sliders"></i>Price/Duration</a></li>
-
-
-                        
-                        
+                        <li><a href="sellers-nickname.php"><i class="fa fa-sliders"></i>Seller Nick Name</a></li>
+                        <li><a href="add-price-duration.php"><i class="fa fa-sliders"></i>Price/Duration</a></li>
+                        <li><a href="delivery_settings.php"><i class="fa fa-sliders"></i>Delivery Charges/Days</a></li>
                     </ul>
                 </li>
-                <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-male"></i>
-                        <span>Banners</span>
-                        <i class="fa fa-angle-right pull-right"></i>
-                        
-                    </a>
-                    <ul class="treeview-menu">
-                        
-                        
-                        <li><a href="add-banner.php"><i class="fa fa-plus"></i>Add Banner</a></li>
-
-                        <li><a href="banners.php"><i class="fa fa-sliders"></i>Manage Banners</a></li>
-
-
-                        
-                        
-                    </ul>
-                </li>
+                
+                
                     
                 
             </ul>

@@ -62,15 +62,33 @@ $area = $db->escapeString($_POST['area']);
 $city = $db->escapeString($_POST['city']);
 $pincode = $db->escapeString($_POST['pincode']);
 
-
-$sql = "INSERT INTO address(`user_id`,`name`,`address`, `landmark`, `area`, `city`, `pincode`)VALUES('$user_id','$name','$address','$landmark','$area','$city','$pincode')";
+$sql = "SELECT * FROM address WHERE user_id = '" . $user_id . "'";
 $db->sql($sql);
 $res = $db->getResult();
-$response['success'] = true;
-$response['message'] = "Address added successfully";
-        
-$response['data'] = $res;
-print_r(json_encode($response));
+$num = $db->numRows($res);
+if ($num >= 1) {
+    $sql = "INSERT INTO address(`user_id`,`name`,`address`, `landmark`, `area`, `city`, `pincode`)VALUES('$user_id','$name','$address','$landmark','$area','$city','$pincode')";
+    $db->sql($sql);
+    $res = $db->getResult();
+    $response['success'] = true;
+    $response['message'] = "Address added successfully";
+
+    $response['data'] = $res;
+    print_r(json_encode($response));
+
+}
+else {
+    $sql = "INSERT INTO address(`user_id`,`name`,`address`, `landmark`, `area`, `city`, `pincode`, `default_address`)VALUES('$user_id','$name','$address','$landmark','$area','$city','$pincode',1)";
+    $db->sql($sql);
+    $res = $db->getResult();
+    $response['success'] = true;
+    $response['message'] = "Address added successfully";
+            
+    $response['data'] = $res;
+    print_r(json_encode($response));
+
+}
+
 
 
 ?>

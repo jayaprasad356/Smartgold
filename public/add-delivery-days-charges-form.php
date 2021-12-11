@@ -1,19 +1,20 @@
 <?php
+
+
 if (isset($_POST['btnAdd'])) {
     $price = $db->escapeString($_POST['price']);
     $days = $db->escapeString($_POST['days']);
-    
-    $sql_query = "UPDATE settings SET price = '" . $price . "' , days = '" . $days . "' WHERE id = 1";
+    $sql_query = "UPDATE delivery SET charges = '" . $price . "' , days = '" . $days . "' WHERE id = 1";
     $db->sql($sql_query);
-    echo( "<section class='content-header'><span class='label label-success'> Price and Duration Updated</span></section>");
+    echo( "<section class='content-header'><span class='label label-success'> updated Successfully</span></section>");
     
 }
-$sql = "SELECT * FROM settings";
+$sql = "SELECT * FROM delivery";
 $db->sql($sql);
-$res = $db->getResult();
+$resdel = $db->getResult();
 ?>
 <section class="content-header">
-    <h1>Add Price/Duration <small><a href='smart gold settings.php'> <i class='fa fa-angle-double-left'></i>&nbsp;&nbsp;&nbsp;Back to Settings</a></small></h1>
+    <h1>Add Delivery-Charges/Days <small><a href='smart gold settings.php'> <i class='fa fa-angle-double-left'></i>&nbsp;&nbsp;&nbsp;Back to Settings</a></small></h1>
     <ol class="breadcrumb">
         <li><a href="home.php"><i class="fa fa-home"></i> Home</a></li>
     </ol>
@@ -26,7 +27,7 @@ $res = $db->getResult();
                 <!-- general form elements -->
                 <div class="box box-primary">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Add Price/Duration</h3>
+                        <h3 class="box-title">Add Delivery-Charges/Days</h3>
 
                     </div><!-- /.box-header -->
 
@@ -36,15 +37,15 @@ $res = $db->getResult();
                             <div class="row">
                                 <div class="form-group col-md-4">
                                     <div class="form-group">
-                                        <label for="">Enter Price</label>
-                                        <input type="text" class="form-control" name="price" id="name" value="<?php echo $res[0]['price'] ?>" required>
+                                        <label for="">Enter Charges</label>
+                                        <input type="text" class="form-control" name="price" id="name" value="<?php echo $resdel[0]['charges'] ?>" required>
                                     </div>
                                 </div>
                                 <div class="row">
                                 <div class="form-group col-md-4">
                                     <div class="form-group">
                                         <label for="">Enter days</label>
-                                        <input type="text" class="form-control" name="days" id="name" value="<?php echo $res[0]['days'] ?>" required>
+                                        <input type="text" class="form-control" name="days" id="name" value="<?php echo $resdel[0]['days'] ?>" required>
                                     </div>
                                 </div>
                                 
@@ -52,7 +53,7 @@ $res = $db->getResult();
                             
                         </div><!-- /.box-body -->
                         <div class="box-footer">
-                            <button type="submit" class="btn btn-primary" id="submit_btn" name="btnAdd">Update</button>
+                            <button type="submit" class="btn btn-primary" id="submit_btn" name="btnAdd">Add</button>
                             <input type="reset" class="btn-warning btn" value="Clear" />
                             <div id="result" style="display: none;"></div>
                         </div>

@@ -11,39 +11,28 @@ include_once('../includes/crud.php');
 $db = new Database();
 $db->connect();
 
-if (empty($_POST['seller_id'])) {
-    $response['success'] = false;
-    $response['message'] = "Seller ID is Empty";
-    print_r(json_encode($response));
-    return false;
-}
-$seller_id = $db->escapeString($_POST['seller_id']);
-$sql = "SELECT * FROM products WHERE seller_id = '" . $seller_id . "'";
+
+$sql = "SELECT * FROM category";
 $db->sql($sql);
 $res = $db->getResult();
 $num = $db->numRows($res);
 if ($num >= 1) {
     foreach ($res as $row) {
         $temp['id'] = $row['id'];
-        $temp['seller_id'] = $row['seller_id'];
         $temp['name'] = $row['name'];
-        $temp['category_id'] = $row['category_id'];
         $temp['image'] = DOMAIN_URL . $row['image'];
-        $temp['description'] = $row['description'];
-        $temp['discounted_price'] = $row['discounted_price'];
-        $temp['price'] = $row['price'];
-        
         $temp1[] = $temp;
     }
+    
     $response['success'] = true;
-    $response['message'] = "products Retrived Successfully";
+    $response['message'] = "Category Retrived Successfully";
     $response['data'] = $temp1;
     print_r(json_encode($response));
 
 }
 else{
     $response['success'] = false;
-    $response['message'] = "products Not Found";
+    $response['message'] = "Category Not Found";
     $response['data'] = $res;
     print_r(json_encode($response));
 

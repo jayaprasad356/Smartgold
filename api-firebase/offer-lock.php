@@ -52,15 +52,36 @@ $db->sql($sql);
 $res = $db->getResult();
 $num = $db->numRows($res);
 if ($num >= 1) {
+    foreach ($res as $row) {
+        $temp['id'] = $row['id'];
+        $temp['name'] = $row['name'];
+        $temp['store_name'] = $row['store_name'];
+        $temp['email'] = $row['email'];
+        $temp['mobile'] = $row['mobile'];
+        $temp['store_url'] = $row['store_url'];
+        $temp['logo'] = $row['logo'];
+        $temp['store_description'] = $row['store_description'];
+        $temp['street'] = $row['street'];
+        $temp['pincode'] = $row['pincode'];
+        $temp['city'] = $row['city'];
+        $temp['state'] = $row['state'];
+        $temp['latitude'] = $row['latitude'];
+        $temp['longitude'] = $row['longitude'];
+        $temp['valid_till'] = "01-11-2000";
+        $temp1[] = $temp;
+        
+    }
     $response['success'] = true;
     $response['message'] = "Smart Gold is Locked Successfully";
-    $response['data'] = $res;
+    $response['data'] = $temp;
     print_r(json_encode($response));
 
 }
 else{
+    
     $response['success'] = false;
     $response['message'] = "Smart Gold is not Locked";
+    
     $response['data'] = $res;
     print_r(json_encode($response));
 

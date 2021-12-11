@@ -206,40 +206,7 @@ if (isset($_GET['table']) && $_GET['table'] == 'settings') {
     $bulkData['rows'] = $rows;
     print_r(json_encode($bulkData));
 }
-// data of 'banners' table goes here
-if (isset($_GET['table']) && $_GET['table'] == 'banners') {
 
-    $offset = 0;
-    $limit = 10;
-    $sort = 'id';
-    $order = 'DESC';
-    $where = '';
-    
-
-
-    $sql = "SELECT * FROM `banners`";
-    $db->sql($sql);
-    $res = $db->getResult();
-
-    
-    $rows = array();
-    $tempRow = array();
-
-    foreach ($res as $row) {
-
-        
-        
-
-        $tempRow['id'] = $row['id'];
-        
-        $tempRow['image'] = "<a data-lightbox='category' href='" . $row['imgUrl'] . "' data-caption='" . $row['id'] . "'><img src='" . $row['imgUrl'] . "' title='" . $row['id'] . "' height='50' /></a>";
-       
-        $rows[] = $tempRow;
-        
-    }
-    $bulkData['rows'] = $rows;
-    print_r(json_encode($bulkData));
-}
 
 
 

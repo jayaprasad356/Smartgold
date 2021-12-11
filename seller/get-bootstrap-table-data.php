@@ -50,8 +50,9 @@ if (isset($_GET['table']) && $_GET['table'] == 'offers') {
         
         
 
-        $operate = '<a href="view-product-variants.php?id=' . $row['id'] . '" title="View"><i class="fa fa-folder-open"></i></a>';
-        $operate .= ' <a href="edit-product.php?id=' . $row['id'] . '" title="Edit"><i class="fa fa-edit"></i></a>';
+        // $operate = '<a href="view-product-variants.php?id=' . $row['id'] . '" class="label label-success" title="View">View</a>';
+        // $operate .= ' <a href="edit-product.php?id=' . $row['id'] . '" title="Edit"><i class="fa fa-edit"></i></a>';
+        $locked = '<a href="offers_lock.php?id=' . $row['id'] . '" class="label label-success" title="View">View</a>';
 
         
         $tempRow['id'] = $row['id'];
@@ -65,7 +66,41 @@ if (isset($_GET['table']) && $_GET['table'] == 'offers') {
         $tempRow['valid_date'] = $row['valid_date'];
 
 
-        $tempRow['operate'] = $operate;
+        $tempRow['locked'] = $locked;
+        $rows[] = $tempRow;
+    }
+    $bulkData['rows'] = $rows;
+    print_r(json_encode($bulkData));
+}
+//data of 'LOCKOFFERS' table goes here
+if (isset($_GET['table']) && $_GET['table'] == 'lockoffers') {
+    $offerid = $_GET['offerid'];
+
+    $sql = "SELECT *
+    FROM users
+    LEFT JOIN offer_lock
+    ON users.id = offer_lock.user_id WHERE users.id = offer_lock.user_id AND offer_lock.offer_id = '" . $offerid . "' ";
+    $db->sql($sql);
+    $res = $db->getResult();
+    
+    $rows = array();
+    $tempRow = array();
+    foreach ($res as $row) {
+        
+        
+        
+
+        // $operate = '<a href="view-product-variants.php?id=' . $row['id'] . '" class="label label-success" title="View">View</a>';
+        // $operate .= ' <a href="edit-product.php?id=' . $row['id'] . '" title="Edit"><i class="fa fa-edit"></i></a>';
+        //$locked = '<a href="offers_lock.php?id=' . $row['id'] . '" class="label label-success" title="View">View</a>';
+
+        
+        
+        
+        $tempRow['name'] = $row['name'];
+        $tempRow['mobile'] = $row['mobile'];
+        $tempRow['email'] = $row['email'];
+        
         $rows[] = $tempRow;
     }
     $bulkData['rows'] = $rows;

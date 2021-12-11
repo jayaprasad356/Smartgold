@@ -65,4 +65,21 @@ class custom_functions
             return ($row['total'] != "") ? $row['total'] : 0;
             
     }
+    function get_product_by_id($arr)
+    {
+        $arr = stripslashes($arr);
+        if (!empty($arr)) {
+            $arr = json_decode($arr, 1);
+            $i = 0;
+            foreach ($arr as $id) {
+                $sql = "SELECT * FROM products WHERE id = '" . $id . "' ";
+                $this->db->sql($sql);
+                $res[$i] = $this->db->getResult()[0];
+                $i++;
+            }
+            if (!empty($res)) {
+                return $res;
+            }
+        }
+    }
 }

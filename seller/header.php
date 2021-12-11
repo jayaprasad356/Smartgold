@@ -187,6 +187,7 @@ $db->sql("SET NAMES 'utf8'");
                         <li><a href="add-offer.php"><i class="fa fa-plus"></i> Add Offer</a></li>
                         <li><a href="offers.php"><i class="fa fa-sliders"></i> Manage Offers</a></li>
                         
+                        
                     </ul>
                 </li>
                     

@@ -46,6 +46,7 @@ if ($num >= 1) {
     foreach ($res as $row) 
     {
         $tempRow['nick_name'] = 'Reputed Shop';
+        $tempRow['id'] = $row['id'];
         $tempRow['seller_id'] = $row['seller_id'];
         $tempRow['budget'] = $row['budget'];
         $tempRow['gram_price'] = $row['gram_price'];

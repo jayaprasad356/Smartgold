@@ -11,39 +11,44 @@ include_once('../includes/crud.php');
 $db = new Database();
 $db->connect();
 
-if (empty($_POST['seller_id'])) {
+if (empty($_POST['user_id'])) {
     $response['success'] = false;
-    $response['message'] = "Seller ID is Empty";
+    $response['message'] = "User ID is Empty";
     print_r(json_encode($response));
     return false;
 }
-$seller_id = $db->escapeString($_POST['seller_id']);
-$sql = "SELECT * FROM products WHERE seller_id = '" . $seller_id . "'";
+$user_id = $db->escapeString($_POST['user_id']);
+$sql = "SELECT *,cart.id,products.id AS product_id
+FROM cart
+LEFT JOIN products
+ON cart.product_id = products.id WHERE user_id ='" . $user_id . "'";
+//$sql = "SELECT * FROM products,cart WHERE products.id = cart.product_id AND cart.user_id = '" . $user_id . "'";
 $db->sql($sql);
 $res = $db->getResult();
 $num = $db->numRows($res);
 if ($num >= 1) {
     foreach ($res as $row) {
         $temp['id'] = $row['id'];
-        $temp['seller_id'] = $row['seller_id'];
+        $temp['product_id'] = $row['product_id'];
         $temp['name'] = $row['name'];
         $temp['category_id'] = $row['category_id'];
-        $temp['image'] = DOMAIN_URL . $row['image'];
         $temp['description'] = $row['description'];
-        $temp['discounted_price'] = $row['discounted_price'];
-        $temp['price'] = $row['price'];
-        
-        $temp1[] = $temp;
+        $temp['quantity'] = $row['quantity'];
+        $temp['image'] = DOMAIN_URL . $row['image'];
+        $temp['discounted_price'] = $row['quantity'] * $row['discounted_price'];
+        $temp['price'] = $row['quantity'] * $row['price'];
+        $rows[] = $temp;
+
     }
     $response['success'] = true;
-    $response['message'] = "products Retrived Successfully";
-    $response['data'] = $temp1;
+    $response['message'] = "Cart Retrived Successfully";
+    $response['data'] = $rows;
     print_r(json_encode($response));
 
 }
 else{
     $response['success'] = false;
-    $response['message'] = "products Not Found";
+    $response['message'] = "Cart Not Found";
     $response['data'] = $res;
     print_r(json_encode($response));
 
