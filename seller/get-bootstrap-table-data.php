@@ -72,6 +72,41 @@ if (isset($_GET['table']) && $_GET['table'] == 'offers') {
     $bulkData['rows'] = $rows;
     print_r(json_encode($bulkData));
 }
+//data of 'OFFERS' table goes here
+if (isset($_GET['table']) && $_GET['table'] == 'orders') {
+
+
+    
+    $sql = "SELECT *,orders.id AS id FROM orders LEFT JOIN products ON orders.product_id = products.id WHERE products.seller_id = '" . $id . "'";
+    $db->sql($sql);
+    $res = $db->getResult();
+    
+    $rows = array();
+    $tempRow = array();
+    foreach ($res as $row) {
+        
+        
+        
+
+        // $operate = '<a href="view-product-variants.php?id=' . $row['id'] . '" class="label label-success" title="View">View</a>';
+        // $operate .= ' <a href="edit-product.php?id=' . $row['id'] . '" title="Edit"><i class="fa fa-edit"></i></a>';
+        $update = '<a href="updateorders.php?id=' . $row['id'] . '" class="label label-success" title="Update">Update Orders</a>';
+
+        
+        $tempRow['id'] = $row['id'];
+        
+        $tempRow['product_id'] = $row['product_id'];
+        $tempRow['name'] = $row['name'];
+        $tempRow['quantity'] = $row['quantity'];
+        $tempRow['delivery_charges'] = $row['delivery_charges'];
+        $tempRow['buy_method'] = $row['buy_method'];
+        $tempRow['status'] = $row['status'];
+        $tempRow['update'] = $update;
+        $rows[] = $tempRow;
+    }
+    $bulkData['rows'] = $rows;
+    print_r(json_encode($bulkData));
+}
 //data of 'LOCKOFFERS' table goes here
 if (isset($_GET['table']) && $_GET['table'] == 'lockoffers') {
     $offerid = $_GET['offerid'];

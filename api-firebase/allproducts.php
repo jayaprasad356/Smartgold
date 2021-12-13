@@ -13,7 +13,8 @@ $db->connect();
 
 
 if (empty($_POST['category_id'])){
-    $sql = "SELECT * FROM products ";
+    $sql = "SELECT *,products.id AS id FROM products LEFT JOIN seller ON products.seller_id = seller.id";
+    
     $db->sql($sql);
     $res = $db->getResult();
     $num = $db->numRows($res);

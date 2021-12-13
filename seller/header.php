@@ -190,6 +190,20 @@ $db->sql("SET NAMES 'utf8'");
                         
                     </ul>
                 </li>
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-cubes"></i>
+                        <span>Orders</span>
+                        <i class="fa fa-angle-right pull-right"></i>
+                        
+                    </a>
+                    <ul class="treeview-menu">
+                        
+                        <li><a href="orders.php"><i class="fa fa-sliders"></i>View Orders</a></li>
+                        
+                        
+                    </ul>
+                </li>
                     
                 
             </ul>
