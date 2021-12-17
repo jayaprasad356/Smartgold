@@ -10,14 +10,7 @@ header("Pragma: no-cache");
 include_once('../includes/crud.php');
 $db = new Database();
 $db->connect();
-
-if (empty($_POST['user_id'])) {
-    $response['success'] = false;
-    $response['message'] = "User ID is Empty";
-    print_r(json_encode($response));
-    return false;
-}
-if (empty($_POST['from_price_range'])) {
+if ($_POST['from_price_range'] != 0 & empty($_POST['from_price_range'])) {
     $response['success'] = false;
     $response['message'] = "From Price Range is Empty";
     print_r(json_encode($response));
@@ -40,11 +33,11 @@ $to_price_range = $db->escapeString($_POST['to_price_range']);
 $sort = $db->escapeString($_POST['sort']);
 if (empty($_POST['category_id'])){
     if ($sort == 1){
-        $sql = "SELECT *,products.id AS id FROM products LEFT JOIN seller ON products.seller_id = seller.id WHERE discounted_price > $from_price_range AND discounted_price < $to_price_range ORDER BY discounted_price ASC";
+        $sql = "SELECT *,products.id AS id,products.name AS name FROM products LEFT JOIN seller ON products.seller_id = seller.id WHERE discounted_price > $from_price_range AND discounted_price < $to_price_range ORDER BY discounted_price ASC";
     
     }
     else {
-        $sql = "SELECT *,products.id AS id FROM products LEFT JOIN seller ON products.seller_id = seller.id WHERE discounted_price > $from_price_range AND discounted_price < $to_price_range ORDER BY discounted_price DESC";
+        $sql = "SELECT *,products.id AS id,products.name AS name FROM products LEFT JOIN seller ON products.seller_id = seller.id WHERE discounted_price > $from_price_range AND discounted_price < $to_price_range ORDER BY discounted_price DESC";
     }
        
         $db->sql($sql);
@@ -55,6 +48,8 @@ if (empty($_POST['category_id'])){
                 $temp['id'] = $row['id'];
                 $temp['seller_id'] = $row['seller_id'];
                 $temp['name'] = $row['name'];
+                $temp['store_name'] = $row['store_name'];
+            
                 $temp['category_id'] = $row['category_id'];
                
                 // $temp['image'] = array();
@@ -88,11 +83,11 @@ else {
     $category_id = $db->escapeString($_POST['category_id']);
     
     if ($sort == 1){
-        $sql = "SELECT *,products.id AS id FROM products LEFT JOIN seller ON products.seller_id = seller.id WHERE category_id = $category_id AND discounted_price > $from_price_range AND discounted_price < $to_price_range ORDER BY discounted_price ASC";
+        $sql = "SELECT *,products.id AS id,products.name AS name FROM products LEFT JOIN seller ON products.seller_id = seller.id WHERE category_id = $category_id AND discounted_price > $from_price_range AND discounted_price < $to_price_range ORDER BY discounted_price ASC";
     
     }
     else {
-        $sql = "SELECT *,products.id AS id FROM products LEFT JOIN seller ON products.seller_id = seller.id WHERE category_id = $category_id AND discounted_price > $from_price_range AND discounted_price < $to_price_range ORDER BY discounted_price DESC";
+        $sql = "SELECT *,products.id AS id,products.name AS name FROM products LEFT JOIN seller ON products.seller_id = seller.id WHERE category_id = $category_id AND discounted_price > $from_price_range AND discounted_price < $to_price_range ORDER BY discounted_price DESC";
     }
        
         $db->sql($sql);
@@ -103,6 +98,8 @@ else {
                 $temp['id'] = $row['id'];
                 $temp['seller_id'] = $row['seller_id'];
                 $temp['name'] = $row['name'];
+                $temp['store_name'] = $row['store_name'];
+            
                 $temp['category_id'] = $row['category_id'];
                
                 // $temp['image'] = array();
