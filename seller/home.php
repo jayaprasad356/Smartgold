@@ -40,20 +40,30 @@ include "header.php";
         <section class="content">
             <div class="row">
                 
-            <div class="col-lg-4 col-xs-6">
-                    <div class="small-box bg-yellow">
+                <div class="col-lg-4 col-xs-6">
+                        <div class="small-box bg-yellow">
+                            <div class="inner">
+                                <h3><?= $function->products_my_rows_count('products',$ID); ?></h3>
+                                <p>Products</p>
+                                </p>
+                            </div>
+                            <div class="icon"><i class="fa fa-cubes"></i></div>
+                            <a href="products.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                        </div>
+                        
+                </div>
+                <div class="col-lg-4 col-xs-6">
+                    <div class="small-box bg-blue">
                         <div class="inner">
-                            <h3><?= $function->products_my_rows_count('products',$ID); ?></h3>
-                            <p>Products</p>
-                            </p>
+                            <h3><?= $function->products_my_rows_count('orders',$ID); ?></h3>
+                            
+                            <p>Orders</p>
                         </div>
                         <div class="icon"><i class="fa fa-cubes"></i></div>
-                        <a href="products.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                        <a href="orders.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
-               
-                
-                
+
             </div>
             
         </section>

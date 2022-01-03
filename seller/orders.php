@@ -32,7 +32,7 @@ $_SESSION['timeout'] = $currentTime + $expired;
 <html>
 
 <head>
-    <title>Products | Smart Gold - Dashboard</title>
+    <title>Orders | Smart Gold - Dashboard</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 </head>
 </body>

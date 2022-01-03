@@ -46,6 +46,12 @@ if (isset($_GET['table']) && $_GET['table'] == 'offers') {
     $rows = array();
     $tempRow = array();
     foreach ($res as $row) {
+        if($row['status'] == 0){
+            $status = "inactive";
+        }
+        else{
+            $status = "active";
+        }
         $currency = "Rs.";
         
         
@@ -57,12 +63,12 @@ if (isset($_GET['table']) && $_GET['table'] == 'offers') {
         
         $tempRow['id'] = $row['id'];
         
-        $tempRow['seller_id'] = (!empty($row['seller_id'])) ? $row['seller_id'] : "";
-        $tempRow['budget_id'] = $row['budget_id'];
+        //$tempRow['seller_id'] = (!empty($row['seller_id'])) ? $row['seller_id'] : "";
+        //$tempRow['budget_id'] = $row['budget_id'];
         $tempRow['gram_price'] = $currency . " " . $row['gram_price'];
         $tempRow['wastage'] = $row['wastage'];
         $tempRow['max_locked'] = $row['max_locked'];
-        $tempRow['status'] = $row['status'];
+        $tempRow['status'] = $status;
         $tempRow['valid_date'] = $row['valid_date'];
 
 
@@ -77,7 +83,7 @@ if (isset($_GET['table']) && $_GET['table'] == 'orders') {
 
 
     
-    $sql = "SELECT *,orders.id AS id FROM orders LEFT JOIN products ON orders.product_id = products.id WHERE products.seller_id = '" . $id . "'";
+    $sql = "SELECT *,orders.id AS id,orders.status AS status FROM orders LEFT JOIN products ON orders.product_id = products.id WHERE products.seller_id = '" . $id . "'";
     $db->sql($sql);
     $res = $db->getResult();
     

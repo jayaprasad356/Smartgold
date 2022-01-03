@@ -14,7 +14,7 @@ $db->sql($sql);
 $resdel = $db->getResult();
 ?>
 <section class="content-header">
-    <h1>Add Delivery-Charges/Days <small><a href='smart gold settings.php'> <i class='fa fa-angle-double-left'></i>&nbsp;&nbsp;&nbsp;Back to Settings</a></small></h1>
+    <h1>Add Delivery-Charges/Days <small><a href="home.php"><i class="fa fa-home"></i> Home</a></small></h1>
     <ol class="breadcrumb">
         <li><a href="home.php"><i class="fa fa-home"></i> Home</a></li>
     </ol>

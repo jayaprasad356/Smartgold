@@ -3,11 +3,12 @@ if (isset($_POST['btnAdd'])) {
     $nick_name = $db->escapeString($_POST['name']);
     $sql_query = "INSERT INTO nickname (nickname)VALUES('$nick_name')";
     $db->sql($sql_query);
-    echo('Nickname Added');
+    echo( "<section class='content-header'><span class='label label-success'> Nickname Added</span></section>");
+
 }
 ?>
 <section class="content-header">
-    <h1>Add Seller Nick Name <small><a href='smart gold settings.php'> <i class='fa fa-angle-double-left'></i>&nbsp;&nbsp;&nbsp;Back to Settings</a></small></h1>
+    <h1>Add Seller Nick Name <small><a href="home.php"><i class="fa fa-home"></i> Home</a></small></h1>
     <ol class="breadcrumb">
         <li><a href="home.php"><i class="fa fa-home"></i> Home</a></li>
     </ol>

@@ -57,9 +57,6 @@ include "header.php";
                         <a href="sellers.php" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
-               
-                
-                
             </div>
             
         </section>

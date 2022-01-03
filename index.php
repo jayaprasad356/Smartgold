@@ -1,3 +1,11 @@
+<?php session_start();
+ob_start();
+include_once('./includes/crud.php');
+$db = new Database;
+$db->connect();
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

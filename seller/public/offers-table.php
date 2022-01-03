@@ -28,7 +28,7 @@
                                 
                                 
                                 <th data-field="seller_id" data-sortable="true">Seller ID</th>
-                                <th data-field="budget_id" data-sortable="true">Budget ID</th>
+                                <!-- <th data-field="budget_id" data-sortable="true">Budget ID</th> -->
                                 <th data-field="gram_price" data-sortable="true">Price Per Gram</th>
                             
                                 <th data-field="wastage" data-sortable="true">Wastage</th>

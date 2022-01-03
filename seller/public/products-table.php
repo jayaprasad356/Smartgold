@@ -27,14 +27,14 @@
                                 
                                 
                                 
-                                <th data-field="seller_id" data-sortable="true">Seller ID</th>
+                                <!-- <th data-field="seller_id" data-sortable="true">Seller ID</th> -->
                                 <th data-field="name" data-sortable="true">Name</th>
                                 <th data-field="image">Image</th>
                                 <th data-field="price" data-sortable="true">Price</th>
                                 <th data-field="discounted_price" data-sortable="true">D.Price</th>
                                 
-                                <th data-field="stock" data-sortable="true">Stock</th>
-                                <th data-field="serve_for" data-sortable="true">Availability</th>
+                                <!-- <th data-field="stock" data-sortable="true">Stock</th>
+                                <th data-field="serve_for" data-sortable="true">Availability</th> -->
                                 
                                 <th data-field="is_approved" data-sortable="true">Is Approved?</th>
                                 <th data-field="description" data-sortable="true" data-visible="false">Description</th>
