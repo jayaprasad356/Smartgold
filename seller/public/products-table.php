@@ -38,7 +38,7 @@
                                 
                                 <th data-field="is_approved" data-sortable="true">Is Approved?</th>
                                 <th data-field="description" data-sortable="true" data-visible="false">Description</th>
-                                
+                                <th data-field="operate" data-events="actionEvents">Action</th>
                                 <!-- <th data-field="operate" data-events="actionEvents">Action</th> -->
                             </tr>
                         </thead>

@@ -162,8 +162,12 @@ if (isset($_GET['table']) && $_GET['table'] == 'products') {
         
         
 
-        $operate = '<a href="view-product-variants.php?id=' . $row['id'] . '" title="View"><i class="fa fa-folder-open"></i></a>';
-        $operate .= ' <a href="edit-product.php?id=' . $row['id'] . '" title="Edit"><i class="fa fa-edit"></i></a>';
+        // $operate = '<a href="view-product-variants.php?id=' . $row['id'] . '" title="View"><i class="fa fa-folder-open"></i></a>';
+        // $operate .= ' <a href="edit-product.php?id=' . $row['id'] . '" title="Edit"><i class="fa fa-edit"></i></a>';
+
+        $operate = ' <a href="edit-product.php?id=' . $row['id'] . '" title="Edit"><i class="fa fa-edit"></i></a>';
+        $operate .= ' <a id="deleteproduct" class="btn btn-xs btn-danger" href="delete-product.php?id=' . $row['id'] . '" title="Delete"><i class="fa fa-trash-o"></i></a>&nbsp;';
+        
 
         
         $tempRow['id'] = $row['id'];

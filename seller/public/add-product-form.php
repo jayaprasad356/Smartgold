@@ -108,7 +108,7 @@ if (isset($_POST['btnAdd'])) {
         $upload_image = 'upload/images/' . $image;
 
         // insert new data to product table
-        $sql = "INSERT INTO products (name,seller_id,category_id,image,description,is_approved,status,price,discounted_price) VALUES('$name','$seller_id','$category_id','$upload_image','$description','$is_approved','$status',$price,$discounted_price)";
+        $sql = "INSERT INTO products (name,seller_id,category_id,image,description,is_approved,status,price,discounted_price,stock) VALUES('$name','$seller_id','$category_id','$upload_image','$description','$is_approved','$status',$price,$discounted_price,$stock)";
         $db->sql($sql);
         $product_result = $db->getResult();
 
@@ -170,6 +170,7 @@ if (isset($_POST['btnAdd'])) {
                                 <select name="serve_for" class="form-control" required>
                                     <option value="Available">Available</option>
                                     <option value="Sold Out">Sold Out</option>
+                                    <option value="Not Available">Not Available</option>
                                 </select>
 
                             </div>
