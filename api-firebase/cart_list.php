@@ -34,6 +34,7 @@ if ($num >= 1) {
         $temp['category_id'] = $row['category_id'];
         $temp['description'] = $row['description'];
         $temp['quantity'] = $row['quantity'];
+        $temp['status'] = $row['status'];
         $temp['image'] = DOMAIN_URL . $row['image'];
         $temp['discounted_price'] = $row['quantity'] * $row['discounted_price'];
         $temp['price'] = $row['quantity'] * $row['price'];
