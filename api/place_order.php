@@ -7,10 +7,23 @@ header("Cache-Control: no-store, no-cache, must-revalidate");
 header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache");
 
-include_once('../includes/custom-functions.php');
 include_once('../includes/crud.php');
+include_once('verify-token.php');
+include_once('../includes/variables.php');
 $db = new Database();
 $db->connect();
+
+if (!verify_token()) {
+    return false;
+}
+
+if (!isset($_POST['accesskey'])  || trim($_POST['accesskey']) != $access_key) {
+    $response['success'] = false;
+    $response['message'] = "No Accsess key found!";
+    print_r(json_encode($response));
+    return false;
+    exit();
+}
 
 $function = new custom_functions();
 if (empty($_POST['user_id'])) {
