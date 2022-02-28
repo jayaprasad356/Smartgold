@@ -22,13 +22,13 @@
                             <div class="row">
                                 <div class="form-group col-md-4">
                                     <div class="form-group">
-                                        <label for="">Name</label>
+                                        <label for="">Name</label><i class="text-danger asterik">*</i>
                                         <input type="text" class="form-control" name="name" id="name" required>
                                     </div>
                                 </div>
                                 <div class="form-group col-md-4">
                                     <div class="form-group">
-                                        <label for="">Email</label>
+                                        <label for="">Email</label><i class="text-danger asterik">*</i>
                                         <input type="email" class="form-control" name="email" id="email" required>
                                     </div>
                                 </div>
@@ -36,7 +36,7 @@
                             <div class="row">
                                 <div class="form-group col-md-4">
                                     <div class="form-group">
-                                        <label for="">Mobile</label>
+                                        <label for="">Mobile</label><i class="text-danger asterik">*</i>
                                         <input type="number" class="form-control" name="mobile" id="mobile" required>
                                     </div>
                                 </div>
@@ -50,13 +50,13 @@
                             <div class="row">
                                 <div class="form-group col-md-4">
                                     <div class="form-group">
-                                        <label for="">Password</label>
+                                        <label for="">Password</label><i class="text-danger asterik">*</i>
                                         <input type="password" class="form-control" name="password" id="password" required>
                                     </div>
                                 </div>
                                 <div class="form-group col-md-4">
                                     <div class="form-group">
-                                        <label for="">Confirm Password</label>
+                                        <label for="">Confirm Password</label><i class="text-danger asterik">*</i>
                                         <input type="password" class="form-control" name="confirm_password" required>
                                     </div>
                                 </div>
@@ -64,13 +64,13 @@
                             <div class="row">
                                 <div class="form-group col-md-4">
                                     <div class="form-group">
-                                        <label for="">Store Name</label>
+                                        <label for="">Store Name</label><i class="text-danger asterik">*</i>
                                         <input type="text" class="form-control" name="store_name" id="store_name" required>
                                     </div>
                                 </div>
                                 <div class="form-group col-md-4">
                                     <div class="form-group">
-                                        <label for="logo">Logo</label>
+                                        <label for="logo">Logo</label><i class="text-danger asterik">*</i>
                                         <input type="file" name="store_logo" id="store_logo" required /><br>
                                     </div>
                                 </div>
@@ -84,7 +84,7 @@
                                 </div>
                                 <div class="form-group col-md-4">
                                     <div class="form-group">
-                                        <label for="">Pincode</label>
+                                        <label for="">Pincode</label><i class="text-danger asterik">*</i>
                                         <input type="text" class="form-control" id='pincode' name="pincode" required>
                                     </div>
                                     
@@ -94,7 +94,7 @@
                             <div class="row">
                                 <div class="form-group col-md-4">
                                     <div class="form-group">
-                                        <label for="">Enter City</label>
+                                        <label for="">Enter City</label><i class="text-danger asterik">*</i>
                                         <input type="text" class="form-control" id='city' name="city" required>
                                     </div>
                                     
@@ -104,8 +104,47 @@
                             <div class="row">
                                 <div class="form-group col-md-4">
                                     <div class="form-group">
-                                        <label for="">State</label>
-                                        <input type="text" class="form-control" name="state" id="state">
+                                        <label for="">State</label><i class="text-danger asterik">*</i>
+                                        
+                                        <select name="state" id="state" class="form-control">
+                                            <option value="Andhra Pradesh">Andhra Pradesh</option>
+                                            <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
+                                            <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                                            <option value="Assam">Assam</option>
+                                            <option value="Bihar">Bihar</option>
+                                            <option value="Chandigarh">Chandigarh</option>
+                                            <option value="Chhattisgarh">Chhattisgarh</option>
+                                            <option value="Dadar and Nagar Haveli">Dadar and Nagar Haveli</option>
+                                            <option value="Daman and Diu">Daman and Diu</option>
+                                            <option value="Delhi">Delhi</option>
+                                            <option value="Lakshadweep">Lakshadweep</option>
+                                            <option value="Puducherry">Puducherry</option>
+                                            <option value="Goa">Goa</option>
+                                            <option value="Gujarat">Gujarat</option>
+                                            <option value="Haryana">Haryana</option>
+                                            <option value="Himachal Pradesh">Himachal Pradesh</option>
+                                            <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+                                            <option value="Jharkhand">Jharkhand</option>
+                                            <option value="Karnataka">Karnataka</option>
+                                            <option value="Kerala">Kerala</option>
+                                            <option value="Madhya Pradesh">Madhya Pradesh</option>
+                                            <option value="Maharashtra">Maharashtra</option>
+                                            <option value="Manipur">Manipur</option>
+                                            <option value="Meghalaya">Meghalaya</option>
+                                            <option value="Mizoram">Mizoram</option>
+                                            <option value="Nagaland">Nagaland</option>
+                                            <option value="Odisha">Odisha</option>
+                                            <option value="Punjab">Punjab</option>
+                                            <option value="Rajasthan">Rajasthan</option>
+                                            <option value="Sikkim">Sikkim</option>
+                                            <option value="Tamil Nadu">Tamil Nadu</option>
+                                            <option value="Telangana">Telangana</option>
+                                            <option value="Tripura">Tripura</option>
+                                            <option value="Uttar Pradesh">Uttar Pradesh</option>
+                                            <option value="Uttarakhand">Uttarakhand</option>
+                                            <option value="West Bengal">West Bengal</option>
+                                        </select>
+
                                     </div>
                                 </div>
                                 <div class="form-group col-md-4">
@@ -141,13 +180,13 @@
                             <div class="row">
                                 <div class="form-group col-md-4">
                                     <div class="form-group">
-                                        <label for="">National Identity Card</label>
+                                        <label for="">National Identity Card</label><i class="text-danger asterik">*</i>
                                         <input type="file" class="form-control" name="national_id_card" required>
                                     </div>
                                 </div>
                                 <div class="form-group col-md-4">
                                     <div class="form-group">
-                                        <label for="">Address Proof</label>
+                                        <label for="">Address Proof</label><i class="text-danger asterik">*</i>
                                         <input type="file" class="form-control" name="address_proof" id="address_proof" required><br>
                                     </div>
                                 </div>
@@ -156,7 +195,7 @@
                             <div class="row">
                                 <div class="form-group col-md-4">
                                     <div class="form-group">
-                                        <label for="">PAN Number</label>
+                                        <label for="">PAN Number</label><i class="text-danger asterik">*</i>
                                         <input type="text" class="form-control" name="pan_number" required>
                                     </div>
                                 </div>
@@ -254,8 +293,10 @@
             cktext: {
                 required: function() {
                     CKEDITOR.instances.cktext.updateElement();
+                    
                 }
             }
+            
         }
 
     });
@@ -268,8 +309,7 @@
         e.preventDefault();
         var formData = new FormData(this);
         if ($("#add_form").validate().form()) {
-            if (confirm('Are you sure?Want to Add Seller')) {
-                $.ajax({
+            $.ajax({
                     type: 'POST',
                     url: $(this).attr('action'),
                     data: formData,
@@ -287,7 +327,9 @@
                         $('#add_form')[0].reset();
                     }
                 });
-            }
+        }else{
+            $('#add_form')[0].reset();
+
         }
     });
 </script>

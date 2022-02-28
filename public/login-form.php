@@ -19,6 +19,7 @@ if (isset($_POST['btnLogin'])) {
 
     if (!empty($username) && !empty($password)) {
 		if ($username == 'admin' && $password == 'admin123') {
+			$_SESSION['timeout'] = $currentTime + $expired;
 			header("location: home.php");
 
 		}else {

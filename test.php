@@ -41,7 +41,7 @@ $db->sql("SET NAMES 'utf8'");
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body table-responsive">
-                        <table  class="table table-hover" data-toggle="table"  data-url="api-firebase/get-bootstrap-table-data.php?table=customers"    data-side-pagination="server" data-pagination="true"     >
+                        <table  class="table table-hover" data-toggle="table"  data-url="api/get-bootstrap-table-data.php?table=customers"    data-side-pagination="server" data-pagination="true"     >
                             <thead>
                                 <tr>
                                     <th data-field="id" data-sortable="true">ID</th>
