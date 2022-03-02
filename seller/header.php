@@ -104,10 +104,15 @@ $db->sql("SET NAMES 'utf8'");
             <a href="home.php" class="logo">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
                 <span class="logo-mini">
-                    <h2><?= $acronym ?></h2>
+                    <img src="../img/sminilogo.png"  alt="User Image">
+                    
                 </span>
                 <!-- logo for regular state and mobile devices -->
+                <img src="../img/slogo.png"  alt="User Image">
+                
                 <span class="logo-lg">
+                
+                    
                     <h3>Smart Gold</h3>
                 </span>
             </a>

@@ -43,7 +43,7 @@
                                 <div class="form-group col-md-4">
                                     <div class="form-group">
                                         <label for="">Store URL</label>
-                                        <input type="text" class="form-control" name="store_url" id="store_url">
+                                        <input type="url" pattern="https://.*" class="form-control" name="store_url" id="store_url">
                                     </div>
                                 </div>
                             </div>
@@ -280,7 +280,18 @@
     $('#add_form').validate({
         rules: {
             name: "required",
-            mobile: "required",
+            mobile: {
+                required: true,
+                number: true,
+                minlength: 10,
+                maxlength: 10
+                },
+                pincode: {
+                required: true,
+                number: true,
+                minlength: 6,
+                maxlength: 6
+                },
             password: "required",
             address: "required",
             description: "required",
@@ -300,13 +311,10 @@
         }
 
     });
-    $('#cat_ids').select2({
-        width: 'element',
-        placeholder: 'type in category name to search',
 
-    });
     $('#add_form').on('submit', function(e) {
         e.preventDefault();
+        
         var formData = new FormData(this);
         if ($("#add_form").validate().form()) {
             $.ajax({
