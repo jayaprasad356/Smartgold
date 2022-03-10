@@ -79,6 +79,12 @@ if (isset($_POST['btnLogin'])) {
                     <div class="box-footer">
                         <button type="submit" name="btnLogin" class="btn btn-info pull-left">Login</button>
                     </div>
+                    <div class="box-footer">
+                        <a href="sign-up.php" class="btn pull-left">Create Seller Account?</a>
+                        <!-- <a href="forgot-password.php" class="btn pull-right">Forgot password?</a> -->
+
+                    </div>
+                
                    
             </form>
         </div>
