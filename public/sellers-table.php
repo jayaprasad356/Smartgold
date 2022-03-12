@@ -38,11 +38,9 @@
                                     <th data-field="pincode">Pincode</th>
                                     <th data-field="city">City</th>
                                     <th data-field="state">State</th>
+                                    <th data-field="status" data-sortable="true">Status</th>
+                                    <th data-field="operate" data-events="actionEvents">Action</th>
                                     
-                                    <th data-field="account_number">Account Number</th>
-                                    <th data-field="bank_ifsc_code">Bank IFSC Code</th>
-                                    <th data-field="account_name">Account Name</th>
-                                    <th data-field="bank_name">Bank Name</th>
                                     
                                     
                                 </tr>

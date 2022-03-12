@@ -83,8 +83,7 @@ if (isset($_GET['table']) && $_GET['table'] == 'seller') {
    
     $path = 'upload/seller/';
     foreach ($res as $row) {
-        //$operate .= ' <a class="btn btn-xs btn-danger" href="delete-product.php?id=' . $row['product_variant_id'] . '" title="Delete"><i class="fa fa-trash-o"></i></a>&nbsp;';
-        
+        $operate = ' <a href="edit-seller.php?id=' . $row['id'] . '"><i class="fa fa-edit"></i>Edit </a>';  
         $tempRow['id'] = $row['id'];
         $tempRow['name'] = $row['name'];
         $tempRow['mobile'] = $row['mobile'];
@@ -103,12 +102,19 @@ if (isset($_GET['table']) && $_GET['table'] == 'seller') {
         $tempRow['bank_name'] = $row['bank_name'];
         $tempRow['bank_ifsc_code'] = $row['bank_ifsc_code'];
         $tempRow['account_name'] = $row['account_name'];
-        $tempRow['status'] = $row['status'];
+        if ($row['status'] == 2)
+            $tempRow['status'] = "<label class='label label-warning'>Not-Approved</label>";
+        else if ($row['status'] == 1)
+            $tempRow['status'] = "<label class='label label-success'>Approved</label>";
+        else if ($row['status'] == 0)
+            $tempRow['status'] = "<label class='label label-danger'>Deactive</label>";
+        //$tempRow['status'] = $row['status'];
         $tempRow['address_proof'] = "<a data-lightbox='product' href='" . DOMAIN_URL . $path . $row['address_proof'] . "'><img src='" . DOMAIN_URL . $path . $row['address_proof'] . "' height='50' /></a>";
         $tempRow['national_identity_card'] = "<a data-lightbox='product' href='" . DOMAIN_URL . $path . $row['national_identity_card'] . "'><img src='" . DOMAIN_URL . $path . $row['national_identity_card'] . "' height='50' /></a>";
         $tempRow['pan_number'] = $row['pan_number'];
         $tempRow['latitude'] = $row['latitude'];
         $tempRow['longitude'] = $row['longitude'];
+        $tempRow['operate'] = $operate;
         
          
         $rows[] = $tempRow;
