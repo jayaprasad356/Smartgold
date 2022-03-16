@@ -24,24 +24,18 @@ if (!isset($_POST['accesskey'])  || trim($_POST['accesskey']) != $access_key) {
     return false;
     exit();
 }
-//select s.* from offers p join seller s on s.id=p.seller_id
 if (empty($_POST['user_id'])) {
     $response['success'] = false;
     $response['message'] = "User ID is Empty";
     print_r(json_encode($response));
     return false;
 }
-
 $user_id = $db->escapeString($_POST['user_id']);
-
-
-
 $sql = "SELECT *,ol.id AS id from offer_lock ol INNER JOIN offers o on ol.offer_id = o.id INNER JOIN seller s ON o.seller_id = s.id WHERE ol.user_id = '" . $user_id . "'";
 $db->sql($sql);
 $res = $db->getResult();
 $num = $db->numRows($res);
 if ($num >= 1) {
-    
     $response['success'] = true;
     $response['message'] = "Locked Offer Successfully Retrived";
     $response['data'] = $res;

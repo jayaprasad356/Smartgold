@@ -57,10 +57,8 @@ $status = $db->escapeString('received');
 
 
 $sql = "INSERT INTO offer_lock(`user_id`,`offer_id`, `paid_amt`, `status`)VALUES($user_id,$offer_id,$paid_amt,'$status')";
-
 $db->sql($sql);
 $res = $db->getResult();
-
 $sql = "SELECT * FROM seller WHERE id = '" . $seller_id . "'";
 $db->sql($sql);
 $res = $db->getResult();

@@ -1,18 +1,11 @@
 <?php
-include_once('includes/functions.php');
-include_once('includes/custom-functions.php');
+include_once('../includes/functions.php');
+include_once('../includes/custom-functions.php');
 $fn = new custom_functions;
 ?>
 <?php
 // $ID = (isset($_GET['id'])) ? $db->escapeString($fn->xss_clean($_GET['id'])) : "";
-if (isset($_GET['id'])) {
-    $ID = $db->escapeString($_GET['id']);
-} else {
-    // $ID = "";
-    return false;
-    exit(0);
-}
-
+$ID = $_SESSION['seller_id'];
 // create array variable to store previous data
 $data = array();
 
@@ -20,14 +13,6 @@ $sql_query = "SELECT * FROM seller WHERE id =" . $ID;
 $db->sql($sql_query);
 $res = $db->getResult();
 ?>
-<section class="content-header">
-    <h1>
-        Edit Seller<small><a href='sellers.php'><i class='fa fa-angle-double-left'></i>&nbsp;&nbsp;&nbsp;Back to Sellers</a></small></h1>
-
-    <ol class="breadcrumb">
-        <li><a href="home.php"><i class="fa fa-home"></i> Home</a></li>
-    </ol>
-</section>
 <section class="content">
     <!-- Main row -->
 
@@ -36,7 +21,7 @@ $res = $db->getResult();
             <!-- general form elements -->
             <div class="box box-primary">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Edit Seller</h3>
+                        <h3 class="box-title">Edit Profile</h3>
                     </div><!-- /.box-header -->
                     <!-- form start -->
                     <form id="edit_form" method="post" action="public/db-operation.php" enctype="multipart/form-data">
@@ -260,40 +245,11 @@ $res = $db->getResult();
                                     <div class="form-group">
                                         <label for="description">Store Description :</label>
                                         <textarea name="description" id="description" class="form-control" rows="10"><?php echo $res[0]['store_description']; ?></textarea>
+                                        
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="form-group col-md-4">
-                                    <div class="form-group">
-                                        <label for="">Valid Upto</label><i class="text-danger asterik">*</i>
-                                        <input type="date" class="form-control" name="valid" id="valid" value="<?= $res[0]['valid']; ?>">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="form-group col-md-5">
-                                    <div class="form-group">
-                                        <label class="control-label">Status</label>
-                                        <div id="status" class="btn-group">
-                                            <label class="btn btn-default" data-toggle-class="btn-default" data-toggle-passive-class="btn-default">
-                                                <input type="radio" name="status" value="0" <?= ($res[0]['status'] == 0) ? 'checked' : ''; ?>> Deactive
-                                            </label>
-                                            <label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-                                                <input type="radio" name="status" value="1" <?= ($res[0]['status'] == 1) ? 'checked' : ''; ?>> Approved
-                                            </label>
-                                            <label class="btn btn-danger" data-toggle-class="btn-danger" data-toggle-passive-class="btn-default">
-                                                <input type="radio" name="status" value="2" <?= ($res[0]['status'] == 2) ? 'checked' : ''; ?>> Not-Approved
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- </div> -->
 
-                                <!-- </div> -->
-
-                            </div>
-                            
                             <div class="box-footer">
                                 <button type="submit" class="btn btn-primary" id="submit_btn">Update</button><br>
                                 <div style="display:none;" id="result"></div>
@@ -304,7 +260,43 @@ $res = $db->getResult();
                 </div><!-- /.box -->
         </div>
     </div>
-
+    <div class="modal fade" id='howItWorksModal' tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+        <div class="modal-dialog modal-md" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">How seller commission will get credited?</h4>
+                    <hr>
+                    <ol>
+                        <li>
+                            Cron job must be set (For once in a day) on your server for seller commission to be work.
+                        </li>
+                        <li>
+                            Cron job will run every mid night at 12:00 AM.
+                        </li>
+                        <li>
+                            Formula for seller commision is <b>Sub total (Excluding delivery charge) / 100 * seller commission percentage</b>
+                        </li>
+                        <li>
+                            For example sub total is 1378 and seller commission is 20% then 1378 / 100 X 20 = 275.6 so 1378 - 275.6 = 1102.4 will get credited into seller's wallet</b>
+                        </li>
+                        <li>
+                            If Order status is delivered then only seller will get commisison.
+                        </li>
+                        <li>
+                            Ex - 1. Order placed on 11-Aug-21 and product return days are set to 0 so 11-Aug + 0 days = 11-Aug seller commission will get credited on 12-Aug-21 at 12:00 AM (Mid night)
+                        </li>
+                        <li>
+                            Ex - 2. Order placed on 11-Aug-21 and product return days are set to 7 so 11-Aug + 7 days = 18-Aug seller commission will get credited on 19-Aug-21 at 12:00 AM (Mid night)
+                        </li>
+                        <li>
+                            If seller commission doesn't works make sure cron job is set properly and it is working. If you don't know how to set cron job for once in a day please take help of server support or do search for it.
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 
 <div class="separator"> </div>
@@ -331,7 +323,6 @@ $res = $db->getResult();
                 maxlength: 6
                 },
             address: "required",
-            valid: "required",
             description: "required",
             require_products_approval: "required",
             status: "required",
@@ -347,6 +338,7 @@ $res = $db->getResult();
     });
     $('#edit_form').on('submit', function(e) {
         e.preventDefault();
+    
         var formData = new FormData(this);
         if ($("#edit_form").validate().form()) {
             $.ajax({

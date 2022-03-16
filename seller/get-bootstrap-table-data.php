@@ -62,6 +62,7 @@ if (isset($_GET['table']) && $_GET['table'] == 'offers') {
 
         
         $tempRow['id'] = $row['id'];
+        $tempRow['seller_id'] = $row['seller_id'];
         
         //$tempRow['seller_id'] = (!empty($row['seller_id'])) ? $row['seller_id'] : "";
         //$tempRow['budget_id'] = $row['budget_id'];

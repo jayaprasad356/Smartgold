@@ -224,6 +224,15 @@
                                     </div>
                                 </div>
                             </div>
+                            
+                            <div class="row">
+                                <div class="form-group col-md-4">
+                                    <div class="form-group">
+                                        <label for="">Valid Upto</label><i class="text-danger asterik">*</i>
+                                        <input type="date" class="form-control" name="valid" id="valid">
+                                    </div>
+                                </div>
+                            </div>
                             <div class="row">
                                 
                                 
@@ -293,6 +302,7 @@
                 maxlength: 6
                 },
             password: "required",
+            valid: "required",
             address: "required",
             description: "required",
             require_products_approval: "required",
@@ -335,9 +345,10 @@
                         $('#add_form')[0].reset();
                     }
                 });
-        }else{
-            $('#add_form')[0].reset();
-
         }
+        // else{
+        //     $('#add_form')[0].reset();
+
+        // }
     });
 </script>

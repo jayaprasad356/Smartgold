@@ -47,16 +47,15 @@ if (empty($_POST['budget_range_id'])) {
 $latitude = $db->escapeString($_POST['latitude']);
 $longitude = $db->escapeString($_POST['longitude']);
 $budget_range_id = $db->escapeString($_POST['budget_range_id']);
-$sql = "SELECT * FROM offers,seller,budget WHERE offers.seller_id = seller.id AND offers.budget_id = budget.id AND offers.budget_id = $budget_range_id";
+$currentdate = new DateTime(date('Y-m-d'));
+$cdate = $currentdate->format('Y-m-d');
+$sql = "SELECT * FROM offers,seller,budget WHERE offers.seller_id = seller.id AND offers.budget_id = budget.id AND offers.budget_id = $budget_range_id AND offers.valid_date >= '$cdate' AND seller.valid >= '$cdate'";
 $db->sql($sql);
 $res = $db->getResult();
 $num = $db->numRows($res);
 if ($num >= 1) {
     $response['success'] = true;
     $response['message'] = "Offers Retrieved Successfully";
-    
-
-
     foreach ($res as $row) 
     {
         $tempRow['nick_name'] = 'Reputed Shop';
@@ -68,10 +67,8 @@ if ($num >= 1) {
         $tempRow['max_locked'] = $row['max_locked'];
         $tempRow['status'] = $row['status'];
         $tempRow['valid_date'] = $row['valid_date'];
-
         $distance = round((((acos(sin(($latitude*pi()/180)) * sin(($row['latitude']*pi()/180))+cos(($latitude*pi()/180)) * cos(($row['latitude']*pi()/180)) * cos((($longitude- $row['longitude'])*pi()/180))))*180/pi())*60*1.1515*1.609344), 2);
         $tempRow['distance'] = $distance;
-
         $rows[] = $tempRow;
 
     }

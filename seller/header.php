@@ -7,7 +7,11 @@ $db = new Database();
 $db->connect();
 $db->sql("SET NAMES 'utf8'");
 
-
+$Id = $_SESSION['seller_id'];
+$sql = "SELECT * FROM seller WHERE id=" . $Id;
+$db->sql($sql);
+$result = $db->getResult();
+$path = 'upload/seller/';
 ?>
 <!DOCTYPE html>
 <html>
@@ -128,16 +132,16 @@ $db->sql("SET NAMES 'utf8'");
                         
                             <li class="dropdown user user-menu">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    <img src="../img/logo.png" class="user-image" alt="User Image">
-                                    <span class="hidden-xs">Seller</span>
+                                    <img src="<?php echo DOMAIN_URL . $path . $result[0]['logo'] ?>" class="user-image" alt="User Image">
+                                    <span class="hidden-xs"><?php echo $result[0]['store_name'] ?></span>
                                 </a>
                                 <ul class="dropdown-menu">
                                     <!-- User image -->
                                     <li class="user-header">
-                                        <img src="../img/logo.png" class="img-circle" alt="User Image">
+                                        <img src="<?php echo DOMAIN_URL . $path . $result[0]['logo'] ?>" class="img-circle" alt="User Image">
                                         <p>
-                                            Seller
-                                            <small>seller@gmail.com</small>
+                                            <?php echo $result[0]['store_name'] ?>
+                                            <small><?php echo $result[0]['email'] ?></small>
                                         </p>
                                     </li>
                                     <li class="user-footer">
@@ -145,6 +149,9 @@ $db->sql("SET NAMES 'utf8'");
                                             <a href="admin-profile.php" class="btn btn-default btn-flat"> Edit Profile</a>
                                         </div> -->
                                         <div class="pull-left">
+                                            <a href="profile.php" class="btn btn-default btn-flat">Profile</a>
+                                        </div>
+                                        <div class="pull-right">
                                             <a href="logout.php" class="btn btn-default btn-flat">Log out</a>
                                         </div>
                                     </li>

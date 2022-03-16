@@ -32,16 +32,28 @@ if (isset($_POST['btnLogin'])) {
         $num = $db->numRows($res);
 
         if ($num == 1) {
-            $sql = "SELECT status FROM seller WHERE mobile=" . $mobile;
+            $sql = "SELECT status,valid FROM seller WHERE mobile=" . $mobile;
             $db->sql($sql);
             $result = $db->getResult();
+            $date1 = new DateTime(date('Y-m-d'));
+            $date2 = new DateTime($result[0]['valid']);
+            $interval = $date1->diff($date2);
+            
+            // else{
+            //     $error['failed_status'] = "difference " . $interval->days . " days ";
+            // }
+            //echo "difference " . $interval->days . " days ";
+            
 
             // approoved: 1 | not-approoved: 2 | deactive:0 |  removed :7
             if ($result[0]['status'] == 7) {
                 $error['failed_status'] = "<span class='btn btn-danger'>It seems your acount was removed by super admin please contact him to restore the account!</span>";
             } else if ($result[0]['status'] == 2) {
                 $error['failed_status'] = "<span class='btn btn-danger'>Your account is not approved by Super Admin. Please wait for approval!</span>";
-            } else {
+            } else if($date1 > $date2){
+                $error['failed_status'] = "<span class='btn btn-danger'>Your account is expired,please contact admin to upgrade plan</span>";
+
+            }else {
                 $_SESSION['seller_name'] = $res[0]['name'];
                 $_SESSION['seller_id'] = $res[0]['id'];
                 $_SESSION['timeout'] = $currentTime + $expired;
