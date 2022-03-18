@@ -5,6 +5,79 @@
     </ol>
     <hr />
 </section>
+<style>
+    #map {
+    height: 350px;
+  }
+  /* html, body {
+    width:550px;
+    height:550px;
+  } */
+
+  .pac-card {
+    
+    border-radius: 2px 0 0 2px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    outline: none;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    background-color: #fff;
+    font-family: Roboto;
+  }
+
+  #pac-container {
+    padding-bottom: 2px;
+    margin-right: 12px;
+  }
+
+  .pac-controls {
+    display: inline-block;
+    padding: 5px 11px;
+  }
+
+  .pac-controls label {
+    font-family: Roboto;
+    font-size: 13px;
+    font-weight: 300;
+  }
+
+  #pac-input {
+    background-color: #fff;
+    font-family: Roboto;
+    font-size: 15px;
+    font-weight: 300;
+    margin: 12px;
+
+    text-overflow: ellipsis;
+    width: 400px;
+    border: #e0e0e0 1px solid;
+  }
+
+  #pac-input:focus {
+    outline: none;
+  }
+
+  #label {
+    color: #fff;
+    background-color: #4d90fe;
+    font-size: 25px;
+    font-weight: 500;
+    padding: 6px 12px;
+  }
+
+  #location-error {
+    display: inline-block;
+    padding: 6px;
+    background: #e4a7a7;
+    border: #d49c9c 1px solid;
+    font-size: 1.3em;
+    color: #333;
+    display:none;
+    margin: 12px;
+  }
+  
+    
+</style>
 <section class="content">
     <div class="row">
         <div class="col-md-12">
@@ -74,6 +147,28 @@
                                         <input type="file" name="store_logo" id="store_logo" required /><br>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="row">
+                            <div class="pac-card" id="pac-card">
+                            <div>
+                            <div id="label">
+                                Location search
+                            </div>       
+                            </div>
+                            <div id="pac-container">
+                            <input id="pac-input" type="text"
+                                placeholder="Enter a location"><div id="location-error"></div>
+                            </div>
+                            </div>
+
+                            </div>
+                            <div class="row">
+                            <div id="map"></div>
+                            <div id="infowindow-content">
+                                <img src="" width="16" height="16" id="place-icon">
+                                <span id="place-name"  class="title"></span><br>
+                                <span id="place-address"></span>
+                            </div>
                             </div>
                             <div class="row">
                                 <div class="form-group col-md-4">
@@ -352,3 +447,55 @@
         // }
     });
 </script>
+<script>
+    function initMap() {
+    	var centerCoordinates = new google.maps.LatLng(37.6, -95.665);
+        var map = new google.maps.Map(document.getElementById('map'), {
+        center: centerCoordinates,
+        zoom: 4
+        });
+        var card = document.getElementById('pac-card');
+        var input = document.getElementById('pac-input');
+        var infowindowContent = document.getElementById('infowindow-content');
+        
+        map.controls[google.maps.ControlPosition.TOP_RIGHT].push(card);
+
+        var autocomplete = new google.maps.places.Autocomplete(input);
+        var infowindow = new google.maps.InfoWindow();
+        infowindow.setContent(infowindowContent);
+        
+        var marker = new google.maps.Marker({
+          map: map
+        });
+
+        autocomplete.addListener('place_changed', function() {
+ 	        document.getElementById("location-error").style.display = 'none';
+            infowindow.close();
+            marker.setVisible(false);
+        		var place = autocomplete.getPlace();
+        		if (!place.geometry) {
+        		  	document.getElementById("location-error").style.display = 'inline-block';
+        		  	document.getElementById("location-error").innerHTML = "Cannot Locate '" + input.value + "' on map";
+        		    return;
+        		}
+        		
+        		map.fitBounds(place.geometry.viewport);
+        		marker.setPosition(place.geometry.location);
+        		marker.setVisible(true);
+        		    
+        		infowindowContent.children['place-icon'].src = place.icon;
+        		infowindowContent.children['place-name'].textContent = place.name;
+        		infowindowContent.children['place-address'].textContent = input.value;
+                document.getElementById("latitude").value = place.geometry.location.lat();
+                document.getElementById("longtitude").value = place.geometry.location.lng();
+                //document.getElementById("street").value = place.formatted_address;
+            //console.log(place.formatted_address);
+            //console.log("lat - "+place.geometry.location.lat() +"lng - " +place.geometry.location.lng());
+        		
+        		infowindow.open(map, marker);
+            
+        });
+    }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDXRUNEuXhkWGxiOtrvTSMc91H6L9PM-_M&libraries=places&callback=initMap"
+        async defer></script>

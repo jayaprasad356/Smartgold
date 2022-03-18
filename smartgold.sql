@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.0
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 02, 2022 at 05:43 AM
--- Server version: 10.4.18-MariaDB
--- PHP Version: 7.3.27
+-- Generation Time: Mar 17, 2022 at 03:21 PM
+-- Server version: 10.4.22-MariaDB
+-- PHP Version: 7.4.27
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -177,6 +177,14 @@ CREATE TABLE `offers` (
   `valid_date` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `offers`
+--
+
+INSERT INTO `offers` (`id`, `seller_id`, `budget_id`, `gram_price`, `wastage`, `max_locked`, `status`, `valid_date`) VALUES
+(1, 1, 2, 5, 5, 5, 0, '2022-03-12'),
+(2, 1, 2, 5, 5, 5, 0, '2022-03-15');
+
 -- --------------------------------------------------------
 
 --
@@ -235,13 +243,6 @@ CREATE TABLE `products` (
   `is_approved` int(11) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `products`
---
-
-INSERT INTO `products` (`id`, `seller_id`, `name`, `category_id`, `image`, `description`, `status`, `discounted_price`, `price`, `stock`, `date_added`, `is_approved`) VALUES
-(1, 1, 'Female Ring ', 1, 'upload/images/7789-2021-12-25.jpg', 'Super Ring, Specially Made for Female ', 'Not Available', 20000, 25000, 10, '2021-12-24 19:28:37', 1);
-
 -- --------------------------------------------------------
 
 --
@@ -273,16 +274,21 @@ CREATE TABLE `seller` (
   `address_proof` text CHARACTER SET utf8 DEFAULT NULL,
   `pan_number` text CHARACTER SET utf8 DEFAULT NULL,
   `latitude` varchar(256) CHARACTER SET utf8 DEFAULT NULL,
-  `longitude` varchar(256) CHARACTER SET utf8 DEFAULT NULL
+  `longitude` varchar(256) CHARACTER SET utf8 DEFAULT NULL,
+  `valid` varchar(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `seller`
 --
 
-INSERT INTO `seller` (`id`, `name`, `store_name`, `email`, `mobile`, `password`, `store_url`, `logo`, `store_description`, `street`, `pincode`, `city`, `state`, `account_number`, `bank_ifsc_code`, `account_name`, `bank_name`, `status`, `last_updated`, `date_created`, `national_identity_card`, `address_proof`, `pan_number`, `latitude`, `longitude`) VALUES
-(1, 'JP', 'JP Mart', 'jp@gmail.com', '9876543210', 'e807f1fcf82d132f9bb018ca6738a19f', 'https://www.apple.com/in/', '1640372913.4344.jpg', '<p>JPMart Gold Seller</p>\r\n', 'east street', '612503', 'Kumbakonam', 'Tamil Nadu', '34325325235', 'TRGRGRGG', 'jp', 'Indian Bank', 1, NULL, '2021-12-24 19:08:33', '1640372913.4378.jpg', '1640372913.44.jpg', '132342432', '0', '0'),
-(2, 'safds', 'Test Shop', 'wre@gmail.com', '4343434', 'e10adc3949ba59abbe56e057f20f883e', '34332432', '1645933635.0093.png', '', 'east street', '612503', 'kumbakonam', 'Bihar', '34324324', '33432432', 'jp', 'cub', 1, NULL, '2022-02-27 03:47:15', '1645933635.011.png', '1645933635.0127.png', '3242143432', '32432432', '4324324');
+INSERT INTO `seller` (`id`, `name`, `store_name`, `email`, `mobile`, `password`, `store_url`, `logo`, `store_description`, `street`, `pincode`, `city`, `state`, `account_number`, `bank_ifsc_code`, `account_name`, `bank_name`, `status`, `last_updated`, `date_created`, `national_identity_card`, `address_proof`, `pan_number`, `latitude`, `longitude`, `valid`) VALUES
+(1, 'Prasad BE', 'JP Mart', 'jp@gmail.com', '9876543210', 'e807f1fcf82d132f9bb018ca6738a19f', 'https://www.apple.com/in/', '1647014772.7646.png', 'scs dcdcd', 'east street', '612503', 'Kumbakonam', 'Tamil Nadu', '34325325235', 'TRGRGRGG', 'jp', 'Indian Bank', 1, '2022-03-13 16:57:00', '2021-12-24 19:08:33', '1647014694.2344.png', '1647057090.7513.png', '132342432', '434343', '45453', '2021-03-13'),
+(2, 'safds', 'Test Shop', 'wre@gmail.com', '4343434', 'e10adc3949ba59abbe56e057f20f883e', '34332432', '1645933635.0093.png', '', 'east street', '612503', 'kumbakonam', 'Bihar', '34324324', '33432432', 'jp', 'cub', 1, NULL, '2022-02-27 03:47:15', '1645933635.011.png', '1645933635.0127.png', '3242143432', '32432432', '4324324', ''),
+(3, 'Developer', 'Dev', 'dev@gmail.com', '9090909090', '25d55ad283aa400af464c76d713c07ad', '', '1646240879.5935.png', '', '', '612503', 'chennai', 'Andhra Pradesh', '', '', '', '', 1, NULL, '2022-03-02 17:07:59', '1646240879.5944.png', '1646240879.5954.png', '65674674', '0', '0', ''),
+(4, 'Prasad', 'hi shop', 'jp@gmail.com', '8080808080', '93279e3308bdbbeed946fc965017f67a', '', '1646918191.9885.png', 'fdsfds', '', '613113', 'shjfdfds', 'Andhra Pradesh', '', '', '', '', 1, '2022-03-16 05:57:07', '2022-03-10 13:16:31', '1646918191.9892.png', '1646918191.9897.png', '1234567890', '0', '0', '2022-03-17'),
+(5, 'Akash', 'Akash Shop', 'akash@gmail.com', '6060606060', '25d55ad283aa400af464c76d713c07ad', '', '1646919064.1564.png', '', '', '', '', '', '', '', '', '', 2, NULL, '2022-03-10 13:31:04', '1646919064.158.png', '1646919064.1599.png', '1234567890', '0', '0', ''),
+(6, 'test', 'Test', 'test@gmail.com', '7070707070', 'e807f1fcf82d132f9bb018ca6738a19f', '', '1647335497.4464.png', '', '', '612503', 'kumbakonam', 'Tamil Nadu', '', '', '', '', 1, NULL, '2022-03-15 09:11:37', '1647335497.448.png', '1647335497.4495.png', '12346677766', '0', '0', '2022-03-25');
 
 -- --------------------------------------------------------
 
@@ -461,7 +467,7 @@ ALTER TABLE `nickname`
 -- AUTO_INCREMENT for table `offers`
 --
 ALTER TABLE `offers`
-  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `offer_lock`
@@ -485,7 +491,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `seller`
 --
 ALTER TABLE `seller`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `settings`

@@ -25,7 +25,6 @@ if (!isset($_POST['accesskey'])  || trim($_POST['accesskey']) != $access_key) {
     exit();
 }
 
-$function = new custom_functions();
 if (empty($_POST['user_id'])) {
     $response['success'] = false;
     $response['message'] = "User ID is Empty";
