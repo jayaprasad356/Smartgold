@@ -67,6 +67,27 @@ $db->connect();
                             <input type="number" class="form-control" name="mobile" id="mobile" required>
                         </div>
                         <div class="form-group">
+                            <p id="mverifytext" style="display:none" class="text-success"></p>
+                        </div>
+                        <div class="form-group">
+                            <input id="senOtpbtn" type="button" class="btn btn-primary" onclick="sendOtp()" value="Send Otp">
+                        </div>
+                        <div class="form-group">
+                            <div id="recaptcha-container"></div>
+                        </div>
+                        <div class="form-group">
+                            <input type="hidden" class="form-control" placeholder="Verification Code" name="vcode" id="vcode" required> 
+                            
+                        </div>
+                        <div class="form-group">
+                            <div class="gone">
+                                <input id="verifybtn" type="hidden" class="btn btn-primary" onclick="verifyOtp()" value="Verify">
+
+                            </div>
+                            
+                        </div>
+                        
+                        <div class="form-group">
                             <label for="">Password</label><i class="text-danger asterik">*</i>
                             <input type="password" class="form-control" name="password" id="password" required>
                         </div>
@@ -158,28 +179,79 @@ $db->connect();
 <script>
     $('#add_seller_form').on('submit', function(e) {
         e.preventDefault();
-        var formData = new FormData(this);
-        if ($("#add_seller_form").validate().form()) {
-            $.ajax({
-                type: 'POST',
-                url: $(this).attr('action'),
-                data: formData,
-                beforeSend: function() {
-                    $('#submit_btn').html('Please wait..');
-                },
-                cache: false,
-                contentType: false,
-                processData: false,
-                success: function(result) {
-                    $('#result').html(result);
-                    $('#result').show().delay(6000).fadeOut();
-                    $('#submit_btn').html('Submit');
-                    $('#add_seller_form')[0].reset();
-                    //window.location = "../seller/index.php";
+        if(document.getElementById("mverifytext").innerHTML == "Mobile Number Verified"){
+            var formData = new FormData(this);
+            if ($("#add_seller_form").validate().form()) {
+                $.ajax({
+                    type: 'POST',
+                    url: $(this).attr('action'),
+                    data: formData,
+                    beforeSend: function() {
+                        $('#submit_btn').html('Please wait..');
+                    },
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    success: function(result) {
+                        $('#result').html(result);
+                        $('#result').show().delay(6000).fadeOut();
+                        $('#submit_btn').html('Submit');
+                        $('#add_seller_form')[0].reset();
+                        //window.location = "../seller/index.php";
 
 
-                }
-            });
+                    }
+                });
+            }
+
         }
+        else{
+            alert("Please Verify Your Mobile Number !")
+        }
+        
     });
+</script>
+<script src="https://www.gstatic.com/firebasejs/4.8.1/firebase.js"></script>
+  <script type="text/javascript">
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyAFCnGf6H7TjrwAhAhr_Zg6umPpoZBjhjg",
+    authDomain: "smartgold-a0c76.firebaseapp.com",
+    projectId: "smartgold-a0c76",
+    storageBucket: "smartgold-a0c76.appspot.com",
+    messagingSenderId: "900414686957",
+    appId: "1:900414686957:web:92e9e0509aada7454feee4",
+    measurementId: "G-HBNFGSCR8G"
+  };
+  firebase.initializeApp(config);
+</script>
+<script type="text/javascript">
+function sendOtp() {
+    window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container');
+    firebase.auth().signInWithPhoneNumber("+91"+document.getElementById("mobile").value, window.recaptchaVerifier) 
+    .then(function(confirmationResult) {
+        window.confirmationResult = confirmationResult;
+        document.getElementById("vcode").type = "number";
+        document.getElementById("verifybtn").type = "button";
+        console.log(confirmationResult);
+    });
+
+}
+function verifyOtp() {
+
+    window.confirmationResult.confirm(document.getElementById("vcode").value)
+    .then(function(result) {
+
+        document.getElementById("vcode").type = "hidden";
+        document.getElementById("verifybtn").type = "hidden";
+        document.getElementById("recaptcha-container").style.display = "none";
+        document.getElementById("mverifytext").innerHTML = "Mobile Number Verified";
+        document.getElementById("mverifytext").style = "";
+        document.getElementById("senOtpbtn").type = "hidden";
+      console.log(result);
+    }).catch(function(error) {
+      console.log(error);
+    });
+
+}
 </script>

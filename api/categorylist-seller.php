@@ -25,38 +25,35 @@ if (!isset($_POST['accesskey'])  || trim($_POST['accesskey']) != $access_key) {
     exit();
 }
 
-if (empty($_POST['user_id'])) {
+if (empty($_POST['seller_id'])) {
     $response['success'] = false;
-    $response['message'] = "User ID is Empty";
+    $response['message'] = "Seller ID is Empty";
     print_r(json_encode($response));
     return false;
 }
-$user_id = $db->escapeString($_POST['user_id']);
-$sql = "SELECT *,orders.id AS id,orders.status AS status FROM orders,products WHERE orders.product_id = products.id AND orders.user_id = '" . $user_id . "'";
+$seller_id = $db->escapeString($_POST['seller_id']); 
+//$sql = "SELECT * FROM products WHERE seller_id = '" . $seller_id . "'";
+$sql = "SELECT category.id,category.name,category.image FROM `products`,`category` WHERE category.id = products.category_id AND seller_id = '$seller_id' GROUP BY category_id";
 $db->sql($sql);
 $res = $db->getResult();
 $num = $db->numRows($res);
 if ($num >= 1) {
     foreach ($res as $row) {
-        $tempRow['id'] = $row['id'];
-        $tempRow['name'] = $row['name'];
-        $tempRow['discounted_price'] = $row['discounted_price'];
-        $tempRow['quantity'] = $row['quantity'];
-        $tempRow['buy_method'] = $row['buy_method'];
-        $tempRow['status'] = $row['status'];
-        $tempRow['image'] = DOMAIN_URL . $row['image'];
-        $rows[] = $tempRow;
-
+        $temp['id'] = $row['id'];
+        $temp['name'] = $row['name'];
+        $temp['image'] = DOMAIN_URL . $row['image'];
+        
+        $temp1[] = $temp;
     }
     $response['success'] = true;
-    $response['message'] = "Orders Retrived Successfully";
-    $response['data'] = $rows;
+    $response['message'] = "Category Retrived Successfully";
+    $response['data'] = $temp1;
     print_r(json_encode($response));
 
 }
 else{
     $response['success'] = false;
-    $response['message'] = "Orders Not Found";
+    $response['message'] = "products Not Found";
     $response['data'] = $res;
     print_r(json_encode($response));
 

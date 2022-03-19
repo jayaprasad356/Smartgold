@@ -59,7 +59,7 @@ $status = $db->escapeString('received');
 $sql = "INSERT INTO offer_lock(`user_id`,`offer_id`, `paid_amt`, `status`)VALUES($user_id,$offer_id,$paid_amt,'$status')";
 $db->sql($sql);
 $res = $db->getResult();
-$sql = "SELECT * FROM seller WHERE id = '" . $seller_id . "'";
+$sql = "SELECT *,offers.valid_date FROM `seller`,`offers` WHERE seller.id = offers.seller_id AND seller.id = '" . $seller_id . "'";
 $db->sql($sql);
 $res = $db->getResult();
 $num = $db->numRows($res);
@@ -79,7 +79,7 @@ if ($num >= 1) {
         $temp['state'] = $row['state'];
         $temp['latitude'] = $row['latitude'];
         $temp['longitude'] = $row['longitude'];
-        $temp['valid_till'] = "01-11-2000";
+        $temp['valid_till'] = $row['valid_date'];
         $temp1[] = $temp;
         
     }
