@@ -11,16 +11,14 @@ if (!isset($_SESSION['seller_id']) && !isset($_SESSION['seller_name'])) {
     $ID = $_SESSION['seller_id'];
 }
 $order_id = $_GET['id'];
-$sql_query = "SELECT status FROM orders WHERE id = '" . $order_id . "'";
-$db->sql($sql_query);
 
-$res = $db->getResult();
 if (isset($_POST['btnUpdate'])) {
     
     $seller_id = $ID;
     $status = $db->escapeString($_POST['status']);
+    $payment_status = $db->escapeString($_POST['payment_status']);
     
-    $sql = "UPDATE orders SET status = '$status' WHERE id = '" . $order_id . "'";
+    $sql = "UPDATE orders SET `status` = '$status',`payment_status` = '$payment_status' WHERE id = '" . $order_id . "'";
     $db->sql($sql);
     $product_result = $db->getResult();
 
@@ -31,7 +29,7 @@ if (isset($_POST['btnUpdate'])) {
     }
     if ($product_result == 1 ) {
         $error['add_menu'] = "<section class='content-header'>
-                                            <span class='label label-success'>Offer Added Successfully</span>
+                                            <span class='label label-success'>Updated Successfully</span>
                                             <h4><small><a  href='orders.php'><i class='fa fa-angle-double-left'></i>&nbsp;&nbsp;&nbsp;Back to Orders</a></small></h4>
                                              </section>";
     } else {
@@ -41,6 +39,10 @@ if (isset($_POST['btnUpdate'])) {
     
 
 }
+$sql_query = "SELECT status,payment_status FROM orders WHERE id = '" . $order_id . "'";
+$db->sql($sql_query);
+
+$res = $db->getResult();
 
 ?>
 <section class="content-header">
@@ -70,13 +72,49 @@ if (isset($_POST['btnUpdate'])) {
                 
                     
                     <div class="box-body">
-                        <div class="form-group">
-                            <div class="col-md-6">
+                        <div class="col-md-6">
+                            <div class="form-group" >
                                 <label for="exampleInputEmail1">Status</label> <i class="text-danger asterik">*</i><?php echo isset($error['status']) ? $error['status'] : ''; ?>
-                                <input type="text" class="form-control" name="status" value="<?php echo $res[0]['status'] ?>" >
+                                <select name="status" class="form-control" required>
+                                <option value="received" <?php if ($res[0]['status'] == "received") {
+                                                                                echo "selected";
+                                                                            } ?>>Received</option>
+                                <option value="Shipped" <?php if ($res[0]['status'] == "Shipped") {
+                                                                                echo "selected";
+                                                                            } ?>>Shipped</option>
+                                <option value="Refunded" <?php if ($res[0]['status'] == "Refunded") {
+                                                                                echo "selected";
+                                                                            } ?>>Refunded</option>
+                                <option value="Refunded" <?php if ($res[0]['status'] == "Refunded") {
+                                            echo "selected";
+                                        } ?>>Refunded</option>
+                                <option value="Cancelled" <?php if ($res[0]['status'] == "Cancelled") {
+                                            echo "selected";
+                                        } ?>>Cancelled</option>                                            
+                            </select>
                             </div>
                                 
                         </div>
+                        <div class="col-md-6">
+                            <label for="exampleInputEmail1">Payment Status</label> <i class="text-danger asterik">*</i><?php echo isset($error['status']) ? $error['status'] : ''; ?>
+                                
+                            <select name="payment_status" class="form-control" required>
+                                <option value="UnPaid" <?php if ($res[0]['payment_status'] == "UnPaid") {
+                                                                                echo "selected";
+                                                                            } ?>>UnPaid</option>
+                                <option value="Paid" <?php if ($res[0]['payment_status'] == "Paid") {
+                                                                                echo "selected";
+                                                                            } ?>>Paid</option>
+                                <option value="Refunded" <?php if ($res[0]['payment_status'] == "Refunded") {
+                                                                                echo "selected";
+                                                                            } ?>>Refunded</option>
+                                <option value="Cancelled" <?php if ($res[0]['payment_status'] == "Cancelled") {
+                                            echo "selected";
+                                        } ?>>Cancelled</option>                                            
+                            </select>
+                        </div>
+
+                    </div>
                     
                     <!-- /.box-body -->
                     <div class="box-footer">

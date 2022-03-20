@@ -68,18 +68,15 @@ $res = $db->getResult();
                                     </div>
                                 </div>
                             </div>
+                            <div class="form-group">
+                                <input id="changepass" type="button" class="btn btn-primary" onclick="changePassword()" value="Change Password">
+                            </div>
                             <div class="row">
                                 <div class="form-group col-md-4">
-                                    <div class="form-group">
-                                        <label for="">Password</label><small>( Leave it blank for no change )</small>
-                                        <input type="password" class="form-control" name="password" id="password">
-                                    </div>
+                                    <input type="hidden" class="form-control" name="password" placeholder="Password" id="password">
                                 </div>
                                 <div class="form-group col-md-4">
-                                    <div class="form-group">
-                                        <label for="">Confirm Password</label>
-                                        <input type="password" class="form-control" name="confirm_password" id="confirm_password">
-                                    </div>
+                                    <input type="hidden" class="form-control" name="confirm_password" placeholder="Confirm Password" id="confirm_password">
                                 </div>
                             </div>
                             <div class="row">
@@ -364,4 +361,12 @@ $res = $db->getResult();
         }
     });
 </script>
+<script type="text/javascript">
+    function changePassword() {
+        document.getElementById("password").type = "password";
+        document.getElementById("confirm_password").type = "password";
+
+    }
+
+    </script>
 <?php $db->disconnect(); ?>

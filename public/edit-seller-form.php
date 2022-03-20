@@ -334,14 +334,14 @@ $res = $db->getResult();
                             <div class="row">
                                 <div class="form-group col-md-4">
                                     <div class="form-group">
-                                        <label for="">Latitude</label>
-                                        <input type="number" class="form-control" name="latitude" id="latitude" value="<?= $res[0]['latitude']; ?>">
+                                        <label for="">Latitude</label><i class="text-danger asterik">*</i>
+                                        <input type="number" class="form-control" name="latitude" id="latitude" value="<?= $res[0]['latitude']; ?>" required>
                                     </div>
                                 </div>
                                 <div class="form-group col-md-4">
                                     <div class="form-group">
-                                        <label for="">Longitude</label>
-                                        <input type="text" class="form-control" name="longitude" id="longitude" value="<?= $res[0]['longitude']; ?>">
+                                        <label for="">Longitude</label><i class="text-danger asterik">*</i>
+                                        <input type="text" class="form-control" name="longitude" id="longitude" value="<?= $res[0]['longitude']; ?>" required>
                                     </div>
                                 </div>
                             </div>
@@ -504,7 +504,7 @@ $res = $db->getResult();
         		infowindowContent.children['place-name'].textContent = place.name;
         		infowindowContent.children['place-address'].textContent = input.value;
                 document.getElementById("latitude").value = place.geometry.location.lat();
-                document.getElementById("longtitude").value = place.geometry.location.lng();
+                document.getElementById("longitude").value = place.geometry.location.lng();
                 //document.getElementById("street").value = place.formatted_address;
             //console.log(place.formatted_address);
             //console.log("lat - "+place.geometry.location.lat() +"lng - " +place.geometry.location.lng());

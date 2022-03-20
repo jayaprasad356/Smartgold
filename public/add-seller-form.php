@@ -296,8 +296,8 @@
                                 </div>
                                 <div class="form-group col-md-4">
                                     <div class="form-group">
-                                        <label for="">Latitude</label>
-                                        <input type="number" class="form-control" name="latitude" id="latitude">
+                                        <label for="">Latitude</label><i class="text-danger asterik">*</i>
+                                        <input type="number" class="form-control" name="latitude" id="latitude" required>
                                     </div>
                                 </div>
 
@@ -306,8 +306,8 @@
                                 
                                 <div class="form-group col-md-4">
                                     <div class="form-group">
-                                        <label for="">Longitude</label>
-                                        <input type="text" class="form-control" name="longitude" id="longitude">
+                                        <label for="">Longitude</label><i class="text-danger asterik">*</i>
+                                        <input type="text" class="form-control" name="longitude" id="longitude" required>
                                     </div>
                                 </div>
                             </div>
