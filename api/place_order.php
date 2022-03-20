@@ -53,7 +53,7 @@ $sql = "SELECT COUNT(id) AS count FROM cart WHERE user_id = '" . $user_id . "'";
 $db->sql($sql);
 $rescount = $db->getResult();
 $productcount = $rescount[0]['count'];
-if($is_paid == true){
+if($is_paid == 'true'){
     $payment_status = "Paid";
 }else{
     $payment_status = "UnPaid";
