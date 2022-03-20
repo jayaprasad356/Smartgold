@@ -142,7 +142,7 @@ $db->sql("SET NAMES 'utf8'");
                                             <a href="admin-profile.php" class="btn btn-default btn-flat"> Edit Profile</a>
                                         </div> -->
                                         <div class="pull-left">
-                                            <a href="logout.php" class="btn btn-default btn-flat">Log out</a>
+                                            <a href="logout.php" class="btn btn-primary btn-flat">Log out</a>
                                         </div>
                                     </li>
                                     <!-- Menu Body -->

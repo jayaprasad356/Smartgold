@@ -314,12 +314,11 @@
                             <div class="row">
                                 <div class="form-group col-md-8">
                                     <div class="form-group">
-                                        <label for="description">Store Description :</label>
+                                        <label for="description">Store Description :</label><i class="text-danger asterik">*</i>
                                         <textarea name="description" id="description" class="form-control" rows="8"></textarea>
                                     </div>
                                 </div>
                             </div>
-                            
                             <div class="row">
                                 <div class="form-group col-md-4">
                                     <div class="form-group">
@@ -329,9 +328,6 @@
                                 </div>
                             </div>
                             <div class="row">
-                                
-                                
-                                
                                 <div class="form-group col-md-5">
                                     <div class="form-group">
                                         <label class="control-label">Status</label>
@@ -377,9 +373,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>
 
 <script type="text/javascript" src="css/js/ckeditor/ckeditor.js"></script>
-<script type="text/javascript">
-    CKEDITOR.replace('description');
-</script>
 <script>
     $('#add_form').validate({
         rules: {
@@ -487,7 +480,7 @@
         		infowindowContent.children['place-name'].textContent = place.name;
         		infowindowContent.children['place-address'].textContent = input.value;
                 document.getElementById("latitude").value = place.geometry.location.lat();
-                document.getElementById("longtitude").value = place.geometry.location.lng();
+                document.getElementById("longitude").value = place.geometry.location.lng();
                 //document.getElementById("street").value = place.formatted_address;
             //console.log(place.formatted_address);
             //console.log("lat - "+place.geometry.location.lat() +"lng - " +place.geometry.location.lng());

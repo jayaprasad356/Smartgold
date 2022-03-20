@@ -128,6 +128,8 @@ if (isset($_GET['table']) && $_GET['table'] == 'lockoffers') {
     $rows = array();
     $tempRow = array();
     foreach ($res as $row) {
+        $operate = ' <a href="edit-offer-lock.php?id=' . $row['id'] . '" title="Edit"><i class="fa fa-edit"></i></a>';
+        
         
         
         
@@ -142,6 +144,7 @@ if (isset($_GET['table']) && $_GET['table'] == 'lockoffers') {
         $tempRow['name'] = $row['name'];
         $tempRow['mobile'] = $row['mobile'];
         $tempRow['email'] = $row['email'];
+        $tempRow['operate'] = $operate;
         
         $rows[] = $tempRow;
     }

@@ -37,8 +37,15 @@ if (empty($_POST['buy_method'])) {
     print_r(json_encode($response));
     return false;
 }
+if (empty($_POST['is_paid'])) {
+    $response['success'] = false;
+    $response['message'] = "Paid Status is Empty";
+    print_r(json_encode($response));
+    return false;
+}
 $user_id = $db->escapeString($_POST['user_id']);
 $buy_method = $db->escapeString($_POST['buy_method']);
+$is_paid = $db->escapeString($_POST['is_paid']);
 $sql = "SELECT product_id,quantity FROM cart WHERE user_id = '" . $user_id . "'";
 $db->sql($sql);
 $res = $db->getResult();
@@ -46,12 +53,17 @@ $sql = "SELECT COUNT(id) AS count FROM cart WHERE user_id = '" . $user_id . "'";
 $db->sql($sql);
 $rescount = $db->getResult();
 $productcount = $rescount[0]['count'];
+if($is_paid == true){
+    $payment_status = "Paid";
+}else{
+    $payment_status = "UnPaid";
+}
 
 for ($i = 0; $i < $productcount; $i++) {
     $product_id = $res[$i]['product_id'];
     $quantity = $res[$i]['quantity'];
     
-    $sql = "INSERT INTO orders(`user_id`,`product_id`,`quantity`,`status`,`buy_method`)VALUES('$user_id','$product_id','$quantity','received','$buy_method')";
+    $sql = "INSERT INTO orders(`user_id`,`product_id`,`quantity`,`status`,`buy_method`,`payment_status`)VALUES('$user_id','$product_id','$quantity','received','$buy_method','$payment_status')";
     $db->sql($sql);
     $sql = "DELETE FROM cart WHERE product_id = '" . $product_id . "' AND user_id = '$user_id'";
     $db->sql($sql);
