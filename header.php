@@ -202,7 +202,7 @@ $db->sql("SET NAMES 'utf8'");
                 
                     </ul>
                 </li>
-                <li class="treeview">
+                <!-- <li class="treeview">
                     <a href="#">
                         <i class="fa fa-male"></i>
                         <span>Smart Gold Settings</span>
@@ -214,7 +214,7 @@ $db->sql("SET NAMES 'utf8'");
                         <li><a href="add-price-duration.php"><i class="fa fa-sliders"></i>Price/Duration</a></li>
                         <li><a href="delivery_settings.php"><i class="fa fa-sliders"></i>Delivery Charges/Days</a></li>
                     </ul>
-                </li>
+                </li> -->
                 
                 
                     

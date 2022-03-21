@@ -6,7 +6,7 @@ $function = new custom_functions;
 
 // set time for session timeout
 $currentTime = time() + 25200;
-$expired = 120;
+$expired = 300;
 
 // if current time is more than session timeout back to login page
 if ($currentTime > $_SESSION['timeout']) {
@@ -16,8 +16,7 @@ if ($currentTime > $_SESSION['timeout']) {
 // destroy previous session timeout and create new one
 unset($_SESSION['timeout']);
 $_SESSION['timeout'] = $currentTime + $expired;
-
-
+               
 
 include "header.php";
 

@@ -38,14 +38,6 @@ if (isset($_POST['btnLogin'])) {
             $date1 = new DateTime(date('Y-m-d'));
             $date2 = new DateTime($result[0]['valid']);
             $interval = $date1->diff($date2);
-            
-            // else{
-            //     $error['failed_status'] = "difference " . $interval->days . " days ";
-            // }
-            //echo "difference " . $interval->days . " days ";
-            
-
-            // approoved: 1 | not-approoved: 2 | deactive:0 |  removed :7
             if ($result[0]['status'] == 7) {
                 $error['failed_status'] = "<span class='btn btn-danger'>It seems your acount was removed by super admin please contact him to restore the account!</span>";
             } else if ($result[0]['status'] == 2) {
