@@ -23,6 +23,7 @@ if (isset($_POST['btnAdd'])) {
     $maxilock= $db->escapeString($_POST['maxilock']);
     $status = $db->escapeString($_POST['serve_for']);
     $valid = $db->escapeString($_POST['valid']);
+    $description = $db->escapeString($_POST['description']);
 
     
     $error = array();
@@ -45,14 +46,14 @@ if (isset($_POST['btnAdd'])) {
     if (empty($valid)) {
         $error['valid'] = " <span class='label label-danger'>Required!</span>";
     }
-
+    
     
     if (!empty($ppg) && !empty($budget_id)   && !empty($wastage) && !empty($maxilock) && !empty($status) && !empty($valid)) {
 
         
 
         // insert new data to product table
-        $sql = "INSERT INTO offers (seller_id,budget_id,gram_price,wastage,max_locked,status,valid_date) VALUES('$seller_id','$budget_id','$ppg','$wastage','$maxilock','$status','$valid')";
+        $sql = "INSERT INTO offers (seller_id,budget_id,gram_price,wastage,max_locked,status,valid_date,description) VALUES('$seller_id','$budget_id','$ppg','$wastage','$maxilock','$status','$valid','$description')";
         $db->sql($sql);
         $product_result = $db->getResult();
 
@@ -130,13 +131,21 @@ if (isset($_POST['btnAdd'])) {
                                 <label for="exampleInputEmail1">Maximum Locked</label> <i class="text-danger asterik">*</i><?php echo isset($error['maxilock']) ? $error['maxilock'] : ''; ?>
                                 <input type="text" class="form-control" name="maxilock" required>
                         </div>
+                        <div class="form-group">
+                            <label for="description">Description :</label> <i class="text-danger asterik">*</i><?php echo isset($error['description']) ? $error['description'] : ''; ?>
+                            <textarea name="description" id="description" class="form-control" rows="8"></textarea>
+                            <script type="text/javascript" src="css/js/ckeditor/ckeditor.js"></script>
+                            <script type="text/javascript">
+                                CKEDITOR.replace('description');
+                            </script>
+                        </div>
                         
                         <div class="row">
                             <div class="col-md-6">
                                 <label for="serve_for">Status :</label>
                                 <select name="serve_for" class="form-control" required>
-                                    <option value="Available">Available</option>
-                                    <option value="Sold Out">Not Available</option>
+                                    <option value="1">Available</option>
+                                    <option value="0">Not Available</option>
                                 </select>
 
                             </div>
