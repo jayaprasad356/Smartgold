@@ -358,11 +358,33 @@ $res = $db->getResult();
                             <div class="row">
                                 <div class="form-group col-md-4">
                                     <div class="form-group">
-                                        <label for="">Valid Upto</label><i class="text-danger asterik">*</i>
-                                        <input type="date" class="form-control" name="valid" id="valid" value="<?= $res[0]['valid']; ?>">
+                                        <input type="hidden" class="form-control" name="valid" id="valid" value="<?= $res[0]['valid']; ?>">
                                     </div>
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="form-group col-md-4">
+                                    <div class="form-group">
+                                        <select name="plan" id="plan" onchange="changeplan()" class="form-control">
+                                            <option value="0">Select Plan</option>
+                                            <option <?=$res[0]['plan'] == 'free-trial' ? ' selected="selected"' : '';?> value="free-trial">Free Trial</option>
+                                            <option <?=$res[0]['plan'] == 'basic-monthly' ? ' selected="selected"' : '';?>  value="basic-monthly">Basic Monthly</option>
+                                            <option <?=$res[0]['plan'] == 'deluxe-monthly' ? ' selected="selected"' : '';?> value="deluxe-monthly">Deluxe Monthly</option>
+                                            <option <?=$res[0]['plan'] == 'premium-monthly' ? ' selected="selected"' : '';?> value="premium-monthly">Premium Monthly</option>
+                                            <option <?=$res[0]['plan'] == 'basic-annually' ? ' selected="selected"' : '';?> value="basic-annually">Basic Annually</option>
+                                            <option <?=$res[0]['plan'] == 'deluxe-annually' ? ' selected="selected"' : '';?> value="deluxe-annually">Deluxe Annually</option>
+                                            <option <?=$res[0]['plan'] == 'premium-annually' ? ' selected="selected"' : '';?> value="premium-annually">Premium Annually</option>
+                                       </select>
+                                    </div>
+                                </div>
+                           </div>
+                           <div class="row">
+                               <div class="form-group col-md-4">
+                                    <p class="text-danger" id="resultvalid"></p>
+
+                               </div>
+                               
+                           </div>
                             <div class="row">
                                 <div class="form-group col-md-5">
                                     <div class="form-group">
@@ -463,6 +485,72 @@ $res = $db->getResult();
             });
         }
     });
+</script>
+<script>
+    function changeplan() {
+    var value = document.getElementById("plan").value;
+    console.log(value);
+    if(value == 'free-trial'){
+        
+        var date = new Date();
+        Date.prototype.addDays = function(days) {
+            var date = new Date(this.valueOf());
+            date.setDate(date.getDate() + days);
+            return date;
+        }
+        var today = date.addDays(30);
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var yyyy = today.getFullYear();
+
+        today = yyyy + '-' + mm + '-' + dd;
+        document.getElementById("valid").value = today;
+        document.getElementById("resultvalid").innerHTML = 'Plan Valid Upto - '+today;
+    }
+    else if(value == 'basic-monthly' || value == 'deluxe-monthly' || value == 'premium-monthly'){
+        var date = new Date();
+        Date.prototype.addDays = function(days) {
+            var date = new Date(this.valueOf());
+            date.setDate(date.getDate() + days);
+            return date;
+        }
+        var today = date.addDays(30);
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var yyyy = today.getFullYear();
+
+        today = yyyy + '-' + mm + '-' + dd;
+        console.log(today)
+        document.getElementById("valid").value = today;
+        document.getElementById("resultvalid").innerHTML = 'Plan Valid Upto - '+today;
+    
+
+    }
+    else if(value == 'basic-annually' || value == 'deluxe-annually' || value == 'premium-annually'){
+        var date = new Date();
+        Date.prototype.addDays = function(days) {
+            var date = new Date(this.valueOf());
+            date.setDate(date.getDate() + days);
+            return date;
+        }
+        var today = date.addDays(365);
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var yyyy = today.getFullYear();
+
+        today = yyyy + '-' + mm + '-' + dd;
+        document.getElementById("valid").value = today;
+        document.getElementById("resultvalid").innerHTML = 'Plan Valid Upto - '+today;
+    
+
+    }
+
+
+    
+
+
+    }
+    
 </script>
 <script>
     function initMap() {

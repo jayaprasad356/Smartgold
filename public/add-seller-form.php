@@ -322,11 +322,33 @@
                             <div class="row">
                                 <div class="form-group col-md-4">
                                     <div class="form-group">
-                                        <label for="">Valid Upto</label><i class="text-danger asterik">*</i>
-                                        <input type="date" class="form-control" name="valid" id="valid">
+                                        <input type="hidden" class="form-control" name="valid" id="valid">
                                     </div>
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="form-group col-md-4">
+                                    <div class="form-group">
+                                        <select name="plan" id="plan" onchange="changeplan()" class="form-control">
+                                            <option value="0">Select Plan</option>
+                                            <option value="free-trial">Free Trial</option>
+                                            <option value="basic-monthly">Basic Monthly</option>
+                                            <option value="deluxe-monthly">Deluxe Monthly</option>
+                                            <option value="premium-monthly">Premium Monthly</option>
+                                            <option value="basic-annually">Basic Annually</option>
+                                            <option value="deluxe-annually">Deluxe Annually</option>
+                                            <option value="premium-annually">Premium Annually</option>
+                                       </select>
+                                    </div>
+                                </div>
+                           </div>
+                           <div class="row">
+                               <div class="form-group col-md-4">
+                                    <p class="text-danger" id="resultvalid"></p>
+
+                               </div>
+                               
+                           </div>
                             <div class="row">
                                 <div class="form-group col-md-5">
                                     <div class="form-group">
@@ -414,7 +436,8 @@
         e.preventDefault();
         
         var formData = new FormData(this);
-        if ($("#add_form").validate().form()) {
+        if(document.getElementById("plan").value != '0'){
+            if ($("#add_form").validate().form()) {
             $.ajax({
                     type: 'POST',
                     url: $(this).attr('action'),
@@ -431,14 +454,84 @@
                         $('#submit_btn').html('Add');
                     
                         $('#add_form')[0].reset();
+                        document.getElementById("resultvalid").innerHTML = '';
                     }
                 });
         }
-        // else{
-        //     $('#add_form')[0].reset();
 
-        // }
+        }
+        
+        else{
+            alert("Please,Select Plan");
+
+        }
     });
+</script>
+<script>
+    function changeplan() {
+    var value = document.getElementById("plan").value;
+    console.log(value);
+    if(value == 'free-trial'){
+        
+        var date = new Date();
+        Date.prototype.addDays = function(days) {
+            var date = new Date(this.valueOf());
+            date.setDate(date.getDate() + days);
+            return date;
+        }
+        var today = date.addDays(30);
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var yyyy = today.getFullYear();
+
+        today = yyyy + '-' + mm + '-' + dd;
+        document.getElementById("valid").value = today;
+        document.getElementById("resultvalid").innerHTML = 'Plan Valid Upto - '+today;
+    }
+    else if(value == 'basic-monthly' || value == 'deluxe-monthly' || value == 'premium-monthly'){
+        var date = new Date();
+        Date.prototype.addDays = function(days) {
+            var date = new Date(this.valueOf());
+            date.setDate(date.getDate() + days);
+            return date;
+        }
+        var today = date.addDays(30);
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var yyyy = today.getFullYear();
+
+        today = yyyy + '-' + mm + '-' + dd;
+        console.log(today)
+        document.getElementById("valid").value = today;
+        document.getElementById("resultvalid").innerHTML = 'Plan Valid Upto - '+today;
+    
+
+    }
+    else if(value == 'basic-annually' || value == 'deluxe-annually' || value == 'premium-annually'){
+        var date = new Date();
+        Date.prototype.addDays = function(days) {
+            var date = new Date(this.valueOf());
+            date.setDate(date.getDate() + days);
+            return date;
+        }
+        var today = date.addDays(365);
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var yyyy = today.getFullYear();
+
+        today = yyyy + '-' + mm + '-' + dd;
+        document.getElementById("valid").value = today;
+        document.getElementById("resultvalid").innerHTML = 'Plan Valid Upto - '+today;
+    
+
+    }
+
+
+    
+
+
+    }
+    
 </script>
 <script>
     function initMap() {

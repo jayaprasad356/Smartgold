@@ -151,7 +151,7 @@ if (isset($_POST['btnAdd'])) {
                             </div>
                             <div class="col-md-6">
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Valid Upto</label> <i class="text-danger asterik">*</i><?php echo isset($error['valid']) ? $error['valid'] : ''; ?>
+                                <label for="exampleInputEmail1">Valid Date</label> <i class="text-danger asterik">*</i><?php echo isset($error['valid']) ? $error['valid'] : ''; ?>
                                 <input type="date" class="form-control" name="valid" required>
                         </div>
                             </div>
