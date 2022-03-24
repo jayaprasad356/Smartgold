@@ -37,7 +37,7 @@ if (empty($_POST['latitude']) || empty($_POST['longitude']) || empty($_POST['ran
             $temp['id'] = $row['id'];
             $temp['name'] = $row['name'];
             $temp['store_name'] = $row['store_name'];
-            $temp['logo'] = DOMAIN_URL . $row['logo'];
+            $temp['logo'] = DOMAIN_URL .'upload/seller/'. $row['logo'];
             $temp1[] = $temp;
 
         }
