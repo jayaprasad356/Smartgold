@@ -216,6 +216,11 @@ $path = 'upload/seller/';
                         
                     </ul>
                 </li>
+                <li class="treeview">
+                    <a href="upgrade.php">
+                        <i class="fa fa-credit-card" class="active"></i> <span>Upgrade</span>
+                    </a>
+                </li>
                     
                 
             </ul>
