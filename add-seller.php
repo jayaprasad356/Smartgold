@@ -32,4 +32,5 @@ include "header.php"; ?>
       </div><!-- /.content-wrapper -->
   </body>
 </html>
+
 <?php include"footer.php";?>

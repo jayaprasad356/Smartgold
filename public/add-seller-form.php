@@ -112,6 +112,7 @@
                                         <label for="">Mobile</label><i class="text-danger asterik">*</i>
                                         <input type="number" class="form-control" name="mobile" id="mobile" required>
                                     </div>
+                                    <p name="mobilecheckout" id="mobilecheckout" class="text-danger"></p>
                                 </div>
                                 <div class="form-group col-md-4">
                                     <div class="form-group">
@@ -466,6 +467,39 @@
 
         }
     });
+</script>
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $('input[name=mobile]').change(function() {
+            console.log($('#mobile').val());
+            var myVar = $('#mobile').val();
+            
+            $.ajax({
+            url: "sellermobileexist.php",
+            type: "POST",
+            data:{"mobile":myVar}
+            }).done(function(data) {
+                console.log(data);
+                if(data == "success"){
+                    $("#mobilecheckout").html("");
+                }else{
+                    console.log(data);
+                    $("#mobilecheckout").html("Mobile Number Already Registered");
+                }
+            
+            }).fail(function(request){
+                console.log(request.responseText);
+                if(request.responseText == "success"){
+                    $("#mobilecheckout").html("");
+                }else{
+                   
+                    $("#mobilecheckout").html("Mobile Number Already Registered");
+                }
+            });
+            
+        });
+});
 </script>
 <script>
     function changeplan() {
