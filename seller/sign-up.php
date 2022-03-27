@@ -132,7 +132,7 @@ $db->connect();
                             <input type="email" class="form-control" name="email" id="email" required>
                         </div>
                         <div class="form-group">
-                            <label for="">Mobile</label><i class="text-danger asterik">*</i>
+                            <label for="">Mobile</label><i class="text-danger asterik">*</i><p name="mobilecheckout" id="mobilecheckout" class="text-danger"></p>
                             <input type="number" class="form-control" name="mobile" id="mobile" required>
                         </div>
                         <div class="form-group">
@@ -345,32 +345,47 @@ $db->connect();
     $('#add_seller_form').on('submit', function(e) {
         e.preventDefault();
         if(document.getElementById("mverifytext").innerHTML == "Mobile Number Verified"){
-            var formData = new FormData(this);
-            if ($("#add_seller_form").validate().form()) {
-                $.ajax({
-                    type: 'POST',
-                    url: $(this).attr('action'),
-                    data: formData,
-                    beforeSend: function() {
-                        $('#submit_btn').html('Please wait..');
-                    },
-                    cache: false,
-                    contentType: false,
-                    processData: false,
-                    success: function(result) {
-                        $('#result').html(result);
-                        $('#result').show().delay(6000).fadeOut();
-                        $('#submit_btn').html('Submit');
-                        $('#add_seller_form')[0].reset();
-                        document.getElementById( 'mverifytext' ).style.display = 'none';
-                        document.getElementById("mverifytext").innerHTML = ""
-                        document.getElementById("senOtpbtn").type = "button";
-                        //window.location = "../seller/index.php";
+            if(document.getElementById("mobilecheckout").innerHTML == ""){
+                document.getElementById("mobile").disabled = false;
+                var formData = new FormData(this);
+                if ($("#add_seller_form").validate().form()) {
+                    
+                    $.ajax({
+                        type: 'POST',
+                        url: $(this).attr('action'),
+                        data: formData,
+                        beforeSend: function() {
+                            $('#submit_btn').html('Please wait..');
+                        },
+                        cache: false,
+                        contentType: false,
+                        processData: false,
+                        success: function(result) {
+                            $('#result').html(result);
+                            $('#result').show().delay(6000).fadeOut();
+                            $('#submit_btn').html('Submit');
+                            $('#add_seller_form')[0].reset();
+                            document.getElementById( 'mverifytext' ).style.display = 'none';
+                            document.getElementById("mverifytext").innerHTML = ""
+                            document.getElementById("senOtpbtn").type = "button";
+                            
+                            //window.location = "../seller/index.php";
 
 
-                    }
-                });
+                        }
+                    });
+                }else{
+                    document.getElementById("mobile").disabled = true;
+
+                }
+
             }
+            else{
+                alert("Mobile Number Already Registered !")
+
+
+            }
+
 
         }
         else{
@@ -392,6 +407,31 @@ $db->connect();
     measurementId: "G-HBNFGSCR8G"
   };
   firebase.initializeApp(config);
+</script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $('input[name=mobile]').change(function() {
+            console.log($('#mobile').val());
+            var myVar = $('#mobile').val();
+            
+            $.ajax({
+            url: "sellermobileexist.php",
+            type: "POST",
+            data:{"mobile":myVar}
+            }).done(function(data) {
+                console.log(data);
+                if(data == "success"){
+                    $("#mobilecheckout").html("");
+                }else{
+                    $("#mobilecheckout").html("Mobile Number Already Registered");
+                }
+            
+            }).fail(function(data){
+                console.log("Try again");
+            });
+            
+        });
+});
 </script>
 <script type="text/javascript">
 function sendOtp() {
@@ -416,6 +456,7 @@ function verifyOtp() {
         document.getElementById("mverifytext").innerHTML = "Mobile Number Verified";
         document.getElementById("mverifytext").style = "";
         document.getElementById("senOtpbtn").type = "hidden";
+        document.getElementById("mobile").disabled = true;
       console.log(result);
     }).catch(function(error) {
       console.log(error);
