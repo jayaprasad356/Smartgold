@@ -439,7 +439,7 @@
         e.preventDefault();
         
         var formData = new FormData(this);
-        if(document.getElementById("mobilecheckout").value == ''){
+        if(document.getElementById("mobilecheckout").innerHTML == ''){
             if ($("#add_form").validate().form()) {
             $.ajax({
                     type: 'POST',
