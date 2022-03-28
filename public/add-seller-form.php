@@ -172,12 +172,16 @@
                             </div>
                             </div>
                             <div class="row">
-                                <div class="form-group col-md-4">
+                                <div class="form-group col-md-12">
                                     <div class="form-group">
-                                        <label for="">Street</label>
+                                        <label for="">Address</label>
                                         <input type="text" class="form-control" name="street" id="street">
                                     </div>
                                 </div>
+
+
+                            </div>
+                            <div class="row">
                                 <div class="form-group col-md-4">
                                     <div class="form-group">
                                         <label for="">Pincode</label><i class="text-danger asterik">*</i>
@@ -185,9 +189,6 @@
                                     </div>
                                     
                                 </div>
-
-                            </div>
-                            <div class="row">
                                 <div class="form-group col-md-4">
                                     <div class="form-group">
                                         <label for="">Enter City</label><i class="text-danger asterik">*</i>
@@ -331,7 +332,7 @@
                                 <div class="form-group col-md-4">
                                     <div class="form-group">
                                         <select name="plan" id="plan" onchange="changeplan()" class="form-control">
-                                            <option value="0">Select Plan</option>
+                                            <option value="">Select Plan</option>
                                             <option value="free-trial">Free Trial</option>
                                             <option value="basic-monthly">Basic Monthly</option>
                                             <option value="deluxe-monthly">Deluxe Monthly</option>
@@ -437,7 +438,7 @@
         e.preventDefault();
         
         var formData = new FormData(this);
-        if(document.getElementById("plan").value != '0'){
+        if(document.getElementById("mobilecheckout").value == ''){
             if ($("#add_form").validate().form()) {
             $.ajax({
                     type: 'POST',
@@ -458,12 +459,12 @@
                         document.getElementById("resultvalid").innerHTML = '';
                     }
                 });
-        }
+            }
 
         }
         
         else{
-            alert("Please,Select Plan");
+            alert("Mobile Number Already Registered");
 
         }
     });
@@ -500,6 +501,20 @@ $(document).ready(function() {
             
         });
 });
+</script>
+<script type="text/javascript">
+
+var geocoder = new google.maps.Geocoder();
+var address = "new york";
+
+geocoder.geocode( { 'address': address}, function(results, status) {
+
+  if (status == google.maps.GeocoderStatus.OK) {
+    var latitude = results[0].geometry.location.lat();
+    var longitude = results[0].geometry.location.lng();
+    alert(latitude);
+  } 
+}); 
 </script>
 <script>
     function changeplan() {
@@ -602,12 +617,16 @@ $(document).ready(function() {
         		map.fitBounds(place.geometry.viewport);
         		marker.setPosition(place.geometry.location);
         		marker.setVisible(true);
-        		    
-        		infowindowContent.children['place-icon'].src = place.icon;
-        		infowindowContent.children['place-name'].textContent = place.name;
-        		infowindowContent.children['place-address'].textContent = input.value;
+                
+        		// infowindowContent.children['place-icon'].src = place.icon;
+        		// infowindowContent.children['place-name'].textContent = place.name;
+        		// infowindowContent.children['place-address'].textContent = input.value;
+                
                 document.getElementById("latitude").value = place.geometry.location.lat();
                 document.getElementById("longitude").value = place.geometry.location.lng();
+                document.getElementById("street").value = place.formatted_address;
+                document.getElementById("pincode").value = zipcode;
+                
                 //document.getElementById("street").value = place.formatted_address;
             //console.log(place.formatted_address);
             //console.log("lat - "+place.geometry.location.lat() +"lng - " +place.geometry.location.lng());
