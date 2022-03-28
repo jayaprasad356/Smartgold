@@ -418,6 +418,7 @@
             valid: "required",
             address: "required",
             description: "required",
+            state: "required",
             plan: "required",
             require_products_approval: "required",
             status: "required",
