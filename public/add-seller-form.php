@@ -417,6 +417,7 @@
             valid: "required",
             address: "required",
             description: "required",
+            plan: "required",
             require_products_approval: "required",
             status: "required",
             confirm_password: {
