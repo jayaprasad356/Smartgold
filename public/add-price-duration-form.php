@@ -13,7 +13,7 @@ $db->sql($sql);
 $res = $db->getResult();
 ?>
 <section class="content-header">
-    <h1>Add Price/Duration <small><a href="home.php"><i class="fa fa-home"></i> Home</a></small></h1>
+    <h1>Locking Amount / Validity <small><a href="home.php"><i class="fa fa-home"></i> Home</a></small></h1>
     <ol class="breadcrumb">
         <li><a href="home.php"><i class="fa fa-home"></i> Home</a></li>
     </ol>
@@ -26,7 +26,7 @@ $res = $db->getResult();
                 <!-- general form elements -->
                 <div class="box box-primary">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Add Price/Duration</h3>
+                        <h3 class="box-title">Locking Amount / Validity</h3>
 
                     </div><!-- /.box-header -->
 
@@ -36,14 +36,14 @@ $res = $db->getResult();
                             <div class="row">
                                 <div class="form-group col-md-4">
                                     <div class="form-group">
-                                        <label for="">Enter Price</label>
+                                        <label for="">Locking Amount</label>
                                         <input type="text" class="form-control" name="price" id="name" value="<?php echo $res[0]['price'] ?>" required>
                                     </div>
                                 </div>
                                 <div class="row">
                                 <div class="form-group col-md-4">
                                     <div class="form-group">
-                                        <label for="">Enter days</label>
+                                        <label for="">Lock validity (in days)</label>
                                         <input type="text" class="form-control" name="days" id="name" value="<?php echo $res[0]['days'] ?>" required>
                                     </div>
                                 </div>

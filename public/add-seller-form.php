@@ -204,6 +204,7 @@
                                         <label for="">State</label><i class="text-danger asterik">*</i>
                                         
                                         <select name="state" id="state" class="form-control">
+                                            <option value="">Select State</option>
                                             <option value="Andhra Pradesh">Andhra Pradesh</option>
                                             <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
                                             <option value="Arunachal Pradesh">Arunachal Pradesh</option>
@@ -584,10 +585,10 @@ geocoder.geocode( { 'address': address}, function(results, status) {
 </script>
 <script>
     function initMap() {
-    	var centerCoordinates = new google.maps.LatLng(37.6, -95.665);
+    	var centerCoordinates = new google.maps.LatLng(20.5937, 78.9629);
         var map = new google.maps.Map(document.getElementById('map'), {
         center: centerCoordinates,
-        zoom: 4
+        zoom: 5
         });
         var card = document.getElementById('pac-card');
         var input = document.getElementById('pac-input');
@@ -636,5 +637,6 @@ geocoder.geocode( { 'address': address}, function(results, status) {
         });
     }
     </script>
+
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDXRUNEuXhkWGxiOtrvTSMc91H6L9PM-_M&libraries=places&callback=initMap"
         async defer></script>

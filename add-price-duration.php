@@ -15,7 +15,7 @@ session_start();
 include "header.php"; ?>
 <html>
 <head>
-<title>Add Price/Duration | Smart Gold - Dashboard</title>
+<title>Locking Amount / Validity | Smart Gold - Dashboard</title>
 <style>
     .asterik {
     font-size: 20px;
