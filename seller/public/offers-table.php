@@ -35,6 +35,7 @@
                                 
                                 <th data-field="max_locked" data-sortable="true">Max Locked</th>
                                 <th data-field="status" data-sortable="true">Status</th>
+                                <th data-field="budget_range" data-sortable="true">Budget Range</th>
                                 <th data-field="valid_date" data-sortable="true">Valid Date</th>
                                 <th data-field="locked" data-events="actionEvents">Locked Customers</th>
                                 

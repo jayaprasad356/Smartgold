@@ -53,6 +53,18 @@ if (isset($_GET['table']) && $_GET['table'] == 'offers') {
             $status = "active";
         }
         $currency = "Rs.";
+        if($row['budget_id'] == 1){
+            $budget = "upto 1 lakh";
+        }
+        else if($row['budget_id'] == 2){
+            $budget = "1 lakh to 5 lakhs";
+        }
+        else if($row['budget_id'] == 3){
+            $budget = "5 lakhs to 10 lakhs";
+        }
+        else if($row['budget_id'] == 4){
+            $budget = "above 10 lakhs";
+        }
         
         
 
@@ -71,6 +83,7 @@ if (isset($_GET['table']) && $_GET['table'] == 'offers') {
         $tempRow['max_locked'] = $row['max_locked'];
         $tempRow['status'] = $status;
         $tempRow['valid_date'] = $row['valid_date'];
+        $tempRow['budget_range'] = $budget;
 
 
         $tempRow['locked'] = $locked;
@@ -129,11 +142,6 @@ if (isset($_GET['table']) && $_GET['table'] == 'lockoffers') {
     $tempRow = array();
     foreach ($res as $row) {
         $operate = ' <a href="edit-offer-lock.php?id=' . $row['id'] . '" title="Edit"><i class="fa fa-edit"></i></a>';
-        
-        
-        
-        
-
         // $operate = '<a href="view-product-variants.php?id=' . $row['id'] . '" class="label label-success" title="View">View</a>';
         // $operate .= ' <a href="edit-product.php?id=' . $row['id'] . '" title="Edit"><i class="fa fa-edit"></i></a>';
         //$locked = '<a href="offers_lock.php?id=' . $row['id'] . '" class="label label-success" title="View">View</a>';
