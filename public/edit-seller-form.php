@@ -223,12 +223,15 @@ $res = $db->getResult();
                                         <input type="text" class="form-control" name="store_name" id="store_name" value="<?= $res[0]['store_name']; ?>" required>
                                     </div>
                                 </div>
-                                <div class="form-group col-md-4">
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-12">
                                     <div class="form-group">
-                                        <label for="">Street</label>
+                                        <label for="">Address</label>
                                         <input type="text" class="form-control" name="street" id="street" value="<?= (!empty($res[0]['street'])) ? $res[0]['street'] : ""; ?>">
                                     </div>
                                 </div>
+
 
                             </div>
                             <div class="row">
@@ -533,7 +536,7 @@ $res = $db->getResult();
             date.setDate(date.getDate() + days);
             return date;
         }
-        var today = date.addDays(365);
+        var today = date.addDays(364);
         var dd = String(today.getDate()).padStart(2, '0');
         var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
         var yyyy = today.getFullYear();
@@ -554,10 +557,10 @@ $res = $db->getResult();
 </script>
 <script>
     function initMap() {
-    	var centerCoordinates = new google.maps.LatLng(37.6, -95.665);
+    	var centerCoordinates = new google.maps.LatLng(20.5937, 78.9629);
         var map = new google.maps.Map(document.getElementById('map'), {
         center: centerCoordinates,
-        zoom: 4
+        zoom: 5
         });
         var card = document.getElementById('pac-card');
         var input = document.getElementById('pac-input');
@@ -593,7 +596,7 @@ $res = $db->getResult();
         		infowindowContent.children['place-address'].textContent = input.value;
                 document.getElementById("latitude").value = place.geometry.location.lat();
                 document.getElementById("longitude").value = place.geometry.location.lng();
-                //document.getElementById("street").value = place.formatted_address;
+                document.getElementById("street").value = place.formatted_address;
             //console.log(place.formatted_address);
             //console.log("lat - "+place.geometry.location.lat() +"lng - " +place.geometry.location.lng());
         		

@@ -206,7 +206,7 @@ $db->sql("SET NAMES 'utf8'");
                 <li class="treeview">
                     <a href="#">
                         <i class="fa fa-sliders"></i>
-                        <span>Menu</span>
+                        <span>Smart Gold Settings</span>
                         <i class="fa fa-angle-right pull-right"></i>
                         
                     </a>

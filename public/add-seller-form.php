@@ -565,7 +565,7 @@ geocoder.geocode( { 'address': address}, function(results, status) {
             date.setDate(date.getDate() + days);
             return date;
         }
-        var today = date.addDays(365);
+        var today = date.addDays(364);
         var dd = String(today.getDate()).padStart(2, '0');
         var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
         var yyyy = today.getFullYear();

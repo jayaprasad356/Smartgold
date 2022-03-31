@@ -7,7 +7,7 @@ $function = new custom_functions;
 
 // set time for session timeout
 $currentTime = time() + 25200;
-$expired = 300;
+$expired = 1800;
 
 if (!isset($_SESSION['seller_id']) && !isset($_SESSION['seller_name'])) {
     header("location:index.php");
