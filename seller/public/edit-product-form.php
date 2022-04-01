@@ -66,7 +66,7 @@ if (isset($_POST['btnUpdate'])) {
     }
 
 
-    if (!empty($name) && !empty($category_id)   && empty($error['image'])  && !empty($description)) {
+    if (!empty($name) && !empty($category_id)   && empty($error['image'])) {
 
         
         if (!empty($image)){
@@ -196,7 +196,7 @@ $rescat = $db->getResult();
                                 <div class="col-md-6">
                                     <div class="form-group packate_div">
                                         <label for="weight">Weight :</label><i class="text-danger asterik">*</i>
-                                        <input type="number" step="any" min='0' class="form-control" name="weight" value="<?php echo $res[0]['weight'] ?>" id="weight" />
+                                        <input type="number" step="any" min='0' class="form-control" name="weight" required value="<?php echo $res[0]['weight'] ?>" id="weight" />
                                     </div>
                                 </div>
                         </div>
@@ -225,7 +225,7 @@ $rescat = $db->getResult();
                         </div>
                         
                         <div class="form-group">
-                            <label for="description">Description :</label> <i class="text-danger asterik">*</i><?php echo isset($error['description']) ? $error['description'] : ''; ?>
+                            <label for="description">Description :</label>
                             <textarea name="description" id="description" class="form-control" rows="8"><?php echo $res[0]['description']; ?></textarea>
                             <script type="text/javascript" src="css/js/ckeditor/ckeditor.js"></script>
                             <script type="text/javascript">
