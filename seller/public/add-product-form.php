@@ -21,6 +21,8 @@ if (isset($_POST['btnAdd'])) {
     $status = $db->escapeString($_POST['serve_for']);
     $stock = $db->escapeString($_POST['stock']);
     $price= $db->escapeString($_POST['price']);
+    $gender= $db->escapeString($_POST['gender']);
+    $weight= $db->escapeString($_POST['weight']);
     $discounted_price = $db->escapeString($_POST['discounted_price']);
     $category_id = $db->escapeString($_POST['category_id']);
     
@@ -31,7 +33,7 @@ if (isset($_POST['btnAdd'])) {
 
     $description = $db->escapeString($_POST['description']);
 
-    $is_approved = (isset($_POST['is_approved']) && $_POST['is_approved'] != '') ? $db->escapeString($_POST['is_approved']) : 1;
+    $is_approved = 1;
 
     $error = array();
 
@@ -78,7 +80,7 @@ if (isset($_POST['btnAdd'])) {
             }
         }
     }
-    if (!empty($name) && !empty($category_id)   && empty($error['image'])  && !empty($description)) {
+    if (!empty($name) && !empty($category_id) && !empty($weight) && !empty($gender)   && empty($error['image'])) {
 
         // create random image file name
         $string = '0123456789';
@@ -108,7 +110,7 @@ if (isset($_POST['btnAdd'])) {
         $upload_image = 'upload/images/' . $image;
 
         // insert new data to product table
-        $sql = "INSERT INTO products (name,seller_id,category_id,image,description,is_approved,status,price,discounted_price,stock) VALUES('$name','$seller_id','$category_id','$upload_image','$description','$is_approved','$status',$price,$discounted_price,$stock)";
+        $sql = "INSERT INTO products (name,seller_id,category_id,image,description,is_approved,status,price,discounted_price,stock,weight,gender) VALUES('$name','$seller_id','$category_id','$upload_image','$description','$is_approved','$status',$price,$discounted_price,$stock,$weight,'$gender')";
         $db->sql($sql);
         $product_result = $db->getResult();
 
@@ -182,11 +184,6 @@ if (isset($_POST['btnAdd'])) {
                             </div>
 
                         </div>
-                    
-                        
-                        
-                        
-                        
                         <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group packate_div">
@@ -197,6 +194,22 @@ if (isset($_POST['btnAdd'])) {
                                     <div class="form-group packate_div">
                                         <label for="discounted_price">Discounted Price(₹):</label>
                                         <input type="number" step="any" min='0' class="form-control" name="discounted_price" id="discounted_price" />
+                                    </div>
+                                </div>
+                        </div>
+                        <div class="row">
+                                <div class="col-md-6">
+                                    <label for="gender">Gender :</label><i class="text-danger asterik">*</i>
+                                    <select name="gender" class="form-control" required>
+                                        <option value="">Select</option>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group packate_div">
+                                        <label for="weight">Weight :</label><i class="text-danger asterik">*</i>
+                                        <input type="number" step="any" min='0' class="form-control" name="weight" id="weight" />
                                     </div>
                                 </div>
                         </div>
@@ -223,14 +236,13 @@ if (isset($_POST['btnAdd'])) {
                         </div>
                         
                         <div class="form-group">
-                            <label for="description">Description :</label> <i class="text-danger asterik">*</i><?php echo isset($error['description']) ? $error['description'] : ''; ?>
+                            <label for="description">Description :</label>
                             <textarea name="description" id="description" class="form-control" rows="8"></textarea>
-                            <script type="text/javascript" src="css/js/ckeditor/ckeditor.js"></script>
-                            <script type="text/javascript">
-                                CKEDITOR.replace('description');
-                            </script>
                         </div>
-                        <div class="row">
+                        <div class="form-group">
+                            <p class="text-danger">Disclaimer : *Weight and Price may vary subject to the stock available.</p>
+                        </div>
+                        <!-- <div class="row">
                             <div class="form-group col-md-4">
                                 <div class="form-group">
                                     <label class="control-label">Product Status</label>
@@ -244,7 +256,7 @@ if (isset($_POST['btnAdd'])) {
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                     <!-- /.box-body -->
                     <div class="box-footer">
@@ -377,25 +389,6 @@ if (isset($_POST['btnAdd'])) {
         $('#add_product_form').validate();
     });
 
-    $('#add_loose_variation').on('click', function() {
-        html = '<div class="row"><div class="col-md-4"><div class="form-group"><label for="measurement">No. of Books</label> <i class="text-danger asterik">*</i>' +
-            '<input type="number" step="any" min="0" class="form-control" name="loose_measurement[]" required=""></div></div>' +
-            '<div class="col-md-2"><div class="form-group loose_div">' +
-            '<label for="unit">Unit:</label><select class="form-control" name="loose_measurement_unit_id[]">' +
-            '<?php
-                foreach ($res_unit as  $row) {
-                    echo "<option value=" . $row['id'] . ">" . $row['short_code'] . "</option>";
-                }
-                ?>' +
-            '</select></div></div>' +
-            '<div class="col-md-3"><div class="form-group"><label for="price">Price  (<?= $settings['currency'] ?>):</label> <i class="text-danger asterik">*</i>' +
-            '<input type="number" step="any" min="0" class="form-control" name="loose_price[]" required=""></div></div>' +
-            '<div class="col-md-2"><div class="form-group"><label for="discounted_price">Discounted Price(<?= $settings['currency'] ?>):</label>' +
-            '<input type="number" step="any"  min="0" class="form-control" name="loose_discounted_price[]" /></div></div>' +
-            '<div class="col-md-1" style="display: grid;"><label>Remove</label><a class="remove_variation text-danger" title="Remove variation of product" style="cursor: pointer;"><i class="fa fa-times fa-2x"></i></a></div>' +
-            '</div>';
-        $('#variations').append(html);
-    });
 </script>
 <script>
     $('#add_product_form').validate({
@@ -408,17 +401,12 @@ if (isset($_POST['btnAdd'])) {
             price: "required",
             quantity: "required",
             image: "required",
+            weight: "required",
+            gender: "required",
             category_id: "required",
             stock: "required",
             discounted_price: {
                 lessThanEqual: "#price"
-            },
-            description: {
-                required: function(textarea) {
-                    CKEDITOR.instances[textarea.id].updateElement();
-                    var editorcontent = textarea.value.replace(/<[^>]*>/gi, '');
-                    return editorcontent.length === 0;
-                }
             },
             pincode_ids_inc: {
                 empty: {

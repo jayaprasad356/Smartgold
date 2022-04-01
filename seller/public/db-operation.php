@@ -243,4 +243,62 @@ if (isset($_POST['update_seller'])  && !empty($_POST['update_seller'])) {
         echo "<label class='alert alert-danger'>Some Error Occurred! Please Try Again.</label>";
     }
 }
+if (isset($_POST['add_offer'])  && !empty($_POST['add_offer'])) {
+    $ppg = (isset($_POST['pricegram']) && $_POST['pricegram'] != "") ? $db->escapeString($_POST['pricegram']) : "";
+    $budget_id = $db->escapeString($_POST['budget_id']);
+    $seller_id = $db->escapeString($_POST['seller_id']);
+    $wastage = (isset($_POST['wastage']) && $_POST['wastage'] != "") ? $db->escapeString($_POST['wastage']) : "";
+    $maxilock= $db->escapeString($_POST['maxilock']);
+    $status = $db->escapeString($_POST['serve_for']);
+    $valid = $db->escapeString($_POST['valid']);
+    $description = $db->escapeString($_POST['description']);
+
+
+
+    
+    $error = array();
+
+
+    if (empty($budget_id)) {
+        echo " <span class='label label-danger'>Required!</span>";
+    }
+    if (empty($maxilock)) {
+        echo  " <span class='label label-danger'>Required!</span>";
+    }
+    if (empty($status)) {
+        echo " <span class='label label-danger'>Required!</span>";
+    }
+    if (empty($valid)) {
+        echo " <span class='label label-danger'>Required!</span>";
+    }
+    if (empty($description)) {
+        echo " <span class='label label-danger'>Required!</span>";
+    }
+    
+    
+    if (!empty($budget_id) && !empty($maxilock) && !empty($status) && !empty($valid)) {
+
+        
+
+        // insert new data to product table
+        $sql = "INSERT INTO offers (seller_id,budget_id,gram_price,wastage,max_locked,status,valid_date,description) VALUES('$seller_id','$budget_id','$ppg','$wastage','$maxilock','$status','$valid','$description')";
+        $db->sql($sql);
+        $product_result = $db->getResult();
+
+        if (!empty($product_result)) {
+            $product_result = 0;
+        } else {
+            $product_result = 1;
+        }
+        
+        if ($product_result == 1 ) {
+            echo '<label class="alert alert-success">Offer Added Successfully!</label>';
+            return false;
+        } else {
+            echo " <span class='label label-danger'>Failed</span>";
+            return false;
+        }
+    }
+   
+}
 ?>

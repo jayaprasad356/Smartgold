@@ -1,7 +1,7 @@
 <?php session_start();
 // set time for session timeout
 $currentTime = time() + 25200;
-$expired = 1800;
+$expired = 900;
 
 // if session not set go to login page
 if (!isset($_SESSION['seller_id']) && !isset($_SESSION['seller_name'])) {

@@ -21,7 +21,7 @@ $res = $db->getResult();
             <!-- general form elements -->
             <div class="box box-primary">
                     <div class="box-header with-border">
-                        <h3 class="box-title">Edit Profile</h3>
+                        <h3 class="text-primary box-title">Your Current Plan is <?= $res[0]['plan']; ?> - Expired at <?= $res[0]['valid']; ?></h3>
                     </div><!-- /.box-header -->
                     <!-- form start -->
                     <form id="edit_form" method="post" action="public/db-operation.php" enctype="multipart/form-data">
@@ -300,7 +300,6 @@ $res = $db->getResult();
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>
-<script src='https://cloud.tinymce.com/stable/tinymce.min.js'></script>
 
 
 <script>
@@ -319,15 +318,19 @@ $res = $db->getResult();
                 minlength: 6,
                 maxlength: 6
                 },
-            address: "required",
-            description: "required",
-            require_products_approval: "required",
-            status: "required",
-            cktext: {
-                required: function() {
-                    CKEDITOR.instances.cktext.updateElement();
-                    
-                }
+                confirm_password: {
+                required: true,
+                equalTo: "#password"
+                },
+                address: "required",
+                description: "required",
+                require_products_approval: "required",
+                status: "required",
+                cktext: {
+                    required: function() {
+                        CKEDITOR.instances.cktext.updateElement();
+                        
+                    }
             }
             
         }

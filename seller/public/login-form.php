@@ -40,8 +40,11 @@ if (isset($_POST['btnLogin'])) {
             $interval = $date1->diff($date2);
             if ($result[0]['status'] == 7) {
                 $error['failed_status'] = "<span class='btn btn-danger'>It seems your acount was removed by super admin please contact him to restore the account!</span>";
-            } else if ($result[0]['status'] == 2) {
-                $error['failed_status'] = "<span class='btn btn-danger'>Your account is not approved by Super Admin. Please wait for approval!</span>";
+            } else if ($result[0]['status'] == 0) {
+                $error['failed_status'] = "<span class='btn btn-danger'>It seems your acount was deactivated by admin please contact admin to activate the account!</span>";
+            } 
+            else if ($result[0]['status'] == 2) {
+                $error['failed_status'] = "<span class='btn btn-danger'>Your account is not approved by Admin. Please wait for approval!</span>";
             } else if($date1 > $date2){
                 $error['failed_status'] = "<span class='btn btn-danger'>Your account is expired,please contact admin to upgrade plan</span>";
 

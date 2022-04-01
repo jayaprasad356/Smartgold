@@ -20,6 +20,8 @@ if (isset($_POST['btnUpdate'])) {
     $price= $db->escapeString($_POST['price']);
     $discounted_price = $db->escapeString($_POST['discounted_price']);
     $category_id = $db->escapeString($_POST['category_id']);
+    $gender= $db->escapeString($_POST['gender']);
+    $weight= $db->escapeString($_POST['weight']);
     
     // get image info
     $image = $db->escapeString($_FILES['image']['name']);
@@ -77,12 +79,12 @@ if (isset($_POST['btnUpdate'])) {
             // upload new image
             $upload = move_uploaded_file($_FILES['image']['tmp_name'], '../upload/images/' . $image);
             $upload_image = 'upload/images/' . $image;
-            $sql_query = "UPDATE products SET name = '$name' ,seller_id= '$seller_id',category_id= '$category_id',image = '$upload_image',description = '$description' ,is_approved = '$is_approved' ,status = '$status' , price = '$price', discounted_price = '$discounted_price', stock = '$stock' WHERE id = $product_id";
+            $sql_query = "UPDATE products SET name = '$name' ,seller_id= '$seller_id',category_id= '$category_id',image = '$upload_image',description = '$description' ,is_approved = '$is_approved' ,status = '$status' , price = '$price', discounted_price = '$discounted_price', stock = '$stock', gender = '$gender', weight = '$weight' WHERE id = $product_id";
             
 
         }
         else{
-            $sql_query = "UPDATE products SET name = '$name' ,seller_id= '$seller_id',category_id= '$category_id',description = '$description' ,is_approved = '$is_approved' ,status = '$status' , price = '$price', discounted_price = '$discounted_price', stock = '$stock' WHERE id = $product_id";
+            $sql_query = "UPDATE products SET name = '$name' ,seller_id= '$seller_id',category_id= '$category_id',description = '$description' ,is_approved = '$is_approved' ,status = '$status' , price = '$price', discounted_price = '$discounted_price', stock = '$stock', gender = '$gender', weight = '$weight' WHERE id = $product_id";
             
 
         }
@@ -178,6 +180,26 @@ $rescat = $db->getResult();
                                     </div>
                                 </div>
                         </div>
+                        <div class="row">
+                                <div class="col-md-6">
+                                    <label for="gender">Gender :</label><i class="text-danger asterik">*</i>
+                                    <select name="gender" class="form-control" required>
+                                        <option value="">Select</option>
+                                        <option value="Male" <?php if ($res[0]['gender'] == "Male") {
+                                                                                    echo "selected";
+                                                                                } ?>>Male</option>
+                                        <option value="Female" <?php if ($res[0]['gender'] == "Female") {
+                                                                                    echo "selected";
+                                                                                } ?>>Female</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group packate_div">
+                                        <label for="weight">Weight :</label><i class="text-danger asterik">*</i>
+                                        <input type="number" step="any" min='0' class="form-control" name="weight" value="<?php echo $res[0]['weight'] ?>" id="weight" />
+                                    </div>
+                                </div>
+                        </div>
                         <div class="form-group">
                             <label for="category_id">Category :</label> <i class="text-danger asterik">*</i>
                             <select name="category_id" id="category_id" class="form-control" required>
@@ -210,7 +232,7 @@ $rescat = $db->getResult();
                                 CKEDITOR.replace('description');
                             </script>
                         </div>
-                        <div class="row">
+                        <!-- <div class="row">
                             <div class="form-group col-md-4">
                                 <div class="form-group">
                                     <label class="control-label">Product Status</label>
@@ -224,7 +246,7 @@ $rescat = $db->getResult();
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                     <!-- /.box-body -->
                     <div class="box-footer">
