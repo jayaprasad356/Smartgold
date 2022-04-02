@@ -68,6 +68,8 @@ if (empty($_POST['category_id'])){
                
                 // $temp['image'] = array();
                 $temp['image'] = DOMAIN_URL . $row['image'];
+                $temp['gender'] = $row['gender'];
+                $temp['weight'] = $row['weight'];
                 // $temp['image'][1] = DOMAIN_URL . $row['image'];
                 // $temp['image'][2] = DOMAIN_URL . $row['image'];
                 $temp['description'] = $row['description'];
@@ -118,6 +120,8 @@ else {
                
                 // $temp['image'] = array();
                 $temp['image'] = DOMAIN_URL . $row['image'];
+                $temp['gender'] = $row['gender'];
+                $temp['weight'] = $row['weight'];
                 // $temp['image'][1] = DOMAIN_URL . $row['image'];
                 // $temp['image'][2] = DOMAIN_URL . $row['image'];
                 $temp['description'] = $row['description'];

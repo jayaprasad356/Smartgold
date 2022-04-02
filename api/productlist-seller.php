@@ -44,6 +44,8 @@ if ($num >= 1) {
         $temp['category_id'] = $row['category_id'];
         $temp['image'] = DOMAIN_URL . $row['image'];
         $temp['description'] = $row['description'];
+        $temp['gender'] = $row['gender'];
+        $temp['weight'] = $row['weight'];
         $temp['discounted_price'] = $row['discounted_price'];
         $temp['price'] = $row['price'];
         

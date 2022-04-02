@@ -37,6 +37,8 @@ if (empty($_POST['category_id'])){
             $temp['name'] = $row['name'];
             $temp['store_name'] = $row['store_name'];
             $temp['category_id'] = $row['category_id'];
+            $temp['gender'] = $row['gender'];
+            $temp['weight'] = $row['weight'];
             
            
             // $temp['image'] = array();
@@ -77,6 +79,8 @@ if (empty($_POST['category_id'])){
             $temp['store_name'] = $row['store_name'];
         
             $temp['category_id'] = $row['category_id'];
+            $temp['gender'] = $row['gender'];
+            $temp['weight'] = $row['weight'];
            
             // $temp['image'] = array();
             $temp['image'] = DOMAIN_URL . $row['image'];

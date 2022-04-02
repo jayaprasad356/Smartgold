@@ -45,6 +45,8 @@ $sql = "SELECT *,products.id AS id,products.name AS name FROM products LEFT JOIN
             $temp['name'] = $row['name'];
             $temp['store_name'] = $row['store_name'];
             $temp['category_id'] = $row['category_id'];
+            $temp['gender'] = $row['gender'];
+            $temp['weight'] = $row['weight'];
             
            
             // $temp['image'] = array();
