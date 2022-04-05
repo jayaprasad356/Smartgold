@@ -57,7 +57,7 @@ $res = $db->getResult();
                                     <div class="form-group">
                                         <label for="exampleInputFile">Image</label>
                                         
-                                        <input type="file" name="image" id="image">
+                                        <input type="file" accept="image/png,  image/jpeg" name="image" id="image">
                                         <p class="help-block"><img src="<?php echo DOMAIN_URL . $res[0]['image']; ?>" style="max-width:100%" /></p>
                                     </div>
                                 </div>
