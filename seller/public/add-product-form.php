@@ -23,7 +23,7 @@ if (isset($_POST['btnAdd'])) {
     $price= $db->escapeString($_POST['price']);
     $gender= $db->escapeString($_POST['gender']);
     $weight= $db->escapeString($_POST['weight']);
-    $discounted_price = $db->escapeString($_POST['discounted_price']);
+    $discounted_price = (isset($_POST['discounted_price']) && $_POST['discounted_price'] != "") ? $db->escapeString($_POST['discounted_price']) : "";
     $category_id = $db->escapeString($_POST['category_id']);
     
     // get image info
@@ -136,6 +136,11 @@ if (isset($_POST['btnAdd'])) {
 }
 
 ?>
+<style>
+    .disable{
+pointer-events:none;
+}
+</style>
 <section class="content-header">
     <h1>Add Product</h1>
     <?php echo isset($error['add_menu']) ? $error['add_menu'] : ''; ?>
@@ -194,13 +199,13 @@ if (isset($_POST['btnAdd'])) {
                                 <div class="col-md-4">
                                     <div class="form-group packate_div">
                                         <label for="discounted_price">Discount In (%):</label>
-                                        <input type="number" step="any" min='0' class="form-control discounted_percentage" name="discounted_percentage" id="discounted_percentage" />
+                                        <input type="number" step="any" min='0' class="form-control discounted_percentage" name="discounted_percentage"  id="discounted_percentage" />
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group packate_div">
                                         <label for="discounted_price">Discounted Price(₹):</label>
-                                        <input type="number" step="any" min='0' class="form-control" name="discounted_price" id="discounted_price" disabled />
+                                        <input type="number" step="any" min='0' class="form-control disable" name="discounted_price" value="0" id="discounted_price" />
                                     </div>
                                 </div>
                         </div>
@@ -364,16 +369,31 @@ if (isset($_POST['btnAdd'])) {
     $(document).on('input', '.discounted_percentage', function(){
         let dp = $('#discounted_percentage').val();
         let price = $('#price').val(); 
-        var sale;
-        sale = calculateSale(price, dp);
-        $('#discounted_price').val(sale);
+        if(price != '' && dp != ''){
+            var sale;
+            sale = calculateSale(price, dp);
+            $('#discounted_price').val(sale);
+
+        }
+        else{
+            $('#discounted_price').val(0);
+
+        }
+
     });
     $(document).on('input', '.price', function(){
         let dp = $('#discounted_percentage').val();
         let price = $('#price').val(); 
-        var sale;
-        sale = calculateSale(price, dp);
-        $('#discounted_price').val(sale);
+        if(price != '' && dp != ''){
+            var sale;
+            sale = calculateSale(price, dp);
+            $('#discounted_price').val(sale);
+
+        }
+        else{
+            $('#discounted_price').val(0);
+
+        }
     });
     const calculateSale = (listPrice, discount) => {
         listPrice = parseFloat(listPrice);
