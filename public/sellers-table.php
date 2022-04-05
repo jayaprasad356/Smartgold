@@ -23,7 +23,9 @@
                         <table id='products_table' class="table table-hover" data-search="true" data-toggle="table" data-query-params="queryParams_1" data-url="api/get-bootstrap-table-data.php?table=seller" data-page-list="[5, 10, 20, 50, 100, 200]" data-show-refresh="true"  data-side-pagination="server" data-pagination="true"  data-trim-on-search="false" data-filter-control="true" data-query-params="queryParams" data-sort-name="id" data-sort-order="desc"  data-export-types='["txt","excel"]' >
                             <thead>
                                 <tr>
+                                    <th data-field="operate" data-events="actionEvents">Action</th>
                                     <th data-field="id" data-sortable="true">ID</th>
+                                    <th data-field="date_created" data-sortable="true">Enrollment Date  <br> <small>(yyyy-mm-dd)</small></th>
                                     <th data-field="name" data-sortable="true">Name</th>
                                     <th data-field="store_name" data-sortable="true">Store Name</th>
                                     <th data-field="email" data-sortable="true">Email</th>
@@ -39,7 +41,7 @@
                                     <th data-field="city">City</th>
                                     <th data-field="state">State</th>
                                     <th data-field="status" data-sortable="true">Status</th>
-                                    <th data-field="operate" data-events="actionEvents">Action</th>
+                                    
                                 </tr>
                             </thead>
                         </table>

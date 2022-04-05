@@ -47,7 +47,6 @@
 
     function queryParams_1(p) {
         return {
-            "filter_user": $('#filter_user').val(),
             limit: p.limit,
             sort: p.sort,
             order: p.order,

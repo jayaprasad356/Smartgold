@@ -483,12 +483,14 @@ $res = $db->getResult();
                         placeholder: "type in category name to search"
                     });
                     $('#submit_btn').html('Update');
+                    alert("Seller Updated Successfully")
                     location.reload(true);
                 }
             });
         }
     });
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.0/moment.min.js"></script>
 <script>
     function changeplan() {
     var value = document.getElementById("plan").value;
@@ -508,7 +510,8 @@ $res = $db->getResult();
 
         today = yyyy + '-' + mm + '-' + dd;
         document.getElementById("valid").value = today;
-        document.getElementById("resultvalid").innerHTML = 'Plan Valid Upto - '+today;
+        var longDateStr = moment(today, 'Y-M-D').format('DD,MMMM');
+        document.getElementById("resultvalid").innerHTML = 'Plan Valid Upto : '+longDateStr+","+yyyy;
     }
     else if(value == 'basic-monthly' || value == 'deluxe-monthly' || value == 'premium-monthly'){
         var date = new Date();
@@ -525,7 +528,8 @@ $res = $db->getResult();
         today = yyyy + '-' + mm + '-' + dd;
         console.log(today)
         document.getElementById("valid").value = today;
-        document.getElementById("resultvalid").innerHTML = 'Plan Valid Upto - '+today;
+        var longDateStr = moment(today, 'Y-M-D').format('DD,MMMM');
+        document.getElementById("resultvalid").innerHTML = 'Plan Valid Upto : '+longDateStr+","+yyyy;
     
 
     }
@@ -543,8 +547,13 @@ $res = $db->getResult();
 
         today = yyyy + '-' + mm + '-' + dd;
         document.getElementById("valid").value = today;
-        document.getElementById("resultvalid").innerHTML = 'Plan Valid Upto - '+today;
+        var longDateStr = moment(today, 'Y-M-D').format('DD,MMMM');
+        document.getElementById("resultvalid").innerHTML = 'Plan Valid Upto : '+longDateStr+","+yyyy;
+
     
+
+    }else {
+        document.getElementById("resultvalid").innerHTML = '';
 
     }
 

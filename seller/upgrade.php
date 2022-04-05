@@ -107,8 +107,8 @@ include "header.php";
                         <h2 class="h1 font-weight-bold">₹ 5,00,000<span class="text-small font-weight-normal ml-2">/ Year</span></h2>
                         <div class="custom-separator my-4 mx-auto bg-warning"></div>
                         <ul class="list-unstyled my-5 text-small text-left">
-                            <li class="mb-3"> <i class="fa fa-check mr-2 text-primary"></i> 100 Products in Inventory </li>
-                            <li class="mb-3"> <i class="fa fa-check mr-2 text-primary"></i> 10 Offers in a Month</li>
+                            <li class="mb-3"> <i class="fa fa-check mr-2 text-primary"></i> 500 Products in Inventory </li>
+                            <li class="mb-3"> <i class="fa fa-check mr-2 text-primary"></i> 15 Offers in a Month</li>
                             <li class="mb-3"> <i class="fa fa-check mr-2 text-primary"></i> 5 Admin Access</li>
                         </ul> <a href="#" class="btn btn-warning btn-block p-2 shadow rounded-pill">Subscribe</a>
                     </div>

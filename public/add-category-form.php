@@ -111,8 +111,8 @@ if (isset($_POST['btnAdd'])) {
                         </div>
                        
                         <div class="form-group">
-                            <label for="exampleInputFile">Image&nbsp;&nbsp;&nbsp;*Please choose square image of larger than 350px*350px & smaller than 550px*550px.</label><?php echo isset($error['category_image']) ? $error['category_image'] : ''; ?>
-                            <input type="file" name="category_image" id="category_image" />
+                            <label for="exampleInputFile">Image</label><?php echo isset($error['category_image']) ? $error['category_image'] : ''; ?>
+                            <input type="file" name="category_image" accept="image/png,  image/jpeg" id="category_image" />
                         </div>
                     </div><!-- /.box-body -->
 

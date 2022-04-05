@@ -109,10 +109,9 @@
                             <div class="row">
                                 <div class="form-group col-md-4">
                                     <div class="form-group">
-                                        <label for="">Mobile</label><i class="text-danger asterik">*</i>
-                                        <input type="number" class="form-control" name="mobile" id="mobile" required>
+                                        <label for="">Mobile</label><i class="text-danger asterik">*</i><small name="mobilecheckout" id="mobilecheckout" class="text-danger"></small>
+                                        <input type="number" class="form-control mobilecheck" name="mobile" id="mobile" required>
                                     </div>
-                                    <p name="mobilecheckout" id="mobilecheckout" class="text-danger"></p>
                                 </div>
                                 <div class="form-group col-md-4">
                                     <div class="form-group">
@@ -145,7 +144,7 @@
                                 <div class="form-group col-md-4">
                                     <div class="form-group">
                                         <label for="logo">Logo</label><i class="text-danger asterik">*</i>
-                                        <input type="file" name="store_logo" id="store_logo" required /><br>
+                                        <input type="file" name="store_logo" accept="image/png,  image/jpeg" id="store_logo" required /><br>
                                     </div>
                                 </div>
                             </div>
@@ -185,13 +184,13 @@
                                 <div class="form-group col-md-4">
                                     <div class="form-group">
                                         <label for="">Pincode</label><i class="text-danger asterik">*</i>
-                                        <input type="text" class="form-control" id='pincode' name="pincode" required>
+                                        <input type="number" class="form-control" id='pincode' name="pincode"  required>
                                     </div>
                                     
                                 </div>
                                 <div class="form-group col-md-4">
                                     <div class="form-group">
-                                        <label for="">Enter City</label><i class="text-danger asterik">*</i>
+                                        <label for="">City</label><i class="text-danger asterik">*</i>
                                         <input type="text" class="form-control" id='city' name="city" required>
                                     </div>
                                     
@@ -273,46 +272,44 @@
                                         <input type="text" class="form-control" name="account_name">
                                     </div>
                                 </div>
-                                
-                            </div>
-                            <div class="row">
-                                <div class="form-group col-md-4">
-                                    <div class="form-group">
-                                        <label for="">National Identity Card</label><i class="text-danger asterik">*</i>
-                                        <input type="file" class="form-control" name="national_id_card" required>
-                                    </div>
-                                </div>
-                                <div class="form-group col-md-4">
-                                    <div class="form-group">
-                                        <label for="">Address Proof</label><i class="text-danger asterik">*</i>
-                                        <input type="file" class="form-control" name="address_proof" id="address_proof" required><br>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="row">
                                 <div class="form-group col-md-4">
                                     <div class="form-group">
                                         <label for="">PAN Number</label><i class="text-danger asterik">*</i>
                                         <input type="text" class="form-control" name="pan_number" required>
                                     </div>
                                 </div>
+                                
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-4">
+                                    <div class="form-group">
+                                        <label for="">National Identity Card</label><i class="text-danger asterik">*</i>
+                                        <input type="file" class="form-control" accept="image/png,  image/jpeg" name="national_id_card" required>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <div class="form-group">
+                                        <label for="">Address Proof</label><i class="text-danger asterik">*</i>
+                                        <input type="file" class="form-control" accept="image/png,  image/jpeg" name="address_proof" id="address_proof" required><br>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+
                                 <div class="form-group col-md-4">
                                     <div class="form-group">
                                         <label for="">Latitude</label><i class="text-danger asterik">*</i>
                                         <input type="number" class="form-control" name="latitude" id="latitude" required>
                                     </div>
                                 </div>
-
-                            </div>
-                            <div class="row">
-                                
                                 <div class="form-group col-md-4">
                                     <div class="form-group">
                                         <label for="">Longitude</label><i class="text-danger asterik">*</i>
                                         <input type="text" class="form-control" name="longitude" id="longitude" required>
                                     </div>
                                 </div>
+
                             </div>
                             <div class="row">
                                 <div class="form-group col-md-8">
@@ -342,6 +339,9 @@
                                             <option value="deluxe-annually">Deluxe Annually</option>
                                             <option value="premium-annually">Premium Annually</option>
                                        </select>
+                                       <a href="#" data-toggle='modal' data-target='#howItWorksModal' title='How it works'><u>Click to View Plan Details</u></a>
+                                       
+                                        
                                     </div>
                                 </div>
                            </div>
@@ -387,6 +387,55 @@
             
                 
             
+        </div>
+    </div>
+    <div class="modal fade" id='howItWorksModal'  role="dialog" aria-labelledby="myLargeModalLabel">
+        <div class="modal-dialog modal-md" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Smart Gold Plan List</h4>
+                    <hr>
+                    <ul>
+                        <li>
+                            <b>Free Trial</b>
+                            <big>30 Days</big>
+                            
+                        </li>
+                        <li>
+                            <b>Basic Monthly Plan</b>
+                            <big>₹ 10,000/ Month</big>
+                            <p>100 Products in Inventory <br>10 Offers in a Month <br>2 Admin Access</p>
+                        </li>
+                        <li>
+                            <b>Basic Yearly Plan</b>
+                            <big>₹ 1,00,000/ Year</big>
+                            <p>100 Products in Inventory<br>10 Offers in a Month<br>2 Admin Access</p>
+                        </li>
+                        <li>
+                            <b>Deluxe Monthly Plan</b>
+                            <big>₹ 50,000/ Month</big>
+                            <p>500 Products in Inventory<br>15 Offers in a Month<br>5 Admin Access</p>
+                        </li>
+                        <li>
+                            <b>Deluxe Yearly Plan</b>
+                            <big>₹ 5,00,000/ Year</big>
+                            <p>500 Products in Inventory<br>15 Offers in a Month<br>5 Admin Access</p>
+                        </li>
+                        <li>
+                            <b>Premium Monthly Plan</b>
+                            <big>₹ 1,00,000/ Month</big>
+                            <p>Unlimited Products in Inventory<br>One Offers in a Day<br>10 Admin Access</p>
+                        </li>
+                        <li>
+                            <b>Premium Yearly Plan</b>
+                            <big>₹ 10,00,000/ Year</big>
+                            <p>Unlimited Products in Inventory<br>One Offers in a Day<br>10 Admin Access</p>
+                        </li>
+                        
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
 </section>
@@ -473,11 +522,9 @@
     });
 </script>
 <script type="text/javascript">
-$(document).ready(function() {
-    $('input[name=mobile]').change(function() {
-            console.log($('#mobile').val());
-            var myVar = $('#mobile').val();
-            
+    $(document).on('input', '.mobilecheck', function(){
+        var myVar = $('#mobile').val();
+        if(myVar != ''){
             $.ajax({
             url: "sellermobileexist.php",
             type: "POST",
@@ -496,13 +543,14 @@ $(document).ready(function() {
                 if(request.responseText == "success"){
                     $("#mobilecheckout").html("");
                 }else{
-                   
+                    
                     $("#mobilecheckout").html("Mobile Number Already Registered");
                 }
             });
-            
-        });
-});
+
+        }
+
+    });
 </script>
 <script type="text/javascript">
 
@@ -518,6 +566,7 @@ geocoder.geocode( { 'address': address}, function(results, status) {
   } 
 }); 
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.0/moment.min.js"></script>
 <script>
     function changeplan() {
     var value = document.getElementById("plan").value;
@@ -537,7 +586,8 @@ geocoder.geocode( { 'address': address}, function(results, status) {
 
         today = yyyy + '-' + mm + '-' + dd;
         document.getElementById("valid").value = today;
-        document.getElementById("resultvalid").innerHTML = 'Plan Valid Upto - '+today;
+        var longDateStr = moment(today, 'Y-M-D').format('DD,MMMM');
+        document.getElementById("resultvalid").innerHTML = 'Plan Valid Upto : '+longDateStr+","+yyyy;
     }
     else if(value == 'basic-monthly' || value == 'deluxe-monthly' || value == 'premium-monthly'){
         var date = new Date();
@@ -554,8 +604,8 @@ geocoder.geocode( { 'address': address}, function(results, status) {
         today = yyyy + '-' + mm + '-' + dd;
         console.log(today)
         document.getElementById("valid").value = today;
-        document.getElementById("resultvalid").innerHTML = 'Plan Valid Upto - '+today;
-    
+        var longDateStr = moment(today, 'Y-M-D').format('DD,MMMM');
+        document.getElementById("resultvalid").innerHTML = 'Plan Valid Upto : '+longDateStr+","+yyyy;
 
     }
     else if(value == 'basic-annually' || value == 'deluxe-annually' || value == 'premium-annually'){
@@ -572,8 +622,12 @@ geocoder.geocode( { 'address': address}, function(results, status) {
 
         today = yyyy + '-' + mm + '-' + dd;
         document.getElementById("valid").value = today;
-        document.getElementById("resultvalid").innerHTML = 'Plan Valid Upto - '+today;
+        var longDateStr = moment(today, 'Y-M-D').format('DD,MMMM');
+        document.getElementById("resultvalid").innerHTML = 'Plan Valid Upto : '+longDateStr+","+yyyy;
     
+
+    }else {
+        document.getElementById("resultvalid").innerHTML = '';
 
     }
 
@@ -620,23 +674,54 @@ geocoder.geocode( { 'address': address}, function(results, status) {
         		marker.setPosition(place.geometry.location);
         		marker.setVisible(true);
                 
-        		// infowindowContent.children['place-icon'].src = place.icon;
-        		// infowindowContent.children['place-name'].textContent = place.name;
-        		// infowindowContent.children['place-address'].textContent = input.value;
                 
                 document.getElementById("latitude").value = place.geometry.location.lat();
                 document.getElementById("longitude").value = place.geometry.location.lng();
-                document.getElementById("street").value = place.formatted_address;
-                document.getElementById("pincode").value = zipcode;
                 
-                //document.getElementById("street").value = place.formatted_address;
-            //console.log(place.formatted_address);
-            //console.log("lat - "+place.geometry.location.lat() +"lng - " +place.geometry.location.lng());
+                getlocatedata(place.geometry.location.lat(),place.geometry.location.lng())
+                //document.getElementById("pincode").value = place.address[address.length - 1].long_name
+                
+                
         		
         		infowindow.open(map, marker);
             
         });
     }
+    </script>
+    <script>
+        function getlocatedata(lat,lng) {
+            var url = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + lat + "," + lng + "&key=AIzaSyDXRUNEuXhkWGxiOtrvTSMc91H6L9PM-_M";
+            $.ajax({
+                type: "GET",
+                url: url,
+                dataType: "json",
+                success: function (msg) {
+                    var results = msg.results;
+                    var address = results[0].address_components;
+                    var zipcode = address[address.length - 1].long_name;
+                    var state = address[address.length - 3].long_name;
+                    var city = address[address.length - 5].long_name;
+
+                    var add= results[0].formatted_address ;
+                    var addvalue=add.split(",");
+                    var count=addvalue.length;
+                    //var state=addvalue[count-2];
+                    //var city=addvalue[count-3];
+                    //var zip = results[0].address_components[8].long_name;
+                    document.getElementById("street").value = add;
+
+                    document.getElementById("pincode").value = zipcode;
+                    document.getElementById("city").value = city;
+                    document.getElementById("state").value = state;
+                },
+                error: function (req, status, error) {
+                    //alert('Sorry, an error occurred.');
+                    console.log(req.responseText);
+                }
+            });
+            
+
+        }
     </script>
 
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDXRUNEuXhkWGxiOtrvTSMc91H6L9PM-_M&libraries=places&callback=initMap"
