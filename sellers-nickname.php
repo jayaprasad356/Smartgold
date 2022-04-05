@@ -18,7 +18,7 @@ include "header.php"; ?>
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Seller Nick Name | Smart Gold - Dashbord</title>
+    <title>Smart Gold Admin</title>
 </head>
 
 <body>

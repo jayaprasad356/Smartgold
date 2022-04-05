@@ -20,7 +20,7 @@
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body table-responsive">
-                        <table id='products_table' class="table table-hover" data-toggle="table" data-url="api/get-bootstrap-table-data.php?table=seller" data-page-list="[5, 10, 20, 50, 100, 200]" data-show-refresh="true"  data-side-pagination="server" data-pagination="true"  data-trim-on-search="false" data-filter-control="true" data-query-params="queryParams" data-sort-name="id" data-sort-order="desc"  data-export-types='["txt","excel"]' >
+                        <table id='products_table' class="table table-hover" data-search="true" data-toggle="table" data-query-params="queryParams_1" data-url="api/get-bootstrap-table-data.php?table=seller" data-page-list="[5, 10, 20, 50, 100, 200]" data-show-refresh="true"  data-side-pagination="server" data-pagination="true"  data-trim-on-search="false" data-filter-control="true" data-query-params="queryParams" data-sort-name="id" data-sort-order="desc"  data-export-types='["txt","excel"]' >
                             <thead>
                                 <tr>
                                     <th data-field="id" data-sortable="true">ID</th>
@@ -40,12 +40,7 @@
                                     <th data-field="state">State</th>
                                     <th data-field="status" data-sortable="true">Status</th>
                                     <th data-field="operate" data-events="actionEvents">Action</th>
-                                    
-                                    
-                                    
                                 </tr>
-                                  
-                                
                             </thead>
                         </table>
                     </div>
@@ -57,3 +52,20 @@
         </div>
         <!-- /.row (main row) -->
     </section>
+<script>
+    $('#filter_user').on('change', function() {
+        $('#user_table').bootstrapTable('refresh');
+
+    });
+
+    function queryParams_1(p) {
+        return {
+            "filter_user": $('#filter_user').val(),
+            limit: p.limit,
+            sort: p.sort,
+            order: p.order,
+            offset: p.offset,
+            search: p.search
+        };
+    }
+</script>

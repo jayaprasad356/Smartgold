@@ -30,32 +30,8 @@ if (isset($_POST['btnAdd'])) {
     error_reporting(E_ERROR | E_PARSE);
     $extension = end(explode(".", $_FILES["category_image"]["name"]));
 
-    if ($image_error > 0) {
-        $error['category_image'] = " <span class='label label-danger'>Not Uploaded!!</span>";
-    } else {
-        $result = $fn->validate_image($_FILES["category_image"]);
-        if ($result) {
-            $error['category_image'] = " <span class='label label-danger'>Image type must jpg, jpeg, gif, or png!</span>";
-        }
-        // $mimetype = mime_content_type($_FILES["category_image"]["tmp_name"]);
-        // if (!in_array($mimetype, array('image/jpg', 'image/jpeg', 'image/gif', 'image/png'))) {
-        // 	$error['category_image'] = " <span class='label label-danger'>Image type must jpg, jpeg, gif, or png!</span>";
-        // }
-    }
-
-    if (!empty($category_name)  && empty($error['category_image'])) {
-
-        // create random image file name
-        $string = '0123456789';
-        $file = preg_replace("/\s+/", "_", $_FILES['category_image']['name']);
-        $menu_image = $function->get_random_string($string, 4) . "-" . date("Y-m-d") . "." . $extension;
-
-        // upload new image
-        $upload = move_uploaded_file($_FILES['category_image']['tmp_name'], 'upload/images/' . $menu_image);
-
-        // insert new data to menu table
-        $upload_image = 'upload/images/' . $menu_image;
-        $sql_query = "INSERT INTO category (name,image,status)VALUES('$category_name', '$upload_image',1)";
+    if (!empty($category_name) && $image_error > 0) {
+        $sql_query = "INSERT INTO category (name,image,status)VALUES('$category_name', '',1)";
         $db->sql($sql_query);
         $result = $db->getResult();
         if (!empty($result)) {
@@ -63,12 +39,47 @@ if (isset($_POST['btnAdd'])) {
         } else {
             $result = 1;
         }
-
         if ($result == 1) {
             $error['add_category'] = " <section class='content-header'><span class='label label-success'>Category Added Successfully</span></section>";
         } else {
             $error['add_category'] = " <span class='label label-danger'>Failed add category</span>";
         }
+    }
+    else if(!empty($category_name)) {
+        $result = $fn->validate_image($_FILES["category_image"]);
+        if ($result) {
+            $error['category_image'] = " <span class='label label-danger'>Image type must jpg, jpeg, gif, or png!</span>";
+        }
+        else {
+            // create random image file name
+            $string = '0123456789';
+            $file = preg_replace("/\s+/", "_", $_FILES['category_image']['name']);
+            $menu_image = $function->get_random_string($string, 4) . "-" . date("Y-m-d") . "." . $extension;
+    
+            // upload new image
+            $upload = move_uploaded_file($_FILES['category_image']['tmp_name'], 'upload/images/' . $menu_image);
+    
+            // insert new data to menu table
+            $upload_image = 'upload/images/' . $menu_image;
+            $sql_query = "INSERT INTO category (name,image,status)VALUES('$category_name', '$upload_image',1)";
+            $db->sql($sql_query);
+            $result = $db->getResult();
+            if (!empty($result)) {
+                $result = 0;
+            } else {
+                $result = 1;
+            }
+    
+            if ($result == 1) {
+                $error['add_category'] = " <section class='content-header'><span class='label label-success'>Category Added Successfully</span></section>";
+            } else {
+                $error['add_category'] = " <span class='label label-danger'>Failed add category</span>";
+            }
+
+        }
+
+    
+
     }
 }
 ?>
@@ -95,13 +106,13 @@ if (isset($_POST['btnAdd'])) {
                 <form method="post" enctype="multipart/form-data">
                     <div class="box-body">
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Category Name</label><?php echo isset($error['category_name']) ? $error['category_name'] : ''; ?>
+                            <label for="exampleInputEmail1">Category Name</label><i class="text-danger asterik">*</i><?php echo isset($error['category_name']) ? $error['category_name'] : ''; ?>
                             <input type="text" class="form-control" name="category_name" required>
                         </div>
                        
                         <div class="form-group">
                             <label for="exampleInputFile">Image&nbsp;&nbsp;&nbsp;*Please choose square image of larger than 350px*350px & smaller than 550px*550px.</label><?php echo isset($error['category_image']) ? $error['category_image'] : ''; ?>
-                            <input type="file" name="category_image" id="category_image" required />
+                            <input type="file" name="category_image" id="category_image" />
                         </div>
                     </div><!-- /.box-body -->
 

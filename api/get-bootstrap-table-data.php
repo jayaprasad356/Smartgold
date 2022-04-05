@@ -40,10 +40,30 @@ $db->connect();
 
 
 
-if (isset($_GET['table']) && $_GET['table'] == 'customers') {
+if (isset($_GET['table']) && $_GET['table'] == 'customers') 
+{
+    $where = '';
+    $offset = 0;
+    $sort = 'id';
+    $order = 'DESC';
+    if (isset($_GET['search']) && !empty($_GET['search'])) {
+        $search = $db->escapeString($_GET['search']);
+        $where .= "WHERE name like '%" . $search . "%' ";
+    }
+    if (isset($_GET['sort'])){
+        $sort = $db->escapeString($_GET['sort']);
+
+    }
+    if (isset($_GET['order'])){
+        $order = $db->escapeString($_GET['order']);
+
+    }
+        
+
+    
     
    
-    $sql = "SELECT * FROM users";
+    $sql = "SELECT * FROM users $where ORDER BY $sort $order";
     $db->sql($sql);
     $res = $db->getResult();
     
@@ -69,9 +89,27 @@ if (isset($_GET['table']) && $_GET['table'] == 'customers') {
     print_r(json_encode($bulkData));
 }
 if (isset($_GET['table']) && $_GET['table'] == 'seller') {
+
+    $where = '';
+    $offset = 0;
+    $sort = 'id';
+    $order = 'DESC';
+    if (isset($_GET['search']) && !empty($_GET['search'])) {
+        $search = $db->escapeString($_GET['search']);
+        $where .= "WHERE name like '%" . $search . "%' ";
+    }
+    if (isset($_GET['sort'])){
+        $sort = $db->escapeString($_GET['sort']);
+
+    }
+    if (isset($_GET['order'])){
+        $order = $db->escapeString($_GET['order']);
+
+    }
+        
     
    
-    $sql = "SELECT * FROM seller";
+    $sql = "SELECT * FROM seller $where ORDER BY $sort $order";
     $db->sql($sql);
     $res = $db->getResult();
     
@@ -126,14 +164,25 @@ if (isset($_GET['table']) && $_GET['table'] == 'seller') {
 if (isset($_GET['table']) && $_GET['table'] == 'category') {
 
     $offset = 0;
-    $limit = 10;
     $sort = 'id';
     $order = 'DESC';
     $where = '';
+    if (isset($_GET['search']) && !empty($_GET['search'])) {
+        $search = $db->escapeString($_GET['search']);
+        $where .= "WHERE name like '%" . $search . "%' ";
+    }
+    if (isset($_GET['sort'])){
+        $sort = $db->escapeString($_GET['sort']);
+
+    }
+    if (isset($_GET['order'])){
+        $order = $db->escapeString($_GET['order']);
+
+    }
     
 
 
-    $sql = "SELECT * FROM `category`";
+    $sql = "SELECT * FROM `category`$where ORDER BY $sort $order";
     $db->sql($sql);
     $res = $db->getResult();
 
@@ -144,13 +193,19 @@ if (isset($_GET['table']) && $_GET['table'] == 'category') {
     foreach ($res as $row) {
 
         
-        $operate = ' <a href="edit-category.php?id=' . $row['id'] . '"><i class="fa fa-edit"></i>Edit</a>';
-        $operate .= ' <a class="btn-xs btn-danger" href="delete-category.php?id=' . $row['id'] . '"><i class="fa fa-trash-o"></i>Delete</a>';
+        $operate = ' <a href="edit-category.php?id=' . $row['id'] . '"><i class="fa fa-edit"></i></a>';
+        //$operate = ' <a class="btn-xs btn-danger" href="delete-category.php?id=' . $row['id'] . '"><i class="fa fa-trash-o"></i>Delete</a>';
 
         $tempRow['id'] = $row['id'];
         $tempRow['name'] = $row['name'];
+        if(!empty($row['image'])){
+            $tempRow['image'] = "<a data-lightbox='category' href='" . $row['image'] . "' data-caption='" . $row['name'] . "'><img src='" . $row['image'] . "' title='" . $row['name'] . "' height='50' /></a>";
+
+        }else{
+            $tempRow['image'] = 'No Image';
+
+        }
         
-        $tempRow['image'] = "<a data-lightbox='category' href='" . $row['image'] . "' data-caption='" . $row['name'] . "'><img src='" . $row['image'] . "' title='" . $row['name'] . "' height='50' /></a>";
         $tempRow['operate'] = $operate;
         $rows[] = $tempRow;
     }

@@ -92,7 +92,7 @@ if (isset($_GET['table']) && $_GET['table'] == 'offers') {
     $bulkData['rows'] = $rows;
     print_r(json_encode($bulkData));
 }
-//data of 'OFFERS' table goes here
+//data of 'ORDERS' table goes here
 if (isset($_GET['table']) && $_GET['table'] == 'orders') {
 
 
@@ -183,7 +183,6 @@ if (isset($_GET['table']) && $_GET['table'] == 'products') {
 
         
         $tempRow['id'] = $row['id'];
-        
         $tempRow['seller_id'] = (!empty($row['seller_id'])) ? $row['seller_id'] : "";
         $tempRow['seller_name'] = (!empty($row['seller_name'])) ? $row['seller_name'] : "";
         $tempRow['name'] = $row['name'];

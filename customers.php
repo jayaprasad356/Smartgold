@@ -19,7 +19,7 @@ include "header.php"; ?>
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Smart Gold - Customers</title>
+    <title>Smart Gold Admin</title>
 </head>
 
 <body>

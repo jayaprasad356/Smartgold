@@ -26,7 +26,7 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Smart Gold - Sellers</title>
+    <title>Smart Gold Admin</title>
 </head>
 
 <body>

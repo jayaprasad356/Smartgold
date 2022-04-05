@@ -23,7 +23,7 @@
 <?php include"header.php";?>
 <html>
 <head>
-<title>Categories | Smart Gold - Dashboard</title>
+<title>Smart Gold Admin</title>
 </head>
 </body>
       <!-- Content Wrapper. Contains page content -->

@@ -28,7 +28,7 @@ session_start();
 </body>
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
-    <?php include('public/edit-seller-form.php'); ?>
+    <?php include('public/edit-category-form.php'); ?>
 </div><!-- /.content-wrapper -->
 </body>
 

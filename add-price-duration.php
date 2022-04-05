@@ -15,7 +15,7 @@ session_start();
 include "header.php"; ?>
 <html>
 <head>
-<title>Locking Amount / Validity | Smart Gold - Dashboard</title>
+<title>Smart Gold Admin</title>
 <style>
     .asterik {
     font-size: 20px;

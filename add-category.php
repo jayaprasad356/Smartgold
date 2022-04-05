@@ -25,7 +25,7 @@
 <?php include"header.php";?>
 <html>
 <head>
-<title>Add Category | Smart Gold- Dashboard <?=$settings['isAuth']?> </title>
+<title>Smart Gold Admin</title>
 </head>
 </body>
       <!-- Content Wrapper. Contains page content -->

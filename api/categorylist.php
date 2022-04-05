@@ -32,9 +32,11 @@ $res = $db->getResult();
 $num = $db->numRows($res);
 if ($num >= 1) {
     foreach ($res as $row) {
+        
+        $image = (isset($row['image']) && $row['image'] != "") ? DOMAIN_URL . $row['image'] : "";
         $temp['id'] = $row['id'];
         $temp['name'] = $row['name'];
-        $temp['image'] = DOMAIN_URL . $row['image'];
+        $temp['image'] = $image;
         $temp1[] = $temp;
     }
     

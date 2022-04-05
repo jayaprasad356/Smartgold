@@ -185,15 +185,22 @@ if (isset($_POST['btnAdd'])) {
 
                         </div>
                         <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <div class="form-group packate_div">
-                                        <label for="price">Price (₹):</label> <i class="text-danger asterik">*</i><input type="number" step="any" min='0' class="form-control" name="price" id="price" required />
+                                        <label for="price">Price (₹):</label> <i class="text-danger asterik">*</i>
+                                        <input type="number" step="any" min='0' class="form-control price" name="price" id="price" required />
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-4">
+                                    <div class="form-group packate_div">
+                                        <label for="discounted_price">Discount In (%):</label>
+                                        <input type="number" step="any" min='0' class="form-control discounted_percentage" name="discounted_percentage" id="discounted_percentage" />
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
                                     <div class="form-group packate_div">
                                         <label for="discounted_price">Discounted Price(₹):</label>
-                                        <input type="number" step="any" min='0' class="form-control" name="discounted_price" id="discounted_price" />
+                                        <input type="number" step="any" min='0' class="form-control" name="discounted_price" id="discounted_price" disabled />
                                     </div>
                                 </div>
                         </div>
@@ -354,41 +361,25 @@ if (isset($_POST['btnAdd'])) {
 </script>
 
 <script>
-    var num = 2;
-    $('#add_packate_variation').on('click', function() {
-        html = '<div class="row"><div class="col-md-2"><div class="form-group"><label for="measurement">No. of Books</label> <i class="text-danger asterik">*</i>' +
-            '<input type="number" class="form-control" name="packate_measurement[]" required="" step="any" min="0"></div></div>' +
-            '<div class="col-md-1"><div class="form-group">' +
-            '<label for="measurement_unit">Unit</label><select class="form-control" name="packate_measurement_unit_id[]">' +
-            '<?php
-                foreach ($res_unit as $row) {
-                    echo "<option value=" . $row['id'] . ">" . $row['short_code'] . "</option>";
-                }
-                ?>' +
-            '</select></div></div>' +
-            '<div class="col-md-2"><div class="form-group"><label for="price">Price(<?= $settings['currency'] ?>):</label> <i class="text-danger asterik">*</i>' +
-            '<input type="number" step="any" min="0" class="form-control" name="packate_price[]" required=""></div></div>' +
-            '<div class="col-md-2"><div class="form-group"><label for="discounted_price">Discounted Price(<?= $settings['currency'] ?>):</label>' +
-            '<input type="number" step="any" min="0" class="form-control" name="packate_discounted_price[]" /></div></div>' +
-            '<div class="col-md-1"><div class="form-group"><label for="stock">Stock:</label> <i class="text-danger asterik">*</i>' +
-            '<input type="number" step="any" min="0" class="form-control" name="packate_stock[]" /></div></div>' +
-            '<div class="col-md-1"><div class="form-group"><label for="unit">Unit:</label>' +
-            '<select class="form-control" name="packate_stock_unit_id[]">' +
-            '<?php
-                foreach ($res_unit as  $row) {
-                    echo "<option value=" . $row['id'] . ">" . $row['short_code'] . "</option>";
-                }
-                ?>' +
-            '</select>' +
-            '</div></div>' +
-            '<div class="col-md-2"><div class="form-group packate_div"><label for="qty">Status:</label><select name="packate_serve_for[]" class="form-control" required><option value="Available">Available</option><option value="Sold Out">Sold Out</option></select></div></div>' +
-            '<div class="col-md-1" style="display: grid;"><label>Remove</label><a class="remove_variation text-danger" title="Remove variation of product" style="cursor: pointer;"><i class="fa fa-times fa-2x"></i></a></div>' +
-            '</div>';
-
-        $('#variations').append(html);
-        $('#add_product_form').validate();
+    $(document).on('input', '.discounted_percentage', function(){
+        let dp = $('#discounted_percentage').val();
+        let price = $('#price').val(); 
+        var sale;
+        sale = calculateSale(price, dp);
+        $('#discounted_price').val(sale);
     });
-
+    $(document).on('input', '.price', function(){
+        let dp = $('#discounted_percentage').val();
+        let price = $('#price').val(); 
+        var sale;
+        sale = calculateSale(price, dp);
+        $('#discounted_price').val(sale);
+    });
+    const calculateSale = (listPrice, discount) => {
+        listPrice = parseFloat(listPrice);
+        discount  = parseFloat(discount);
+        return (listPrice - ( listPrice * discount / 100 )).toFixed(2); // Sale price
+    }
 </script>
 <script>
     $('#add_product_form').validate({

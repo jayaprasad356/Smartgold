@@ -17,7 +17,7 @@ $_SESSION['timeout'] = $currentTime + $expired;
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Price/Duration | Smart Gold - Dashboard</title>
+    <title>Smart Gold Admin</title>
 </head>
 
 <body>

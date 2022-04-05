@@ -247,4 +247,45 @@ if (isset($_POST['update_seller'])  && !empty($_POST['update_seller'])) {
         echo "<label class='alert alert-danger'>Some Error Occurred! Please Try Again.</label>";
     }
 }
+if (isset($_POST['update_category'])  && !empty($_POST['update_category'])) {
+    $id = $db->escapeString($_POST['update_id']);
+    $name = $db->escapeString($_POST['name']);
+    $status = $db->escapeString($_POST['status']);
+
+    if ($_FILES['image']['size'] != 0 && $_FILES['image']['error'] == 0 && !empty($_FILES['image'])) {
+        //image isn't empty and update the image
+        $old_image = $db->escapeString($_POST['old_image']);
+        $extension = pathinfo($_FILES["image"]["name"])['extension'];
+
+        $result = $fn->validate_image($_FILES["image"]);
+        // if (!$result) {
+        //     echo " <span class='label label-danger'>Logo image type must jpg, jpeg, gif, or png!</span>";
+        //     return false;
+        //     exit();
+        // }
+        $target_path = '../upload/images/';
+        
+        $filename = microtime(true) . '.' . strtolower($extension);
+        $full_path = $target_path . "" . $filename;
+        if (!move_uploaded_file($_FILES["image"]["tmp_name"], $full_path)) {
+            echo '<p class="alert alert-danger">Can not upload image.</p>';
+            return false;
+            exit();
+        }
+        if (!empty($old_image)) {
+            unlink('../' . $old_image);
+        }
+        $upload_image = 'upload/images/' . $filename;
+        $sql = "UPDATE category SET `image`='" . $upload_image . "' WHERE `id`=" . $id;
+        $db->sql($sql);
+    }
+
+
+    $sql = "UPDATE category SET `name`= '$name',`status`= '$status' WHERE `id`=" . $id;
+    if ($db->sql($sql)) {
+        echo "<label class='alert alert-success'>Category Updated Successfully.</label>";
+    } else {
+        echo "<label class='alert alert-danger'>Some Error Occurred! Please Try Again.</label>";
+    }
+}
 ?>
