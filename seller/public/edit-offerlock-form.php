@@ -21,14 +21,6 @@ if (isset($_POST['btnUpdate'])) {
 
     $db->sql($sql_query);
     $error['update_data'] = "<span class='label label-success'>Offer Lock updated Successfully</span>";
-    
-        
-
-        
-    
-
-    
-
 }
 $sql_query = "SELECT users.name,users.mobile,offer_lock.status FROM offer_lock,users WHERE offer_lock.id = '$offer_lock_id'";
 $db->sql($sql_query);

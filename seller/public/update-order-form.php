@@ -76,41 +76,21 @@ $res = $db->getResult();
                             <div class="form-group" >
                                 <label for="exampleInputEmail1">Status</label> <i class="text-danger asterik">*</i><?php echo isset($error['status']) ? $error['status'] : ''; ?>
                                 <select name="status" class="form-control" required>
-                                <option value="received" <?php if ($res[0]['status'] == "received") {
-                                                                                echo "selected";
-                                                                            } ?>>Received</option>
-                                <option value="Shipped" <?php if ($res[0]['status'] == "Shipped") {
-                                                                                echo "selected";
-                                                                            } ?>>Shipped</option>
-                                <option value="Refunded" <?php if ($res[0]['status'] == "Refunded") {
-                                                                                echo "selected";
-                                                                            } ?>>Refunded</option>
-                                <option value="Refunded" <?php if ($res[0]['status'] == "Refunded") {
-                                            echo "selected";
-                                        } ?>>Refunded</option>
-                                <option value="Cancelled" <?php if ($res[0]['status'] == "Cancelled") {
-                                            echo "selected";
-                                        } ?>>Cancelled</option>                                            
-                            </select>
+                                <option value="Received" <?php if ($res[0]['status'] == "Received") {echo "selected";} ?>>Received</option>
+                                <option value="Cancelled" <?php if ($res[0]['status'] == "Cancelled") {echo "selected";} ?>>Cancelled</option>         
+                                <option value="Completed" <?php if ($res[0]['status'] == "Completed") {echo "selected";} ?>>Completed</option>                                                                            
+                                </select>
                             </div>
-                                
                         </div>
                         <div class="col-md-6">
                             <label for="exampleInputEmail1">Payment Status</label> <i class="text-danger asterik">*</i><?php echo isset($error['status']) ? $error['status'] : ''; ?>
-                                
                             <select name="payment_status" class="form-control" required>
                                 <option value="UnPaid" <?php if ($res[0]['payment_status'] == "UnPaid") {
                                                                                 echo "selected";
                                                                             } ?>>UnPaid</option>
                                 <option value="Paid" <?php if ($res[0]['payment_status'] == "Paid") {
                                                                                 echo "selected";
-                                                                            } ?>>Paid</option>
-                                <option value="Refunded" <?php if ($res[0]['payment_status'] == "Refunded") {
-                                                                                echo "selected";
-                                                                            } ?>>Refunded</option>
-                                <option value="Cancelled" <?php if ($res[0]['payment_status'] == "Cancelled") {
-                                            echo "selected";
-                                        } ?>>Cancelled</option>                                            
+                                                                            } ?>>Paid</option>                                       
                             </select>
                         </div>
 

@@ -34,7 +34,7 @@ include "header.php";
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Smart Gold Dashboard</title>
+    <title>Smart Gold Vendor</title>
 </head>
 <body>
 

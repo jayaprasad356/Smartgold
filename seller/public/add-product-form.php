@@ -220,7 +220,7 @@ pointer-events:none;
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group packate_div">
-                                        <label for="weight">Weight :</label><i class="text-danger asterik">*</i>
+                                        <label for="weight">Weight (in grams)</label><i class="text-danger asterik">*</i>
                                         <input type="number" step="any" min='0' class="form-control" name="weight" id="weight" />
                                     </div>
                                 </div>

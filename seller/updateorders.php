@@ -21,7 +21,7 @@ $_SESSION['timeout'] = $currentTime + $expired;
 include"header.php";?>
 <html>
 <head>
-<title>Update Orders | Smart Gold - Dashboard</title>
+<title>Smart Gold Vendor</title>
 <style>
     .asterik {
     font-size: 20px;

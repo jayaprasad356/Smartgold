@@ -14,7 +14,7 @@ include"header.php";?>
 </body>
       <!-- Content Wrapper. Contains page content -->
       <div class="content-wrapper">
-        <?php include('public/edit-product-form.php'); ?>
+        <?php include('public/edit-offer-form.php'); ?>
       </div><!-- /.content-wrapper -->
   </body>
 </html>

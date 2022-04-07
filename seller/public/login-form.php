@@ -69,7 +69,7 @@ if (isset($_POST['btnLogin'])) {
         
         <div class="box box-info col-md-12 ">
             <div class="box-header with-border ">
-                <h3 class="box-title">Seller Login</h3>
+                <h3 class="box-title">Vendor Login</h3>
             </div>
             <form method="post" enctype="multipart/form-data">
                 <div class="box-body">

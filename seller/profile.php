@@ -2,7 +2,7 @@
 include"header.php";?>
 <html>
 <head>
-<title>Edit Profile | Smart Gold - Dashboard</title>
+<title>Smart Gold Vendor</title>
 <style>
     .asterik {
     font-size: 20px;

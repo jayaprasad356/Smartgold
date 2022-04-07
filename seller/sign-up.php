@@ -12,7 +12,7 @@ $db->connect();
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="icon" type="image/ico" href="../img/logo.png">
-    <title>Seller Registration</title>
+    <title>Smart Gold Vendor</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.5 -->
@@ -200,7 +200,7 @@ $db->connect();
                             </div>
    
                         <div class="form-group">
-                            <label for="">Street</label>
+                            <label for="">Address</label>
                             <input type="text" class="form-control" name="street" id="street">
                         </div>
                         <div class="form-group">
@@ -505,14 +505,47 @@ function verifyOtp() {
         		infowindowContent.children['place-address'].textContent = input.value;
                 document.getElementById("latitude").value = place.geometry.location.lat();
                 document.getElementById("longitude").value = place.geometry.location.lng();
-                //document.getElementById("street").value = place.formatted_address;
-            //console.log(place.formatted_address);
-            //console.log("lat - "+place.geometry.location.lat() +"lng - " +place.geometry.location.lng());
+                getlocatedata(place.geometry.location.lat(),place.geometry.location.lng())
         		
         		infowindow.open(map, marker);
             
         });
     }
+    </script>
+        <script>
+        function getlocatedata(lat,lng) {
+            var url = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + lat + "," + lng + "&key=AIzaSyDXRUNEuXhkWGxiOtrvTSMc91H6L9PM-_M";
+            $.ajax({
+                type: "GET",
+                url: url,
+                dataType: "json",
+                success: function (msg) {
+                    var results = msg.results;
+                    var address = results[0].address_components;
+                    var zipcode = address[address.length - 1].long_name;
+                    var state = address[address.length - 3].long_name;
+                    var city = address[address.length - 5].long_name;
+
+                    var add= results[0].formatted_address ;
+                    var addvalue=add.split(",");
+                    var count=addvalue.length;
+                    //var state=addvalue[count-2];
+                    //var city=addvalue[count-3];
+                    //var zip = results[0].address_components[8].long_name;
+                    document.getElementById("street").value = add;
+
+                    document.getElementById("pincode").value = zipcode;
+                    document.getElementById("city").value = city;
+                    document.getElementById("state").value = state;
+                },
+                error: function (req, status, error) {
+                    //alert('Sorry, an error occurred.');
+                    console.log(req.responseText);
+                }
+            });
+            
+
+        }
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDXRUNEuXhkWGxiOtrvTSMc91H6L9PM-_M&libraries=places&callback=initMap"
         async defer></script>

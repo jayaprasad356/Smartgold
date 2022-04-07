@@ -142,9 +142,7 @@ $rescat = $db->getResult();
                             <div class="col-md-6">
                                 <label for="serve_for">Status :</label>
                                 <select name="serve_for" class="form-control" required>
-                                    <option value="Available" <?php if ($res[0]['status'] == "Available") {
-                                                                                    echo "selected";
-                                                                                } ?>>Available</option>
+                                    <option value="Available" <?php if ($res[0]['status'] == "Available") {echo "selected";} ?>>Available</option>
                                     <option value="Sold Out" <?php if ($res[0]['status'] == "Sold Out") {
                                                                                     echo "selected";
                                                                                 } ?>>Sold Out</option>

@@ -37,6 +37,7 @@ $db->connect();
 
 //data of 'OFFERS' table goes here
 if (isset($_GET['table']) && $_GET['table'] == 'offers') {
+        
 
 
     $sql = "SELECT * FROM `offers` WHERE seller_id = '" . $id . "' ";
@@ -46,6 +47,9 @@ if (isset($_GET['table']) && $_GET['table'] == 'offers') {
     $rows = array();
     $tempRow = array();
     foreach ($res as $row) {
+        $operate = ' <a href="edit-offer.php?id=' . $row['id'] . '"><i class="fa fa-edit"></i></a>'; 
+        $operate .= '<a href="offers_lock.php?id=' . $row['id'] . '" class="label label-primary" title="View">View Offer</a>';
+    
         if($row['status'] == 0){
             $status = "inactive";
         }
@@ -87,6 +91,7 @@ if (isset($_GET['table']) && $_GET['table'] == 'offers') {
 
 
         $tempRow['locked'] = $locked;
+        $tempRow['operate'] = $operate;
         $rows[] = $tempRow;
     }
     $bulkData['rows'] = $rows;
@@ -104,17 +109,10 @@ if (isset($_GET['table']) && $_GET['table'] == 'orders') {
     $rows = array();
     $tempRow = array();
     foreach ($res as $row) {
+        $operate = ' <a href="edit-seller.php?id=' . $row['id'] . '"><i class="fa fa-edit"></i></a>'; 
         
-        
-        
-
-        // $operate = '<a href="view-product-variants.php?id=' . $row['id'] . '" class="label label-success" title="View">View</a>';
-        // $operate .= ' <a href="edit-product.php?id=' . $row['id'] . '" title="Edit"><i class="fa fa-edit"></i></a>';
         $update = '<a href="updateorders.php?id=' . $row['id'] . '" class="label label-success" title="Update">Update Orders</a>';
-
-        
         $tempRow['id'] = $row['id'];
-        
         $tempRow['product_id'] = $row['product_id'];
         $tempRow['name'] = $row['name'];
         $tempRow['quantity'] = $row['quantity'];
@@ -122,6 +120,7 @@ if (isset($_GET['table']) && $_GET['table'] == 'orders') {
         $tempRow['buy_method'] = $row['buy_method'];
         $tempRow['status'] = $row['status'];
         $tempRow['update'] = $update;
+        $tempRow['operate'] = $operate;
         $rows[] = $tempRow;
     }
     $bulkData['rows'] = $rows;

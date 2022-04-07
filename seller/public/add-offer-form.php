@@ -85,12 +85,11 @@ $res = $db->getResult();
 
                             </div>
                             <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Valid Date</label> <i class="text-danger asterik">*</i><?php echo isset($error['valid']) ? $error['valid'] : ''; ?>
-                                <input type="date" class="form-control" id="valid" name="valid" required>
-                        </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Valid Date</label> <i class="text-danger asterik">*</i><?php echo isset($error['valid']) ? $error['valid'] : ''; ?>
+                                    <input type="date" class="form-control" id="valid" name="valid" required>
+                                </div>
                             </div>
-
                         </div>
                     </div>
                     <!-- /.box-body -->

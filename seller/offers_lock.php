@@ -34,7 +34,7 @@ $offerid = $_GET['id'];
 <html>
 
 <head>
-    <title>Products | Smart Gold - Dashboard</title>
+    <title>Smart Gold Vendor</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 </head>
 </body>
