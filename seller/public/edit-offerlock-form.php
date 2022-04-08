@@ -70,18 +70,15 @@ $rescat = $db->getResult();
                             <div class="col-md-6">
                                 <label for="status">Offer Lock Status :</label>
                                 <select name="status" class="form-control" required>
-                                    <option value="received" <?php if ($res[0]['status'] == "received") {
+                                    <option value="Locked" <?php if ($res[0]['status'] == "Locked") {
                                                                                     echo "selected";
-                                                                                } ?>>Received</option>
-                                    <option value="paid" <?php if ($res[0]['status'] == "paid") {
+                                                                                } ?>>Locked</option>
+                                    <option value="Cancelled" <?php if ($res[0]['status'] == "Cancelled") {
                                                                                     echo "selected";
-                                                                                } ?>>Paid</option>
-                                    <option value="refunded" <?php if ($res[0]['status'] == "refunded") {
+                                                                                } ?>>Cancelled</option>
+                                    <option value="Completed" <?php if ($res[0]['status'] == "Completed") {
                                                                                     echo "selected";
-                                                                                } ?>>Refunded</option>
-                                    <option value="cancelled" <?php if ($res[0]['status'] == "cancelled") {
-                                                echo "selected";
-                                            } ?>>Cancelled</option>                                            
+                                                                                } ?>>Completed</option>                                          
                                 </select>
 
                             </div>

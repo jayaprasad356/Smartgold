@@ -65,7 +65,7 @@ for ($i = 0; $i < $productcount; $i++) {
     $discounted_price = $res[$i]['discounted_price'];
     $delivery_charges = $res[$i]['delivery_charges'];
     
-    $sql = "INSERT INTO orders(`user_id`,`product_id`,`quantity`,`status`,`delivery_charges`,`buy_method`,`payment_status`,`total`)VALUES('$user_id','$product_id','$quantity','received',$delivery_charges,'$buy_method','$payment_status','$discounted_price')";
+    $sql = "INSERT INTO orders(`user_id`,`product_id`,`quantity`,`status`,`delivery_charges`,`buy_method`,`payment_status`,`total`)VALUES('$user_id','$product_id','$quantity','Received',$delivery_charges,'$buy_method','$payment_status','$discounted_price')";
     $db->sql($sql);
     $sql = "DELETE FROM cart WHERE product_id = '" . $product_id . "' AND user_id = '$user_id'";
     $db->sql($sql);

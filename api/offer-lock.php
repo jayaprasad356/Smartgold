@@ -53,7 +53,7 @@ $user_id = $db->escapeString($_POST['user_id']);
 $offer_id = $db->escapeString($_POST['offer_id']);
 $seller_id = $db->escapeString($_POST['seller_id']);
 $paid_amt = $db->escapeString($_POST['paid_amt']);
-$status = $db->escapeString('received');
+$status = $db->escapeString('Locked');
 
 
 $sql = "INSERT INTO offer_lock(`user_id`,`offer_id`, `paid_amt`, `status`)VALUES($user_id,$offer_id,$paid_amt,'$status')";
