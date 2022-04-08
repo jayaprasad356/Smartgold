@@ -82,12 +82,12 @@ if (isset($_POST['btnUpdate'])) {
             // upload new image
             $upload = move_uploaded_file($_FILES['image']['tmp_name'], '../upload/images/' . $image);
             $upload_image = 'upload/images/' . $image;
-            $sql_query = "UPDATE products SET name = '$name' ,seller_id= '$seller_id',category_id= '$category_id',image = '$upload_image',description = '$description' ,is_approved = '$is_approved' ,status = '$status' , price = '$price', discounted_price = '$discounted_price', stock = '$stock', gender = '$gender', weight = '$weight' WHERE id = $product_id";
+            $sql_query = "UPDATE products SET name = '$name' ,seller_id= '$seller_id',category_id= '$category_id',image = '$upload_image',description = '$description' ,status = '$status' , price = '$price', discounted_price = '$discounted_price', stock = '$stock', gender = '$gender', weight = '$weight' WHERE id = $product_id";
             
 
         }
         else{
-            $sql_query = "UPDATE products SET name = '$name' ,seller_id= '$seller_id',category_id= '$category_id',description = '$description' ,is_approved = '$is_approved' ,status = '$status' , price = '$price', discounted_price = '$discounted_price', stock = '$stock', gender = '$gender', weight = '$weight' WHERE id = $product_id";
+            $sql_query = "UPDATE products SET name = '$name' ,seller_id= '$seller_id',category_id= '$category_id',description = '$description' ,status = '$status' , price = '$price', discounted_price = '$discounted_price', stock = '$stock', gender = '$gender', weight = '$weight' WHERE id = $product_id";
             
 
         }
@@ -147,25 +147,31 @@ pointer-events:none;
                                 <input type="text" class="form-control" name="name" value="<?php echo $res[0]['name'] ?>" required>
                         </div>
                         <div class="row">
-                            <div class="col-md-6">
-                                <label for="serve_for">Status :</label>
-                                <select name="serve_for" class="form-control" required>
-                                    <option value="Available" <?php if ($res[0]['status'] == "Available") {echo "selected";} ?>>Available</option>
-                                    <option value="Sold Out" <?php if ($res[0]['status'] == "Sold Out") {
-                                                                                    echo "selected";
-                                                                                } ?>>Sold Out</option>
-                                    <option value="Not Available" <?php if ($res[0]['status'] == "Not Available") {
-                                                                                    echo "selected";
-                                                                                } ?>>Not Available</option>
-                                </select>
 
-                            </div>
                             <div class="col-md-6">
                                     <div class="form-group packate_div">
                                         <label for="qty">Stock:</label> <i class="text-danger asterik">*</i>
                                         <input type="number" step="any" min="0" class="form-control" name="stock" required="" value="<?php echo $res[0]['stock'] ?>" />
                                     </div>
                             </div>
+                            <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="category_id">Category :</label> <i class="text-danger asterik">*</i>
+                                <select name="category_id" id="category_id" class="form-control" required>
+                                    <option value="">--Select Category--</option>
+                                    <?php foreach ($rescat as $row) { ?>
+                                        <option value="<?php echo $row['id']; ?>" <?= ($row['id'] == $res[0]['category_id']) ? "selected" : ""; ?>><?php echo $row['name']; ?></option>
+                                        
+                                            
+                                    <?php 
+                                    } ?>
+                                    
+                                </select>
+                            </div>
+
+                            </div>
+                    
+
 
                         </div>
                     
@@ -210,20 +216,7 @@ pointer-events:none;
                                     </div>
                                 </div>
                         </div>
-                        <div class="form-group">
-                            <label for="category_id">Category :</label> <i class="text-danger asterik">*</i>
-                            <select name="category_id" id="category_id" class="form-control" required>
-                                <option value="">--Select Category--</option>
-                                <?php foreach ($rescat as $row) { ?>
-                                    <option value="<?php echo $row['id']; ?>" <?= ($row['id'] == $res[0]['category_id']) ? "selected" : ""; ?>><?php echo $row['name']; ?></option>
-                                    
-                                        
-                                <?php 
-                                } ?>
-                                
-                            </select>
-                            <br />
-                        </div>
+
                        
                         
 
@@ -243,8 +236,8 @@ pointer-events:none;
                                 <div class="col-md-6">
                                     <label for="status">Product Status</label>
                                     <select name="status" class="form-control" required>
-                                        <option value="1">Active</option>
-                                        <option value="0">Deactive</option>
+                                        <option value="1" <?=$res[0]['status'] == '1' ? ' selected="selected"' : '';?>>Active</option>
+                                        <option value="0" <?=$res[0]['status'] == '0' ? ' selected="selected"' : '';?>>Deactive</option>
                                     </select>
 
                                 </div>
