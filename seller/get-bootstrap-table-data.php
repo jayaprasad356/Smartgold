@@ -48,10 +48,10 @@ if (isset($_GET['table']) && $_GET['table'] == 'offers') {
     $tempRow = array();
     foreach ($res as $row) {
         $operate = ' <a href="edit-offer.php?id=' . $row['id'] . '"><i class="fa fa-edit"></i></a>'; 
-        $operate .= '<a href="offers_lock.php?id=' . $row['id'] . '" class="label label-primary" title="View">View Offer</a>';
+        $operate .= '<a href="view-offer.php?id=' . $row['id'] . '" class="label label-primary" title="View">View Offer</a>';
     
         if($row['status'] == 0){
-            $status = "inactive";
+            $status = "Deactive";
         }
         else{
             $status = "active";
@@ -109,10 +109,14 @@ if (isset($_GET['table']) && $_GET['table'] == 'orders') {
     $rows = array();
     $tempRow = array();
     foreach ($res as $row) {
-        $operate = ' <a href="edit-seller.php?id=' . $row['id'] . '"><i class="fa fa-edit"></i></a>'; 
+        $operate = '<a href="view-order.php?id=' . $row['id'] . '" class="label label-primary" title="View">View Order</a>';
+    
+        $dc  = $row['date_created'];
+        $dc = explode(" ", $dc); 
         
         $update = '<a href="updateorders.php?id=' . $row['id'] . '" class="label label-success" title="Update">Update Orders</a>';
         $tempRow['id'] = $row['id'];
+        $tempRow['date_created'] = $dc[0];
         $tempRow['product_id'] = $row['product_id'];
         $tempRow['name'] = $row['name'];
         $tempRow['quantity'] = $row['quantity'];

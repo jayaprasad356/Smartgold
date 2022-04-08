@@ -15,7 +15,7 @@ $product_id = $_GET['id'];
 if (isset($_POST['btnUpdate'])) {
     $seller_id = $ID;
     $name = $db->escapeString($_POST['name']);
-    $status = $db->escapeString($_POST['serve_for']);
+    $status = $db->escapeString($_POST['status']);
     $stock = $db->escapeString($_POST['stock']);
     $price= $db->escapeString($_POST['price']);
     $discounted_price = $db->escapeString($_POST['discounted_price']);
@@ -54,16 +54,16 @@ if (isset($_POST['btnUpdate'])) {
     // get image file extension
     error_reporting(E_ERROR | E_PARSE);
     $extension = end(explode(".", $_FILES["image"]["name"]));
-    if (!empty($image)) {
-        // $mimetype = mime_content_type($_FILES["image"]["tmp_name"]);
-        // if (!in_array($mimetype, array('image/jpg', 'image/jpeg', 'image/gif', 'image/png'))) {
-        //     $error['image'] = " <span class='label label-danger'>Image type must jpg, jpeg, gif, or png!</span>";
-        // }
-        $result = $fn->validate_image($_FILES["image"]);
-        if (!$result) {
-            $error['image'] = " <span class='label label-danger'>Image type must jpg, jpeg, gif, or png!</span>";
-        }
-    }
+    // if (!empty($image)) {
+    //     // $mimetype = mime_content_type($_FILES["image"]["tmp_name"]);
+    //     // if (!in_array($mimetype, array('image/jpg', 'image/jpeg', 'image/gif', 'image/png'))) {
+    //     //     $error['image'] = " <span class='label label-danger'>Image type must jpg, jpeg, gif, or png!</span>";
+    //     // }
+    //     $result = $fn->validate_image($_FILES["image"]);
+    //     if (!$result) {
+    //         $error['image'] = " <span class='label label-danger'>Image type must jpg, jpeg, gif, or png!</span>";
+    //     }
+    // }
 
 
     if (!empty($name) && !empty($category_id)   && empty($error['image'])) {
@@ -225,26 +225,19 @@ $rescat = $db->getResult();
                         <div class="form-group">
                             <label for="description">Description :</label>
                             <textarea name="description" id="description" class="form-control" rows="8"><?php echo $res[0]['description']; ?></textarea>
-                            <script type="text/javascript" src="css/js/ckeditor/ckeditor.js"></script>
-                            <script type="text/javascript">
-                                CKEDITOR.replace('description');
-                            </script>
                         </div>
-                        <!-- <div class="row">
+                        <div class="row">
                             <div class="form-group col-md-4">
-                                <div class="form-group">
-                                    <label class="control-label">Product Status</label>
-                                    <div id="status" class="btn-group">
-                                        <label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-                                            <input type="radio" name="is_approved" value="1" <?= ($res[0]['is_approved'] == 1) ? 'checked' : ''; ?>> Approved
-                                        </label>
-                                        <label class="btn btn-danger" data-toggle-class="btn-danger" data-toggle-passive-class="btn-default">
-                                            <input type="radio" name="is_approved" value="2" <?= ($res[0]['is_approved'] == 2) ? 'checked' : ''; ?>> Not-Approved
-                                        </label>
-                                    </div>
+                                <div class="col-md-6">
+                                    <label for="status">Product Status</label>
+                                    <select name="status" class="form-control" required>
+                                        <option value="1">Active</option>
+                                        <option value="0">Deactive</option>
+                                    </select>
+
                                 </div>
                             </div>
-                        </div> -->
+                        </div>
                     </div>
                     <!-- /.box-body -->
                     <div class="box-footer">

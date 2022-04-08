@@ -62,8 +62,10 @@ if($is_paid == 'true'){
 for ($i = 0; $i < $productcount; $i++) {
     $product_id = $res[$i]['product_id'];
     $quantity = $res[$i]['quantity'];
+    $discounted_price = $res[$i]['discounted_price'];
+    $delivery_charges = $res[$i]['delivery_charges'];
     
-    $sql = "INSERT INTO orders(`user_id`,`product_id`,`quantity`,`status`,`buy_method`,`payment_status`)VALUES('$user_id','$product_id','$quantity','received','$buy_method','$payment_status')";
+    $sql = "INSERT INTO orders(`user_id`,`product_id`,`quantity`,`status`,`delivery_charges`,`buy_method`,`payment_status`,`total`)VALUES('$user_id','$product_id','$quantity','received',$delivery_charges,'$buy_method','$payment_status','$discounted_price')";
     $db->sql($sql);
     $sql = "DELETE FROM cart WHERE product_id = '" . $product_id . "' AND user_id = '$user_id'";
     $db->sql($sql);
@@ -73,56 +75,6 @@ for ($i = 0; $i < $productcount; $i++) {
 $response['success'] = true;
 $response['message'] = "Order Placed Successfully";
 print_r(json_encode($response));
-
-// $item_details = $function->get_product_by_id($items);
-// for ($i = 0; $i < count($item_details); $i++) {
-//     $product_id = $db->escapeString($item_details[$i]['id']);
-//     $sql = "INSERT INTO orders(`user_id`,`product_id`,`status`)VALUES('$user_id','$product_id','received')";
-//     $db->sql($sql);
-//     $response['success'] = true;
-//     $response['message'] = "Order Placed".$product_id;
-//     print_r(json_encode($response));
-
-// }
-
-// $items = $_POST['product_id'];
-// $items = stripslashes($items);
-// $items = json_decode($items, 1);
-
-// $cars = array();
-
-// for ($i = 0; $i < count($items); $i++){
-//     if($items[$i] == '12' || $items[$i] == '15'){
-//         $cars[$i]=array($items[$i]);
-//         $response['success'] = false;
-//         $response['message'] = "Product ID is Empty".$cars[$i];
-//         print_r(json_encode($response));
-
-//     }
-    
-
-// }
-
-// foreach ($cars as $it) {
-//     // $response['success'] = false;
-//     // $response['message'] = "Product ID is Empty".$it[1];
-//     // print_r(json_encode($response));
-    
-    
-    
-
-// }
-// $a=array('a','b','c');
-//     foreach($a as $b){
-//         $c = array();
-//         for($i=0;$i<count($a);$i++){                
-//             $c[$i]=$b;
-//             $response['success'] = false;
-//         $response['message'] = "Product ID is Empty".$c[$i];
-//         print_r(json_encode($response));
-//         }
-        
-//     }
 
 
 ?>

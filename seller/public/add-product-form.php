@@ -18,13 +18,14 @@ if (isset($_POST['btnAdd'])) {
     
     $seller_id = $ID;
     $name = $db->escapeString($_POST['name']);
-    $status = $db->escapeString($_POST['serve_for']);
+    $status = $db->escapeString($_POST['status']);
     $stock = $db->escapeString($_POST['stock']);
     $price= $db->escapeString($_POST['price']);
     $gender= $db->escapeString($_POST['gender']);
     $weight= $db->escapeString($_POST['weight']);
     $discounted_price = (isset($_POST['discounted_price']) && $_POST['discounted_price'] != "") ? $db->escapeString($_POST['discounted_price']) : "";
     $category_id = $db->escapeString($_POST['category_id']);
+
     
     // get image info
     $image = $db->escapeString($_FILES['image']['name']);
@@ -32,6 +33,9 @@ if (isset($_POST['btnAdd'])) {
     $image_type = $db->escapeString($_FILES['image']['type']);
 
     $description = $db->escapeString($_POST['description']);
+    if($discounted_price == '0' || $discounted_price == ''){
+        $discounted_price = $price;
+    }
 
     $is_approved = 1;
 
@@ -215,7 +219,7 @@ pointer-events:none;
                                     <select name="gender" class="form-control" required>
                                         <option value="">Select</option>
                                         <option value="Male">Male</option>
-                                        <option value="Female">Female</option>
+                                        <option value="Female" selected>Female</option>
                                     </select>
                                 </div>
                                 <div class="col-md-6">
@@ -251,24 +255,22 @@ pointer-events:none;
                             <label for="description">Description :</label>
                             <textarea name="description" id="description" class="form-control" rows="8"></textarea>
                         </div>
+                        <div class="row">
+                            <div class="form-group col-md-4">
+                                <div class="col-md-6">
+                                    <label for="status">Product Status</label>
+                                    <select name="status" class="form-control" required>
+                                        <option value="1">Active</option>
+                                        <option value="0">Deactive</option>
+                                    </select>
+
+                                </div>
+                            </div>
+                        </div>
                         <div class="form-group">
                             <p class="text-danger">Disclaimer : *Weight and Price may vary subject to the stock available.</p>
                         </div>
-                        <!-- <div class="row">
-                            <div class="form-group col-md-4">
-                                <div class="form-group">
-                                    <label class="control-label">Product Status</label>
-                                    <div id="status" class="btn-group">
-                                        <label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
-                                            <input type="radio" name="is_approved" value="1"> Approved
-                                        </label>
-                                        <label class="btn btn-danger" data-toggle-class="btn-danger" data-toggle-passive-class="btn-default">
-                                            <input type="radio" name="is_approved" value="2"> Not-Approved
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> -->
+
                     </div>
                     <!-- /.box-body -->
                     <div class="box-footer">
@@ -285,122 +287,9 @@ pointer-events:none;
 <div class="separator"> </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>
-<script>
-    $('#seller_id').on('change', function(e) {
-        var seller_id = $('#seller_id').val();
-        $.ajax({
-            type: 'POST',
-            url: "public/db-operation.php",
-            data: 'get_categories_by_seller=1&seller_id=' + seller_id,
-            beforeSend: function() {
-                $('#category_id').html('<option>Please wait..</option>');
-            },
-            success: function(result) {
-                $('#category_id').html(result);
-            }
-        });
-    });
 
-    var changeCheckbox = document.querySelector('#return_status_button');
-    var init = new Switchery(changeCheckbox);
-    changeCheckbox.onchange = function() {
-        if ($(this).is(':checked')) {
-            $('#return_status').val(1);
-            $('#return_day').show();
-        } else {
-            $('#return_status').val(0);
-            $('#return_day').hide();
-            $('#return_day').val('');
-        }
-    };
-    // $('.pincodes').hide();
-    $('#pincode_ids_exc').prop('disabled', true);
 
-    $('#product_pincodes').on('change', function() {
-        var val = $('#product_pincodes').val();
-        if (val == "included" || val == "excluded") {
-            $('#pincode_ids_exc').prop('disabled', false);
-        } else {
-            $('#pincode_ids_exc').prop('disabled', true);
-        }
-    });
-    $('#pincode_ids_exc').select2({
-        width: 'element',
-        placeholder: 'type in category name to search',
 
-    });
-</script>
-
-<script>
-    var changeCheckbox = document.querySelector('#cancelable_button');
-    var init = new Switchery(changeCheckbox);
-    changeCheckbox.onchange = function() {
-        if ($(this).is(':checked')) {
-            $('#cancelable_status').val(1);
-            $('#till-status').show();
-
-        } else {
-            $('#cancelable_status').val(0);
-            $('#till-status').hide();
-            $('#till_status').val('');
-        }
-    };
-</script>
-<script>
-    $('#pincode_ids_inc').select2({
-        width: 'element',
-        placeholder: 'type in category name to search',
-
-    });
-
-    if ($('#packate').prop('checked')) {
-        $('#packate_div').show();
-        $('#packate_server_hide').hide();
-        $('.loose_div').children(":input").prop('disabled', true);
-        $('#loose_stock_div').children(":input").prop('disabled', true);
-    }
-
-    $.validator.addMethod('lessThanEqual', function(value, element, param) {
-        return this.optional(element) || parseInt(value) < parseInt($(param).val());
-    }, "Discounted Price should be lesser than Price");
-</script>
-
-<script>
-    $(document).on('input', '.discounted_percentage', function(){
-        let dp = $('#discounted_percentage').val();
-        let price = $('#price').val(); 
-        if(price != '' && dp != ''){
-            var sale;
-            sale = calculateSale(price, dp);
-            $('#discounted_price').val(sale);
-
-        }
-        else{
-            $('#discounted_price').val(0);
-
-        }
-
-    });
-    $(document).on('input', '.price', function(){
-        let dp = $('#discounted_percentage').val();
-        let price = $('#price').val(); 
-        if(price != '' && dp != ''){
-            var sale;
-            sale = calculateSale(price, dp);
-            $('#discounted_price').val(sale);
-
-        }
-        else{
-            $('#discounted_price').val(0);
-
-        }
-    });
-    const calculateSale = (listPrice, discount) => {
-        listPrice = parseFloat(listPrice);
-        discount  = parseFloat(discount);
-        return (listPrice - ( listPrice * discount / 100 )).toFixed(2); // Sale price
-    }
-</script>
 <script>
     $('#add_product_form').validate({
 
@@ -434,51 +323,4 @@ pointer-events:none;
             CKEDITOR.instances[instance].setData('');
         }
     });
-</script>
-<script>
-    $(document).on('click', '.remove_variation', function() {
-        $(this).closest('.row').remove();
-    });
-
-
-    $(document).on('change', '#category_id', function() {
-        $.ajax({
-            url: "public/db-operation.php",
-            data: "category_id=" + $('#category_id').val() + "&change_category=1",
-            method: "POST",
-            success: function(data) {
-                $('#subcategory_id').html("<option value=''>---Select Subcategory---</option>" + data);
-            }
-        });
-    });
-
-    $(document).on('change', '#packate', function() {
-        $('#variations').html("");
-        $('#packate_div').show();
-        $('#packate_server_hide').hide();
-        $('.packate_div').children(":input").prop('disabled', false);
-        $('#loose_div').hide();
-        $('.loose_div').children(":input").prop('disabled', true);
-        $('#loose_stock_div').hide();
-        $('#loose_stock_unit_id').hide();
-        $('#loose_stock_div').children(":input").prop('disabled', true);
-
-    });
-    $(document).on('change', '#loose', function() {
-        $('#variations').html("");
-        $('#loose_div').show();
-        $('.loose_div').children(":input").prop('disabled', false);
-        $('#loose_stock_div').show();
-        $('#loose_stock_div').children(":input").prop('disabled', false);
-        $('#packate_server_hide').show();
-        $('#packate_div').hide();
-        $('.packate_div').children(":input").prop('disabled', true);
-
-    });
-
-    // function validate_amount(value) {
-    //     if (parseInt(value) < 0) {
-    //         alert('You Can not enter amount less than zero.');
-    //     }
-    // }
 </script>

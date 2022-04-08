@@ -21,7 +21,9 @@
                     <table id='products_table' class="table table-hover" data-toggle="table" data-url="get-bootstrap-table-data.php?table=orders" data-page-list="[5, 10, 20, 50, 100, 200]"  data-side-pagination="server" data-pagination="true"  data-query-params="queryParams"   >
                         <thead>
                             <tr>
+                                <th data-field="operate" data-events="actionEvents">Action</th>
                                 <th data-field="id" data-sortable="true">ID</th>
+                                <th data-field="date_created" data-sortable="true">Order Date</th>
                                 <th data-field="product_id" data-sortable="true">Product ID</th>
                                 <th data-field="name" data-sortable="true">Name</th>
                                 <th data-field="quantity" data-sortable="true">Quantity</th>

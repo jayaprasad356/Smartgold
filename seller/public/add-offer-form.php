@@ -59,7 +59,7 @@ $res = $db->getResult();
                             <br />
                         </div>
                         <div class="form-group">
-                                <label for="exampleInputEmail1">Discount Per Gram(₹):</label>
+                                <label for="exampleInputEmail1">Discount Per Gram(₹)</label>
                                 <input type="number" class="form-control" id="pricegram" name="pricegram">
                         </div>
                         <div class="form-group">
@@ -79,8 +79,8 @@ $res = $db->getResult();
                             <div class="col-md-6">
                                 <label for="serve_for">Status :</label>
                                 <select name="serve_for" class="form-control" required>
-                                    <option value="1">Available</option>
-                                    <option value="0">Not Available</option>
+                                    <option value="1">Active</option>
+                                    <option value="0">Deactive</option>
                                 </select>
 
                             </div>
