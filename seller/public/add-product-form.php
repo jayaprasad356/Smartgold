@@ -176,12 +176,25 @@ pointer-events:none;
                                 <label for="exampleInputEmail1">Product Name</label> <i class="text-danger asterik">*</i><?php echo isset($error['name']) ? $error['name'] : ''; ?>
                                 <input type="text" class="form-control" name="name" required>
                         </div>
+
                         <div class="row">
                             <div class="col-md-6">
                                     <div class="form-group packate_div">
                                         <label for="qty">Stock:</label> <i class="text-danger asterik">*</i>
                                         <input type="number" step="any" min="0" class="form-control" name="stock" required="" />
                                     </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="category_id">Category :</label> <i class="text-danger asterik">*</i>
+                                <select name="category_id" id="category_id" class="form-control" required>
+                                    <option value="">--Select Category--</option>
+                                    <?php foreach ($res as $row) { ?>
+                                        
+                                            <option value="<?php echo $row['id']; ?>"><?php echo $row['name']; ?></option>
+                                    <?php 
+                                    } ?>
+                                    
+                                </select>
                             </div>
 
                         </div>
@@ -221,19 +234,7 @@ pointer-events:none;
                                     </div>
                                 </div>
                         </div>
-                        <div class="form-group">
-                            <label for="category_id">Category :</label> <i class="text-danger asterik">*</i>
-                            <select name="category_id" id="category_id" class="form-control" required>
-                                <option value="">--Select Category--</option>
-                                <?php foreach ($res as $row) { ?>
-                                    
-                                        <option value="<?php echo $row['id']; ?>"><?php echo $row['name']; ?></option>
-                                <?php 
-                                } ?>
-                                
-                            </select>
-                            <br />
-                        </div>
+
                        
                         
 
