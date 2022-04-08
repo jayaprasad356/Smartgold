@@ -164,43 +164,86 @@ if (isset($_GET['table']) && $_GET['table'] == 'lockoffers') {
 }
 //data of 'PRODUCTS' table goes here
 if (isset($_GET['table']) && $_GET['table'] == 'products') {
+    $offset = 0;
+    $limit = 10;
+    $where = '';
+    $sort = 'id';
+    $order = 'DESC';
+    if (isset($_GET['offset']))
+    $offset = $db->escapeString($_GET['offset']);
+    if (isset($_GET['limit']))
+        $limit = $db->escapeString($_GET['limit']);
+    if (isset($_GET['sort']))
+        $sort = $db->escapeString($_GET['sort']);
+    if (isset($_GET['order']))
+        $order = $db->escapeString($_GET['order']);
+
+    if (isset($_GET['search']) && !empty($_GET['search'])) {
+        $search = $db->escapeString($_GET['search']);
+        $where .= "WHERE name like '%" . $search . "%' OR gender like '%" . $search . "%' OR price like '%" . $search . "%' AND seller_id = $id";
+    }
+    else{
+        $where .= "WHERE seller_id = $id";
+
+    }
+    if (isset($_GET['sort'])){
+        $sort = $db->escapeString($_GET['sort']);
+
+    }
+    if (isset($_GET['order'])){
+        $order = $db->escapeString($_GET['order']);
+
+    }
+    $sql = "SELECT COUNT(`id`) as total FROM `products` " . $where;
+    $db->sql($sql);
+    $res = $db->getResult();
+    foreach ($res as $row)
+        $total = $row['total'];
 
 
-    $sql = "SELECT * FROM `products` WHERE seller_id = '" . $id . "' ";
+    //$where .= "AND ''";
+    //$sql = "SELECT *,products.id AS id,products.name AS name,category.name AS category_name FROM `products`,`category` " . $where . " ORDER BY " . $sort . " " . $order . " LIMIT " . $offset . ", " . $limit;;
+    
+    $sql = "SELECT * FROM `products` " . $where . " ORDER BY " . $sort . " " . $order . " LIMIT " . $offset . ", " . $limit;;
     $db->sql($sql);
     $res = $db->getResult();
     
+    $bulkData = array();
+    $bulkData['total'] = $total;
+    
+   
     $rows = array();
     $tempRow = array();
     foreach ($res as $row) {
         $currency = "Rs.";
-        
-        
-
-        // $operate = '<a href="view-product-variants.php?id=' . $row['id'] . '" title="View"><i class="fa fa-folder-open"></i></a>';
-        // $operate .= ' <a href="edit-product.php?id=' . $row['id'] . '" title="Edit"><i class="fa fa-edit"></i></a>';
-
         $operate = ' <a href="edit-product.php?id=' . $row['id'] . '" title="Edit"><i class="fa fa-edit"></i></a>';
-        $operate .= ' <a id="deleteproduct" class="btn btn-xs btn-danger" href="delete-product.php?id=' . $row['id'] . '" title="Delete"><i class="fa fa-trash-o"></i></a>&nbsp;';
+        //$operate .= ' <a id="deleteproduct" class="btn btn-xs btn-danger" href="delete-product.php?id=' . $row['id'] . '" title="Delete"><i class="fa fa-trash-o"></i></a>&nbsp;';
         
+
+        $discounted_price = $currency . " " . $row['discounted_price'];
+        if($row['discounted_price'] == $row['price']){
+            $discounted_price = "No Discount";
+        } 
 
         
         $tempRow['id'] = $row['id'];
         $tempRow['seller_id'] = (!empty($row['seller_id'])) ? $row['seller_id'] : "";
         $tempRow['seller_name'] = (!empty($row['seller_name'])) ? $row['seller_name'] : "";
         $tempRow['name'] = $row['name'];
+        $catid = $row['category_id'];
+        $sql = "SELECT * FROM `category` WHERE id = $catid ";
+        $db->sql($sql);
+        $cat = $db->getResult();
+        $tempRow['category_name'] = $cat[0]['name'];
         
         $tempRow['price'] = $currency . " " . $row['price'];
         
 
-        $tempRow['is_approved'] = ($row['is_approved'] == 1)
-            ? "<label class='label label-success'>Approved</label>"
-            : (($row['is_approved'] == 2)
-                ? "<label class='label label-danger'>Not-Approved</label>"
-                : "<label class='label label-warning'>Not-Processed</label>");
+        $tempRow['status'] = ($row['status'] == 1)? "<label class='label label-success'>Active</label>": (($row['status'] == 0)? "<label class='label label-danger'>Deactive</label>": "<label class='label label-warning'>Deactive</label>");
         $tempRow['description'] = $row['description'];
-        $tempRow['discounted_price'] = $currency . " " . $row['discounted_price'];
-        $tempRow['status'] = $row['status'] == 'Sold Out' ? "<span class='label label-danger'>Sold Out</label>" : "<span class='label label-success'>Available</label>";
+        $tempRow['discounted_price'] = $discounted_price;
+        $tempRow['weight'] = $row['weight'];
+        $tempRow['gender'] = $row['gender'];
         $tempRow['image'] = "<a data-lightbox='product' href='" . DOMAIN_URL . $row['image'] . "' data-caption='" . $row['name'] . "'><img src='" . DOMAIN_URL . $row['image'] . "' title='" . $row['name'] . "' height='50' /></a>";
         $tempRow['operate'] = $operate;
         $rows[] = $tempRow;

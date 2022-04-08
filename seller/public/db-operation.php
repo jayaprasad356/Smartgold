@@ -148,8 +148,8 @@ if (isset($_POST['update_seller'])  && !empty($_POST['update_seller'])) {
     $bank_ifsc_code = (isset($_POST['ifsc_code']) && $_POST['ifsc_code'] != "") ? $db->escapeString($_POST['ifsc_code']) : "";
     $account_name = (isset($_POST['account_name']) && $_POST['account_name'] != "") ? $db->escapeString($_POST['account_name']) : "";
     $bank_name = (isset($_POST['bank_name']) && $_POST['bank_name'] != "") ? $db->escapeString($_POST['bank_name']) : "";
-    $latitude = (isset($_POST['latitude']) && $_POST['latitude'] != "") ? $db->escapeString($_POST['latitude']) : "0";
-    $longitude = (isset($_POST['longitude']) && $_POST['longitude'] != "") ? $db->escapeString($_POST['longitude']) : "0";
+    // $latitude = (isset($_POST['latitude']) && $_POST['latitude'] != "") ? $db->escapeString($_POST['latitude']) : "0";
+    // $longitude = (isset($_POST['longitude']) && $_POST['longitude'] != "") ? $db->escapeString($_POST['longitude']) : "0";
     $pincode = (isset($_POST['pincode']) && $_POST['pincode'] != "") ? $db->escapeString($_POST['pincode']) : "";
     
 
@@ -233,9 +233,9 @@ if (isset($_POST['update_seller'])  && !empty($_POST['update_seller'])) {
     }
 
     if (!empty($password)) {
-        $sql = "UPDATE `seller` SET `name`='$name',`latitude`='$latitude',`longitude`='$longitude',`store_name`='$store_name',`email`='$email',`mobile`='$mobile',`password`='$password',`store_url`='$store_url',`store_description`='$store_description',`street`='$street',`pincode`='$pincode',`city`='$city',`state`='$state',`account_number`='$account_number',`bank_ifsc_code`='$bank_ifsc_code',`account_name`='$account_name',`bank_name`='$bank_name',`pan_number`='$pan_number' WHERE id=" . $id;
+        $sql = "UPDATE `seller` SET `name`='$name',`store_name`='$store_name',`email`='$email',`mobile`='$mobile',`password`='$password',`store_url`='$store_url',`store_description`='$store_description',`street`='$street',`pincode`='$pincode',`city`='$city',`state`='$state',`account_number`='$account_number',`bank_ifsc_code`='$bank_ifsc_code',`account_name`='$account_name',`bank_name`='$bank_name',`pan_number`='$pan_number' WHERE id=" . $id;
     } else {
-        $sql = "UPDATE `seller` SET `name`='$name',`latitude`='$latitude',`longitude`='$longitude',`store_name`='$store_name',`email`='$email',`mobile`='$mobile',`store_url`='$store_url',`store_description`='$store_description',`street`='$street',`pincode`='$pincode',`city`='$city',`state`='$state',`account_number`='$account_number',`bank_ifsc_code`='$bank_ifsc_code',`account_name`='$account_name',`bank_name`='$bank_name',`pan_number`='$pan_number' WHERE id=" . $id;
+        $sql = "UPDATE `seller` SET `name`='$name',`store_name`='$store_name',`email`='$email',`mobile`='$mobile',`store_url`='$store_url',`store_description`='$store_description',`street`='$street',`pincode`='$pincode',`city`='$city',`state`='$state',`account_number`='$account_number',`bank_ifsc_code`='$bank_ifsc_code',`account_name`='$account_name',`bank_name`='$bank_name',`pan_number`='$pan_number' WHERE id=" . $id;
     }
     if ($db->sql($sql)) {
         echo "<label class='alert alert-success'>Information Updated Successfully.</label>";
@@ -276,7 +276,7 @@ if (isset($_POST['add_offer'])  && !empty($_POST['add_offer'])) {
     }
     
     
-    if (!empty($budget_id) && !empty($maxilock) && !empty($status) && !empty($valid)) {
+    if (!empty($budget_id) && !empty($maxilock) && !empty($status) && !empty($valid) && !empty($description)) {
 
         
 

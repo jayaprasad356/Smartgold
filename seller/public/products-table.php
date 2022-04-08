@@ -20,26 +20,23 @@
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body table-responsive">
-                    <table id='products_table' class="table table-hover" data-toggle="table" data-url="get-bootstrap-table-data.php?table=products" data-page-list="[5, 10, 20, 50, 100, 200]"  data-side-pagination="server" data-pagination="true"  data-query-params="queryParams"   >
+                    <table id='products_table' class="table table-hover" data-toggle="table" data-search="true" data-url="get-bootstrap-table-data.php?table=products" data-page-list="[5, 10, 20, 50, 100, 200]" data-show-refresh="true"  data-side-pagination="server" data-pagination="true" data-query-params="queryParams_1"  data-trim-on-search="false" data-filter-control="true" data-query-params="queryParams" data-sort-name="id" data-sort-order="desc"  data-export-types='["txt","excel"]'   >
                         <thead>
                             <tr>
+                                <th data-field="operate" data-events="actionEvents">Action</th>
                                 <th data-field="id" data-sortable="true">ID</th>
                                 
-                                
-                                
-                                <!-- <th data-field="seller_id" data-sortable="true">Seller ID</th> -->
                                 <th data-field="name" data-sortable="true">Name</th>
-                                <th data-field="image">Image</th>
+                                <th data-field="category_name" data-sortable="true">Category Name</th>
+                                <th data-field="image" >Image</th>
+                                <th data-field="weight" data-sortable="true">Weight</th>
+                                <th data-field="gender" data-sortable="true">Gender</th>
                                 <th data-field="price" data-sortable="true">Price</th>
                                 <th data-field="discounted_price" data-sortable="true">D.Price</th>
                                 
-                                <!-- <th data-field="stock" data-sortable="true">Stock</th>
-                                <th data-field="serve_for" data-sortable="true">Availability</th> -->
-                                
-                                <th data-field="is_approved" data-sortable="true">Is Approved?</th>
+                                <th data-field="status" data-sortable="true">Status</th>
                                 <th data-field="description" data-sortable="true" data-visible="false">Description</th>
-                                <th data-field="operate" data-events="actionEvents">Action</th>
-                                <!-- <th data-field="operate" data-events="actionEvents">Action</th> -->
+                                
                             </tr>
                         </thead>
                     </table>
@@ -54,10 +51,8 @@
 </section>
 
 <script>
-    function queryParams(p) {
+    function queryParams_1(p) {
         return {
-            "category_id": $('#category_id').val(),
-            "is_approved": $('#is_approved').val(),
             limit: p.limit,
             sort: p.sort,
             order: p.order,
@@ -65,14 +60,4 @@
             search: p.search
         };
     }
-</script>
-<script>
-    $('#category_id').on('change', function() {
-        id = $('#category_id').val();
-        $('#products_table').bootstrapTable('refresh');
-    });
-    $('#is_approved').on('change', function() {
-        id = $('#is_approved').val();
-        $('#products_table').bootstrapTable('refresh');
-    });
 </script>

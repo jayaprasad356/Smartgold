@@ -221,7 +221,7 @@ $res = $db->getResult();
                                 </div>
                             </div>
 
-                            <div class="row">
+                            <!-- <div class="row">
                                 <div class="form-group col-md-4">
                                     <div class="form-group">
                                         <label for="">Latitude</label>
@@ -234,7 +234,7 @@ $res = $db->getResult();
                                         <input type="text" class="form-control" name="longitude" id="longitude" value="<?= $res[0]['longitude']; ?>">
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
 
 
                             <div class="row">
@@ -357,6 +357,7 @@ $res = $db->getResult();
                     $('#cat_ids').select2({
                         placeholder: "type in category name to search"
                     });
+                    alert("Profile Updated Successfully");
                     $('#submit_btn').html('Update');
                     location.reload(true);
                 }

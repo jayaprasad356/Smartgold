@@ -72,7 +72,7 @@ $res = $db->getResult();
                         </div>
                         <div class="form-group">
                             <label for="description">Fine Print Description :</label> <i class="text-danger asterik">*</i><?php echo isset($error['description']) ? $error['description'] : ''; ?>
-                            <textarea name="description" id="description" class="form-control" rows="8"></textarea>
+                            <textarea name="description" id="description" class="form-control" rows="8" required></textarea>
                         </div>
                         
                         <div class="row">
@@ -143,6 +143,7 @@ $res = $db->getResult();
                     success: function(result) {
                         $('#result').html(result);
                         $('#result').show().delay(6000).fadeOut();
+                        alert("Offer Added Successfully");
                         $('#submit_btn').html('Add');
                     
                         $('#add_offer_form')[0].reset();
