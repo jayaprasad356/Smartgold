@@ -48,7 +48,7 @@ if (isset($_GET['table']) && $_GET['table'] == 'offers') {
     $tempRow = array();
     foreach ($res as $row) {
         $operate = ' <a href="edit-offer.php?id=' . $row['id'] . '"><i class="fa fa-edit"></i></a>'; 
-        $operate .= '<a href="view-offer.php?id=' . $row['id'] . '" class="label label-primary" title="View">View Offer</a>';
+        $operate .= '<a href="view-product.php?id=' . $row['id'] . '" class="label label-primary" title="View">View</a>';
     
         if($row['status'] == 0){
             $status = "Deactive";
@@ -74,7 +74,7 @@ if (isset($_GET['table']) && $_GET['table'] == 'offers') {
 
         // $operate = '<a href="view-product-variants.php?id=' . $row['id'] . '" class="label label-success" title="View">View</a>';
         // $operate .= ' <a href="edit-product.php?id=' . $row['id'] . '" title="Edit"><i class="fa fa-edit"></i></a>';
-        $locked = '<a href="offers_lock.php?id=' . $row['id'] . '" class="label label-success" title="View">View</a>';
+        $locked = '<a href="offers_lock.php?id=' . $row['id'] . '" class="label label-success" title="Show Locked Customers">Show Locked Customers</a>';
 
         
         $tempRow['id'] = $row['id'];
@@ -109,7 +109,7 @@ if (isset($_GET['table']) && $_GET['table'] == 'orders') {
     $rows = array();
     $tempRow = array();
     foreach ($res as $row) {
-        $operate = '<a href="view-order.php?id=' . $row['id'] . '" class="label label-primary" title="View">View Order</a>';
+        $operate = '<a href="view-order.php?id=' . $row['id'] . '" class="label label-primary" title="View">View</a>';
     
         $dc  = $row['date_created'];
         $dc = explode(" ", $dc); 
@@ -217,9 +217,8 @@ if (isset($_GET['table']) && $_GET['table'] == 'products') {
     foreach ($res as $row) {
         $currency = "Rs.";
         $operate = ' <a href="edit-product.php?id=' . $row['id'] . '" title="Edit"><i class="fa fa-edit"></i></a>';
-        //$operate .= ' <a id="deleteproduct" class="btn btn-xs btn-danger" href="delete-product.php?id=' . $row['id'] . '" title="Delete"><i class="fa fa-trash-o"></i></a>&nbsp;';
-        
-
+        $operate .= '<a href="view-product.php?id=' . $row['id'] . '" class="label label-primary" title="View">View</a>';
+    
         $discounted_price = $currency . " " . $row['discounted_price'];
         if($row['discounted_price'] == $row['price']){
             $discounted_price = "No Discount";
