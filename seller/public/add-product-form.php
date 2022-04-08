@@ -14,7 +14,7 @@ $sql_query = "SELECT id, name FROM category";
 $db->sql($sql_query);
 
 $res = $db->getResult();
-if (isset($_POST['btnAdd'])) {
+if (isset($_POST['tnAdd'])) {
     
     $seller_id = $ID;
     $name = $db->escapeString($_POST['name']);
@@ -168,23 +168,15 @@ pointer-events:none;
 
                 <!-- /.box-header -->
                 <!-- form start -->
-                <form id='add_product_form' method="post" enctype="multipart/form-data">
-                    
+                <form id='add_product_form' action="public/db-operation.php" method="post" enctype="multipart/form-data">
+                    <input type="hidden" id="add_product" name="add_product" required="" value="1" aria-required="true">
+                    <input type="hidden" id="seller_id" name="seller_id" required="" value="<?php echo $ID ?>" aria-required="true">
                     <div class="box-body">
                         <div class="form-group">
                                 <label for="exampleInputEmail1">Product Name</label> <i class="text-danger asterik">*</i><?php echo isset($error['name']) ? $error['name'] : ''; ?>
                                 <input type="text" class="form-control" name="name" required>
                         </div>
                         <div class="row">
-                            <div class="col-md-6">
-                                <label for="serve_for">Status :</label>
-                                <select name="serve_for" class="form-control" required>
-                                    <option value="Available">Available</option>
-                                    <option value="Sold Out">Sold Out</option>
-                                    <option value="Not Available">Not Available</option>
-                                </select>
-
-                            </div>
                             <div class="col-md-6">
                                     <div class="form-group packate_div">
                                         <label for="qty">Stock:</label> <i class="text-danger asterik">*</i>
@@ -225,7 +217,7 @@ pointer-events:none;
                                 <div class="col-md-6">
                                     <div class="form-group packate_div">
                                         <label for="weight">Weight (in grams)</label><i class="text-danger asterik">*</i>
-                                        <input type="number" step="any" min='0' class="form-control" name="weight" id="weight" />
+                                        <input type="number" step="any" min='0' class="form-control" name="weight" id="weight" required />
                                     </div>
                                 </div>
                         </div>
@@ -248,7 +240,7 @@ pointer-events:none;
                         
                         <div class="form-group">
                             <label for="image">Main Image : <i class="text-danger asterik">*</i>&nbsp;&nbsp;&nbsp;*Please choose square image of larger than 350px*350px & smaller than 550px*550px.</label><?php echo isset($error['image']) ? $error['image'] : ''; ?>
-                            <input type="file" name="image" id="image" required>
+                            <input type="file" name="image" accept="image/png,  image/jpeg" id="image" required>
                         </div>
                         
                         <div class="form-group">
@@ -273,10 +265,15 @@ pointer-events:none;
 
                     </div>
                     <!-- /.box-body -->
-                    <div class="box-footer">
+                    <!-- <div class="box-footer">
                         <input type="submit" class="btn-primary btn" value="Add" name="btnAdd" />&nbsp;
                         <input type="reset" class="btn-danger btn" value="Clear" id="btnClear" />
-                        <!--<div  id="res"></div>-->
+                       <div  id="res"></div>
+                    </div> -->
+                    <div class="box-footer">
+                            <button type="submit" class="btn btn-primary" id="submit_btn" name="btnAdd">Add</button>
+                            <input type="reset" class="btn-warning btn" value="Clear" />
+                            <div id="result" style="display: none;"></div>
                     </div>
                 </form>
             </div>
@@ -286,35 +283,52 @@ pointer-events:none;
 </section>
 <div class="separator"> </div>
 
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>
 
+<script>
+    $(document).on('input', '.discounted_percentage', function(){
+        let dp = $('#discounted_percentage').val();
+        let price = $('#price').val(); 
+        if(price != '' && dp != ''){
+            var sale;
+            sale = calculateSale(price, dp);
+            $('#discounted_price').val(sale);
 
+        }
+        else{
+            $('#discounted_price').val(0);
+
+        }
+
+    });
+    $(document).on('input', '.price', function(){
+        let dp = $('#discounted_percentage').val();
+        let price = $('#price').val(); 
+        if(price != '' && dp != ''){
+            var sale;
+            sale = calculateSale(price, dp);
+            $('#discounted_price').val(sale);
+
+        }
+        else{
+            $('#discounted_price').val(0);
+
+        }
+    });
+    const calculateSale = (listPrice, discount) => {
+        listPrice = parseFloat(listPrice);
+        discount  = parseFloat(discount);
+        return (listPrice - ( listPrice * discount / 100 )).toFixed(2); // Sale price
+    }
+</script>
 
 <script>
     $('#add_product_form').validate({
-
-        ignore: [],
-        debug: false,
         rules: {
             name: "required",
-            measurement: "required",
             price: "required",
-            quantity: "required",
-            image: "required",
-            weight: "required",
-            gender: "required",
-            category_id: "required",
-            stock: "required",
-            discounted_price: {
-                lessThanEqual: "#price"
-            },
-            pincode_ids_inc: {
-                empty: {
-                    depends: function(element) {
-                        return $("#pincode_ids_exc").is(":blank");
-                    }
-                }
-            }
+            quantity: "required"
 
         }
     });
@@ -322,5 +336,36 @@ pointer-events:none;
         for (instance in CKEDITOR.instances) {
             CKEDITOR.instances[instance].setData('');
         }
+    });
+</script>
+<script>
+        $('#add_product_form').on('submit', function(e) {
+        e.preventDefault();
+        
+        var formData = new FormData(this);
+        if ($("#add_product_form").validate().form()) {
+            $.ajax({
+                    type: 'POST',
+                    url: $(this).attr('action'),
+                    data: formData,
+                    beforeSend: function() {
+                        $('#submit_btn').html('Please wait..');
+                    },
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    success: function(result) {
+                        $('#result').html(result);
+                        $('#result').show().delay(6000).fadeOut();
+                        alert("Product Added Successfully");
+                        $('#submit_btn').html('Add');
+                    
+                        $('#add_product_form')[0].reset();
+                        document.getElementById("resultvalid").innerHTML = '';
+                    }
+                });
+            }
+
+
     });
 </script>

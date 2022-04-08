@@ -218,7 +218,7 @@ $rescat = $db->getResult();
                         
                         <div class="form-group">
                             <label for="image">Main Image : <i class="text-danger asterik">*</i>&nbsp;&nbsp;&nbsp;*Please choose square image of larger than 350px*350px & smaller than 550px*550px.</label><?php echo isset($error['image']) ? $error['image'] : ''; ?>
-                            <input type="file" name="image" id="image">
+                            <input type="file" name="image" accept="image/png,  image/jpeg" id="image">
                             <img src="<?php echo DOMAIN_URL.$res[0]['image']; ?>" width="210" height="160" />
                         </div>
                         

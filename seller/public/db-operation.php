@@ -301,4 +301,72 @@ if (isset($_POST['add_offer'])  && !empty($_POST['add_offer'])) {
     }
    
 }
+if (isset($_POST['add_product'])  && !empty($_POST['add_product'])) {
+    $seller_id = $db->escapeString($_POST['seller_id']);
+    $name = $db->escapeString($_POST['name']);
+    $status = $db->escapeString($_POST['status']);
+    $stock = $db->escapeString($_POST['stock']);
+    $price= $db->escapeString($_POST['price']);
+    $gender= $db->escapeString($_POST['gender']);
+    $weight= $db->escapeString($_POST['weight']);
+    $discounted_price = (isset($_POST['discounted_price']) && $_POST['discounted_price'] != "") ? $db->escapeString($_POST['discounted_price']) : "";
+    $category_id = $db->escapeString($_POST['category_id']);
+    // get image info
+    $image = $db->escapeString($_FILES['image']['name']);
+    $image_error = $db->escapeString($_FILES['image']['error']);
+    $image_type = $db->escapeString($_FILES['image']['type']);
+
+    $description = $db->escapeString($_POST['description']);
+    if($discounted_price == '0' || $discounted_price == ''){
+        $discounted_price = $price;
+    }
+
+    $is_approved = 1;
+
+    $error = array();
+
+    if (empty($name)) {
+        echo " <span class='label label-danger'>Required!</span>";
+    }
+    if (empty($category_id)) {
+        echo " <span class='label label-danger'>Required!</span>";
+    }
+    if ($image_error > 0) {
+        echo " <span class='label label-danger'>Not uploaded!</span>";
+    }
+    if (!empty($name) && !empty($category_id) && !empty($weight) && !empty($gender)   && empty($error['image'])) {
+
+        // create random image file name
+        $string = '0123456789';
+        $file = preg_replace("/\s+/", "_", $_FILES['image']['name']);
+        $extension = pathinfo($_FILES["image"]["name"])['extension'];
+
+        $image = $function->get_random_string($string, 4) . "-" . date("Y-m-d") . "." . $extension;
+
+        // upload new image
+        $upload = move_uploaded_file($_FILES['image']['tmp_name'], '../../upload/images/' . $image);
+
+        $upload_image = 'upload/images/' . $image;
+
+        // insert new data to product table
+        $sql = "INSERT INTO products (name,seller_id,category_id,image,description,is_approved,status,price,discounted_price,stock,weight,gender) VALUES('$name','$seller_id','$category_id','$upload_image','$description','$is_approved','$status',$price,$discounted_price,$stock,$weight,'$gender')";
+        $db->sql($sql);
+        $product_result = $db->getResult();
+
+        if (!empty($product_result)) {
+            $product_result = 0;
+        } else {
+            $product_result = 1;
+        }
+
+        
+        
+        if ($product_result == 1 ) {
+            echo '<label class="alert alert-success">Product Added Successfully!</label>';
+        } else {
+            echo " <span class='label label-danger'>Failed</span>";
+        }
+    }
+
+}
 ?>
