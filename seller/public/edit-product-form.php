@@ -18,7 +18,7 @@ if (isset($_POST['btnUpdate'])) {
     $status = $db->escapeString($_POST['status']);
     $stock = $db->escapeString($_POST['stock']);
     $price= $db->escapeString($_POST['price']);
-    $discounted_price = $db->escapeString($_POST['discounted_price']);
+    $discounted_price = (isset($_POST['discounted_price']) && $_POST['discounted_price'] != "") ? $db->escapeString($_POST['discounted_price']) : "";
     $category_id = $db->escapeString($_POST['category_id']);
     $gender= $db->escapeString($_POST['gender']);
     $weight= $db->escapeString($_POST['weight']);
@@ -29,6 +29,9 @@ if (isset($_POST['btnUpdate'])) {
     $image_type = $db->escapeString($_FILES['image']['type']);
 
     $description = $db->escapeString($_POST['description']);
+    if($discounted_price == '0' || $discounted_price == ''){
+        $discounted_price = $price;
+    }
 
     $is_approved = (isset($_POST['is_approved']) && $_POST['is_approved'] != '') ? $db->escapeString($_POST['is_approved']) : 1;
 
@@ -108,6 +111,11 @@ $db->sql($sql_query);
 
 $rescat = $db->getResult();
 ?>
+<style>
+    .disable{
+pointer-events:none;
+}
+</style>
 <section class="content-header">
     <h1>Edit Product</h1>
     <small><?php echo isset($error['update_data']) ? $error['update_data'] : ''; ?></small>
@@ -161,20 +169,24 @@ $rescat = $db->getResult();
 
                         </div>
                     
-                        
-                        
-                        
-                        
+        
                         <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <div class="form-group packate_div">
-                                        <label for="price">Price (₹):</label> <i class="text-danger asterik">*</i><input type="number" step="any" min='0' class="form-control" name="price" id="price" value="<?php echo $res[0]['price'] ?>" required />
+                                        <label for="price">Price (₹):</label> <i class="text-danger asterik">*</i>
+                                        <input type="number" step="any" min='0' class="form-control price" value="<?php echo $res[0]['price'] ?>" name="price" id="price" required />
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-4">
+                                    <div class="form-group packate_div">
+                                        <label for="discounted_percentage">Discount In (%):</label>
+                                        <input type="number" step="any" min='0' class="form-control discounted_percentage" name="discounted_percentage"  id="discounted_percentage" />
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
                                     <div class="form-group packate_div">
                                         <label for="discounted_price">Discounted Price(₹):</label>
-                                        <input type="number" step="any" min='0' class="form-control" name="discounted_price" value="<?php echo $res[0]['discounted_price'] ?>" id="discounted_price" />
+                                        <input type="number" step="any" min='0' class="form-control disable" name="discounted_price" value="<?php echo $res[0]['discounted_price'] ?>" value="0" id="discounted_price" />
                                     </div>
                                 </div>
                         </div>
@@ -252,6 +264,43 @@ $rescat = $db->getResult();
     </div>
 </section>
 <div class="separator"> </div>
+
+<script>
+    $(document).on('input', '.discounted_percentage', function(){
+        let dp = $('#discounted_percentage').val();
+        let price = $('#price').val(); 
+        if(price != '' && dp != ''){
+            var sale;
+            sale = calculateSale(price, dp);
+            $('#discounted_price').val(sale);
+
+        }
+        else{
+            $('#discounted_price').val(0);
+
+        }
+
+    });
+    $(document).on('input', '.price', function(){
+        let dp = $('#discounted_percentage').val();
+        let price = $('#price').val(); 
+        if(price != '' && dp != ''){
+            var sale;
+            sale = calculateSale(price, dp);
+            $('#discounted_price').val(sale);
+
+        }
+        else{
+            $('#discounted_price').val(0);
+
+        }
+    });
+    const calculateSale = (listPrice, discount) => {
+        listPrice = parseFloat(listPrice);
+        discount  = parseFloat(discount);
+        return (listPrice - ( listPrice * discount / 100 )).toFixed(2); // Sale price
+    }
+</script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>
 
