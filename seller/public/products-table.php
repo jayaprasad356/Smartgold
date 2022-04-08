@@ -17,6 +17,29 @@
                 <!-- <div class="col-xs-6"> -->
                 
                 <div class="box-header">
+                    <div class="form-group col-md-3">
+                            <h4 class="box-title">Filter by Products Category</h4>
+                            <form method="post">
+                                <select id="category_id" name="category_id" placeholder="Select Category" required class="form-control col-xs-3" style="width: 300px;">
+                                    <?php
+                                    $Query = "select name, id from category";
+                                    $db->sql($Query);
+                                    $result = $db->getResult();
+                                    if ($result) {
+                                    ?>
+                                        <option value="">All Products</option>
+                                        <?php foreach ($result as $row) {
+                                            
+                                        ?>
+                                        <option value='<?= $row['id'] ?>'><?= $row['name'] ?></option>
+                                                
+                                    <?php 
+                                        }
+                                    }
+                                    ?>
+                                </select>
+                            </form>
+                        </div>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body table-responsive">
@@ -51,8 +74,13 @@
 </section>
 
 <script>
+    $('#category_id').on('change', function() {
+        id = $('#category_id').val();
+        $('#products_table').bootstrapTable('refresh');
+    });
     function queryParams_1(p) {
         return {
+            "category_id": $('#category_id').val(),
             limit: p.limit,
             sort: p.sort,
             order: p.order,

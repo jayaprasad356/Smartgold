@@ -169,8 +169,8 @@ if (isset($_GET['table']) && $_GET['table'] == 'products') {
     $where = '';
     $sort = 'id';
     $order = 'DESC';
-    if (isset($_GET['offset']))
-    $offset = $db->escapeString($_GET['offset']);
+    // if (isset($_GET['offset']))
+    //     $offset = $db->escapeString($_GET['offset']);
     if (isset($_GET['limit']))
         $limit = $db->escapeString($_GET['limit']);
     if (isset($_GET['sort']))
@@ -180,7 +180,7 @@ if (isset($_GET['table']) && $_GET['table'] == 'products') {
 
     if (isset($_GET['search']) && !empty($_GET['search'])) {
         $search = $db->escapeString($_GET['search']);
-        $where .= "WHERE name like '%" . $search . "%' OR gender like '%" . $search . "%' OR price like '%" . $search . "%' AND seller_id = $id";
+        $where .= "Where name like '%" . $search . "%' OR gender like '%" . $search . "%' OR price like '%" . $search . "%' AND seller_id = $id";
     }
     else{
         $where .= "WHERE seller_id = $id";
@@ -194,6 +194,10 @@ if (isset($_GET['table']) && $_GET['table'] == 'products') {
         $order = $db->escapeString($_GET['order']);
 
     }
+    if (isset($_GET['category_id']) && $_GET['category_id'] != '') {
+        $category_id = $db->escapeString($_GET['category_id']);
+        $where .= ' AND category_id =' . $category_id;
+    }
     $sql = "SELECT COUNT(`id`) as total FROM `products` " . $where;
     $db->sql($sql);
     $res = $db->getResult();
@@ -201,10 +205,9 @@ if (isset($_GET['table']) && $_GET['table'] == 'products') {
         $total = $row['total'];
 
 
-    //$where .= "AND ''";
-    //$sql = "SELECT *,products.id AS id,products.name AS name,category.name AS category_name FROM `products`,`category` " . $where . " ORDER BY " . $sort . " " . $order . " LIMIT " . $offset . ", " . $limit;;
+    //$sql = "SELECT * FROM `products` " . $where . " ORDER BY " . $sort . " " . $order . " LIMIT " . $offset . ", " . $limit;
+    $sql = "SELECT p.*,(SELECT name FROM category c WHERE c.id=p.category_id) as category_name FROM `products` p " . $where . " ORDER BY " . $sort . " " . $order . " LIMIT " . $offset . ", " . $limit;
     
-    $sql = "SELECT * FROM `products` " . $where . " ORDER BY " . $sort . " " . $order . " LIMIT " . $offset . ", " . $limit;;
     $db->sql($sql);
     $res = $db->getResult();
     
@@ -230,10 +233,7 @@ if (isset($_GET['table']) && $_GET['table'] == 'products') {
         $tempRow['seller_name'] = (!empty($row['seller_name'])) ? $row['seller_name'] : "";
         $tempRow['name'] = $row['name'];
         $catid = $row['category_id'];
-        $sql = "SELECT * FROM `category` WHERE id = $catid ";
-        $db->sql($sql);
-        $cat = $db->getResult();
-        $tempRow['category_name'] = $cat[0]['name'];
+        $tempRow['category_name'] = $row['category_name'];
         
         $tempRow['price'] = $currency . " " . $row['price'];
         
@@ -274,10 +274,11 @@ if (isset($_GET['table']) && $_GET['table'] == 'subcategory') {
         $where = " where (s.`id` like '%" . $search . "%' OR s.`name` like '%" . $search . "%')";
     }
 
-    if (isset($_GET['category_id']) && $_GET['category_id'] != '') {
-        $category_id = $db->escapeString($fn->xss_clean($_GET['category_id']));
-        $where .= empty($where) ? " WHERE s.category_id = $category_id " : "AND s.category_id = $category_id ";
-    }
+
+    // if (isset($_GET['category_id']) && $_GET['category_id'] != '') {
+    //     $category_id = $db->escapeString($fn->xss_clean($_GET['category_id']));
+    //     $where .= empty($where) ? " WHERE s.category_id = $category_id " : "AND s.category_id = $category_id ";
+    // }
 
     $sql1 = "SELECT categories FROM seller WHERE id = " . $id;
     $db->sql($sql1);
