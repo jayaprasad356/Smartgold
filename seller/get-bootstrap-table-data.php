@@ -119,7 +119,7 @@ if (isset($_GET['table']) && $_GET['table'] == 'orders') {
     $offset = 0;
     $limit = 10;
     $where = '';
-    $sort = 'id';
+    $sort = 'orders.id';
     $order = 'DESC';
     if (isset($_GET['limit']))
         $limit = $db->escapeString($_GET['limit']);
@@ -130,10 +130,11 @@ if (isset($_GET['table']) && $_GET['table'] == 'orders') {
 
     if (isset($_GET['search']) && !empty($_GET['search'])) {
         $search = $db->escapeString($_GET['search']);
-        $where .= "Where gram_price like '%" . $search . "%' OR wastage like '%" . $search . "%' OR max_locked like '%" . $search . "%' OR valid_date like '%" . $search . "%' AND seller_id = $id";
+        $where .= "WHERE orders.product_id = products.id AND products.name like '%" . $search ."%' OR orders.quantity like '%" . $search . "%' AND orders.seller_id = $id";
+        //$where .= "Where gram_price like '%" . $search . "%' OR wastage like '%" . $search . "%' OR max_locked like '%" . $search . "%' OR valid_date like '%" . $search . "%' AND seller_id = $id";
     }
     else{
-        $where .= "Where seller_id = $id";
+        $where .= "WHERE orders.product_id = products.id AND orders.seller_id = '$id'";
     }
     if (isset($_GET['sort'])){
         $sort = $db->escapeString($_GET['sort']);
@@ -141,12 +142,14 @@ if (isset($_GET['table']) && $_GET['table'] == 'orders') {
     if (isset($_GET['order'])){
         $order = $db->escapeString($_GET['order']);
     }
-    $sql = "SELECT COUNT(`id`) as total FROM `orders` " . $where;
+    $sql = "SELECT COUNT(`id`) as total FROM `orders` WHERE seller_id = '$id' ";
     $db->sql($sql);
     $res = $db->getResult();
     foreach ($res as $row)
         $total = $row['total'];
-    $sql = "SELECT *,orders.id AS id,orders.status AS status FROM orders LEFT JOIN products ON orders.product_id = products.id WHERE products.seller_id = '" . $id . "'";
+    //$sql = "SELECT *,orders.id AS id,orders.status AS status FROM orders LEFT JOIN products ON orders.product_id = products.id WHERE products.seller_id = '" . $id . "'";
+    $sql = "SELECT * FROM `orders`,`products` " . $where . " ORDER BY " . $sort . " " . $order . " LIMIT " . $offset . ", " . $limit;
+    
     $db->sql($sql);
     $res = $db->getResult();
 
@@ -165,8 +168,11 @@ if (isset($_GET['table']) && $_GET['table'] == 'orders') {
         $tempRow['name'] = $row['name'];
         $tempRow['quantity'] = $row['quantity'];
         $tempRow['delivery_charges'] = $row['delivery_charges'];
-        $tempRow['buy_method'] = $row['buy_method'];
-        $tempRow['status'] = $row['status'];
+        $tempRow['status'] = ($row['status'] == 1)? "<label class='label label-success'>Active</label>": (($row['status'] == 0)? "<label class='label label-danger'>Deactive</label>": "<label class='label label-warning'>Deactive</label>");
+        $tempRow['buy_method'] = ($row['buy_method'] == 1)? "<label class='label label-primary'>Pick Up at Store</label>": (($row['buy_method'] == 2)? "<label class='label label-primary'>Delivery at Home</label>": "<label class='label label-primary'>Delivery at Home</label>");
+        
+        // $tempRow['buy_method'] = $row['buy_method'];
+        // $tempRow['status'] = $row['status'];
         $tempRow['update'] = $update;
         $tempRow['operate'] = $operate;
         $rows[] = $tempRow;
