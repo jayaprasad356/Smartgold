@@ -23,13 +23,13 @@
                             <tr>
                                 <th data-field="operate" data-events="actionEvents">Action</th>
                                 <th data-field="id" data-sortable="true">ID</th>
-                                <th data-field="date_created" data-sortable="true">Order Date</th>
+                                <th data-field="date_created" >Order Date</th>
                                 <th data-field="product_id" data-sortable="true">Product ID</th>
                                 <th data-field="name" data-sortable="true">Name</th>
                                 <th data-field="quantity" data-sortable="true">Quantity</th>
                                 <th data-field="delivery_charges" data-sortable="true">Delivery Charges</th>
                                 <th data-field="buy_method" data-sortable="true">Buy Method</th>
-                                <th data-field="status" data-sortable="true">Status</th>
+                                <th data-field="status" >Status</th>
                                 <th data-field="update">Update</th>
                             </tr>
                         </thead>
