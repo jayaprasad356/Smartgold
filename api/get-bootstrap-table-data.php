@@ -58,7 +58,7 @@ if (isset($_GET['table']) && $_GET['table'] == 'customers')
 
     if (isset($_GET['search']) && !empty($_GET['search'])) {
         $search = $db->escapeString($_GET['search']);
-        $where .= "WHERE name like '%" . $search . "%' ";
+        $where .= "WHERE name like '%" . $search . "%' OR id like '%" . $search . "%' OR email like '%" . $search . "%' OR mobile like '%" . $search . "%' ";
     }
     if (isset($_GET['sort'])){
         $sort = $db->escapeString($_GET['sort']);
@@ -103,13 +103,23 @@ if (isset($_GET['table']) && $_GET['table'] == 'customers')
 }
 if (isset($_GET['table']) && $_GET['table'] == 'seller') {
 
-    $where = '';
     $offset = 0;
+    $limit = 10;
+    $where = '';
     $sort = 'id';
     $order = 'DESC';
+    if (isset($_GET['offset']))
+        $offset = $db->escapeString($_GET['offset']);
+    if (isset($_GET['limit']))
+        $limit = $db->escapeString($_GET['limit']);
+    if (isset($_GET['sort']))
+        $sort = $db->escapeString($_GET['sort']);
+    if (isset($_GET['order']))
+        $order = $db->escapeString($_GET['order']);
+
     if (isset($_GET['search']) && !empty($_GET['search'])) {
         $search = $db->escapeString($_GET['search']);
-        $where .= "WHERE name like '%" . $search . "%' ";
+        $where .= "WHERE name like '%" . $search . "%' OR id like '%" . $search . "%' OR email like '%" . $search . "%' OR mobile like '%" . $search . "%' OR store_name like '%" . $search . "%' OR store_url like '%" . $search . "%' OR store_description like '%" . $search . "%' OR street like '%" . $search . "%' OR pincode like '%" . $search . "%' OR city like '%" . $search . "%' OR state like '%" . $search . "%'";
     }
     if (isset($_GET['sort'])){
         $sort = $db->escapeString($_GET['sort']);
@@ -119,14 +129,19 @@ if (isset($_GET['table']) && $_GET['table'] == 'seller') {
         $order = $db->escapeString($_GET['order']);
 
     }
-        
-    
-   
+    $sql = "SELECT COUNT(`id`) as total FROM `seller` " . $where;
+    $db->sql($sql);
+    $res = $db->getResult();
+    foreach ($res as $row)
+        $total = $row['total'];
+
+
     $sql = "SELECT * FROM seller $where ORDER BY $sort $order";
     $db->sql($sql);
     $res = $db->getResult();
     
     $bulkData = array();
+    $bulkData['total'] = $total;
     
     $rows = array();
     $tempRow = array();
@@ -180,12 +195,22 @@ if (isset($_GET['table']) && $_GET['table'] == 'seller') {
 if (isset($_GET['table']) && $_GET['table'] == 'category') {
 
     $offset = 0;
+    $limit = 10;
+    $where = '';
     $sort = 'id';
     $order = 'DESC';
-    $where = '';
+    if (isset($_GET['offset']))
+        $offset = $db->escapeString($_GET['offset']);
+    if (isset($_GET['limit']))
+        $limit = $db->escapeString($_GET['limit']);
+    if (isset($_GET['sort']))
+        $sort = $db->escapeString($_GET['sort']);
+    if (isset($_GET['order']))
+        $order = $db->escapeString($_GET['order']);
+
     if (isset($_GET['search']) && !empty($_GET['search'])) {
         $search = $db->escapeString($_GET['search']);
-        $where .= "WHERE name like '%" . $search . "%' ";
+        $where .= "WHERE name like '%" . $search . "%' OR id like '%" . $search . "%'";
     }
     if (isset($_GET['sort'])){
         $sort = $db->escapeString($_GET['sort']);
@@ -195,13 +220,18 @@ if (isset($_GET['table']) && $_GET['table'] == 'category') {
         $order = $db->escapeString($_GET['order']);
 
     }
-    
-
-
-    $sql = "SELECT * FROM `category`$where ORDER BY $sort $order";
+    $sql = "SELECT COUNT(`id`) as total FROM `category` ";
+    $db->sql($sql);
+    $res = $db->getResult();
+    foreach ($res as $row)
+        $total = $row['total'];
+   
+    $sql = "SELECT * FROM category " . $where . " ORDER BY " . $sort . " " . $order . " LIMIT " . $offset . ", " . $limit;
     $db->sql($sql);
     $res = $db->getResult();
 
+    $bulkData = array();
+    $bulkData['total'] = $total;
     
     $rows = array();
     $tempRow = array();

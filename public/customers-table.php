@@ -40,10 +40,6 @@
         <!-- /.row (main row) -->
     </section>
     <script>
-    $('#filter_user').on('change', function() {
-        $('#user_table').bootstrapTable('refresh');
-
-    });
 
     function queryParams_1(p) {
         return {

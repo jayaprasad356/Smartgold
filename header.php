@@ -213,7 +213,7 @@ $db->sql("SET NAMES 'utf8'");
                     <ul class="treeview-menu">
                         <!-- <li><a href="sellers-nickname.php"><i class="fa fa-sliders"></i>Seller Nick Name</a></li> -->
                         <li><a href="add-price-duration.php"><i class="fa fa-lock"></i>Locking</a></li>
-                        <!-- <li><a href="delivery_settings.php"><i class="fa fa-sliders"></i>Delivery Charges/Days</a></li> -->
+                        <li><a href="delivery_settings.php"><i class="fa fa-sliders"></i>Delivery Charges</a></li>
                     </ul>
                 </li>
                 
