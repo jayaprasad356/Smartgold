@@ -88,7 +88,7 @@ $resbudget = $db->getResult();
                         </div>
                         <div class="row">
                             <div class="col-md-6">
-                                <label for="status">Status :</label>
+                                <label for="status">Status :</label><i class="text-danger asterik">*</i>
                                 <select name="status" class="form-control" required>
                                     <option value="1"<?php if ($res[0]['status'] == "1") {
                                                                                     echo "selected";

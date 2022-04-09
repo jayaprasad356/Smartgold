@@ -77,7 +77,7 @@ $res = $db->getResult();
                         
                         <div class="row">
                             <div class="col-md-6">
-                                <label for="serve_for">Status :</label>
+                                <label for="serve_for">Status :</label><i class="text-danger asterik">*</i>
                                 <select name="serve_for" class="form-control" required>
                                     <option value="1">Active</option>
                                     <option value="0">Deactive</option>

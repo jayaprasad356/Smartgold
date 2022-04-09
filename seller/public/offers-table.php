@@ -20,21 +20,20 @@
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body table-responsive">
-                    <table id='products_table' class="table table-hover" data-toggle="table" data-url="get-bootstrap-table-data.php?table=offers" data-page-list="[5, 10, 20, 50, 100, 200]"  data-side-pagination="server" data-pagination="true"  data-query-params="queryParams"   >
+                    <table id='products_table' class="table table-hover" data-toggle="table" data-search="true" data-url="get-bootstrap-table-data.php?table=offers" data-show-refresh="true"  data-side-pagination="server" data-pagination="true" data-query-params="queryParams_1"  data-trim-on-search="false" data-filter-control="true" data-query-params="queryParams" data-sort-name="id" data-sort-order="desc"  data-export-types='["txt","excel"]'   >
                         <thead>
                             <tr>
                                 <th data-field="operate" data-events="actionEvents">Action</th>
                                 <th data-field="id" data-sortable="true">ID</th>
                                 <th data-field="valid_date" data-sortable="true">Offer Date</th>
-                                <th data-field="seller_id" data-sortable="true">Seller ID</th>
                                 <th data-field="gram_price" data-sortable="true">Price Per Gram</th>
                                 <th data-field="wastage" data-sortable="true">Wastage</th>
                                 <th data-field="max_locked" data-sortable="true">Max Locked</th>
-                                <th data-field="status" data-sortable="true">Status</th>
-                                <th data-field="budget_range" data-sortable="true">Budget Range</th>
+                                
+                                <th data-field="budget_range" >Budget Range</th>
                                 
                                 <th data-field="locked" data-events="actionEvents">Locked Customers</th>
-                                <!-- <th data-field="operate" data-events="actionEvents">Action</th> -->
+                                <th data-field="status" >Status</th>
                             </tr>
                         </thead>
                     </table>
@@ -49,10 +48,8 @@
 </section>
 
 <script>
-    function queryParams(p) {
+    function queryParams_1(p) {
         return {
-            "category_id": $('#category_id').val(),
-            "is_approved": $('#is_approved').val(),
             limit: p.limit,
             sort: p.sort,
             order: p.order,
@@ -60,14 +57,4 @@
             search: p.search
         };
     }
-</script>
-<script>
-    $('#category_id').on('change', function() {
-        id = $('#category_id').val();
-        $('#products_table').bootstrapTable('refresh');
-    });
-    $('#is_approved').on('change', function() {
-        id = $('#is_approved').val();
-        $('#products_table').bootstrapTable('refresh');
-    });
 </script>

@@ -37,25 +37,52 @@ $db->connect();
 
 //data of 'OFFERS' table goes here
 if (isset($_GET['table']) && $_GET['table'] == 'offers') {
-        
+    $offset = 0;
+    $limit = 10;
+    $where = '';
+    $sort = 'id';
+    $order = 'DESC';
+    if (isset($_GET['limit']))
+        $limit = $db->escapeString($_GET['limit']);
+    if (isset($_GET['sort']))
+        $sort = $db->escapeString($_GET['sort']);
+    if (isset($_GET['order']))
+        $order = $db->escapeString($_GET['order']);
 
+    if (isset($_GET['search']) && !empty($_GET['search'])) {
+        $search = $db->escapeString($_GET['search']);
+        $where .= "Where gram_price like '%" . $search . "%' OR wastage like '%" . $search . "%' OR max_locked like '%" . $search . "%' OR valid_date like '%" . $search . "%' AND seller_id = $id";
+    }
+    else{
+        $where .= "Where seller_id = $id";
 
-    $sql = "SELECT * FROM `offers` WHERE seller_id = '" . $id . "' ";
+    }
+    if (isset($_GET['sort'])){
+        $sort = $db->escapeString($_GET['sort']);
+
+    }
+    if (isset($_GET['order'])){
+        $order = $db->escapeString($_GET['order']);
+
+    }
+
+    $sql = "SELECT COUNT(`id`) as total FROM `offers` " . $where;
     $db->sql($sql);
     $res = $db->getResult();
-    
+    foreach ($res as $row)
+        $total = $row['total'];
+
+    $sql = "SELECT * FROM `offers` " . $where . " ORDER BY " . $sort . " " . $order . " LIMIT " . $offset . ", " . $limit;
+    $db->sql($sql);
+    $res = $db->getResult();
+    $bulkData = array();
+    $bulkData['total'] = $total;
     $rows = array();
     $tempRow = array();
     foreach ($res as $row) {
         $operate = ' <a href="edit-offer.php?id=' . $row['id'] . '"><i class="fa fa-edit"></i></a>'; 
         $operate .= '<a href="view-product.php?id=' . $row['id'] . '" class="label label-primary" title="View">View</a>';
-    
-        if($row['status'] == 0){
-            $status = "Deactive";
-        }
-        else{
-            $status = "active";
-        }
+        $tempRow['status'] = ($row['status'] == 1)? "<label class='label label-success'>Active</label>": (($row['status'] == 0)? "<label class='label label-danger'>Deactive</label>": "<label class='label label-warning'>Deactive</label>");
         $currency = "Rs.";
         if($row['budget_id'] == 1){
             $budget = "upto 1 lakh";
@@ -70,22 +97,12 @@ if (isset($_GET['table']) && $_GET['table'] == 'offers') {
             $budget = "above 10 lakhs";
         }
         
-        
-
-        // $operate = '<a href="view-product-variants.php?id=' . $row['id'] . '" class="label label-success" title="View">View</a>';
-        // $operate .= ' <a href="edit-product.php?id=' . $row['id'] . '" title="Edit"><i class="fa fa-edit"></i></a>';
         $locked = '<a href="offers_lock.php?id=' . $row['id'] . '" class="label label-success" title="Show Locked Customers">Show Locked Customers</a>';
-
-        
         $tempRow['id'] = $row['id'];
         $tempRow['seller_id'] = $row['seller_id'];
-        
-        //$tempRow['seller_id'] = (!empty($row['seller_id'])) ? $row['seller_id'] : "";
-        //$tempRow['budget_id'] = $row['budget_id'];
         $tempRow['gram_price'] = $currency . " " . $row['gram_price'];
-        $tempRow['wastage'] = $row['wastage'];
+        $tempRow['wastage'] = $row['wastage'] . ' grams';
         $tempRow['max_locked'] = $row['max_locked'];
-        $tempRow['status'] = $status;
         $tempRow['valid_date'] = $row['valid_date'];
         $tempRow['budget_range'] = $budget;
 
@@ -99,21 +116,48 @@ if (isset($_GET['table']) && $_GET['table'] == 'offers') {
 }
 //data of 'ORDERS' table goes here
 if (isset($_GET['table']) && $_GET['table'] == 'orders') {
+    $offset = 0;
+    $limit = 10;
+    $where = '';
+    $sort = 'id';
+    $order = 'DESC';
+    if (isset($_GET['limit']))
+        $limit = $db->escapeString($_GET['limit']);
+    if (isset($_GET['sort']))
+        $sort = $db->escapeString($_GET['sort']);
+    if (isset($_GET['order']))
+        $order = $db->escapeString($_GET['order']);
 
-
-    
+    if (isset($_GET['search']) && !empty($_GET['search'])) {
+        $search = $db->escapeString($_GET['search']);
+        $where .= "Where gram_price like '%" . $search . "%' OR wastage like '%" . $search . "%' OR max_locked like '%" . $search . "%' OR valid_date like '%" . $search . "%' AND seller_id = $id";
+    }
+    else{
+        $where .= "Where seller_id = $id";
+    }
+    if (isset($_GET['sort'])){
+        $sort = $db->escapeString($_GET['sort']);
+    }
+    if (isset($_GET['order'])){
+        $order = $db->escapeString($_GET['order']);
+    }
+    $sql = "SELECT COUNT(`id`) as total FROM `orders` " . $where;
+    $db->sql($sql);
+    $res = $db->getResult();
+    foreach ($res as $row)
+        $total = $row['total'];
     $sql = "SELECT *,orders.id AS id,orders.status AS status FROM orders LEFT JOIN products ON orders.product_id = products.id WHERE products.seller_id = '" . $id . "'";
     $db->sql($sql);
     $res = $db->getResult();
-    
+
+    $bulkData = array();
+    $bulkData['total'] = $total;
     $rows = array();
     $tempRow = array();
     foreach ($res as $row) {
         $operate = '<a href="view-order.php?id=' . $row['id'] . '" class="label label-primary" title="View">View</a>';
-    
         $dc  = $row['date_created'];
         $dc = explode(" ", $dc); 
-        
         $update = '<a href="updateorders.php?id=' . $row['id'] . '" class="label label-success" title="Update">Update Orders</a>';
         $tempRow['id'] = $row['id'];
         $tempRow['date_created'] = $dc[0];
@@ -169,8 +213,6 @@ if (isset($_GET['table']) && $_GET['table'] == 'products') {
     $where = '';
     $sort = 'id';
     $order = 'DESC';
-    // if (isset($_GET['offset']))
-    //     $offset = $db->escapeString($_GET['offset']);
     if (isset($_GET['limit']))
         $limit = $db->escapeString($_GET['limit']);
     if (isset($_GET['sort']))
@@ -180,11 +222,10 @@ if (isset($_GET['table']) && $_GET['table'] == 'products') {
 
     if (isset($_GET['search']) && !empty($_GET['search'])) {
         $search = $db->escapeString($_GET['search']);
-        $where .= "Where name like '%" . $search . "%' OR gender like '%" . $search . "%' OR price like '%" . $search . "%' AND seller_id = $id";
+        $where .= "Where name like '%" . $search . "%' OR gender like '%" . $search . "%' OR price like '%" . $search . "%' OR discounted_price like '%" . $search . "%' AND seller_id = $id";
     }
     else{
         $where .= "WHERE seller_id = $id";
-
     }
     if (isset($_GET['sort'])){
         $sort = $db->escapeString($_GET['sort']);
@@ -192,7 +233,6 @@ if (isset($_GET['table']) && $_GET['table'] == 'products') {
     }
     if (isset($_GET['order'])){
         $order = $db->escapeString($_GET['order']);
-
     }
     if (isset($_GET['category_id']) && $_GET['category_id'] != '') {
         $category_id = $db->escapeString($_GET['category_id']);
@@ -203,18 +243,12 @@ if (isset($_GET['table']) && $_GET['table'] == 'products') {
     $res = $db->getResult();
     foreach ($res as $row)
         $total = $row['total'];
-
-
-    //$sql = "SELECT * FROM `products` " . $where . " ORDER BY " . $sort . " " . $order . " LIMIT " . $offset . ", " . $limit;
     $sql = "SELECT p.*,(SELECT name FROM category c WHERE c.id=p.category_id) as category_name FROM `products` p " . $where . " ORDER BY " . $sort . " " . $order . " LIMIT " . $offset . ", " . $limit;
-    
     $db->sql($sql);
     $res = $db->getResult();
-    
+
     $bulkData = array();
     $bulkData['total'] = $total;
-    
-   
     $rows = array();
     $tempRow = array();
     foreach ($res as $row) {
