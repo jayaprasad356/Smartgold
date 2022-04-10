@@ -8,7 +8,9 @@ $function = new custom_functions;
 // set time for session timeout
 $currentTime = time() + 25200;
 $expired = 900;
-
+$currentdate = new DateTime(date('Y-m-d'));
+$currentdate = $currentdate->format('Y-m-d');
+$expirydate = $_SESSION['expiry_date'];
 if (!isset($_SESSION['seller_id']) && !isset($_SESSION['seller_name'])) {
     header("location:index.php");
 } else {
@@ -23,9 +25,6 @@ if ($currentTime > $_SESSION['timeout']) {
 // destroy previous session timeout and create new one
 unset($_SESSION['timeout']);
 $_SESSION['timeout'] = $currentTime + $expired;
-
-
-
 include "header.php";
 ?>
 
@@ -36,12 +35,14 @@ include "header.php";
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Smart Gold Vendor</title>
 </head>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script> 
 <style>
     .white-bg{
     background:#ffffff !important;
     padding: 20px !important;
 }
 </style>
+
 <body>
 
     
@@ -49,7 +50,19 @@ include "header.php";
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
-            <h1>Home</h1>
+            <?php
+             if($currentdate > $expirydate)
+             {
+            ?>
+                <h1 class="text-danger">Your Plan is Expired,Upgrade Your Plan.</h1>
+            <?php
+             }
+             else{?>
+                <h1>Upgrade</h1>
+                <?php
+
+             }
+             ?>
             <ol class="breadcrumb">
                 <li>
                     <a href="home.php"> <i class="fa fa-home"></i> Home</a>
@@ -68,7 +81,10 @@ include "header.php";
                             <li class="mb-3"> <i class="fa fa-check mr-2 text-primary"></i> 100 Products in Inventory </li>
                             <li class="mb-3"> <i class="fa fa-check mr-2 text-primary"></i> 10 Offers in a Month</li>
                             <li class="mb-3"> <i class="fa fa-check mr-2 text-primary"></i> 2 Admin Access</li>
-                        </ul> <a href="#" class="btn btn-warning btn-block p-2 shadow rounded-pill">Subscribe</a>
+                        </ul>
+                        <input type="submit" class="btn btn-warning btn-block p-2 shadow rounded-pill" value="Subscribe" name="submit" onclick="payAmount(10000,1,'basic-monthly')">
+                        <!-- <button type="button"  id="Basic">Subscribe</button> 
+                         -->
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -80,7 +96,9 @@ include "header.php";
                             <li class="mb-3"> <i class="fa fa-check mr-2 text-primary"></i> 100 Products in Inventory </li>
                             <li class="mb-3"> <i class="fa fa-check mr-2 text-primary"></i> 10 Offers in a Month</li>
                             <li class="mb-3"> <i class="fa fa-check mr-2 text-primary"></i> 2 Admin Access</li>
-                        </ul> <a href="#" class="btn btn-warning btn-block p-2 shadow rounded-pill">Subscribe</a>
+                        </ul>
+                        <input type="submit" class="btn btn-warning btn-block p-2 shadow rounded-pill" value="Subscribe" name="submit" onclick="payAmount(100000,1,'basic-annually')">
+                        
                     </div>
                 </div>
             </div>
@@ -98,7 +116,9 @@ include "header.php";
                             <li class="mb-3"> <i class="fa fa-check mr-2 text-primary"></i> 500 Products in Inventory </li>
                             <li class="mb-3"> <i class="fa fa-check mr-2 text-primary"></i> 15 Offers in a Month</li>
                             <li class="mb-3"> <i class="fa fa-check mr-2 text-primary"></i> 5 Admin Access</li>
-                        </ul> <a href="#" class="btn btn-warning btn-block p-2 shadow rounded-pill">Subscribe</a>
+                        </ul>
+                        <input type="submit" class="btn btn-warning btn-block p-2 shadow rounded-pill" value="Subscribe" name="submit" onclick="payAmount(50000,1,'deluxe-monthly')">
+                        
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -110,7 +130,9 @@ include "header.php";
                             <li class="mb-3"> <i class="fa fa-check mr-2 text-primary"></i> 500 Products in Inventory </li>
                             <li class="mb-3"> <i class="fa fa-check mr-2 text-primary"></i> 15 Offers in a Month</li>
                             <li class="mb-3"> <i class="fa fa-check mr-2 text-primary"></i> 5 Admin Access</li>
-                        </ul> <a href="#" class="btn btn-warning btn-block p-2 shadow rounded-pill">Subscribe</a>
+                        </ul>
+                        <input type="submit" class="btn btn-warning btn-block p-2 shadow rounded-pill" value="Subscribe" name="submit" onclick="payAmount(500000,1,'deluxe-annually')">
+                       
                     </div>
                 </div>
             </div>
@@ -128,7 +150,9 @@ include "header.php";
                             <li class="mb-3"> <i class="fa fa-check mr-2 text-primary"></i> Unlimited Products in Inventory </li>
                             <li class="mb-3"> <i class="fa fa-check mr-2 text-primary"></i> One Offers in a Day</li>
                             <li class="mb-3"> <i class="fa fa-check mr-2 text-primary"></i> 10 Admin Access</li>
-                        </ul> <a href="#" class="btn btn-warning btn-block p-2 shadow rounded-pill">Subscribe</a>
+                        </ul>
+                        <input type="submit" class="btn btn-warning btn-block p-2 shadow rounded-pill" value="Subscribe" name="submit" onclick="payAmount(100000,1,'premium-monthly')">
+                       
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -140,7 +164,9 @@ include "header.php";
                             <li class="mb-3"> <i class="fa fa-check mr-2 text-primary"></i> Unlimited Products in Inventory </li>
                             <li class="mb-3"> <i class="fa fa-check mr-2 text-primary"></i> One Offers in a Day</li>
                             <li class="mb-3"> <i class="fa fa-check mr-2 text-primary"></i> 10 Admin Access</li>
-                        </ul> <a href="#" class="btn btn-warning btn-block p-2 shadow rounded-pill">Subscribe</a>
+                        </ul>
+                        <input type="submit" class="btn btn-warning btn-block p-2 shadow rounded-pill" value="Subscribe" name="submit" onclick="payAmount(1000000,1,'premium-annually')">
+                       
                     </div>
                 </div>
             </div>
@@ -149,6 +175,93 @@ include "header.php";
         </section>
         
     </div>
+    
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+
+    function payAmount(totalAmount,product_id,plan){
+
+        var expiryDate = changeplan(plan);
+        var options = {
+        "key": "rzp_test_S50jCnHV2iBtsa",
+        "amount": (1000*100), // 2000 paise = INR 20
+        "name": "Smart Gold",
+        "description": plan,
+        "image": "../img/logo.png",
+        "handler": function (response){
+            $.ajax({
+                url: 'payment-process.php',
+                type: 'post',
+                data: {
+                    razorpay_payment_id: response.razorpay_payment_id , totalAmount : totalAmount ,product_id : product_id,expiryDate : expiryDate,plan : plan,
+                }, 
+                success: function (msg) {
+                    alert("Plan Upgraded Successfully");
+
+
+                //    window.location.href = 'http://localhost/razorpay/success.php';
+                },
+                error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                    alert("Failed ");
+                }
+            });
+        
+        },
+
+        "theme": {
+            "color": "#528FF0"
+        }
+        };
+        var rzp1 = new Razorpay(options);
+        rzp1.open();
+        e.preventDefault();
+       
+
+            
+    }
+
+
+
+</script>
+<script>
+ function changeplan(value) {
+    if(value == 'basic-monthly' || value == 'deluxe-monthly' || value == 'premium-monthly'){
+        var date = new Date();
+        Date.prototype.addDays = function(days) {
+            var date = new Date(this.valueOf());
+            date.setDate(date.getDate() + days);
+            return date;
+        }
+        var today = date.addDays(30);
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var yyyy = today.getFullYear();
+
+        today = yyyy + '-' + mm + '-' + dd;
+        return today;
+    }
+    else if(value == 'basic-annually' || value == 'deluxe-annually' || value == 'premium-annually'){
+        var date = new Date();
+        Date.prototype.addDays = function(days) {
+            var date = new Date(this.valueOf());
+            date.setDate(date.getDate() + days);
+            return date;
+        }
+        var today = date.addDays(364);
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var yyyy = today.getFullYear();
+
+        today = yyyy + '-' + mm + '-' + dd;
+        return today;
+
+    }
+    
+    
+    
+     
+ }
+</script>
 
     <?php include "footer.php"; ?>
     

@@ -16,6 +16,15 @@ if (!isset($_SESSION['seller_id']) && !isset($_SESSION['seller_name'])) {
     header("location:index.php");
 }
 
+$currentdate = new DateTime(date('Y-m-d'));
+$currentdate = $currentdate->format('Y-m-d');
+$expirydate = $_SESSION['expiry_date'];
+if($currentdate > $expirydate)
+{
+    header("location:upgrade.php");
+
+}
+
 
 // if current time is more than session timeout back to login page
 if ($currentTime > $_SESSION['timeout']) {

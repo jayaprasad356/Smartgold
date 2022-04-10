@@ -45,12 +45,15 @@ if (isset($_POST['btnLogin'])) {
             } 
             else if ($result[0]['status'] == 2) {
                 $error['failed_status'] = "<span class='btn btn-danger'>Your account is not approved by Admin. Please wait for approval!</span>";
-            } else if($date1 > $date2){
-                $error['failed_status'] = "<span class='btn btn-danger'>Your account is expired,please contact admin to upgrade plan</span>";
+            } 
+            // else if($date1 > $date2){
+            //     $error['failed_status'] = "<span class='btn btn-danger'>Your account is expired,please contact admin to upgrade plan</span>";
 
-            }else {
+            // }
+            else {
                 $_SESSION['seller_name'] = $res[0]['name'];
                 $_SESSION['seller_id'] = $res[0]['id'];
+                $_SESSION['expiry_date'] = $date2;
                 $_SESSION['timeout'] = $currentTime + $expired;
                 header("location: home.php");
             }

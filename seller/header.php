@@ -11,7 +11,9 @@ $Id = $_SESSION['seller_id'];
 $sql = "SELECT * FROM seller WHERE id=" . $Id;
 $db->sql($sql);
 $result = $db->getResult();
+$_SESSION['expiry_date'] = $result[0]['valid'];
 $path = 'upload/seller/';
+
 ?>
 <!DOCTYPE html>
 <html>
