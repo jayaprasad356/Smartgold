@@ -81,7 +81,7 @@ if (isset($_GET['table']) && $_GET['table'] == 'offers') {
     $tempRow = array();
     foreach ($res as $row) {
         $operate = ' <a href="edit-offer.php?id=' . $row['id'] . '"><i class="fa fa-edit"></i></a>'; 
-        $operate .= '<a href="view-product.php?id=' . $row['id'] . '" class="label label-primary" title="View">View</a>';
+        //$operate .= '<a href="view-product.php?id=' . $row['id'] . '" class="label label-primary" title="View">View</a>';
         $tempRow['status'] = ($row['status'] == 1)? "<label class='label label-success'>Active</label>": (($row['status'] == 0)? "<label class='label label-danger'>Deactive</label>": "<label class='label label-warning'>Deactive</label>");
         $currency = "Rs.";
         if($row['budget_id'] == 1){
@@ -260,7 +260,7 @@ if (isset($_GET['table']) && $_GET['table'] == 'products') {
     foreach ($res as $row) {
         $currency = "Rs.";
         $operate = ' <a href="edit-product.php?id=' . $row['id'] . '" title="Edit"><i class="fa fa-edit"></i></a>';
-        $operate .= '<a href="view-product.php?id=' . $row['id'] . '" class="label label-primary" title="View">View</a>';
+        //$operate .= '<a href="view-product.php?id=' . $row['id'] . '" class="label label-primary" title="View">View</a>';
     
         $discounted_price = $currency . " " . $row['discounted_price'];
         if($row['discounted_price'] == $row['price']){

@@ -172,17 +172,12 @@ pointer-events:none;
                     <input type="hidden" id="add_product" name="add_product" required="" value="1" aria-required="true">
                     <input type="hidden" id="seller_id" name="seller_id" required="" value="<?php echo $ID ?>" aria-required="true">
                     <div class="box-body">
-                        <div class="form-group">
-                                <label for="exampleInputEmail1">Product Name</label> <i class="text-danger asterik">*</i><?php echo isset($error['name']) ? $error['name'] : ''; ?>
-                                <input type="text" class="form-control" name="name" required>
-                        </div>
-
                         <div class="row">
                             <div class="col-md-6">
-                                    <div class="form-group packate_div">
-                                        <label for="qty">Stock:</label> <i class="text-danger asterik">*</i>
-                                        <input type="number" step="any" min="0" class="form-control" name="stock" required="" />
-                                    </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Product Name</label> <i class="text-danger asterik">*</i><?php echo isset($error['name']) ? $error['name'] : ''; ?>
+                                    <input type="text" class="form-control" name="name" required>
+                                </div>
                             </div>
                             <div class="col-md-6">
                                 <label for="category_id">Category :</label> <i class="text-danger asterik">*</i>
@@ -196,6 +191,23 @@ pointer-events:none;
                                     
                                 </select>
                             </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                    <div class="form-group packate_div">
+                                        <label for="qty">Stock:</label> <i class="text-danger asterik">*</i>
+                                        <input type="number" step="any" min="0" class="form-control" name="stock" required="" />
+                                    </div>
+                            </div>
+                            <div class="col-md-6">
+                                    <div class="form-group packate_div">
+                                        <label for="weight">Gross Weight (in grams)</label><i class="text-danger asterik">*</i>
+                                        <input type="number" step="any" min='0' class="form-control" name="weight" id="weight" required />
+                                    </div>
+                            </div>
+
 
                         </div>
                         <div class="row">
@@ -214,7 +226,7 @@ pointer-events:none;
                                 <div class="col-md-4">
                                     <div class="form-group packate_div">
                                         <label for="discounted_price">Discounted Price(₹):</label>
-                                        <input type="number" step="any" min='0' class="form-control disable" name="discounted_price" value="0" id="discounted_price" />
+                                        <input type="number" step="any" min='0' class="form-control disable" name="discounted_price" value="" id="discounted_price" />
                                     </div>
                                 </div>
                         </div>
@@ -227,12 +239,7 @@ pointer-events:none;
                                         <option value="Female" selected>Female</option>
                                     </select>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="form-group packate_div">
-                                        <label for="weight">Weight (in grams)</label><i class="text-danger asterik">*</i>
-                                        <input type="number" step="any" min='0' class="form-control" name="weight" id="weight" required />
-                                    </div>
-                                </div>
+
                         </div>
 
                        
@@ -298,7 +305,7 @@ pointer-events:none;
 
         }
         else{
-            $('#discounted_price').val(0);
+            $('#discounted_price').val('');
 
         }
 
@@ -313,7 +320,7 @@ pointer-events:none;
 
         }
         else{
-            $('#discounted_price').val(0);
+            $('#discounted_price').val('');
 
         }
     });
@@ -358,7 +365,7 @@ pointer-events:none;
                     success: function(result) {
                         $('#result').html(result);
                         $('#result').show().delay(6000).fadeOut();
-                        alert("Product Added Successfully");
+                        //alert("Product Added Successfully");
                         $('#submit_btn').html('Add');
                     
                         $('#add_product_form')[0].reset();

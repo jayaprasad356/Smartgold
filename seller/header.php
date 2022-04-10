@@ -176,45 +176,19 @@ $path = 'upload/seller/';
                 </li>
                 
                 <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-cubes"></i>
-                        <span>Products</span>
-                        <i class="fa fa-angle-right pull-right"></i>
-                        
+                    <a href="products.php">
+                        <i class="fa fa-cubes" class="active"></i> <span>Products</span>
                     </a>
-                    <ul class="treeview-menu">
-                        <li><a href="add-product.php"><i class="fa fa-plus"></i> Add Product</a></li>
-                        <li><a href="products.php"><i class="fa fa-sliders"></i> Manage Products</a></li>
-                        
-                    </ul>
                 </li>
                 <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-cubes"></i>
-                        <span>Offers</span>
-                        <i class="fa fa-angle-right pull-right"></i>
-                        
+                    <a href="offers.php">
+                        <i class="fa fa-cubes" class="active"></i> <span>Offers</span>
                     </a>
-                    <ul class="treeview-menu">
-                        <li><a href="add-offer.php"><i class="fa fa-plus"></i> Add Offer</a></li>
-                        <li><a href="offers.php"><i class="fa fa-sliders"></i> Manage Offers</a></li>
-                        
-                        
-                    </ul>
                 </li>
                 <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-cubes"></i>
-                        <span>Orders</span>
-                        <i class="fa fa-angle-right pull-right"></i>
-                        
+                    <a href="orders.php">
+                        <i class="fa fa-cubes" class="active"></i> <span>Orders</span>
                     </a>
-                    <ul class="treeview-menu">
-                        
-                        <li><a href="orders.php"><i class="fa fa-sliders"></i>View Orders</a></li>
-                        
-                        
-                    </ul>
                 </li>
                 <li class="treeview">
                     <a href="upgrade.php">

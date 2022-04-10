@@ -104,8 +104,12 @@ if (isset($_POST['btnUpdate'])) {
 }
 $sql_query = "SELECT * FROM products WHERE id = '" . $product_id . "'";
 $db->sql($sql_query);
-
 $res = $db->getResult();
+$discounted_price = $res[0]['discounted_price'];
+if($res[0]['price'] == $res[0]['discounted_price']) {
+    $discounted_price = "";
+}
+
 $sql_query = "SELECT id, name FROM category";
 $db->sql($sql_query);
 
@@ -142,10 +146,32 @@ pointer-events:none;
                 <form id='add_product_form' method="post" enctype="multipart/form-data">
                     
                     <div class="box-body">
-                        <div class="form-group">
-                                <label for="exampleInputEmail1">Product Name</label> <i class="text-danger asterik">*</i><?php echo isset($error['name']) ? $error['name'] : ''; ?>
-                                <input type="text" class="form-control" name="name" value="<?php echo $res[0]['name'] ?>" required>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Product Name</label> <i class="text-danger asterik">*</i><?php echo isset($error['name']) ? $error['name'] : ''; ?>
+                                    <input type="text" class="form-control" name="name" value="<?php echo $res[0]['name'] ?>" required>
+                                </div>
+
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="category_id">Category :</label> <i class="text-danger asterik">*</i>
+                                    <select name="category_id" id="category_id" class="form-control" required>
+                                        <option value="">--Select Category--</option>
+                                        <?php foreach ($rescat as $row) { ?>
+                                            <option value="<?php echo $row['id']; ?>" <?= ($row['id'] == $res[0]['category_id']) ? "selected" : ""; ?>><?php echo $row['name']; ?></option>
+                                            
+                                                
+                                        <?php 
+                                        } ?>
+                                        
+                                    </select>
+                                </div>
+
+                            </div>
                         </div>
+
                         <div class="row">
 
                             <div class="col-md-6">
@@ -155,20 +181,10 @@ pointer-events:none;
                                     </div>
                             </div>
                             <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="category_id">Category :</label> <i class="text-danger asterik">*</i>
-                                <select name="category_id" id="category_id" class="form-control" required>
-                                    <option value="">--Select Category--</option>
-                                    <?php foreach ($rescat as $row) { ?>
-                                        <option value="<?php echo $row['id']; ?>" <?= ($row['id'] == $res[0]['category_id']) ? "selected" : ""; ?>><?php echo $row['name']; ?></option>
-                                        
-                                            
-                                    <?php 
-                                    } ?>
-                                    
-                                </select>
-                            </div>
-
+                                    <div class="form-group packate_div">
+                                        <label for="weight">Gross Weight (in grams)</label><i class="text-danger asterik">*</i>
+                                        <input type="number" step="any" min='0' class="form-control" name="weight" required value="<?php echo $res[0]['weight'] ?>" id="weight" />
+                                    </div>
                             </div>
                     
 
@@ -192,7 +208,7 @@ pointer-events:none;
                                 <div class="col-md-4">
                                     <div class="form-group packate_div">
                                         <label for="discounted_price">Discounted Price(₹):</label>
-                                        <input type="number" step="any" min='0' class="form-control disable" name="discounted_price" value="<?php echo $res[0]['discounted_price'] ?>" value="0" id="discounted_price" />
+                                        <input type="number" step="any" min='0' class="form-control disable" name="discounted_price" value="<?php echo $discounted_price ?>" value="" id="discounted_price" />
                                     </div>
                                 </div>
                         </div>
@@ -209,12 +225,7 @@ pointer-events:none;
                                                                                 } ?>>Female</option>
                                     </select>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="form-group packate_div">
-                                        <label for="weight">Weight :</label><i class="text-danger asterik">*</i>
-                                        <input type="number" step="any" min='0' class="form-control" name="weight" required value="<?php echo $res[0]['weight'] ?>" id="weight" />
-                                    </div>
-                                </div>
+
                         </div>
 
                        
@@ -269,7 +280,7 @@ pointer-events:none;
 
         }
         else{
-            $('#discounted_price').val(0);
+            $('#discounted_price').val('');
 
         }
 
@@ -284,7 +295,7 @@ pointer-events:none;
 
         }
         else{
-            $('#discounted_price').val(0);
+            $('#discounted_price').val('');
 
         }
     });
