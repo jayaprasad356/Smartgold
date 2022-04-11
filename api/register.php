@@ -68,7 +68,6 @@ $sql = "SELECT * FROM users WHERE mobile = '" . $mobile . "'";
         $res = $db->getResult();
         $response['success'] = true;
         $response['message'] = "User registered successfully";
-        //$response['total'] = $total[0]['total'];
         $response['data'] = $res;
         print_r(json_encode($response));
 

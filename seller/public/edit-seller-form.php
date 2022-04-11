@@ -358,7 +358,7 @@ $res = $db->getResult();
                         placeholder: "type in category name to search"
                     });
                     alert("Profile Updated Successfully");
-                    $('#submit_btn').html('Update');
+                    //$('#submit_btn').html('Update');
                     location.reload(true);
                 }
             });
