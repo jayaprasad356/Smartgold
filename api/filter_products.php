@@ -24,7 +24,7 @@ if (!isset($_POST['accesskey'])  || trim($_POST['accesskey']) != $access_key) {
     return false;
     exit();
 }
-if (empty($_POST['from_price_range'])) {
+if ($_POST['from_price_range'] == '') {
     $response['success'] = false;
     $response['message'] = "From Price Range is Empty";
     print_r(json_encode($response));

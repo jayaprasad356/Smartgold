@@ -46,7 +46,7 @@ $user_id = $db->escapeString($_POST['user_id']);
 $name = $db->escapeString($_POST['name']);
 $email = $db->escapeString($_POST['email']);
 
-$sql = "SELECT * FROM users WHERE user_id = '" . $user_id . "'";
+$sql = "SELECT * FROM users WHERE id = '" . $user_id . "'";
 $db->sql($sql);
 $res = $db->getResult();
 $num = $db->numRows($res);
