@@ -148,7 +148,7 @@ if (isset($_GET['table']) && $_GET['table'] == 'orders') {
     foreach ($res as $row)
         $total = $row['total'];
     //$sql = "SELECT *,orders.id AS id,orders.status AS status FROM orders LEFT JOIN products ON orders.product_id = products.id WHERE products.seller_id = '" . $id . "'";
-    $sql = "SELECT * FROM `orders`,`products` " . $where . " ORDER BY " . $sort . " " . $order . " LIMIT " . $offset . ", " . $limit;
+    $sql = "SELECT *,orders.id AS id,orders.status AS status FROM `orders`,`products` " . $where . " ORDER BY " . $sort . " " . $order . " LIMIT " . $offset . ", " . $limit;
     
     $db->sql($sql);
     $res = $db->getResult();
@@ -168,7 +168,15 @@ if (isset($_GET['table']) && $_GET['table'] == 'orders') {
         $tempRow['name'] = $row['name'];
         $tempRow['quantity'] = $row['quantity'];
         $tempRow['delivery_charges'] = $row['delivery_charges'];
-        $tempRow['status'] = ($row['status'] == 1)? "<label class='label label-success'>Active</label>": (($row['status'] == 0)? "<label class='label label-danger'>Deactive</label>": "<label class='label label-warning'>Deactive</label>");
+        if($row['status'] == 'Cancelled'){
+            $tempRow['status'] = "<label class='label label-danger'>".$row['status']."</label>";
+
+        }
+        else{
+            $tempRow['status'] = "<label class='label label-primary'>".$row['status']."</label>";
+
+        }
+        
         $tempRow['buy_method'] = ($row['buy_method'] == 1)? "<label class='label label-primary'>Pick Up at Store</label>": (($row['buy_method'] == 2)? "<label class='label label-primary'>Delivery at Home</label>": "<label class='label label-primary'>Delivery at Home</label>");
         
         // $tempRow['buy_method'] = $row['buy_method'];
