@@ -21,7 +21,7 @@
                     <table id='products_table' class="table table-hover" data-toggle="table" data-search="true" data-url="get-bootstrap-table-data.php?table=orders" data-show-refresh="true"  data-side-pagination="server" data-pagination="true" data-query-params="queryParams_1"  data-trim-on-search="false" data-filter-control="true" data-sort-name="orders.id" data-sort-order="desc"  data-export-types='["txt","excel"]'   >
                         <thead>
                             <tr>
-                                <th data-field="operate" data-events="actionEvents">Action</th>
+                                
                                 <th data-field="id" data-sortable="true">ID</th>
                                 <th data-field="date_created" >Order Date</th>
                                 <th data-field="product_id" data-sortable="true">Product ID</th>
@@ -31,6 +31,7 @@
                                 <th data-field="buy_method" data-sortable="true">Buy Method</th>
                                 <th data-field="status" >Status</th>
                                 <th data-field="update">Update</th>
+                                <th data-field="operate" data-events="actionEvents">Action</th>
                             </tr>
                         </thead>
                     </table>

@@ -18,23 +18,34 @@ if (isset($_POST['btnUpdate'])) {
     $status = $db->escapeString($_POST['status']);
     $payment_status = $db->escapeString($_POST['payment_status']);
     
-    $sql = "UPDATE orders SET `status` = '$status',`payment_status` = '$payment_status' WHERE id = '" . $order_id . "'";
-    $db->sql($sql);
-    $product_result = $db->getResult();
 
-    if (!empty($product_result)) {
-        $product_result = 0;
-    } else {
-        $product_result = 1;
+
+    if($status == 'Completed' && $payment_status == 'UnPaid'){
+        $error['add_menu'] = " <span class='label label-danger'>Payment is Not Done,So Not able Complete this order</span>";
+        
+
     }
-    if ($product_result == 1 ) {
-        $error['add_menu'] = "<section class='content-header'>
-                                            <span class='label label-success'>Updated Successfully</span>
-                                            <h4><small><a  href='orders.php'><i class='fa fa-angle-double-left'></i>&nbsp;&nbsp;&nbsp;Back to Orders</a></small></h4>
-                                             </section>";
-    } else {
-        $error['add_menu'] = " <span class='label label-danger'>Failed</span>";
+    else {
+        $sql = "UPDATE orders SET `status` = '$status',`payment_status` = '$payment_status' WHERE id = '" . $order_id . "'";
+        $db->sql($sql);
+        $product_result = $db->getResult();
+        if (!empty($product_result)) {
+            $product_result = 0;
+        } else {
+            $product_result = 1;
+        }
+        if ($product_result == 1 ) {
+            $error['add_menu'] = "<section class='content-header'>
+                                                <span class='label label-success'>Updated Successfully</span>
+                                                
+                                                 </section>";
+        } else {
+            $error['add_menu'] = " <span class='label label-danger'>Failed</span>";
+        }
+
     }
+
+
 
     
 
@@ -48,6 +59,7 @@ $res = $db->getResult();
 <section class="content-header">
     <h1>Update Orders</h1>
     <?php echo isset($error['add_menu']) ? $error['add_menu'] : ''; ?>
+    <h4><small><a  href='orders.php'><i class='fa fa-angle-double-left'></i>&nbsp;&nbsp;&nbsp;Back to Orders</a></small></h4>
     <ol class="breadcrumb">
         <li><a href="home.php"><i class="fa fa-home"></i> Home</a></li>
     </ol>

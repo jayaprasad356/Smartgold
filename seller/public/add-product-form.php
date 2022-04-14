@@ -237,6 +237,8 @@ pointer-events:none;
                                         <option value="">Select</option>
                                         <option value="Male">Male</option>
                                         <option value="Female" selected>Female</option>
+                                        <option value="Kids" selected>Kids</option>
+                                        <option value="Unisex" selected>Unisex</option>
                                     </select>
                                 </div>
 
@@ -248,7 +250,11 @@ pointer-events:none;
                         
                         <div class="form-group">
                             <label for="image">Main Image : <i class="text-danger asterik">*</i>&nbsp;&nbsp;&nbsp;*Please choose square image of larger than 350px*350px & smaller than 550px*550px.</label><?php echo isset($error['image']) ? $error['image'] : ''; ?>
-                            <input type="file" name="image" accept="image/png,  image/jpeg" id="image" required>
+                            <input type="file" onchange="readURL(this);" name="image" accept="image/png,  image/jpeg" id="image" required>
+                        </div>
+                        <div class="form-group">
+                            <img id="blah" src="#" alt="product image" />
+
                         </div>
                         
                         <div class="form-group">
@@ -293,6 +299,22 @@ pointer-events:none;
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>
+<script>
+    function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#blah')
+                        .attr('src', e.target.result)
+                        .width(150)
+                        .height(200);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+</script>
 
 <script>
     $(document).on('input', '.discounted_percentage', function(){

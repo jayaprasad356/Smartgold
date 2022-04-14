@@ -215,14 +215,15 @@ pointer-events:none;
                         <div class="row">
                                 <div class="col-md-6">
                                     <label for="gender">Gender :</label><i class="text-danger asterik">*</i>
-                                    <select name="gender" class="form-control" required>
+                                    <select name="gender" class="form-control" required>                                  
                                         <option value="">Select</option>
                                         <option value="Male" <?php if ($res[0]['gender'] == "Male") {
                                                                                     echo "selected";
                                                                                 } ?>>Male</option>
-                                        <option value="Female" <?php if ($res[0]['gender'] == "Female") {
-                                                                                    echo "selected";
-                                                                                } ?>>Female</option>
+                                        <option value="Female" <?php if ($res[0]['gender'] == "Female") {echo "selected";} ?>>Female</option>
+                                        <option value="Kids" <?php if ($res[0]['gender'] == "Kids") {echo "selected";} ?>>Kids</option>
+                                        <option value="Unisex" <?php if ($res[0]['gender'] == "Unisex") {echo "selected";} ?>>Unisex</option>
+                                                                                
                                     </select>
                                 </div>
 

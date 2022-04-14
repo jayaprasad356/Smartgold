@@ -165,42 +165,19 @@ $db->sql("SET NAMES 'utf8'");
                     </a>
                 </li>
                 <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-male"></i>
-                        <span>Customers</span>
-                        <i class="fa fa-angle-right pull-right"></i>
+                    <a href="customers.php">
+                        <i class="fa fa-users"></i><span>Customers</span>  
                     </a>
-                    <ul class="treeview-menu">
-                        <li><a href="customers.php"><i class="fa fa-users"></i> Customers </a></li>
-                        
-                    </ul>
                 </li>
                 <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-male"></i>
-                        <span>Sellers</span>
-                        <i class="fa fa-angle-right pull-right"></i>
-                        
+                    <a href="sellers.php">
+                        <i class="fa fa-users" class="active"></i> <span>Sellers</span>
                     </a>
-                    <ul class="treeview-menu">
-                        <li><a href="add-seller.php"><i class="fa fa-plus"></i> Add Seller</a></li>
-                        
-                        <li><a href="sellers.php"><i class="fa fa-sliders"></i> Manage Sellers</a></li>
-                        
-                    </ul>
                 </li>
                 <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-bullseye"></i>
-                        <span>Categories</span>
-                        <i class="fa fa-angle-right pull-right"></i>
+                    <a href="categories.php">
+                        <i class="fa fa-cubes" class="active"></i> <span>Categories</span>
                     </a>
-                    <ul class="treeview-menu">
-                    <li><a href="add-category.php"><i class="fa fa-plus"></i> Add Category</a></li>
-                        <li><a href="categories.php"><i class="fa fa-sliders"></i> Manage Categories</a></li>
-                        
-                
-                    </ul>
                 </li>
 
                 <li class="treeview">
