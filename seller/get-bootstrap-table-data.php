@@ -227,6 +227,8 @@ if (isset($_GET['table']) && $_GET['table'] == 'products') {
     $where = '';
     $sort = 'id';
     $order = 'DESC';
+    if (isset($_GET['offset']))
+        $offset = $db->escapeString($_GET['offset']);
     if (isset($_GET['limit']))
         $limit = $db->escapeString($_GET['limit']);
     if (isset($_GET['sort']))
