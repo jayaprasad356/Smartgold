@@ -56,7 +56,7 @@ $paid_amt = $db->escapeString($_POST['paid_amt']);
 $status = $db->escapeString('Locked');
 
 
-$sql = "INSERT INTO offer_lock(`user_id`,`offer_id`, `paid_amt`, `status`)VALUES($user_id,$offer_id,$paid_amt,'$status')";
+$sql = "INSERT INTO offer_lock(`user_id`,`offer_id`, `paid_amt`)VALUES($user_id,$offer_id,$paid_amt)";
 $db->sql($sql);
 $res = $db->getResult();
 $sql = "SELECT *,offers.valid_date FROM `seller`,`offers` WHERE seller.id = offers.seller_id AND seller.id = '" . $seller_id . "'";
