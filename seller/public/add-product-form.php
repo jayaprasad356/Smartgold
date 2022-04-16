@@ -243,11 +243,6 @@ pointer-events:none;
                                 </div>
 
                         </div>
-
-                       
-                        
-
-                        
                         <div class="form-group">
                             <label for="image">Main Image : <i class="text-danger asterik">*</i>&nbsp;&nbsp;&nbsp;*Please choose square image of larger than 350px*350px & smaller than 550px*550px.</label><?php echo isset($error['image']) ? $error['image'] : ''; ?>
                             <input type="file" onchange="readURL(this);" name="image" accept="image/png,  image/jpeg" id="image" required>

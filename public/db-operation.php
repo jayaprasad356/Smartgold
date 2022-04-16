@@ -288,4 +288,17 @@ if (isset($_POST['update_category'])  && !empty($_POST['update_category'])) {
         echo "<label class='alert alert-danger'>Some Error Occurred! Please Try Again.</label>";
     }
 }
+if (isset($_POST['update_offer_lock_status'])  && !empty($_POST['update_offer_lock_status'])) {
+    $id = $db->escapeString($_POST['update_id']);
+    $title = $db->escapeString($_POST['title']);
+
+
+
+    $sql = "UPDATE offer_lock_status SET `title`= '$title' WHERE `id`=" . $id;
+    if ($db->sql($sql)) {
+        echo "<label class='alert alert-success'>Offer Lock Status Updated Successfully.</label>";
+    } else {
+        echo "<label class='alert alert-danger'>Some Error Occurred! Please Try Again.</label>";
+    }
+}
 ?>

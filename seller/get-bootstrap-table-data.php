@@ -191,25 +191,57 @@ if (isset($_GET['table']) && $_GET['table'] == 'orders') {
 //data of 'LOCKOFFERS' table goes here
 if (isset($_GET['table']) && $_GET['table'] == 'lockoffers') {
     $offerid = $_GET['offerid'];
+    $offset = 0;
+    $limit = 10;
+    $where = '';
+    $sort = 'id';
+    $order = 'DESC';
 
-    $sql = "SELECT *
-    FROM users
-    LEFT JOIN offer_lock
-    ON users.id = offer_lock.user_id WHERE users.id = offer_lock.user_id AND offer_lock.offer_id = '" . $offerid . "' ";
+    if (isset($_GET['offset']))
+        $offset = $db->escapeString($_GET['offset']);
+    if (isset($_GET['limit']))
+        $limit = $db->escapeString($_GET['limit']);
+    if (isset($_GET['sort']))
+        $sort = $db->escapeString($_GET['sort']);
+    if (isset($_GET['order']))
+        $order = $db->escapeString($_GET['order']);
+
+    if (isset($_GET['search']) && !empty($_GET['search'])) {
+        $search = $db->escapeString($_GET['search']);
+        $where .= "AND users.name like '%" . $search . "%' OR users.mobile like '%" . $search . "%'";
+    }
+    // else{
+    //     $where .= "WHERE users.id = offer_lock.user_id ";
+    // }
+    if (isset($_GET['sort'])){
+        $sort = $db->escapeString($_GET['sort']);
+
+    }
+    if (isset($_GET['order'])){
+        $order = $db->escapeString($_GET['order']);
+    }
+    $sql = "SELECT COUNT(`id`) as total FROM offer_lock WHERE offer_id = '$offerid'";
     $db->sql($sql);
     $res = $db->getResult();
+    foreach ($res as $row)
+        $total = $row['total'];
+
+    $sql = "SELECT *,offer_lock.id AS id FROM users LEFT JOIN offer_lock  ON users.id = offer_lock.user_id WHERE offer_lock.offer_id = '11'" . $where ;
+    $db->sql($sql);
+    $res = $db->getResult();
+    $bulkData = array();
+    $bulkData['total'] = $total;
     
     $rows = array();
     $tempRow = array();
     foreach ($res as $row) {
-        $operate = ' <a href="edit-offer-lock.php?id=' . $row['id'] . '" title="Edit"><i class="fa fa-edit"></i></a>';
+        $operate = '<a href="edit-offer-lock.php?id=' . $row['id'] . '" class="label label-primary" title="Update">Update</a>';
+        
+        //$operate = ' <a href="edit-offer-lock.php?id=' . $row['id'] . '" title="Edit"><i class="fa fa-edit"></i></a>';
         // $operate = '<a href="view-product-variants.php?id=' . $row['id'] . '" class="label label-success" title="View">View</a>';
         // $operate .= ' <a href="edit-product.php?id=' . $row['id'] . '" title="Edit"><i class="fa fa-edit"></i></a>';
         //$locked = '<a href="offers_lock.php?id=' . $row['id'] . '" class="label label-success" title="View">View</a>';
-
-        
-        
-        
+        $tempRow['id'] = $row['id'];
         $tempRow['name'] = $row['name'];
         $tempRow['mobile'] = $row['mobile'];
         $tempRow['email'] = $row['email'];
