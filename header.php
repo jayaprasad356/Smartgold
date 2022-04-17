@@ -192,6 +192,7 @@ $db->sql("SET NAMES 'utf8'");
                         <li><a href="add-price-duration.php"><i class="fa fa-lock"></i>Locking</a></li>
                         <li><a href="delivery_settings.php"><i class="fa fa-sliders"></i>Delivery Charges</a></li>
                         <li><a href="offer-lock-status.php"><i class="fa fa-sliders"></i>Offer Lock Status</a></li>
+                        <li><a href="manage-plans.php"><i class="fa fa-sliders"></i>Manage Plans</a></li>
                     </ul>
                 </li>
                 

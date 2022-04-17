@@ -335,6 +335,9 @@
                                             <option value="basic-monthly">Basic Monthly</option>
                                             <option value="deluxe-monthly">Deluxe Monthly</option>
                                             <option value="premium-monthly">Premium Monthly</option>
+                                            <option value="basic-quarterly">Basic Quarterly</option>
+                                            <option value="deluxe-quarterly">Deluxe Quarterly</option>
+                                            <option value="premium-quarterly">Premium Quarterly</option>
                                             <option value="basic-annually">Basic Annually</option>
                                             <option value="deluxe-annually">Deluxe Annually</option>
                                             <option value="premium-annually">Premium Annually</option>
@@ -402,36 +405,30 @@
                             <big>30 Days</big>
                             
                         </li>
+                        <?php
+                            $sql = "SELECT * FROM plans";
+                            $db->sql($sql);
+                            $res = $db->getResult();
+                            foreach ($res as $row) {
+                                if($row['validity'] == '1'){
+                                    $months = 'Month';
+
+                                }
+                                else {
+                                    $months = 'Months';
+
+                                }
+                        ?>
                         <li>
-                            <b>Basic Monthly Plan</b>
-                            <big>₹ 10,000/ Month</big>
-                            <p>100 Products in Inventory <br>10 Offers in a Month <br>2 Admin Access</p>
+                            <b><?= $row['name'].'-'.$row['validity'].' '.$months ?></b>
+                            <big>₹ <?= $row['price'] ?></big>
+                            <p><?= $row['products'] ?> Products in Inventory <br><?= $row['offers'] ?> Offers in a Month <br><?= $row['access'] ?> Admin Access</p>
                         </li>
-                        <li>
-                            <b>Basic Yearly Plan</b>
-                            <big>₹ 1,00,000/ Year</big>
-                            <p>100 Products in Inventory<br>10 Offers in a Month<br>2 Admin Access</p>
-                        </li>
-                        <li>
-                            <b>Deluxe Monthly Plan</b>
-                            <big>₹ 50,000/ Month</big>
-                            <p>500 Products in Inventory<br>15 Offers in a Month<br>5 Admin Access</p>
-                        </li>
-                        <li>
-                            <b>Deluxe Yearly Plan</b>
-                            <big>₹ 5,00,000/ Year</big>
-                            <p>500 Products in Inventory<br>15 Offers in a Month<br>5 Admin Access</p>
-                        </li>
-                        <li>
-                            <b>Premium Monthly Plan</b>
-                            <big>₹ 1,00,000/ Month</big>
-                            <p>Unlimited Products in Inventory<br>One Offers in a Day<br>10 Admin Access</p>
-                        </li>
-                        <li>
-                            <b>Premium Yearly Plan</b>
-                            <big>₹ 10,00,000/ Year</big>
-                            <p>Unlimited Products in Inventory<br>One Offers in a Day<br>10 Admin Access</p>
-                        </li>
+                        <?php
+                            }
+
+                        ?>
+                        
                         
                     </ul>
                 </div>
@@ -597,6 +594,25 @@ geocoder.geocode( { 'address': address}, function(results, status) {
             return date;
         }
         var today = date.addDays(30);
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var yyyy = today.getFullYear();
+
+        today = yyyy + '-' + mm + '-' + dd;
+        console.log(today)
+        document.getElementById("valid").value = today;
+        var longDateStr = moment(today, 'Y-M-D').format('DD,MMMM');
+        document.getElementById("resultvalid").innerHTML = 'Plan Valid Upto : '+longDateStr+","+yyyy;
+
+    }
+    else if(value == 'basic-quarterly' || value == 'deluxe-quarterly' || value == 'premium-quarterly'){
+        var date = new Date();
+        Date.prototype.addDays = function(days) {
+            var date = new Date(this.valueOf());
+            date.setDate(date.getDate() + days);
+            return date;
+        }
+        var today = date.addDays(90);
         var dd = String(today.getDate()).padStart(2, '0');
         var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
         var yyyy = today.getFullYear();

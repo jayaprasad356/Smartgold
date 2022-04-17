@@ -374,10 +374,15 @@ $res = $db->getResult();
                                             <option <?=$res[0]['plan'] == 'basic-monthly' ? ' selected="selected"' : '';?>  value="basic-monthly">Basic Monthly</option>
                                             <option <?=$res[0]['plan'] == 'deluxe-monthly' ? ' selected="selected"' : '';?> value="deluxe-monthly">Deluxe Monthly</option>
                                             <option <?=$res[0]['plan'] == 'premium-monthly' ? ' selected="selected"' : '';?> value="premium-monthly">Premium Monthly</option>
+                                            <option <?=$res[0]['plan'] == 'basic-quarterly' ? ' selected="selected"' : '';?> value="basic-quarterly">Basic Quarterly</option>
+                                            <option <?=$res[0]['plan'] == 'deluxe-quarterly' ? ' selected="selected"' : '';?> value="deluxe-quarterly">Deluxe Quarterly</option>
+                                            <option <?=$res[0]['plan'] == 'premium-quarterly' ? ' selected="selected"' : '';?> value="premium-quarterly">Premium Quarterly</option>
                                             <option <?=$res[0]['plan'] == 'basic-annually' ? ' selected="selected"' : '';?> value="basic-annually">Basic Annually</option>
                                             <option <?=$res[0]['plan'] == 'deluxe-annually' ? ' selected="selected"' : '';?> value="deluxe-annually">Deluxe Annually</option>
                                             <option <?=$res[0]['plan'] == 'premium-annually' ? ' selected="selected"' : '';?> value="premium-annually">Premium Annually</option>
                                        </select>
+                                       <a href="#" data-toggle='modal' data-target='#howItWorksModal' title='How it works'><u>Click to View Plan Details</u></a>
+                                       
                                     </div>
                                 </div>
                            </div>
@@ -419,6 +424,49 @@ $res = $db->getResult();
                         </div><!-- /.box-body -->
                     </form>
                 </div><!-- /.box -->
+        </div>
+    </div>
+    <div class="modal fade" id='howItWorksModal'  role="dialog" aria-labelledby="myLargeModalLabel">
+        <div class="modal-dialog modal-md" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Smart Gold Plan List</h4>
+                    <hr>
+                    <ul>
+                        <li>
+                            <b>Free Trial</b>
+                            <big>30 Days</big>
+                            
+                        </li>
+                        <?php
+                            $sql = "SELECT * FROM plans";
+                            $db->sql($sql);
+                            $res = $db->getResult();
+                            foreach ($res as $row) {
+                                if($row['validity'] == '1'){
+                                    $months = 'Month';
+
+                                }
+                                else {
+                                    $months = 'Months';
+
+                                }
+                        ?>
+                        <li>
+                            <b><?= $row['name'].'-'.$row['validity'].' '.$months ?></b>
+                            <big>₹ <?= $row['price'] ?></big>
+                            <p><?= $row['products'] ?> Products in Inventory <br><?= $row['offers'] ?> Offers in a Month <br><?= $row['access'] ?> Admin Access</p>
+                        </li>
+                        <?php
+                            }
+
+                        ?>
+                        
+                        
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -521,6 +569,26 @@ $res = $db->getResult();
             return date;
         }
         var today = date.addDays(30);
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var yyyy = today.getFullYear();
+
+        today = yyyy + '-' + mm + '-' + dd;
+        console.log(today)
+        document.getElementById("valid").value = today;
+        var longDateStr = moment(today, 'Y-M-D').format('DD,MMMM');
+        document.getElementById("resultvalid").innerHTML = 'Plan Valid Upto : '+longDateStr+","+yyyy;
+    
+
+    }
+    else if(value == 'basic-quarterly' || value == 'deluxe-quarterly' || value == 'premium-quarterly'){
+        var date = new Date();
+        Date.prototype.addDays = function(days) {
+            var date = new Date(this.valueOf());
+            date.setDate(date.getDate() + days);
+            return date;
+        }
+        var today = date.addDays(90);
         var dd = String(today.getDate()).padStart(2, '0');
         var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
         var yyyy = today.getFullYear();
