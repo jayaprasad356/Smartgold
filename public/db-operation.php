@@ -313,4 +313,28 @@ if (isset($_POST['update_plan'])  && !empty($_POST['update_plan'])) {
         echo "<label class='alert alert-danger'>Some Error Occurred! Please Try Again.</label>";
     }
 }
+if (isset($_POST['update_admin'])  && !empty($_POST['update_admin'])) {
+    $id = $db->escapeString($_POST['update_id']);
+    $name = $db->escapeString($_POST['name']);
+    $oldpassword = $db->escapeString($_POST['oldpassword']);
+    $password = !empty($_POST['password']) ? $db->escapeString($_POST['password']) : '';
+    $password = !empty($password) ? md5($password) : '';
+    $status = $db->escapeString($_POST['status']);
+
+    if($password != ''){
+        $sql = "UPDATE admin SET `name`= '$name',`password`= '$password',`status`= '$status' WHERE `id`=" . $id;
+
+    }
+    else{
+        $sql = "UPDATE admin SET `name`= '$name',`status`= '$status' WHERE `id`=" . $id;
+
+    }
+
+    if ($db->sql($sql)) {
+        echo "<label class='alert alert-success'> Updated Successfully.</label>";
+    } else {
+        echo "<label class='alert alert-danger'>Some Error Occurred! Please Try Again.</label>";
+    }
+
+}
 ?>

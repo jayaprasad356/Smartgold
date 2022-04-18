@@ -503,7 +503,6 @@
                         $('#result').html(result);
                         $('#result').show().delay(6000).fadeOut();
                         $('#submit_btn').html('Add');
-                    
                         $('#add_form')[0].reset();
                         document.getElementById("resultvalid").innerHTML = '';
                     }

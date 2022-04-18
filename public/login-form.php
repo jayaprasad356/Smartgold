@@ -1,7 +1,8 @@
 <?php
 if (isset($_POST['btnLogin'])) {
+	
 
-    $username = $db->escapeString($_POST['username']);
+    $email = $db->escapeString($_POST['email']);
     $password = $db->escapeString($_POST['password']);
 
     $currentTime = time() + 25200;
@@ -9,18 +10,33 @@ if (isset($_POST['btnLogin'])) {
 
     $error = array();
 
-    if (empty($username)) {
-        $error['failed'] = " <span class='label label-danger'>Username should be filled!</span>";
+    if (empty($email)) {
+        $error['failed'] = " <span class='label label-danger'>email should be filled!</span>";
     }
 
     if (empty($password)) {
         $error['failed'] = " <span class='label label-danger'>Password should be filled!</span>";
     }
 
-    if (!empty($username) && !empty($password)) {
-		if ($username == 'admin' && $password == 'admin123') {
-			$_SESSION['timeout'] = $currentTime + $expired;
-			header("location: home.php");
+    if (!empty($email) && !empty($password)) {
+		$password = md5($password);
+		$sql = "SELECT * FROM admin WHERE email = '$email' AND '$password'";
+		$db->sql($sql);
+		$res = $db->getResult();
+		$num = $db->numRows($res);
+		if ($num == 1) {
+			if($res[0]['status'] == 1){
+				$_SESSION['timeout'] = $currentTime + $expired;
+				$_SESSION['name'] = $res[0]['name'];
+				$_SESSION['email'] = $res[0]['email'];
+				$_SESSION['role'] = $res[0]['role'];
+				header("location: home.php");
+
+			}else{
+				$error['failed'] = "<span class='btn btn-danger'>Your Account is Deactivated</span>";
+
+			}
+
 
 		}else {
             $error['failed'] = "<span class='btn btn-danger'>Invalid Credentials</span>";
@@ -47,8 +63,8 @@ if (isset($_POST['btnLogin'])) {
 			<form method="post" enctype="multipart/form-data">
 				<div class="box-body">
 					<div class="form-group">
-						<label for="exampleInputEmail1">Username :</label>
-						<input type="text" name="username" class="form-control" value="" required>
+						<label for="exampleInputEmail1">Email :</label>
+						<input type="email" name="email" class="form-control" value="" required>
 					</div>
 					<div class="form-group">
 						<label for="exampleInputEmail1">Password :</label>

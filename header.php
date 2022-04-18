@@ -126,15 +126,15 @@ $db->sql("SET NAMES 'utf8'");
                             <li class="dropdown user user-menu">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                     <img src="./img/logo.png" class="user-image" alt="User Image">
-                                    <span class="hidden-xs">Admin</span>
+                                    <span class="hidden-xs"><?php echo $_SESSION['name'] ?></span>
                                 </a>
                                 <ul class="dropdown-menu">
                                     <!-- User image -->
                                     <li class="user-header">
                                         <img src="./img/logo.png" class="img-circle" alt="User Image">
                                         <p>
-                                            Admin
-                                            <small>admin@gmail.com</small>
+                                            <?php echo $_SESSION['name'] ?>
+                                            <small><?php echo $_SESSION['email'] ?></small>
                                         </p>
                                     </li>
                                     <li class="user-footer">
@@ -195,6 +195,18 @@ $db->sql("SET NAMES 'utf8'");
                         <li><a href="manage-plans.php"><i class="fa fa-sliders"></i>Manage Plans</a></li>
                     </ul>
                 </li>
+                <?php if($_SESSION['role'] == 'Super Admin'){?>
+                <li class="treeview">
+                    <a href="admin-access.php">
+                        <i class="fa fa-cubes" class="active"></i> <span>Admin Access</span>
+                    </a>
+                </li>
+                <?php
+                
+
+                }?>
+
+
                 
                 
                     

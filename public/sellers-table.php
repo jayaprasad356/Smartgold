@@ -27,9 +27,11 @@
                                     <th data-field="id" data-sortable="true">ID</th>
                                     <th data-field="date_created" data-sortable="true">Enrollment Date  <br> <small>(yyyy-mm-dd)</small></th>
                                     <th data-field="name" data-sortable="true">Name</th>
+                                    <th data-field="status" data-sortable="true">Status</th>
                                     <th data-field="store_name" data-sortable="true">Store Name</th>
                                     <th data-field="email" data-sortable="true">Email</th>
                                     <th data-field="mobile">Mobile</th>
+                                    <th data-field="plan">Plan</th>
                                 
                                     <th data-field="store_url" data-sortable="true">Store URL</th>
                                     <th data-field="logo" >Logo</th>
@@ -40,7 +42,8 @@
                                     <th data-field="pincode" data-sortable="true">Pincode</th>
                                     <th data-field="city" data-sortable="true" >City</th>
                                     <th data-field="state" data-sortable="true">State</th>
-                                    <th data-field="status" data-sortable="true">Status</th>
+                                    
+
                                     
                                 </tr>
                             </thead>
