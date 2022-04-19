@@ -308,7 +308,7 @@ if (isset($_POST['add_product'])  && !empty($_POST['add_product'])) {
     $stock = $db->escapeString($_POST['stock']);
     $price= $db->escapeString($_POST['price']);
     $gender= $db->escapeString($_POST['gender']);
-    $weight= $db->escapeString($_POST['weight']);
+    $weight = (isset($_POST['weight']) && $_POST['weight'] != "") ? $db->escapeString($_POST['weight']) : 0;
     $discounted_price = (isset($_POST['discounted_price']) && $_POST['discounted_price'] != "") ? $db->escapeString($_POST['discounted_price']) : "";
     $category_id = $db->escapeString($_POST['category_id']);
     // get image info
@@ -334,7 +334,7 @@ if (isset($_POST['add_product'])  && !empty($_POST['add_product'])) {
     if ($image_error > 0) {
         echo " <span class='label label-danger'>Not uploaded!</span>";
     }
-    if (!empty($name) && !empty($category_id) && !empty($weight) && !empty($gender)   && empty($error['image'])) {
+    if (!empty($name) && !empty($category_id) && !empty($gender)   && empty($error['image'])) {
 
         // create random image file name
         $string = '0123456789';

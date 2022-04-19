@@ -161,7 +161,7 @@ if (isset($_GET['table']) && $_GET['table'] == 'orders') {
         $operate = '<a href="view-order.php?id=' . $row['id'] . '" class="label label-primary" title="View">View</a>';
         $dc  = $row['date_created'];
         $dc = explode(" ", $dc); 
-        $update = '<a href="updateorders.php?id=' . $row['id'] . '" class="label label-success" title="Update">Update Orders</a>';
+        $update = '<a href="updateorders.php?id=' . $row['id'] . '" class="label label-primary" title="Update">Update Orders</a>';
         $tempRow['id'] = $row['id'];
         $tempRow['date_created'] = $dc[0];
         $tempRow['product_id'] = $row['product_id'];
@@ -170,6 +170,10 @@ if (isset($_GET['table']) && $_GET['table'] == 'orders') {
         $tempRow['delivery_charges'] = $row['delivery_charges'];
         if($row['status'] == 'Cancelled'){
             $tempRow['status'] = "<label class='label label-danger'>".$row['status']."</label>";
+
+        }
+        else if($row['status'] == 'Completed'){
+            $tempRow['status'] = "<label class='label label-success'>".$row['status']."</label>";
 
         }
         else{
