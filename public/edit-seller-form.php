@@ -303,6 +303,14 @@ $res = $db->getResult();
                                 </div>
 
                             </div>
+                            <div class="row">
+                            <div class="form-group col-md-4">
+                                    <div class="form-group">
+                                        <label for="">GST Number</label><i class="text-danger asterik">*</i>
+                                        <input type="text" class="form-control" name="gst_number" value="<?= $res[0]['gst_number']; ?>" required>
+                                    </div>
+                                </div>
+                            </div>
                             
                             <div class="row">
                                 <div class="form-group col-md-4">

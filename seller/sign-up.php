@@ -259,6 +259,10 @@ $db->connect();
                             <input type="text" class="form-control" name="pan_number" required>
                         </div>
                         <div class="form-group">
+                            <label for="">GST Number</label><i class="text-danger asterik">*</i>
+                            <input type="text" class="form-control" name="gst_number" required>
+                        </div>
+                        <div class="form-group">
                             <label for="">Latitude</label><i class="text-danger asterik">*</i>
                             <input type="number" class="form-control" name="latitude" id="latitude" required>
                         </div>

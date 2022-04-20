@@ -29,6 +29,7 @@ if (isset($_POST['add_seller']) && $_POST['add_seller'] == 1) {
     $account_name = (isset($_POST['account_name']) && $_POST['account_name'] != "") ? $db->escapeString($_POST['account_name']) : "";
     $bank_name = (isset($_POST['bank_name']) && $_POST['bank_name'] != "") ? $db->escapeString($_POST['bank_name']) : "";
     $pan_number = $db->escapeString($_POST['pan_number']);
+    $gst_number = $db->escapeString($_POST['gst_number']);
     
     $store_description = (isset($_POST['description']) && $_POST['description'] != "") ? $db->escapeString($_POST['description']) : "";
     
@@ -125,7 +126,7 @@ if (isset($_POST['add_seller']) && $_POST['add_seller'] == 1) {
         }
     }
 
-    $sql = "INSERT INTO `seller`(`name`, `store_name`,`email`, `mobile`, `password`, `store_url`, `logo`, `store_description`, `street`, `pincode`,`city`, `state`, `account_number`, `bank_ifsc_code`, `account_name`, `bank_name`, `status`,`national_identity_card`,`address_proof`,`pan_number`,`latitude`,`longitude`) VALUES ('$name','$store_name','$email', '$mobile', '$password','$store_url' ,'$filename', '$store_description', '$street','$pincode','$city','$state','$account_number','$bank_ifsc_code','$account_name','$bank_name','$status','$national_id_card','$address_proof','$pan_number','$latitude','$longitude')";
+    $sql = "INSERT INTO `seller`(`name`, `store_name`,`email`, `mobile`, `password`, `store_url`, `logo`, `store_description`, `street`, `pincode`,`city`, `state`, `account_number`, `bank_ifsc_code`, `account_name`, `bank_name`, `status`,`national_identity_card`,`address_proof`,`pan_number`,`gst_number`,`latitude`,`longitude`) VALUES ('$name','$store_name','$email', '$mobile', '$password','$store_url' ,'$filename', '$store_description', '$street','$pincode','$city','$state','$account_number','$bank_ifsc_code','$account_name','$bank_name','$status','$national_id_card','$address_proof','$pan_number','$gst_number','$latitude','$longitude')";
     if ($db->sql($sql)) {
         echo '<label class="alert alert-success">Seller Added Successfully!</label>';
     } else {

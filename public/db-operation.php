@@ -31,6 +31,7 @@ if (isset($_POST['add_seller']) && $_POST['add_seller'] == 1) {
     $account_name = (isset($_POST['account_name']) && $_POST['account_name'] != "") ? $db->escapeString($_POST['account_name']) : "";
     $bank_name = (isset($_POST['bank_name']) && $_POST['bank_name'] != "") ? $db->escapeString($_POST['bank_name']) : "";
     $pan_number = $db->escapeString($_POST['pan_number']);
+    $gst_number = $db->escapeString($_POST['gst_number']);
     
     $store_description = (isset($_POST['description']) && $_POST['description'] != "") ? $db->escapeString($_POST['description']) : "";
     
@@ -126,7 +127,7 @@ if (isset($_POST['add_seller']) && $_POST['add_seller'] == 1) {
             return false;
         }
     }
-    $sql = "INSERT INTO `seller`(`name`, `store_name`,`email`, `mobile`, `password`, `store_url`, `logo`, `store_description`, `street`, `pincode`,`city`, `state`, `account_number`, `bank_ifsc_code`, `account_name`, `bank_name`, `status`,`national_identity_card`,`address_proof`,`pan_number`,`latitude`,`longitude`,`valid`,`plan`) VALUES ('$name','$store_name','$email', '$mobile', '$password','$store_url' ,'$filename', '$store_description', '$street','$pincode','$city','$state','$account_number','$bank_ifsc_code','$account_name','$bank_name','$status','$national_id_card','$address_proof','$pan_number','$latitude','$longitude','$valid','$plan')";
+    $sql = "INSERT INTO `seller`(`name`, `store_name`,`email`, `mobile`, `password`, `store_url`, `logo`, `store_description`, `street`, `pincode`,`city`, `state`, `account_number`, `bank_ifsc_code`, `account_name`, `bank_name`, `status`,`national_identity_card`,`address_proof`,`pan_number`,`gst_number`,`latitude`,`longitude`,`valid`,`plan`) VALUES ('$name','$store_name','$email', '$mobile', '$password','$store_url' ,'$filename', '$store_description', '$street','$pincode','$city','$state','$account_number','$bank_ifsc_code','$account_name','$bank_name','$status','$national_id_card','$address_proof','$pan_number','$gst_number','$latitude','$longitude','$valid','$plan')";
     if ($db->sql($sql)) {
         echo '<label class="alert alert-success">Seller Added Successfully!</label>';
     } else {
@@ -140,6 +141,7 @@ if (isset($_POST['update_seller'])  && !empty($_POST['update_seller'])) {
     $mobile = $db->escapeString($_POST['mobile']);
     $email = $db->escapeString($_POST['email']);
     $pan_number = $db->escapeString($_POST['pan_number']);
+    $gst_number = $db->escapeString($_POST['gst_number']);
     $valid = $db->escapeString($_POST['valid']);
     $plan = $db->escapeString($_POST['plan']);
     $store_description = (isset($_POST['description']) && $_POST['description'] != "") ? $db->escapeString($_POST['description']) : "";
@@ -239,7 +241,7 @@ if (isset($_POST['update_seller'])  && !empty($_POST['update_seller'])) {
     if (!empty($password)) {
         $sql = "UPDATE `seller` SET `name`='$name',`latitude`='$latitude',`longitude`='$longitude',`store_name`='$store_name',`email`='$email',`mobile`='$mobile',`password`='$password',`store_url`='$store_url',`store_description`='$store_description',`street`='$street',`pincode`='$pincode',`city`='$city',`state`='$state',`account_number`='$account_number',`bank_ifsc_code`='$bank_ifsc_code',`account_name`='$account_name',`bank_name`='$bank_name',`status`=$status,`pan_number`='$pan_number',`valid`='$valid',`plan`='$plan' WHERE id=" . $id;
     } else {
-        $sql = "UPDATE `seller` SET `name`='$name',`latitude`='$latitude',`longitude`='$longitude',`store_name`='$store_name',`email`='$email',`mobile`='$mobile',`store_url`='$store_url',`store_description`='$store_description',`street`='$street',`pincode`='$pincode',`city`='$city',`state`='$state',`account_number`='$account_number',`bank_ifsc_code`='$bank_ifsc_code',`account_name`='$account_name',`bank_name`='$bank_name',`status`=$status,`pan_number`='$pan_number',`valid`='$valid',`plan`='$plan' WHERE id=" . $id;
+        $sql = "UPDATE `seller` SET `name`='$name',`latitude`='$latitude',`longitude`='$longitude',`store_name`='$store_name',`email`='$email',`mobile`='$mobile',`store_url`='$store_url',`store_description`='$store_description',`street`='$street',`pincode`='$pincode',`city`='$city',`state`='$state',`account_number`='$account_number',`bank_ifsc_code`='$bank_ifsc_code',`account_name`='$account_name',`bank_name`='$bank_name',`status`=$status,`pan_number`='$pan_number',`gst_number`='$gst_number',`valid`='$valid',`plan`='$plan' WHERE id=" . $id;
     }
     if ($db->sql($sql)) {
         echo "<label class='alert alert-success'>Information Updated Successfully.</label>";
