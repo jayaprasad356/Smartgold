@@ -112,9 +112,14 @@ if (isset($_POST['btnAdd'])) {
                        
                         <div class="form-group">
                             <label for="exampleInputFile">Image</label><?php echo isset($error['category_image']) ? $error['category_image'] : ''; ?>
-                            <input type="file" name="category_image" accept="image/png,  image/jpeg" id="category_image" />
+                            <input type="file" name="category_image" onchange="readURL(this);" accept="image/png,  image/jpeg" id="category_image" />
+                        </div>
+                        <div class="form-group">
+                            <img id="blah" src="#" alt="image" />
+
                         </div>
                     </div><!-- /.box-body -->
+
 
                     <div class="box-footer">
                         <button type="submit" class="btn btn-primary" name="btnAdd">Add</button>
@@ -131,5 +136,21 @@ if (isset($_POST['btnAdd'])) {
 </section>
 
 <div class="separator"> </div>
+<script>
+    function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#blah')
+                        .attr('src', e.target.result)
+                        .width(150)
+                        .height(200);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+</script>
 
 <?php $db->disconnect(); ?>

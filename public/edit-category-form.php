@@ -57,8 +57,8 @@ $res = $db->getResult();
                                     <div class="form-group">
                                         <label for="exampleInputFile">Image</label>
                                         
-                                        <input type="file" accept="image/png,  image/jpeg" name="image" id="image">
-                                        <p class="help-block"><img src="<?php echo DOMAIN_URL . $res[0]['image']; ?>" style="max-width:100%" /></p>
+                                        <input type="file" accept="image/png,  image/jpeg" onchange="readURL(this);"  name="image" id="image">
+                                        <p class="help-block"><img id="blah" src="<?php echo DOMAIN_URL . $res[0]['image']; ?>" style="max-width:100%" /></p>
                                     </div>
                                 </div>
                             </div>
@@ -292,4 +292,20 @@ $res = $db->getResult();
     }
 
     </script>
+    <script>
+    function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#blah')
+                        .attr('src', e.target.result)
+                        .width(150)
+                        .height(200);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+</script>
 <?php $db->disconnect(); ?>
