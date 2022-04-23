@@ -230,7 +230,7 @@ if (isset($_GET['table']) && $_GET['table'] == 'lockoffers') {
     foreach ($res as $row)
         $total = $row['total'];
 
-    $sql = "SELECT *,offer_lock.id AS id FROM users LEFT JOIN offer_lock  ON users.id = offer_lock.user_id WHERE offer_lock.offer_id = '11'" . $where ;
+    $sql = "SELECT *,offer_lock.id AS id FROM users LEFT JOIN offer_lock  ON users.id = offer_lock.user_id WHERE offer_lock.offer_id = '$offerid'" . $where ;
     $db->sql($sql);
     $res = $db->getResult();
     $bulkData = array();
