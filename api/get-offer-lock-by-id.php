@@ -55,6 +55,14 @@ if ($num >= 1) {
         $temp['gram_price'] = $row['gram_price'];
         $temp['wastage'] = $row['wastage'];
         $temp['total_locked'] = $lockcount;
+
+        $status = $row['status'];
+
+        $sql = "SELECT id,title FROM offer_lock_status WHERE id='$status'";
+        $db->sql($sql);
+        $res = $db->getResult();
+
+        $temp['status'] = $res[0]['title'];
         
         
         $temp1[] = $temp;
