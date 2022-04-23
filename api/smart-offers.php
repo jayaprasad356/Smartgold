@@ -56,7 +56,7 @@ $budget_range_id = $db->escapeString($_POST['budget_range_id']);
 $range_to = $db->escapeString($_POST['range_to']);
 $currentdate = new DateTime(date('Y-m-d'));
 $cdate = $currentdate->format('Y-m-d');
-$sql = "SELECT *,offers.description AS description FROM offers,seller,budget WHERE offers.seller_id = seller.id AND offers.budget_id = budget.id AND offers.budget_id = $budget_range_id AND offers.valid_date >= '$cdate' AND seller.valid >= '$cdate' AND offers.status = 1";
+$sql = "SELECT *,offers.id AS id,offers.description AS description FROM offers,seller,budget WHERE offers.seller_id = seller.id AND offers.budget_id = budget.id AND offers.budget_id = $budget_range_id AND offers.valid_date >= '$cdate' AND seller.valid >= '$cdate' AND offers.status = 1";
 $db->sql($sql);
 $res = $db->getResult();
 $num = $db->numRows($res);
@@ -66,6 +66,12 @@ if ($num >= 1) {
     {
         $distance = round((((acos(sin(($latitude*pi()/180)) * sin(($row['latitude']*pi()/180))+cos(($latitude*pi()/180)) * cos(($row['latitude']*pi()/180)) * cos((($longitude- $row['longitude'])*pi()/180))))*180/pi())*60*1.1515*1.609344), 2);
         if($distance <= $range_to){
+            $offer_id = $row['id'];
+            $sql = "SELECT * FROM offer_lock WHERE offer_id='$offer_id'";
+            $db->sql($sql);
+            $res = $db->getResult();
+            $lockcount = $db->numRows($res);
+            
             $tempRow['nick_name'] = 'Reputed Shop';
             $tempRow['id'] = $row['id'];
             $tempRow['seller_id'] = $row['seller_id'];
@@ -73,6 +79,7 @@ if ($num >= 1) {
             $tempRow['gram_price'] = $row['gram_price'];
             $tempRow['wastage'] = $row['wastage'];
             $tempRow['max_locked'] = $row['max_locked'];
+            $tempRow['total_locked'] = $lockcount;
             $tempRow['status'] = $row['status'];
             $tempRow['valid_date'] = $row['valid_date'];
             $tempRow['offer_details'] = $row['description'];
