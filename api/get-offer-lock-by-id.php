@@ -31,14 +31,37 @@ if (empty($_POST['user_id'])) {
     return false;
 }
 $user_id = $db->escapeString($_POST['user_id']);
-$sql = "SELECT *,ol.id AS id from offer_lock ol INNER JOIN offers o on ol.offer_id = o.id INNER JOIN seller s ON o.seller_id = s.id WHERE ol.user_id = '" . $user_id . "'";
+$sql = "SELECT *,ol.id AS id,s.status AS status from offer_lock ol INNER JOIN offers o on ol.offer_id = o.id INNER JOIN seller s ON o.seller_id = s.id WHERE ol.user_id = '" . $user_id . "'";
 $db->sql($sql);
 $res = $db->getResult();
 $num = $db->numRows($res);
 if ($num >= 1) {
+    foreach ($res as $row) {
+        $offer_id = $row['offer_id'];
+        $sql = "SELECT * FROM offer_lock WHERE offer_id='$offer_id'";
+        $db->sql($sql);
+        $res = $db->getResult();
+        $lockcount = $db->numRows($res);
+
+        $temp['id'] = $row['id'];
+        $temp['store_name'] = $row['store_name'];
+        $temp['valid_date'] = $row['valid_date'];
+        $temp['description'] = $row['description'];
+        $temp['street'] = $row['street'];
+        $temp['mobile'] = $row['mobile'];
+        $temp['latitude'] = $row['latitude'];
+        $temp['longitude'] = $row['longitude'];
+        $temp['paid_amt'] = $row['paid_amt'];
+        $temp['gram_price'] = $row['gram_price'];
+        $temp['wastage'] = $row['wastage'];
+        $temp['total_locked'] = $lockcount;
+        
+        
+        $temp1[] = $temp;
+    }
     $response['success'] = true;
     $response['message'] = "Locked Offer Successfully Retrived";
-    $response['data'] = $res;
+    $response['data'] = $temp1;
     print_r(json_encode($response));
 
 }
