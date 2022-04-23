@@ -27,6 +27,7 @@ include_once('includes/functions.php');
                             <thead>
                                 <tr>
                                     <th data-field="operate" data-events="actionEvents">Action</th>
+                                    
                                     <th data-field="id" data-sortable="true">ID</th>
                                     <th data-field="name" data-sortable="true">Name</th>
                                     
