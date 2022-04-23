@@ -71,6 +71,12 @@ if ($num >= 1) {
             $db->sql($sql);
             $res = $db->getResult();
             $lockcount = $db->numRows($res);
+
+            $seller_id = $row['seller_id'];
+            $sql = "SELECT * FROM products WHERE seller_id='$seller_id'";
+            $db->sql($sql);
+            $res = $db->getResult();
+            $product_count = $db->numRows($res);
             
             $tempRow['nick_name'] = 'Reputed Shop';
             $tempRow['id'] = $row['id'];
@@ -80,6 +86,7 @@ if ($num >= 1) {
             $tempRow['wastage'] = $row['wastage'];
             $tempRow['max_locked'] = $row['max_locked'];
             $tempRow['total_locked'] = $lockcount;
+            $tempRow['total_products'] = $product_count;
             $tempRow['status'] = $row['status'];
             $tempRow['valid_date'] = $row['valid_date'];
             $tempRow['offer_details'] = $row['description'];

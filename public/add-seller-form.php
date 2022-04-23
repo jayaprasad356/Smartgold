@@ -274,8 +274,8 @@
                                 </div>
                                 <div class="form-group col-md-4">
                                     <div class="form-group">
-                                        <label for="">PAN Number</label><i class="text-danger asterik">*</i>
-                                        <input type="text" class="form-control" name="pan_number" required>
+                                        <label for="">PAN Number</label><i class="text-danger asterik">*</i><p id="pan_valid" class="text-danger"></p>
+                                        <input type="text" class="form-control pan_number" name="pan_number" id="pan_number" required>
                                     </div>
                                 </div>
                                 
@@ -498,24 +498,31 @@
         var formData = new FormData(this);
         if(document.getElementById("mobilecheckout").innerHTML == ''){
             if ($("#add_form").validate().form()) {
-            $.ajax({
-                    type: 'POST',
-                    url: $(this).attr('action'),
-                    data: formData,
-                    beforeSend: function() {
-                        $('#submit_btn').html('Please wait..');
-                    },
-                    cache: false,
-                    contentType: false,
-                    processData: false,
-                    success: function(result) {
-                        $('#result').html(result);
-                        $('#result').show().delay(6000).fadeOut();
-                        $('#submit_btn').html('Add');
-                        $('#add_form')[0].reset();
-                        document.getElementById("resultvalid").innerHTML = '';
-                    }
-                });
+                if(document.getElementById("pan_valid").innerHTML == ""){
+                    $.ajax({
+                        type: 'POST',
+                        url: $(this).attr('action'),
+                        data: formData,
+                        beforeSend: function() {
+                            $('#submit_btn').html('Please wait..');
+                        },
+                        cache: false,
+                        contentType: false,
+                        processData: false,
+                        success: function(result) {
+                            $('#result').html(result);
+                            $('#result').show().delay(6000).fadeOut();
+                            $('#submit_btn').html('Add');
+                            $('#add_form')[0].reset();
+                            document.getElementById("resultvalid").innerHTML = '';
+                        }
+                    });
+
+                }
+                else{
+                    alert("Pan Number Invalid");
+                }
+
             }
 
         }
@@ -524,6 +531,27 @@
             alert("Mobile Number Already Registered");
 
         }
+    });
+</script>
+<script>
+    $(document).on('input', '.pan_number', function(){
+        var regExp = /[a-zA-z]{5}\d{4}[a-zA-Z]{1}/; 
+    
+        let pan_number = $('#pan_number').val();
+      
+        if (pan_number.length == 10 ) { 
+            if( pan_number.match(regExp) ){ 
+                $('#pan_valid').html('');
+                    }
+            else {
+                $('#pan_valid').html('Not a valid PAN number');
+         
+            } 
+        } 
+        else { 
+            $('#pan_valid').html('Please enter 10 digits for a valid PAN number');
+            
+        } 
     });
 </script>
 <script type="text/javascript">

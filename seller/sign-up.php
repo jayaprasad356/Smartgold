@@ -255,8 +255,8 @@ $db->connect();
                             <input type="text" class="form-control" id='pincode' name="pincode" required>
                         </div>
                         <div class="form-group">
-                            <label for="">PAN Number</label><i class="text-danger asterik">*</i>
-                            <input type="text" class="form-control" name="pan_number" required>
+                            <label for="">PAN Number</label><i class="text-danger asterik">*</i> <p id="pan_valid" class="text-danger"></p>
+                            <input type="text" class="form-control pan_number" name="pan_number" id="pan_number" required>
                         </div>
                         <div class="form-group">
                             <label for="">GST Number</label><i class="text-danger asterik">*</i>
@@ -353,8 +353,8 @@ $db->connect();
                 document.getElementById("mobile").disabled = false;
                 var formData = new FormData(this);
                 if ($("#add_seller_form").validate().form()) {
-                    
-                    $.ajax({
+                    if(document.getElementById("pan_valid").innerHTML == ""){
+                        $.ajax({
                         type: 'POST',
                         url: $(this).attr('action'),
                         data: formData,
@@ -378,6 +378,13 @@ $db->connect();
 
                         }
                     });
+
+                    }
+                    else{
+                        alert("Pan Number Invalid");
+                    }
+                    
+
                 }else{
                     document.getElementById("mobile").disabled = true;
 
@@ -436,6 +443,27 @@ $(document).ready(function() {
             
         });
 });
+</script>
+<script>
+    $(document).on('input', '.pan_number', function(){
+        var regExp = /[a-zA-z]{5}\d{4}[a-zA-Z]{1}/; 
+    
+        let pan_number = $('#pan_number').val();
+      
+        if (pan_number.length == 10 ) { 
+            if( pan_number.match(regExp) ){ 
+                $('#pan_valid').html('');
+                    }
+            else {
+                $('#pan_valid').html('Not a valid PAN number');
+         
+            } 
+        } 
+        else { 
+            $('#pan_valid').html('Please enter 10 digits for a valid PAN number');
+            
+        } 
+    });
 </script>
 <script type="text/javascript">
 function sendOtp() {
