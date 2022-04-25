@@ -26,11 +26,12 @@
                                 <th data-field="operate" data-events="actionEvents">Action</th>
                                 <th data-field="id" data-sortable="true">ID</th>
                                 <th data-field="valid_date" data-sortable="true">Offer Date</th>
-                                <th data-field="gram_price" data-sortable="true">Price Per Gram</th>
-                                <th data-field="wastage" data-sortable="true">Wastage</th>
-                                <th data-field="max_locked" data-sortable="true">Max Locked</th>
+                                <th data-field="gram_price" data-sortable="true">Discount Per Gram(₹)</th>
+                                <th data-field="wastage" data-sortable="true">Discount On Wastage(%)</th>
+                                <th data-field="max_locked" data-sortable="true">Maximum Locked Items</th>
                                 
                                 <th data-field="budget_range" >Budget Range</th>
+                                <th data-field="total_locked_customers" >No. of Locked Customers</th>
                                 
                                 <th data-field="locked" data-events="actionEvents">Locked Customers</th>
                                 <th data-field="status" >Status</th>

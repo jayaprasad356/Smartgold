@@ -97,8 +97,16 @@ if (isset($_GET['table']) && $_GET['table'] == 'offers') {
             $budget = "above 10 lakhs";
         }
         
-        $locked = '<a href="offers_lock.php?id=' . $row['id'] . '" class="label label-success" title="Show Locked Customers">Show Locked Customers</a>';
+        $locked = '<a href="offers_lock.php?id=' . $row['id'] . '" class="label label-primary" title="Show Locked Customers">Show Locked Customers</a>';
         $tempRow['id'] = $row['id'];
+        $offerid = $row['id'];
+        $sql = "SELECT * FROM offer_lock WHERE offer_id = '$offerid'";
+        $db->sql($sql);
+        $res = $db->getResult();
+        $num = $db->numRows($res);
+        $tempRow['total_locked_customers'] = $num;
+
+
         $tempRow['seller_id'] = $row['seller_id'];
         $tempRow['gram_price'] = $currency . " " . $row['gram_price'];
         $tempRow['wastage'] = $row['wastage'] . ' grams';
