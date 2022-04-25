@@ -20,7 +20,7 @@ if (isset($_POST['btnLogin'])) {
 
     if (!empty($email) && !empty($password)) {
 		$password = md5($password);
-		$sql = "SELECT * FROM admin WHERE email = '$email' AND '$password'";
+		$sql = "SELECT * FROM admin WHERE email = '$email' AND password = '$password'";
 		$db->sql($sql);
 		$res = $db->getResult();
 		$num = $db->numRows($res);
