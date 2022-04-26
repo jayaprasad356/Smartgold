@@ -30,6 +30,7 @@
                                 <th data-field="delivery_charges" data-sortable="true">Delivery Charges</th>
                                 <th data-field="buy_method" data-sortable="true">Buy Method</th>
                                 <th data-field="status" >Status</th>
+                                <th data-field="payment_status">Payment Status</th>
                                 <th data-field="update">Update</th>
                                 <th data-field="operate" data-events="actionEvents">Action</th>
                             </tr>

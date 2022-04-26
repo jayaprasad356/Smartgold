@@ -65,6 +65,15 @@ if (isset($_GET['table']) && $_GET['table'] == 'offers') {
         $order = $db->escapeString($_GET['order']);
 
     }
+    if (isset($_GET['budget_id']) && $_GET['budget_id'] != '') {
+        $budget_id = $db->escapeString($_GET['budget_id']);
+        $where .= ' AND budget_id =' . $budget_id;
+    }
+    if (isset($_GET['status']) && $_GET['status'] != '') {
+        $status = $db->escapeString($_GET['status']);
+        $where .= ' AND status =' . $status;
+    }
+
 
     $sql = "SELECT COUNT(`id`) as total FROM `offers` " . $where;
     $db->sql($sql);
@@ -188,6 +197,16 @@ if (isset($_GET['table']) && $_GET['table'] == 'orders') {
             $tempRow['status'] = "<label class='label label-primary'>".$row['status']."</label>";
 
         }
+
+        if($row['payment_status'] == 'Unpaid'){
+            $tempRow['payment_status'] = "<label class='label label-danger'>".$row['payment_status']."</label>";
+
+        }
+        else{
+            $tempRow['payment_status'] = "<label class='label label-primary'>".$row['payment_status']."</label>";
+
+        }
+        
         
         $tempRow['buy_method'] = ($row['buy_method'] == 1)? "<label class='label label-primary'>Pick Up at Store</label>": (($row['buy_method'] == 2)? "<label class='label label-primary'>Delivery at Home</label>": "<label class='label label-primary'>Delivery at Home</label>");
         
