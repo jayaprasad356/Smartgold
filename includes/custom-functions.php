@@ -58,7 +58,7 @@ class custom_functions
         
         // Total count
         
-        $sql = "SELECT COUNT(" . $field . ") as total FROM " . $table ." WHERE id=" . $id;
+        $sql = "SELECT COUNT(" . $field . ") as total FROM " . $table ." WHERE seller_id=" . $id;
         $this->db->sql($sql);
         $res = $this->db->getResult();
         foreach ($res as $row)

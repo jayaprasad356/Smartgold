@@ -159,16 +159,36 @@ if (isset($_GET['table']) && $_GET['table'] == 'orders') {
     if (isset($_GET['order'])){
         $order = $db->escapeString($_GET['order']);
     }
-    $sql = "SELECT COUNT(`id`) as total FROM `orders` WHERE seller_id = '$id' ";
-    $db->sql($sql);
-    $res = $db->getResult();
-    foreach ($res as $row)
-        $total = $row['total'];
+
+    if (isset($_GET['product_id']) && $_GET['product_id'] != 'All') {
+        $product_id = $db->escapeString($_GET['product_id']);
+        $where .= ' AND orders.product_id =' . $product_id;
+    }
+    if (isset($_GET['buy_method']) && $_GET['buy_method'] != '') {
+        $buy_method = $db->escapeString($_GET['buy_method']);
+        $where .= ' AND orders.buy_method =' . $buy_method;
+    }
+    if (isset($_GET['payment_status']) && $_GET['payment_status'] != '') {
+        $payment_status = $db->escapeString($_GET['payment_status']);
+        $where .= " AND orders.payment_status = '$payment_status'";
+        
+    }
+    if (isset($_GET['status']) && $_GET['status'] != '') {
+        $status = $db->escapeString($_GET['status']);
+        $where .= " AND orders.status = '$status'";
+    }
+    // $sql = "SELECT COUNT(`id`) as total FROM `orders` WHERE seller_id = '$id' ";
+    // $db->sql($sql);
+    // $res = $db->getResult();
+    // foreach ($res as $row)
+    //     $total = $row['total'];
     //$sql = "SELECT *,orders.id AS id,orders.status AS status FROM orders LEFT JOIN products ON orders.product_id = products.id WHERE products.seller_id = '" . $id . "'";
     $sql = "SELECT *,orders.id AS id,orders.status AS status FROM `orders`,`products` " . $where . " ORDER BY " . $sort . " " . $order . " LIMIT " . $offset . ", " . $limit;
     
     $db->sql($sql);
     $res = $db->getResult();
+    $num = $db->numRows($res);
+    $total = $num;
 
     $bulkData = array();
     $bulkData['total'] = $total;
@@ -317,12 +337,21 @@ if (isset($_GET['table']) && $_GET['table'] == 'products') {
         $category_id = $db->escapeString($_GET['category_id']);
         $where .= ' AND category_id =' . $category_id;
     }
-    $sql = "SELECT COUNT(`id`) as total FROM `products` " . $where;
+    if (isset($_GET['status']) && $_GET['status'] != '') {
+        $status = $db->escapeString($_GET['status']);
+        $where .= ' AND status =' . $status;
+    }
+
+    if (isset($_GET['gender']) && $_GET['gender'] != '') {
+        $gender = $db->escapeString($_GET['gender']);
+        //$where .= "AND gender = '$gender'";
+    }
+    $sql = "SELECT COUNT(`id`) as total FROM `products` "  . $where;
     $db->sql($sql);
     $res = $db->getResult();
     foreach ($res as $row)
         $total = $row['total'];
-    $sql = "SELECT p.*,(SELECT name FROM category c WHERE c.id=p.category_id) as category_name FROM `products` p " . $where . " ORDER BY " . $sort . " " . $order . " LIMIT " . $offset . ", " . $limit;
+    $sql = "SELECT p.*,(SELECT name FROM category c WHERE c.id=p.category_id) as category_name FROM `products` p " . $where . " AND gender = '$gender' ORDER BY " . $sort . " " . $order . " LIMIT " . $offset . ", " . $limit;
     $db->sql($sql);
     $res = $db->getResult();
 

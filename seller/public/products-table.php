@@ -19,8 +19,7 @@
                 <div class="box-header">
                     <div class="form-group col-md-3">
                             <h4 class="box-title">Filter by Products Category</h4>
-                            <form method="post">
-                                <select id="category_id" name="category_id" placeholder="Select Category" required class="form-control col-xs-3" style="width: 300px;">
+                            <select id="category_id" name="category_id" placeholder="Select Category" required class="form-control col-xs-3" style="width: 300px;">
                                     <?php
                                     $Query = "select name, id from category";
                                     $db->sql($Query);
@@ -38,7 +37,23 @@
                                     }
                                     ?>
                                 </select>
-                            </form>
+                    </div>
+                    <div class="form-group col-md-3">
+                            <h4 class="box-title">Filter by Gender</h4>
+                            <select id="gender" name="gender" class="form-control" required>
+                            
+                                <option value="Male">Male</option>
+                                <option value="Female" selected>Female</option>
+                                <option value="Kids" >Kids</option>
+                                <option value="Unisex" >Unisex</option>
+                            </select>
+                    </div>
+                    <div class="form-group col-md-3">
+                            <h4 class="box-title">Filter by Status</h4>
+                            <select id="status" name="status" placeholder="Select budget range" required class="form-control col-xs-3" style="width: 300px;">
+                                        <option value="1">Active</option>
+                                        <option value="0">Deactive</option>
+                            </select>
                         </div>
                 </div>
                 <!-- /.box-header -->
@@ -78,9 +93,19 @@
         id = $('#category_id').val();
         $('#products_table').bootstrapTable('refresh');
     });
+    $('#gender').on('change', function() {
+        id = $('#gender').val();
+        $('#products_table').bootstrapTable('refresh');
+    });
+    $('#status').on('change', function() {
+        id = $('#status').val();
+        $('#products_table').bootstrapTable('refresh');
+    });
     function queryParams_1(p) {
         return {
             "category_id": $('#category_id').val(),
+            "gender": $('#gender').val(),
+            "status": $('#status').val(),
             limit: p.limit,
             sort: p.sort,
             order: p.order,

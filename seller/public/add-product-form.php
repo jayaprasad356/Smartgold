@@ -109,12 +109,12 @@ pointer-events:none;
                         <div class="row">
                                 <div class="col-md-6">
                                     <label for="gender">Gender :</label><i class="text-danger asterik">*</i>
-                                    <select name="gender" class="form-control" required>
+                                    <select  name="gender" class="form-control" required>
                                         <option value="">Select</option>
                                         <option value="Male">Male</option>
                                         <option value="Female" selected>Female</option>
-                                        <option value="Kids" selected>Kids</option>
-                                        <option value="Unisex" selected>Unisex</option>
+                                        <option value="Kids" >Kids</option>
+                                        <option value="Unisex" >Unisex</option>
                                     </select>
                                 </div>
 
