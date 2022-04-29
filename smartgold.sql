@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 17, 2022 at 03:21 PM
+-- Generation Time: Apr 29, 2022 at 06:22 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.27
 
@@ -36,15 +36,51 @@ CREATE TABLE `address` (
   `area` varchar(120) NOT NULL,
   `city` varchar(120) NOT NULL,
   `pincode` varchar(10) NOT NULL,
-  `default_address` tinyint(1) NOT NULL
+  `default_address` tinyint(1) NOT NULL,
+  `last_updated` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
+  `date_created` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `address`
 --
 
-INSERT INTO `address` (`id`, `name`, `user_id`, `address`, `landmark`, `area`, `city`, `pincode`, `default_address`) VALUES
-(1, 'prasad', 1, '26 uppukara street', '', 'sholapuram', 'Kumbakonam', '612503', 1);
+INSERT INTO `address` (`id`, `name`, `user_id`, `address`, `landmark`, `area`, `city`, `pincode`, `default_address`, `last_updated`, `date_created`) VALUES
+(1, 'prasad', 1, '26 uppukara street', '', 'sholapuram', 'Kumbakonam', '612503', 1, NULL, '2022-04-07 11:13:23'),
+(2, 'Vijay', 2, 'HQ9Q+HPM', '', 'HQ9Q+HPM, Ezhil Nagar, Keeranur, Tamil Nadu 622502, India', 'Keeranur', '622502', 1, NULL, '2022-04-07 11:13:23'),
+(3, 'subha', 3, '438/89', 'temple', '438/89, G.V. Residency, Uppili Palayam, Coimbatore, Tamil Nadu 641015, India', 'Coimbatore', '641015', 1, NULL, '2022-04-07 11:13:23'),
+(4, 'subha', 3, '8', '', 'Ezhil nagar', 'keeranur', '622502', 0, NULL, '2022-04-07 11:13:23'),
+(5, 'Office', 2, 'Tiruchirappalli', '', 'No 4/72 Supramaniyan Street Airport, Thirunagar, Tiruchirappalli, Tamil Nadu 620007, India', 'Tiruchirappalli', '620007', 0, NULL, '2022-04-07 11:13:23'),
+(6, 'Jerusalen', 4, 'Jiron Jerusalen', '', 'Jr. Jerusalen, San Juan de Lurigancho 15408, Peru', 'San Juan de Lurigancho', '154085', 1, NULL, '2022-04-07 11:13:23'),
+(7, 'Otra', 4, 'prueba', '', 'prueba', 'prueba', '123123', 0, NULL, '2022-04-07 11:13:23'),
+(8, 'asdasd', 4, 'asdasdasdasd', '', 'asdasd', 'asdasd', '123123', 0, NULL, '2022-04-07 11:13:23'),
+(9, 'Segunda direccion', 4, 'Direccion de prueba 2', 'Landmark prueba', 'Area de prueba', 'ciudad de prueba', '105231', 0, NULL, '2022-04-07 11:13:23'),
+(10, 'Chandra', 5, 'T.Nagar', 'rathinagiri road', 'vilankurichi', 'Coimbatore', '641035', 1, NULL, '2022-04-16 10:20:14'),
+(11, 'chandrasekar', 6, 'no1', 'Near Bharat gas', 'ammapalayam', 'Tirupur', '641652', 1, NULL, '2022-04-22 05:28:36');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `admin`
+--
+
+CREATE TABLE `admin` (
+  `id` int(11) NOT NULL,
+  `name` text DEFAULT NULL,
+  `email` text DEFAULT NULL,
+  `password` text DEFAULT NULL,
+  `role` text DEFAULT NULL,
+  `status` tinyint(4) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `admin`
+--
+
+INSERT INTO `admin` (`id`, `name`, `email`, `password`, `role`, `status`) VALUES
+(13, 'Smart Gold Admin', 'admin@gmail.com', '0192023a7bbd73250516f069df18b500', 'Super Admin', 1),
+(14, 'Manager', 'subhasubramanian2000@gmail.com', 'cc03e747a6afbbcbf8be7668acfebee5', 'Admin', 1),
+(15, 'Divakar', 'divakarvan03@gmail.com', '827ccb0eea8a706c4c34a16891f84e7b', 'Admin', 1);
 
 -- --------------------------------------------------------
 
@@ -54,17 +90,19 @@ INSERT INTO `address` (`id`, `name`, `user_id`, `address`, `landmark`, `area`, `
 
 CREATE TABLE `banners` (
   `id` int(10) NOT NULL,
-  `imgUrl` varchar(200) NOT NULL
+  `imgUrl` varchar(200) NOT NULL,
+  `last_updated` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
+  `date_created` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `banners`
 --
 
-INSERT INTO `banners` (`id`, `imgUrl`) VALUES
-(1, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhrT-e8MqX-SSxA3pJVkYRpu3gcoccsVjPdw&usqp=CAUhttps://i.pinimg.com/originals/1e/5d/27/1e5d270c627074a21966cd113c3aa3d1.jpg'),
-(2, 'https://jewelsbox.co/images/jewelsbox-banner-23-aug-2021.jpeg'),
-(3, 'https://i.pinimg.com/originals/a1/83/7b/a1837bd992681c561de4985a48884f7a.jpg');
+INSERT INTO `banners` (`id`, `imgUrl`, `last_updated`, `date_created`) VALUES
+(1, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhrT-e8MqX-SSxA3pJVkYRpu3gcoccsVjPdw&usqp=CAUhttps://i.pinimg.com/originals/1e/5d/27/1e5d270c627074a21966cd113c3aa3d1.jpg', NULL, '2022-04-07 11:16:00'),
+(2, 'https://jewelsbox.co/images/jewelsbox-banner-23-aug-2021.jpeg', NULL, '2022-04-07 11:16:00'),
+(3, 'https://i.pinimg.com/originals/a1/83/7b/a1837bd992681c561de4985a48884f7a.jpg', NULL, '2022-04-07 11:16:00');
 
 -- --------------------------------------------------------
 
@@ -74,18 +112,20 @@ INSERT INTO `banners` (`id`, `imgUrl`) VALUES
 
 CREATE TABLE `budget` (
   `id` int(11) NOT NULL,
-  `budget` varchar(200) NOT NULL
+  `budget` varchar(200) NOT NULL,
+  `last_updated` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
+  `date_created` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `budget`
 --
 
-INSERT INTO `budget` (`id`, `budget`) VALUES
-(1, 'upto 1 lakh'),
-(2, '1 lakh to 5 lakhs'),
-(3, '5 lakhs to 10 lakhs'),
-(4, 'above 10 lakhs');
+INSERT INTO `budget` (`id`, `budget`, `last_updated`, `date_created`) VALUES
+(1, 'upto 1 lakh', NULL, '2022-04-07 11:20:02'),
+(2, '1 lakh to 5 lakhs', NULL, '2022-04-07 11:20:02'),
+(3, '5 lakhs to 10 lakhs', NULL, '2022-04-07 11:20:02'),
+(4, 'above 10 lakhs', NULL, '2022-04-07 11:20:02');
 
 -- --------------------------------------------------------
 
@@ -97,8 +137,20 @@ CREATE TABLE `cart` (
   `id` int(10) NOT NULL,
   `user_id` int(10) NOT NULL,
   `product_id` int(10) NOT NULL,
-  `quantity` int(10) NOT NULL
+  `quantity` int(10) NOT NULL,
+  `last_updated` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
+  `date_created` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `cart`
+--
+
+INSERT INTO `cart` (`id`, `user_id`, `product_id`, `quantity`, `last_updated`, `date_created`) VALUES
+(57, 4, 8, 2, NULL, '2022-04-07 11:21:24'),
+(58, 4, 9, 1, NULL, '2022-04-07 11:21:24'),
+(65, 2, 41, 1, NULL, '2022-04-18 05:02:30'),
+(69, 6, 40, 1, NULL, '2022-04-22 05:33:49');
 
 -- --------------------------------------------------------
 
@@ -110,16 +162,28 @@ CREATE TABLE `category` (
   `id` int(11) NOT NULL,
   `name` varchar(60) NOT NULL,
   `image` text NOT NULL,
-  `status` tinyint(4) DEFAULT NULL
+  `status` tinyint(4) DEFAULT NULL,
+  `last_updated` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
+  `date_created` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `category`
 --
 
-INSERT INTO `category` (`id`, `name`, `image`, `status`) VALUES
-(1, 'Ring', 'upload/images/0780-2021-12-25.jpg', 1),
-(2, 'Chain', 'upload/images/4086-2021-12-25.jpg', 1);
+INSERT INTO `category` (`id`, `name`, `image`, `status`, `last_updated`, `date_created`) VALUES
+(1, 'Ring', 'upload/images/0780-2021-12-25.jpg', 1, NULL, '2022-04-07 11:22:37'),
+(2, 'Chain', 'upload/images/4086-2021-12-25.jpg', 1, NULL, '2022-04-07 11:22:37'),
+(3, 'Ear Rings', 'upload/images/1649320567.5162.jpg', 1, NULL, '2022-04-07 11:22:37'),
+(4, 'Bracelets', 'upload/images/1649320740.1485.jpg', 1, NULL, '2022-04-07 11:22:37'),
+(5, 'Bangles', 'upload/images/1550-2022-04-02.jpg', 1, NULL, '2022-04-07 11:22:37'),
+(6, 'Nose Pins', 'upload/images/8947-2022-04-03.jpg', 1, NULL, '2022-04-07 11:22:37'),
+(7, 'Pendants', 'upload/images/2758-2022-04-03.jpg', 1, NULL, '2022-04-07 11:22:37'),
+(8, 'MANGALSUTRA', 'upload/images/6452-2022-04-03.jpg', 1, NULL, '2022-04-07 11:22:37'),
+(9, 'Necklaces', 'upload/images/5220-2022-04-03.jpg', 1, NULL, '2022-04-07 11:22:37'),
+(10, 'Necklace Set', 'upload/images/4024-2022-04-03.png', 1, NULL, '2022-04-07 11:22:37'),
+(11, 'Gold Coins', 'upload/images/7242-2022-04-03.jpg', 1, NULL, '2022-04-07 11:22:37'),
+(12, 'Gift Card', 'upload/images/7563-2022-04-03.png', 1, NULL, '2022-04-07 11:22:37');
 
 -- --------------------------------------------------------
 
@@ -129,16 +193,19 @@ INSERT INTO `category` (`id`, `name`, `image`, `status`) VALUES
 
 CREATE TABLE `delivery` (
   `id` int(10) NOT NULL,
+  `title` text NOT NULL,
   `charges` int(3) NOT NULL,
-  `days` int(3) NOT NULL
+  `days` int(3) NOT NULL,
+  `last_updated` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
+  `date_created` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `delivery`
 --
 
-INSERT INTO `delivery` (`id`, `charges`, `days`) VALUES
-(1, 70, 10);
+INSERT INTO `delivery` (`id`, `title`, `charges`, `days`, `last_updated`, `date_created`) VALUES
+(1, 'delivery', 100, 7, '2022-04-09 07:07:28', '2022-04-07 11:24:19');
 
 -- --------------------------------------------------------
 
@@ -148,17 +215,20 @@ INSERT INTO `delivery` (`id`, `charges`, `days`) VALUES
 
 CREATE TABLE `nickname` (
   `id` int(10) NOT NULL,
-  `nickname` varchar(100) NOT NULL
+  `nickname` varchar(100) NOT NULL,
+  `last_updated` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
+  `date_created` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `nickname`
 --
 
-INSERT INTO `nickname` (`id`, `nickname`) VALUES
-(1, 'Reputed Shop'),
-(2, 'Popular Shop'),
-(3, 'Good');
+INSERT INTO `nickname` (`id`, `nickname`, `last_updated`, `date_created`) VALUES
+(1, 'Reputed Shop', NULL, '2022-04-07 11:25:50'),
+(2, 'Popular Shop', NULL, '2022-04-07 11:25:50'),
+(3, 'Seller Nick', NULL, '2022-04-07 11:25:50'),
+(4, 'Test Nick', NULL, '2022-04-07 11:25:50');
 
 -- --------------------------------------------------------
 
@@ -174,16 +244,29 @@ CREATE TABLE `offers` (
   `wastage` tinyint(2) NOT NULL,
   `max_locked` int(10) NOT NULL,
   `status` tinyint(1) NOT NULL,
-  `valid_date` varchar(20) NOT NULL
+  `valid_date` varchar(20) NOT NULL,
+  `description` text NOT NULL,
+  `last_updated` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
+  `date_created` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `offers`
 --
 
-INSERT INTO `offers` (`id`, `seller_id`, `budget_id`, `gram_price`, `wastage`, `max_locked`, `status`, `valid_date`) VALUES
-(1, 1, 2, 5, 5, 5, 0, '2022-03-12'),
-(2, 1, 2, 5, 5, 5, 0, '2022-03-15');
+INSERT INTO `offers` (`id`, `seller_id`, `budget_id`, `gram_price`, `wastage`, `max_locked`, `status`, `valid_date`, `description`, `last_updated`, `date_created`) VALUES
+(1, 3, 2, 4000, 100, 1, 1, '2022-03-10', '', NULL, '2022-04-07 11:28:04'),
+(2, 3, 2, 3456, 20, 8, 1, '2022-03-28', '', NULL, '2022-04-07 11:28:04'),
+(3, 9, 2, 200, 2, 4, 1, '2022-03-28', 'Ear rings, chains and bangles are available in latest design for locking', NULL, '2022-04-07 11:28:04'),
+(4, 9, 1, 200, 3, 10, 1, '2022-03-31', 'Offer applicable on some of our latest designs (bangles, chains, ear rings etc)', NULL, '2022-04-07 11:28:04'),
+(5, 9, 1, 200, 3, 10, 1, '2022-04-07', 'Offer applicable on some of our latest designs (Bangles, Chains, Ear Rings etc)', NULL, '2022-04-07 11:28:04'),
+(6, 9, 1, 200, 3, 8, 1, '2022-04-01', 'Offer applicable on some of our latest designs (Bangles, Chains, Ear Rings etc)', NULL, '2022-04-07 11:28:04'),
+(7, 9, 3, 100, 2, 14, 1, '2022-04-07', 'Offer valid on chains ONLY', NULL, '2022-04-07 11:28:04'),
+(8, 9, 1, 100, 8, 8, 1, '2022-04-07', 'Offer applicable only on bangles.', NULL, '2022-04-07 11:28:04'),
+(9, 9, 4, 150, 8, 14, 1, '2022-03-31', 'Offer applicable only on sets.', NULL, '2022-04-07 11:28:04'),
+(10, 9, 4, 0, 2, 8, 1, '2022-04-02', 'Offer is applicable of Necklace Sets', NULL, '2022-04-07 11:28:04'),
+(11, 1, 3, 5000, 5, 5, 1, '2022-04-08', 'fgfg', NULL, '2022-04-08 15:21:01'),
+(12, 11, 1, 100, 2, 5, 1, '2022-04-23', '₹100 Discount per gram, 2% wastage discount upto 5 items', '2022-04-23 05:26:57', '2022-04-18 05:09:29');
 
 -- --------------------------------------------------------
 
@@ -196,8 +279,48 @@ CREATE TABLE `offer_lock` (
   `user_id` int(10) NOT NULL,
   `offer_id` int(10) NOT NULL,
   `paid_amt` int(20) NOT NULL,
-  `status` varchar(100) NOT NULL
+  `status` tinyint(4) NOT NULL,
+  `seller_product_name` text DEFAULT NULL,
+  `seller_product_price` text DEFAULT NULL,
+  `seller_description` text DEFAULT NULL,
+  `last_updated` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
+  `date_created` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `offer_lock`
+--
+
+INSERT INTO `offer_lock` (`id`, `user_id`, `offer_id`, `paid_amt`, `status`, `seller_product_name`, `seller_product_price`, `seller_description`, `last_updated`, `date_created`) VALUES
+(1, 3, 2, 1000, 0, '', '', '', NULL, '2022-04-07 11:28:41'),
+(2, 3, 2, 1000, 0, '', '', '', NULL, '2022-04-07 11:28:41'),
+(3, 2, 2, 1000, 0, '', '', '', NULL, '2022-04-07 11:28:41'),
+(4, 1, 11, 500, 4, 'Gold Chain', '50000', '', '2022-04-16 08:39:30', '2022-04-16 08:37:36'),
+(5, 2, 1, 500, 0, NULL, NULL, NULL, NULL, '2022-04-18 05:44:58'),
+(6, 2, 12, 500, 0, NULL, NULL, NULL, NULL, '2022-04-23 07:37:53');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `offer_lock_status`
+--
+
+CREATE TABLE `offer_lock_status` (
+  `id` int(11) NOT NULL,
+  `title` text NOT NULL,
+  `last_updated` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
+  `date_created` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `offer_lock_status`
+--
+
+INSERT INTO `offer_lock_status` (`id`, `title`, `last_updated`, `date_created`) VALUES
+(1, 'Offer Claimed', '2022-04-16 04:35:12', '2022-04-16 03:20:36'),
+(2, 'Came to store not Buy', '2022-04-16 08:27:06', '2022-04-16 04:25:15'),
+(3, 'Offer Locked', NULL, '2022-04-16 08:27:32'),
+(4, 'Buy Later', '2022-04-16 08:39:03', '2022-04-16 08:38:52');
 
 -- --------------------------------------------------------
 
@@ -208,19 +331,83 @@ CREATE TABLE `offer_lock` (
 CREATE TABLE `orders` (
   `id` int(10) NOT NULL,
   `user_id` int(10) NOT NULL,
+  `seller_id` int(11) NOT NULL,
   `product_id` int(10) NOT NULL,
   `quantity` int(10) NOT NULL,
   `buy_method` varchar(30) NOT NULL,
   `status` varchar(200) NOT NULL,
-  `delivery_charges` int(10) NOT NULL
+  `delivery_charges` float NOT NULL,
+  `payment_status` varchar(100) NOT NULL,
+  `total` float NOT NULL,
+  `last_updated` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
+  `date_created` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `orders`
 --
 
-INSERT INTO `orders` (`id`, `user_id`, `product_id`, `quantity`, `buy_method`, `status`, `delivery_charges`) VALUES
-(1, 1, 1, 1, '2', 'received', 0);
+INSERT INTO `orders` (`id`, `user_id`, `seller_id`, `product_id`, `quantity`, `buy_method`, `status`, `delivery_charges`, `payment_status`, `total`, `last_updated`, `date_created`) VALUES
+(1, 1, 1, 1, 1, '2', 'Cancelled', 0, 'UnPaid', 0, '2022-04-13 13:09:57', '2022-04-07 11:29:49'),
+(2, 3, 3, 4, 1, '2', 'Received', 0, '', 0, '2022-04-13 13:13:59', '2022-04-07 11:29:49'),
+(3, 2, 3, 4, 1, '1', 'Received', 0, '', 0, '2022-04-13 13:13:56', '2022-04-07 11:29:49'),
+(4, 2, 3, 4, 1, '2', 'Received', 0, '', 0, '2022-04-13 13:13:53', '2022-04-07 11:29:49'),
+(5, 1, 3, 4, 1, '1', 'Completed', 0, 'Paid', 0, '2022-04-13 09:23:12', '2022-04-07 11:29:49'),
+(6, 1, 3, 4, 1, '1', 'Received', 0, '', 0, '2022-04-13 13:13:47', '2022-04-07 11:29:49'),
+(7, 1, 3, 4, 1, '1', 'Received', 0, 'Paid', 0, '2022-04-13 13:13:44', '2022-04-07 11:29:49'),
+(8, 1, 3, 4, 1, '1', 'Received', 0, 'UnPaid', 0, '2022-04-13 13:13:41', '2022-04-07 11:29:49'),
+(9, 3, 3, 4, 1, '2', 'Received', 0, 'UnPaid', 0, '2022-04-13 13:13:37', '2022-04-07 11:29:49'),
+(10, 3, 3, 4, 1, '2', 'Received', 0, 'UnPaid', 0, '2022-04-13 13:13:33', '2022-04-07 11:29:49'),
+(11, 3, 3, 4, 1, '1', 'Received', 0, 'UnPaid', 0, '2022-04-13 13:13:28', '2022-04-07 11:29:49'),
+(12, 3, 3, 4, 1, '1', 'Received', 0, 'Paid', 0, '2022-04-13 13:13:21', '2022-04-07 11:29:49'),
+(13, 4, 9, 6, 2, '1', 'Received', 0, 'UnPaid', 0, '2022-04-13 13:13:14', '2022-04-07 11:29:49'),
+(14, 4, 3, 4, 2, '1', 'Received', 0, 'UnPaid', 0, '2022-04-13 13:13:12', '2022-04-07 11:29:49'),
+(15, 4, 9, 5, 2, '1', 'Received', 0, 'UnPaid', 0, '2022-04-13 13:13:09', '2022-04-07 11:29:49'),
+(16, 4, 9, 6, 2, '1', 'Received', 0, 'UnPaid', 0, '2022-04-13 13:13:06', '2022-04-07 11:29:49'),
+(17, 4, 9, 5, 4, '1', 'Received', 0, 'UnPaid', 0, '2022-04-13 13:13:03', '2022-04-07 11:29:49'),
+(18, 4, 3, 4, 2, '1', 'Received', 0, 'UnPaid', 0, '2022-04-13 13:13:00', '2022-04-07 11:29:49'),
+(19, 4, 9, 6, 2, '2', 'Completed', 0, 'Paid', 0, '2022-04-15 09:18:35', '2022-04-07 11:29:49'),
+(20, 4, 9, 5, 2, '2', 'Cancelled', 0, 'Paid', 0, '2022-04-15 09:15:47', '2022-04-07 11:29:49'),
+(21, 5, 3, 4, 1, '1', 'Received', 100, 'Paid', 1000, NULL, '2022-04-16 10:24:02'),
+(22, 5, 9, 32, 1, '1', 'Received', 100, 'UnPaid', 8000, NULL, '2022-04-16 10:25:49'),
+(23, 5, 9, 33, 1, '1', 'Received', 100, 'UnPaid', 100000, NULL, '2022-04-16 10:25:49'),
+(24, 5, 9, 35, 1, '1', 'Received', 100, 'UnPaid', 120000, NULL, '2022-04-16 10:25:49'),
+(25, 6, 9, 22, 1, '1', 'Received', 100, 'UnPaid', 45000, NULL, '2022-04-22 05:28:53'),
+(26, 6, 9, 12, 1, '1', 'Received', 100, 'Paid', 200000, NULL, '2022-04-22 05:30:06'),
+(27, 6, 11, 41, 1, '2', 'Received', 100, 'Paid', 15360, NULL, '2022-04-22 05:32:04');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `plans`
+--
+
+CREATE TABLE `plans` (
+  `id` int(11) NOT NULL,
+  `name` text DEFAULT NULL,
+  `validity` text DEFAULT NULL,
+  `price` text DEFAULT NULL,
+  `products` text DEFAULT NULL,
+  `offers` text DEFAULT NULL,
+  `access` text DEFAULT NULL,
+  `last_updated` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
+  `date_created` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `plans`
+--
+
+INSERT INTO `plans` (`id`, `name`, `validity`, `price`, `products`, `offers`, `access`, `last_updated`, `date_created`) VALUES
+(1, 'Basic', '1', '10000', '100', '10', '2', NULL, '2022-04-16 12:37:05'),
+(2, 'Basic', '3', '28000', '100', '10', '2', NULL, '2022-04-16 12:37:05'),
+(3, 'Basic', '12', '100000', '100', '10', '2', NULL, '2022-04-16 12:37:05'),
+(4, 'Deluxe', '1', '50000', '500', '15', '5', NULL, '2022-04-16 12:37:05'),
+(5, 'Deluxe', '3', '135000', '500', '15', '5', NULL, '2022-04-16 12:37:05'),
+(6, 'Deluxe', '12', '500000', '500', '15', '5', NULL, '2022-04-16 12:37:05'),
+(7, 'Premium', '1', '100000', 'Unlimited', 'One a day', '10', NULL, '2022-04-16 12:37:05'),
+(8, 'Premium', '3', '275000', 'Unlimited', 'One a day', '10', NULL, '2022-04-16 12:37:05'),
+(9, 'Premium', '12', '1000000', 'Unlimited', 'One a day', '10', '2022-04-16 17:04:43', '2022-04-16 12:37:05');
 
 -- --------------------------------------------------------
 
@@ -235,13 +422,56 @@ CREATE TABLE `products` (
   `category_id` int(11) NOT NULL,
   `image` text NOT NULL,
   `description` text NOT NULL,
-  `status` varchar(200) DEFAULT NULL,
+  `status` tinyint(4) DEFAULT NULL,
   `discounted_price` float NOT NULL,
   `price` float NOT NULL,
   `stock` int(5) NOT NULL,
   `date_added` timestamp NOT NULL DEFAULT current_timestamp(),
-  `is_approved` int(11) DEFAULT NULL
+  `is_approved` int(11) DEFAULT NULL,
+  `gender` text DEFAULT NULL,
+  `weight` int(10) DEFAULT NULL,
+  `last_updated` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
+  `date_created` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `products`
+--
+
+INSERT INTO `products` (`id`, `seller_id`, `name`, `category_id`, `image`, `description`, `status`, `discounted_price`, `price`, `stock`, `date_added`, `is_approved`, `gender`, `weight`, `last_updated`, `date_created`) VALUES
+(1, 1, 'Female  Beautiful Ring ', 1, 'upload/images/7789-2021-12-25.jpg', '', 1, 20000, 25000, 10, '2021-12-24 19:28:37', 1, 'Female', 4, '2022-04-08 05:06:28', '2022-04-07 11:30:49'),
+(4, 3, 'product 1', 3, 'upload/images/8151-2022-02-26.jpg', 'prod earf ing', 1, 1000, 30000, 8, '2022-02-26 11:21:09', 1, NULL, NULL, '2022-04-08 05:06:48', '2022-04-07 11:30:49'),
+(5, 9, 'Gold Ring', 1, 'upload/images/3649-2022-03-31.png', 'Stone ring', 1, 1000, 50000, 4, '2022-03-31 08:22:14', 1, NULL, NULL, '2022-04-08 05:06:48', '2022-04-07 11:30:49'),
+(6, 9, 'Timeless 18 Karat Yellow Gold Bali-Style Hoop Earrings', 3, 'upload/images/4079-2022-03-31.jpg', 'These 18 Karat gold earrings feature two rings and a multi-faceted gold bead with tiny dots all over it strung on a smooth, easy-on-hinged gold hoop', 1, 0, 34000, 5, '2022-03-31 08:34:01', 1, NULL, NULL, '2022-04-08 05:06:48', '2022-04-07 11:30:49'),
+(22, 9, 'Alluring Gold Chain', 2, 'upload/images/3713-2022-04-13.jpg', 'Lustrous Cable Chain set in 22 Karat Yellow Gold', 1, 45000, 45000, 8, '2022-04-13 16:11:17', 1, 'Female', 23, NULL, '2022-04-13 16:11:17'),
+(10, 1, 'Jewel', 5, 'upload/images/6244-2022-04-03.jpg', 'vdfd', 1, 30000, 50000, 5, '2022-04-03 15:43:30', 1, 'Male', 5, '2022-04-08 05:06:48', '2022-04-07 11:30:49'),
+(11, 1, 'Test', 5, 'upload/images/2154-2022-04-06.jpg', '', 1, 5, 5, 5, '2022-04-05 19:51:58', 1, 'Male', 5, '2022-04-11 12:06:08', '2022-04-07 11:30:49'),
+(12, 9, 'Glitzy Gold Bangle', 5, 'upload/images/3116-2022-04-08.jpg', 'Wrap the beauty of fresh flowers around your wrist with this bangle crafted in 22 Karat Yellow Gold with a single stunning floral motif.', 1, 200000, 200000, 6, '2022-04-08 07:12:33', 1, 'Female', 35, NULL, '2022-04-08 07:12:33'),
+(13, 9, 'Ornate 22 Karat Yellow Gold Etched Bangle', 5, 'upload/images/8517-2022-04-08.jpg', 'This luxurious 22 Karat yellow gold bangle features a stippled band etched with floral motifs, ending in a crown and orb with an embossed flower', 1, 435678, 435678, 20, '2022-04-08 07:27:17', 1, 'Female', 46, NULL, '2022-04-08 07:27:17'),
+(14, 9, 'Slender 22 Karat Yellow Gold Orb Bangle', 5, 'upload/images/8262-2022-04-08.jpg', 'This 22 Karat yellow gold bangle features a polished orb flanked by 2 rings, with 4 triads of roped gold circlets arranged single file across the band', 1, 342000, 342000, 23, '2022-04-08 07:40:35', 1, 'Female', 45, NULL, '2022-04-08 07:40:35'),
+(15, 9, 'Dazzling Rawa Work Gold Bangle', 5, 'upload/images/6749-2022-04-08.jpg', 'Add oppulence to your style when you pair your Traditional Wear with this Exquisite Rawa Work Bangle crafted in 22 Karat Yellow Gold.', 1, 43000, 43000, 6, '2022-04-08 07:56:45', 1, 'Female', 34, NULL, '2022-04-08 07:56:45'),
+(16, 9, 'Detailed Rawa Work Floral Motif Gold Bangle', 5, 'upload/images/5067-2022-04-08.jpg', 'The Detailed Rawa Work on this Floral Motif Gold Bangle to add grace to your overall look', 1, 45000, 45000, 5, '2022-04-08 08:07:02', 1, 'Female', 26, NULL, '2022-04-08 08:07:02'),
+(24, 9, 'Splendid Gold Chain', 2, 'upload/images/2481-2022-04-13.jpg', 'Gorgeous Beaded Chain with Enamelling set in 22 Karat Yellow Gold', 1, 29000, 29000, 21, '2022-04-13 16:18:04', 1, 'Female', 49, NULL, '2022-04-13 16:18:04'),
+(23, 9, 'Traditional Patterned Gold Chain', 2, 'upload/images/9160-2022-04-13.jpg', 'Multi Pattern Chain set in 22 Karat Yellow Gold', 1, 29700, 30000, 20, '2022-04-13 16:14:39', 1, 'Female', 40, NULL, '2022-04-13 16:14:39'),
+(20, 9, 'Delightful Yellow Gold Clover Jhumkas', 3, 'upload/images/9607-2022-04-09.jpg', 'These lovely 22 Karat Gold Jhumkas feature an etched, matte 3-petal stud suspending a bell with matte drops, roped frets and gold discs ending in a bead', 1, 10000, 10000, 39, '2022-04-09 16:09:49', 1, 'Female', 10, '2022-04-09 16:15:04', '2022-04-09 16:09:49'),
+(21, 9, 'Gold Earrings for Women | Gold earrings for women, 22k gold earrings ', 3, 'upload/images/3632-2022-04-09.jpg', 'Gold Earrings for Women | Gold earrings for women, 22k gold earrings ', 1, 20000, 20000, 7, '2022-04-09 16:32:27', 1, 'Female', 14, NULL, '2022-04-09 16:32:27'),
+(25, 9, 'Surreal Gold Chain', 2, 'upload/images/3822-2022-04-13.png', 'Eclectic Multi String Beaded Chain set in 22 Karat Yellow Gold', 1, 60000, 60000, 10, '2022-04-13 16:21:08', 1, 'Female', 35, NULL, '2022-04-13 16:21:08'),
+(26, 9, 'Slender Gold Bracelet', 4, 'upload/images/4344-2022-04-13.jpg', 'Beaded bracelet with light rhodium finish set in 22 karat yellow gold. The textured beads add a surreal charm to this bracelet.', 1, 50000, 50000, 19, '2022-04-13 18:22:00', 1, 'Female', 14, NULL, '2022-04-13 18:22:00'),
+(27, 9, 'Dainty Floral Gold Bracelet For Kids', 4, 'upload/images/5311-2022-04-14.jpg', 'Floral bracelet set in 22 karat yellow gold. Petite floral motifs add timeless charm to this bracelet.', 1, 44000, 44000, 8, '2022-04-13 18:38:36', 1, 'Female', 9, NULL, '2022-04-13 18:38:36'),
+(28, 9, 'Glossy Knotted Gold Bracelet', 4, 'upload/images/9174-2022-04-14.jpg', 'Add the sheen of gold to your daily ensembles with this bracelet crafted in 22 Karat Yellow Gold.', 1, 13000, 13000, 7, '2022-04-13 18:39:41', 1, 'Female', 13, NULL, '2022-04-13 18:39:41'),
+(29, 9, 'Marvellous Artistic Gold Bracelet', 4, 'upload/images/8576-2022-04-14.jpg', 'Teardrop bracelet set in 22 karat yellow gold. Wrap timeless beauty around your wrist with this classy bracelet.', 1, 25000, 25000, 50000, '2022-04-13 18:42:00', 1, 'Female', 6, '2022-04-13 18:44:28', '2022-04-13 18:42:00'),
+(30, 9, 'Two Line Loose Black Bead And Gold Bracelet', 4, 'upload/images/5353-2022-04-14.jpg', 'Bracelet 22 Karat', 1, 24000, 24000, 24, '2022-04-13 18:43:09', 1, 'Female', 8, NULL, '2022-04-13 18:43:09'),
+(31, 9, 'Majestic Exuberant Peacock Inspired Gold Nose Pin', 6, 'upload/images/7904-2022-04-14.jpg', 'Accent the magnificence of your occasion ensemble with this peacock inspired nose pin crafted in 22 karat yellow gold adorned with exuberant stones.', 1, 5000, 5000, 14, '2022-04-13 18:47:43', 1, 'Female', 3, NULL, '2022-04-13 18:47:43'),
+(32, 9, 'Graceful Floral Gold And Diamond Nose Pin', 6, 'upload/images/8822-2022-04-14.jpg', 'Decorate yourself with the charm of flowers with this nose pin SET in 18 Karat Yellow Gold with diamonds in a floral motif. Stone Clarity SI2', 1, 8000, 8000, 7, '2022-04-13 18:50:54', 1, 'Female', 2, NULL, '2022-04-13 18:50:54'),
+(33, 9, 'Captivating Diamond Nose Pin', 6, 'upload/images/6709-2022-04-14.jpg', 'Decorate yourself with the charm of flowers with this nose pin SET in 18 Karat Yellow Gold with diamonds in a floral motif. Stone Clarity SI2', 1, 100000, 100000, 2, '2022-04-13 18:53:51', 1, 'Female', 3, NULL, '2022-04-13 18:53:51'),
+(34, 9, 'Gift An 18kt Gold Pendant To Your Special One', 7, 'upload/images/5365-2022-04-14.jpg', '', 1, 20000, 20000, 4, '2022-04-13 18:56:36', 1, 'Female', 16, NULL, '2022-04-13 18:56:36'),
+(35, 9, 'Perfect Mangalsutra', 8, 'upload/images/1096-2022-04-14.jpg', 'Glamorous Diamond Mangalsutra', 1, 120000, 120000, 6, '2022-04-13 18:59:27', 1, 'Female', 80, NULL, '2022-04-13 18:59:27'),
+(36, 9, '8 Gram 24 Karat Gold Coin With Ganesha-Lakshmi Motif', 11, 'upload/images/9564-2022-04-14.jpg', '8 Gram 24 Karat Gold Coin With Ganesha-Lakshmi Motif', 1, 50000, 50000, 8, '2022-04-13 19:02:11', 1, 'Female', 8, NULL, '2022-04-13 19:02:11'),
+(37, 9, 'Farah Emerald And Ruby Necklace', 9, 'upload/images/4984-2022-04-14.jpg', 'Opulent Necklace set in 22 Karat Yellow Gold and studded with Emeralds and Rubies', 1, 350000, 350000, 17, '2022-04-14 07:20:32', 1, 'Female', 80, NULL, '2022-04-14 07:20:32'),
+(38, 9, 'Radiant Floral Ruby Pendant With Chain And Earrings Set', 10, 'upload/images/7705-2022-04-14.png', 'Floral pendant with chain and earrings set with rubies and chakri diamonds set in 22 karat yellow gold. Dainty floral motifs make this an elegant set', 1, 400000, 400000, 5, '2022-04-14 07:22:41', 1, 'Female', 55, NULL, '2022-04-14 07:22:41'),
+(39, 9, 'Thangam Gift Card', 12, 'upload/images/8999-2022-04-14.jpg', 'Gift Card', 1, 49500, 50000, 17, '2022-04-14 07:26:07', 1, 'Female', 1, NULL, '2022-04-14 07:26:07'),
+(40, 9, 'Thangam Jewelry Gift Card', 12, 'upload/images/4383-2022-04-14.jpg', '', 1, 25000, 25000, 5, '2022-04-14 07:27:48', 1, 'Female', 1, NULL, '2022-04-14 07:27:48'),
+(41, 11, 'DIAMOND PENDANT', 7, 'upload/images/9179-2022-04-18.png', 'Finding inspiration from the circle of life & love! Try on this chic gold pendant', 1, 15360, 16000, 5, '2022-04-18 05:00:46', 1, 'Unisex', 7, '2022-04-18 05:01:44', '2022-04-18 05:00:46');
 
 -- --------------------------------------------------------
 
@@ -273,22 +503,24 @@ CREATE TABLE `seller` (
   `national_identity_card` text CHARACTER SET utf8 DEFAULT NULL,
   `address_proof` text CHARACTER SET utf8 DEFAULT NULL,
   `pan_number` text CHARACTER SET utf8 DEFAULT NULL,
+  `gst_number` text DEFAULT NULL,
   `latitude` varchar(256) CHARACTER SET utf8 DEFAULT NULL,
   `longitude` varchar(256) CHARACTER SET utf8 DEFAULT NULL,
-  `valid` varchar(15) NOT NULL
+  `valid` varchar(20) NOT NULL,
+  `plan` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `seller`
 --
 
-INSERT INTO `seller` (`id`, `name`, `store_name`, `email`, `mobile`, `password`, `store_url`, `logo`, `store_description`, `street`, `pincode`, `city`, `state`, `account_number`, `bank_ifsc_code`, `account_name`, `bank_name`, `status`, `last_updated`, `date_created`, `national_identity_card`, `address_proof`, `pan_number`, `latitude`, `longitude`, `valid`) VALUES
-(1, 'Prasad BE', 'JP Mart', 'jp@gmail.com', '9876543210', 'e807f1fcf82d132f9bb018ca6738a19f', 'https://www.apple.com/in/', '1647014772.7646.png', 'scs dcdcd', 'east street', '612503', 'Kumbakonam', 'Tamil Nadu', '34325325235', 'TRGRGRGG', 'jp', 'Indian Bank', 1, '2022-03-13 16:57:00', '2021-12-24 19:08:33', '1647014694.2344.png', '1647057090.7513.png', '132342432', '434343', '45453', '2021-03-13'),
-(2, 'safds', 'Test Shop', 'wre@gmail.com', '4343434', 'e10adc3949ba59abbe56e057f20f883e', '34332432', '1645933635.0093.png', '', 'east street', '612503', 'kumbakonam', 'Bihar', '34324324', '33432432', 'jp', 'cub', 1, NULL, '2022-02-27 03:47:15', '1645933635.011.png', '1645933635.0127.png', '3242143432', '32432432', '4324324', ''),
-(3, 'Developer', 'Dev', 'dev@gmail.com', '9090909090', '25d55ad283aa400af464c76d713c07ad', '', '1646240879.5935.png', '', '', '612503', 'chennai', 'Andhra Pradesh', '', '', '', '', 1, NULL, '2022-03-02 17:07:59', '1646240879.5944.png', '1646240879.5954.png', '65674674', '0', '0', ''),
-(4, 'Prasad', 'hi shop', 'jp@gmail.com', '8080808080', '93279e3308bdbbeed946fc965017f67a', '', '1646918191.9885.png', 'fdsfds', '', '613113', 'shjfdfds', 'Andhra Pradesh', '', '', '', '', 1, '2022-03-16 05:57:07', '2022-03-10 13:16:31', '1646918191.9892.png', '1646918191.9897.png', '1234567890', '0', '0', '2022-03-17'),
-(5, 'Akash', 'Akash Shop', 'akash@gmail.com', '6060606060', '25d55ad283aa400af464c76d713c07ad', '', '1646919064.1564.png', '', '', '', '', '', '', '', '', '', 2, NULL, '2022-03-10 13:31:04', '1646919064.158.png', '1646919064.1599.png', '1234567890', '0', '0', ''),
-(6, 'test', 'Test', 'test@gmail.com', '7070707070', 'e807f1fcf82d132f9bb018ca6738a19f', '', '1647335497.4464.png', '', '', '612503', 'kumbakonam', 'Tamil Nadu', '', '', '', '', 1, NULL, '2022-03-15 09:11:37', '1647335497.448.png', '1647335497.4495.png', '12346677766', '0', '0', '2022-03-25');
+INSERT INTO `seller` (`id`, `name`, `store_name`, `email`, `mobile`, `password`, `store_url`, `logo`, `store_description`, `street`, `pincode`, `city`, `state`, `account_number`, `bank_ifsc_code`, `account_name`, `bank_name`, `status`, `last_updated`, `date_created`, `national_identity_card`, `address_proof`, `pan_number`, `gst_number`, `latitude`, `longitude`, `valid`, `plan`) VALUES
+(1, 'JP', 'Jewel Shop', 'jp@gmail.com', '9876543210', 'e807f1fcf82d132f9bb018ca6738a19f', 'https://www.apple.com/in/', '1648975386.2208.jpg', 'JPMart Gold Seller\r\n', 'Kalyan Jewellers, APHB Colony, Kukatpally, Hyderabad, Telangana 500072, India', '612503', 'Kumbakonam', 'Tamil Nadu', '34325325235', 'TRGRGRGG', 'jp', 'Indian Bank', 1, '2022-04-26 05:05:59', '2021-12-24 19:08:33', '1648975386.2216.jpeg', '1648975386.2221.jpg', 'GNQPD6996D', '1234', '17.4855015', '78.4105536', '2022-05-26', 'basic-monthly'),
+(5, 'SuperGoldMart', 'Super Gold Mart', 'subha.sellimuthu@gmail.com', '9655790843', '25d55ad283aa400af464c76d713c07ad', '', '1648975535.6976.jpg', 'test', 'Coimbatore, Tamil Nadu 641015, India', '876653', 'cbe', 'Tamil Nadu', '', '', '', '', 1, '2022-04-03 08:45:35', '2022-03-17 13:19:33', '1648975535.701.jpeg', '1648975535.7018.jpg', '76439876', NULL, '11.0076142', '77.0132643', '2023-10-10', '0'),
+(8, 'PD Shop', 'Shop', 'prasad@gmail.com', '8778624681', '25d55ad283aa400af464c76d713c07ad', '', '1648300727.0855.png', 'Test', 'test', '612503', 'Kumbakonam', 'Tamil Nadu', '', '', '', '', 2, '2022-04-05 19:24:52', '2022-03-26 13:18:47', '1648300727.086.png', '1648300727.0863.png', '23243454', NULL, '10.9601852', '79.3844976', '', NULL),
+(9, 'Thangam Jewelry', 'Thangam Jewelry', 's_subha@hotmail.com', '9944017666', 'cc03e747a6afbbcbf8be7668acfebee5', 'thangam.com', '1648372706.0881.jpg', 'The best jewelry in the world', '', '641028', 'coimbatore', 'Tamil Nadu', '', '', '', '', 1, '2022-04-03 12:09:59', '2022-03-27 08:20:46', '1648372706.0891.jpeg', '1648372706.0898.jpg', '7896549', NULL, '11.0126517', '77.0017465', '2023-03-27', 'premium-annually'),
+(10, 'Chandra', 'Chand Jewellers', 'cppsgcas@gmail.com', '7204323367', '97da1ae5301b259baa5b080b71c47c18', '', '1650103619.7903.jpg', 'Unique designs an affordable cost', '1, cross cut street', '641012', 'Coimbatore', 'Tamil Nadu', '', '', '', '', 1, NULL, '2022-04-16 10:06:59', '1650103619.7908.jpg', '1650103619.7912.jpg', 'AP1234543', NULL, '-1', '14', '2022-05-16', 'premium-monthly'),
+(11, 'Vijay', 'Jos Alukkas', 'vjdeveloper2020@gmail.com', '9751665327', 'ba59d642c891bca824b843ed9986d958', 'https://www.josalukkasonline.com/', '1650256797.1784.jpg', 'A Tradition Of Fine Jewellery', 'Keezha raja Veedhi, Melaraja Vidi, Brindavan, Tamil Nadu 622001, India', '622001', 'Pudukkottai', 'Tamil Nadu', '1234567890', 'TEST1234', 'Vijay', 'Test Bank of India', 1, '2022-04-20 09:45:09', '2022-04-18 04:39:57', '1650256797.179.jpg', '1650256797.1793.jpg', 'AKKPI6289', '12345678', '10.3831671', '78.82189559999999', '2022-05-18', 'free-trial');
 
 -- --------------------------------------------------------
 
@@ -299,15 +531,17 @@ INSERT INTO `seller` (`id`, `name`, `store_name`, `email`, `mobile`, `password`,
 CREATE TABLE `settings` (
   `id` int(10) NOT NULL,
   `price` int(10) NOT NULL,
-  `days` int(10) NOT NULL
+  `days` int(10) NOT NULL,
+  `last_updated` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
+  `date_created` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `settings`
 --
 
-INSERT INTO `settings` (`id`, `price`, `days`) VALUES
-(1, 1000, 7);
+INSERT INTO `settings` (`id`, `price`, `days`, `last_updated`, `date_created`) VALUES
+(1, 500, 1, NULL, '2022-04-07 11:31:45');
 
 -- --------------------------------------------------------
 
@@ -319,15 +553,22 @@ CREATE TABLE `users` (
   `id` int(10) NOT NULL,
   `name` varchar(200) NOT NULL,
   `mobile` varchar(50) NOT NULL,
-  `email` varchar(100) NOT NULL
+  `email` varchar(100) NOT NULL,
+  `last_updated` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
+  `date_created` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `mobile`, `email`) VALUES
-(1, 'Jaya Prasad', '8778624681', 'jayaprasad356@gmail.com');
+INSERT INTO `users` (`id`, `name`, `mobile`, `email`, `last_updated`, `date_created`) VALUES
+(1, 'Prasad', '8778624681', 'jayaprsad356@gmail.com', '2022-04-11 11:59:44', '2022-04-07 11:32:31'),
+(2, 'Vijay Bhaskar', '9751665327', 'settaivijay@gmail.com', '2022-04-11 12:28:38', '2022-04-07 11:32:31'),
+(3, 'subha', '9655790843', 'subha.sellimuthu@gmail.com', NULL, '2022-04-07 11:32:31'),
+(4, 'Loki', '9751665328', 'loki@gmail.com', NULL, '2022-04-07 11:32:31'),
+(5, 'chandra', '7204323367', 'cppsgcas@gmail.com', NULL, '2022-04-16 10:01:12'),
+(6, 'chandrasekar', '9894910000', 'geekaygroups@gmail.com', NULL, '2022-04-16 13:26:10');
 
 --
 -- Indexes for dumped tables
@@ -337,6 +578,12 @@ INSERT INTO `users` (`id`, `name`, `mobile`, `email`) VALUES
 -- Indexes for table `address`
 --
 ALTER TABLE `address`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `admin`
+--
+ALTER TABLE `admin`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -388,9 +635,21 @@ ALTER TABLE `offer_lock`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `offer_lock_status`
+--
+ALTER TABLE `offer_lock_status`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `orders`
 --
 ALTER TABLE `orders`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `plans`
+--
+ALTER TABLE `plans`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -425,7 +684,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `address`
 --
 ALTER TABLE `address`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT for table `admin`
+--
+ALTER TABLE `admin`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `banners`
@@ -443,13 +708,13 @@ ALTER TABLE `budget`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
 
 --
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `delivery`
@@ -461,37 +726,49 @@ ALTER TABLE `delivery`
 -- AUTO_INCREMENT for table `nickname`
 --
 ALTER TABLE `nickname`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `offers`
 --
 ALTER TABLE `offers`
-  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `offer_lock`
 --
 ALTER TABLE `offer_lock`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `offer_lock_status`
+--
+ALTER TABLE `offer_lock_status`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+
+--
+-- AUTO_INCREMENT for table `plans`
+--
+ALTER TABLE `plans`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT for table `seller`
 --
 ALTER TABLE `seller`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `settings`
@@ -503,7 +780,7 @@ ALTER TABLE `settings`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
