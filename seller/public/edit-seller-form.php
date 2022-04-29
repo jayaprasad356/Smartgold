@@ -221,20 +221,20 @@ $res = $db->getResult();
                                 </div>
                             </div>
 
-                            <!-- <div class="row">
+                         <div class="row">
                                 <div class="form-group col-md-4">
                                     <div class="form-group">
                                         <label for="">Latitude</label>
-                                        <input type="number" class="form-control" name="latitude" id="latitude" value="<?= $res[0]['latitude']; ?>">
+                                        <input type="number" class="form-control" name="latitude" id="latitude" value="<?= $res[0]['latitude']; ?>" disabled>
                                     </div>
                                 </div>
                                 <div class="form-group col-md-4">
                                     <div class="form-group">
                                         <label for="">Longitude</label>
-                                        <input type="text" class="form-control" name="longitude" id="longitude" value="<?= $res[0]['longitude']; ?>">
+                                        <input type="text" class="form-control" name="longitude" id="longitude" value="<?= $res[0]['longitude']; ?>" disabled>
                                     </div>
                                 </div>
-                            </div> -->
+                            </div> 
 
 
                             <div class="row">

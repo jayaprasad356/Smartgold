@@ -198,7 +198,13 @@ if (isset($_GET['table']) && $_GET['table'] == 'orders') {
         $operate = '<a href="view-order.php?id=' . $row['id'] . '" class="label label-primary" title="View">View</a>';
         $dc  = $row['date_created'];
         $dc = explode(" ", $dc); 
-        $update = '<a href="updateorders.php?id=' . $row['id'] . '" class="label label-primary" title="Update">Update Orders</a>';
+        if($row['status']!='Completed'){
+            $update = '<a href="updateorders.php?id=' . $row['id'] . '" class="label label-primary" title="Update">Update Orders</a>';
+        }
+        else{
+            $update = '';
+        }
+        
         $tempRow['id'] = $row['id'];
         $tempRow['date_created'] = $dc[0];
         $tempRow['product_id'] = $row['product_id'];

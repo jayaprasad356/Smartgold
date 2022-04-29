@@ -73,7 +73,7 @@ $reslock = $db->getResult();
                             <div class="form-group col-md-6">
                                 <label for="status">Offer Lock Status :</label> <i class="text-danger asterik">*</i>
                                 <select name="status" id="status" class="form-control" required>
-                                    <option value="">--Select Offer Lock Status--</option>
+                                    <option value="">Received</option>
                                     <?php foreach ($reslock as $row) { ?>
                                         
                                             <option value="<?php echo $row['id']; ?>"<?= ($row['id'] == $res[0]['status']) ? "selected" : ""; ?>><?php echo $row['title']; ?></option>

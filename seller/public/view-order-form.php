@@ -87,7 +87,14 @@ else if($res[0]['buy_method'] == 2){
                         </table>
                     </div><!-- /.box-body -->
                     <div class="box-footer clearfix">
-                        <a href="updateorders.php?id=<?php echo $res[0]['id'] ?>"><button class="btn btn-primary">Update</button></a>
+                        <?php
+                        if($res [0]['status'] !='Completed'){?>
+                            <a href="updateorders.php?id=<?php echo $res[0]['id'] ?>"><button class="btn btn-primary">Update</button></a> 
+                        <?php
+                        }
+                        ?>
+                    
+                        
                     
                     </div>
                 </div><!-- /.box -->

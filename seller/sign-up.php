@@ -176,6 +176,8 @@ $db->connect();
                             <label for="">Store URL</label>
                             <input type="url" pattern="https://.*" class="form-control" name="store_url" id="store_url">
                         </div>
+                        <br>
+                        <p >It is recommeded to enter the address either mannually or choose from the map, not both</p>
                         <div class="row">
                             <div class="pac-card" id="pac-card">
                             <div>
