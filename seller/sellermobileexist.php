@@ -12,6 +12,7 @@ $db->connect();
 
 if (empty($_POST['mobile'])) {
     echo "fail";
+    return false;
 }
 $mobile = $db->escapeString($_POST['mobile']);
 $sql = "SELECT * FROM seller WHERE mobile = '" . $mobile . "'";

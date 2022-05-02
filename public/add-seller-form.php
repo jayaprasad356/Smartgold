@@ -561,23 +561,14 @@
             $.ajax({
             url: "sellermobileexist.php",
             type: "POST",
-            data:{"mobile":myVar}
-            }).done(function(data) {
-                console.log(data);
-                if(data == "success"){
-                    $("#mobilecheckout").html("");
-                }else{
-                    console.log(data);
-                    $("#mobilecheckout").html("Mobile Number Already Registered");
-                }
-            
-            }).fail(function(request){
-                console.log(request.responseText);
-                if(request.responseText == "success"){
-                    $("#mobilecheckout").html("");
-                }else{
-                    
-                    $("#mobilecheckout").html("Mobile Number Already Registered");
+            data:{"mobile":myVar},
+            complete: function(r){
+                    if(r.responseText == "success"){
+                        $("#mobilecheckout").html("");
+                    }else{
+                        
+                        $("#mobilecheckout").html("Mobile Number Already Registered");
+                    }
                 }
             });
 

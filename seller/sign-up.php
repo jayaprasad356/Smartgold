@@ -133,7 +133,7 @@ $db->connect();
                         </div>
                         <div class="form-group">
                             <label for="">Mobile</label><i class="text-danger asterik">*</i><p name="mobilecheckout" id="mobilecheckout" class="text-danger"></p>
-                            <input type="number" class="form-control" name="mobile" id="mobile" required>
+                            <input type="number" class="form-control mobilecheck" name="mobile" id="mobile" required>
                         </div>
                         <div class="form-group">
                             <p id="mverifytext" style="display:none" class="text-success"></p>
@@ -177,7 +177,7 @@ $db->connect();
                             <input type="url" pattern="https://.*" class="form-control" name="store_url" id="store_url">
                         </div>
                         <br>
-                        <p >It is recommeded to enter the address either mannually or choose from the map, not both</p>
+                        <p class="text-danger" >It is recommeded to enter the address either mannually or choose from the map, not both</p>
                         <div class="row">
                             <div class="pac-card" id="pac-card">
                             <div>
@@ -367,10 +367,8 @@ $db->connect();
                         contentType: false,
                         processData: false,
                         success: function(result) {
-                            $('#result').html(result);
-                            $('#result').show().delay(6000).fadeOut();
-                            $('#submit_btn').html('Submit');
-                            $('#add_seller_form')[0].reset();
+                            alert("Registered Succcessfully");
+                            location.reload(true);
                             document.getElementById( 'mverifytext' ).style.display = 'none';
                             document.getElementById("mverifytext").innerHTML = ""
                             document.getElementById("senOtpbtn").type = "button";
@@ -422,29 +420,25 @@ $db->connect();
   firebase.initializeApp(config);
 </script>
 <script type="text/javascript">
-$(document).ready(function() {
-    $('input[name=mobile]').change(function() {
+    $(document).on('input', '.mobilecheck', function(){
             console.log($('#mobile').val());
             var myVar = $('#mobile').val();
             
             $.ajax({
             url: "sellermobileexist.php",
             type: "POST",
-            data:{"mobile":myVar}
-            }).done(function(data) {
-                console.log(data);
-                if(data == "success"){
-                    $("#mobilecheckout").html("");
-                }else{
-                    $("#mobilecheckout").html("Mobile Number Already Registered");
+            data:{"mobile":myVar},
+            complete: function(r){
+                    if(r.responseText == "success"){
+                        $("#mobilecheckout").html("");
+                    }else{
+                        
+                        $("#mobilecheckout").html("Mobile Number Already Registered");
+                    }
                 }
-            
-            }).fail(function(data){
-                console.log("Try again");
             });
             
         });
-});
 </script>
 <script>
     $(document).on('input', '.pan_number', function(){
