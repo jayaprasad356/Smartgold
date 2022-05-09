@@ -43,7 +43,7 @@ if ($num >= 1) {
         $res = $db->getResult();
         $lockcount = $db->numRows($res);
 
-        $temp['id'] = $row['id'];
+        $temp['id'] = 'smartgold_'.$row['id'];
         $temp['store_name'] = $row['store_name'];
         $temp['valid_date'] = $row['valid_date'];
         $temp['description'] = $row['description'];

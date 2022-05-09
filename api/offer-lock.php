@@ -70,13 +70,18 @@ if($maxlocked > $lockcount){
     $sql = "INSERT INTO offer_lock(`user_id`,`offer_id`, `paid_amt`)VALUES($user_id,$offer_id,$paid_amt)";
     $db->sql($sql);
     $res = $db->getResult();
+    $sql = "SELECT * FROM offer_lock ORDER BY ID DESC";
+    $db->sql($sql);
+    $resoffer = $db->getResult();
+    
     $sql = "SELECT *,offers.valid_date FROM `seller`,`offers` WHERE seller.id = offers.seller_id AND seller.id = '" . $seller_id . "'";
     $db->sql($sql);
     $res = $db->getResult();
     $num = $db->numRows($res);
     if ($num >= 1) {
         foreach ($res as $row) {
-            $temp['id'] = $row['id'];
+            $ref_id = 'smartgold_'.$resoffer[0]['id'];
+            $temp['id'] = $ref_id;
             $temp['name'] = $row['name'];
             $temp['store_name'] = $row['store_name'];
             $temp['email'] = $row['email'];
