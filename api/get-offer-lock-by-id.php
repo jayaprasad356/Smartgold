@@ -31,7 +31,7 @@ if (empty($_POST['user_id'])) {
     return false;
 }
 $user_id = $db->escapeString($_POST['user_id']);
-$sql = "SELECT *,ol.id AS id,s.status AS status from offer_lock ol INNER JOIN offers o on ol.offer_id = o.id INNER JOIN seller s ON o.seller_id = s.id WHERE ol.user_id = '" . $user_id . "'";
+$sql = "SELECT *,ol.id AS id,ol.status AS status from offer_lock ol INNER JOIN offers o on ol.offer_id = o.id INNER JOIN seller s ON o.seller_id = s.id WHERE ol.user_id = '" . $user_id . "'";
 $db->sql($sql);
 $res = $db->getResult();
 $num = $db->numRows($res);
@@ -57,12 +57,20 @@ if ($num >= 1) {
         $temp['total_locked'] = $lockcount;
 
         $status = $row['status'];
+        if($status == 0){
+            $status = 'Offer Locked';
+        }
+        else{
+            $sql = "SELECT id,title FROM offer_lock_status WHERE id='$status'";
+            $db->sql($sql);
+            $res = $db->getResult();
+            $status = $res[0]['title'];
 
-        $sql = "SELECT id,title FROM offer_lock_status WHERE id='$status'";
-        $db->sql($sql);
-        $res = $db->getResult();
+        }
 
-        $temp['status'] = $res[0]['title'];
+
+
+        $temp['status'] = $status;
         
         
         $temp1[] = $temp;
