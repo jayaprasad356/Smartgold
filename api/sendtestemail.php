@@ -15,7 +15,7 @@ $db = new Database();
 $db->connect();
 
 
-$to = 'jayaprasad356@gmail.com';
+$to = 'jandraid0.1@gmail.com';
 $subject = 'Test';
 $item_data1 = '';
 $order_data = '';
