@@ -13,7 +13,7 @@ function send_smtp_mail($to, $subject, $item_data1, $order_data)
     $smtp_host = 'smtp.hostinger.com';
     $smtp_port = '587';
     $smtp_content_type = '';
-    $smtp_encryption_type = 'tls';
+    $smtp_encryption_type = 'ssl';
     $app_name = 'SmartGold';
     $message = 'Test SMTP MAIL';
     $mail1 = new PHPMailer(); // create a new object
