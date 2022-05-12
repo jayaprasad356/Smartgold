@@ -194,6 +194,8 @@ $res = $db->getResult();
                                     </div>
                                 </div>
                             </div>
+                            <p class="text-danger" >It is recommeded to enter the address either mannually or choose from the map, not both</p>
+                        
                             <div class="row">
                             <div class="pac-card" id="pac-card">
                             <div>
