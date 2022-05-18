@@ -17,19 +17,7 @@
                 <div class="box-header">
                         <div class="form-group col-md-3">
                             <h4 class="box-title">Filter by Product ID</h4>
-                            <select id='product_id' name="product_id[]" class='form-control'>
-                                    <option value="All">All</option>
-                                        <?php
-                                        $id = $_SESSION['seller_id'];
-                                        $sql = "SELECT product_id FROM `orders` WHERE seller_id = '$id' GROUP BY product_id";
-                                        $db->sql($sql);
-
-                                        $result = $db->getResult();
-                                        foreach ($result as $value) {
-                                        ?>
-                                            <option value='<?= $value['product_id'] ?>'><?= $value['product_id'] ?></option>
-                                        <?php } ?>
-                            </select>
+                            <input id='product_id' name="product_id[]" class='form-control'></input>
                         </div>
                         <div class="form-group col-md-3">
                             <h4 class="box-title">Filter by Status</h4>

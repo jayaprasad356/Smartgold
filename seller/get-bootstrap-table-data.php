@@ -212,29 +212,29 @@ if (isset($_GET['table']) && $_GET['table'] == 'orders') {
         $tempRow['quantity'] = $row['quantity'];
         $tempRow['delivery_charges'] = $row['delivery_charges'];
         if($row['status'] == 'Cancelled'){
-            $tempRow['status'] = "<label class='label label-danger'>".$row['status']."</label>";
+            $tempRow['status'] = $row['status'];
 
         }
         else if($row['status'] == 'Completed'){
-            $tempRow['status'] = "<label class='label label-success'>".$row['status']."</label>";
+            $tempRow['status'] = $row['status'];
 
         }
         else{
-            $tempRow['status'] = "<label class='label label-primary'>".$row['status']."</label>";
+            $tempRow['status'] = $row['status'];
 
         }
 
         if($row['payment_status'] == 'Unpaid'){
-            $tempRow['payment_status'] = "<label class='label label-danger'>".$row['payment_status']."</label>";
+            $tempRow['payment_status'] = $row['payment_status'];
 
         }
         else{
-            $tempRow['payment_status'] = "<label class='label label-primary'>".$row['payment_status']."</label>";
+            $tempRow['payment_status'] = $row['payment_status'];
 
         }
         
         
-        $tempRow['buy_method'] = ($row['buy_method'] == 1)? "<label class='label label-primary'>Pick Up at Store</label>": (($row['buy_method'] == 2)? "<label class='label label-primary'>Delivery at Home</label>": "<label class='label label-primary'>Delivery at Home</label>");
+        $tempRow['buy_method'] = ($row['buy_method'] == 1)? "<p>Pick Up at Store</p>": (($row['buy_method'] == 2)? "<p>Delivery at Home</p>": "<p>Delivery at Home</p>");
         
         // $tempRow['buy_method'] = $row['buy_method'];
         // $tempRow['status'] = $row['status'];

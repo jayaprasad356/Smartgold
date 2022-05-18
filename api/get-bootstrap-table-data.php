@@ -71,8 +71,11 @@ if (isset($_GET['table']) && $_GET['table'] == 'customers')
     $sql = "SELECT COUNT(`id`) as total FROM `users` " . $where;
     $db->sql($sql);
     $res = $db->getResult();
+   
+    
     foreach ($res as $row)
         $total = $row['total'];
+       
    
     //$sql = "SELECT * FROM users $where ORDER BY $sort $order";
     $sql = "SELECT * FROM users " . $where . " ORDER BY " . $sort . " " . $order . " LIMIT " . $offset . ", " . $limit;
@@ -81,6 +84,7 @@ if (isset($_GET['table']) && $_GET['table'] == 'customers')
     
     $bulkData = array();
     $bulkData['total'] = $total;
+   
     
     $rows = array();
     $tempRow = array();
@@ -89,13 +93,28 @@ if (isset($_GET['table']) && $_GET['table'] == 'customers')
     
     foreach ($res as $row) {
         //$operate .= ' <a class="btn btn-xs btn-danger" href="delete-product.php?id=' . $row['product_variant_id'] . '" title="Delete"><i class="fa fa-trash-o"></i></a>&nbsp;';
-        
+        $operate = '<a href="view-customer.php?id=' . $row['id'] . '" class="label label-primary" title="View">View</a>';
+        $user_id=$row['id'];
+        $sql="SELECT * FROM offer_lock WHERE user_id=$user_id";
+        $db->sql($sql);
+        $res = $db->getResult();
+        $offers_locked_count = $db->numRows($res);
+
+        $user_id=$row['id'];
+        $sql="SELECT * FROM orders WHERE user_id=$user_id";
+        $db->sql($sql);
+        $res = $db->getResult();
+        $orders_purchased = $db->numRows($res);
+
         $tempRow['id'] = $row['id'];
         $tempRow['name'] = $row['name'];
         $tempRow['mobile'] = $row['mobile'];
         $tempRow['email'] = $row['email'];
+        $tempRow['offers_locked_count'] = $offers_locked_count;
+        $tempRow['orders_purchased'] = $orders_purchased;
+        $tempRow['operate'] = $operate;
         
-         
+        
         $rows[] = $tempRow;
     }
     $bulkData['rows'] = $rows;
