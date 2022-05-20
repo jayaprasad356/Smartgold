@@ -88,7 +88,7 @@ $db->sql($sql);
 $res = $db->getResult();
 $num = $db->numRows($res);
 if ($num == 1) {
-    $sql = "UPDATE address SET user_id='$user_id',address_id='$address_id',name='$name',address='$address', landmark='$landmark', area='$area', city='$city', pincode='$pincode' WHERE id='$address_id'";
+    $sql = "UPDATE address SET user_id='$user_id',name='$name',address='$address', landmark='$landmark', area='$area', city='$city', pincode='$pincode' WHERE id='$address_id'";
     $db->sql($sql);
     $res = $db->getResult();
     $response['success'] = true;
