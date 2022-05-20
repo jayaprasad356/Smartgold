@@ -542,7 +542,7 @@ $res = $db->getResult();
                             placeholder: "type in category name to search"
                         });
                         $('#submit_btn').html('Update');
-                        alert("Seller Updated Successfully")
+                        
                         location.reload(true);
                     }
                 });

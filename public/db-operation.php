@@ -244,7 +244,7 @@ if (isset($_POST['update_seller'])  && !empty($_POST['update_seller'])) {
         $sql = "UPDATE `seller` SET `name`='$name',`latitude`='$latitude',`longitude`='$longitude',`store_name`='$store_name',`email`='$email',`mobile`='$mobile',`store_url`='$store_url',`store_description`='$store_description',`street`='$street',`pincode`='$pincode',`city`='$city',`state`='$state',`account_number`='$account_number',`bank_ifsc_code`='$bank_ifsc_code',`account_name`='$account_name',`bank_name`='$bank_name',`status`=$status,`pan_number`='$pan_number',`gst_number`='$gst_number',`valid`='$valid',`plan`='$plan' WHERE id=" . $id;
     }
     if ($db->sql($sql)) {
-        echo "<label class='alert alert-success'>Information Updated Successfully.</label>";
+        echo "<label class='alert alert-success'>Profile Updated Successfully.</label>";
     } else {
         echo "<label class='alert alert-danger'>Some Error Occurred! Please Try Again.</label>";
     }

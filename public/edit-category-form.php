@@ -153,12 +153,12 @@ $res = $db->getResult();
                 processData: false,
                 success: function(result) {
                     $('#result').html(result);
-                    $('#result').show().delay(6000).fadeOut();
+                    $('#result').show().delay(3000).fadeOut();
                     $('#cat_ids').select2({
                         placeholder: "type in category name to search"
                     });
                     $('#submit_btn').html('Update');
-                    alert("Category Updated Successfully")
+                    
                     location.reload(true);
                 }
             });

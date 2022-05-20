@@ -257,13 +257,20 @@ pointer-events:none;
                     processData: false,
                     success: function(result) {
                         $('#result').html(result);
-                        $('#result').show().delay(6000).fadeOut();
-                        alert("Product Added Successfully");
-                        location.reload(true);
+                       
                         $('#submit_btn').html('Add');
                     
                         $('#add_product_form')[0].reset();
-                        document.getElementById("resultvalid").innerHTML = '';
+                        $('#result').show();
+
+                          // place this within dom ready function
+                        function showpanel() {     
+                            
+
+                            window.location.replace("products.php");
+                        }
+
+                        setTimeout(showpanel, 3000)
                     }
                 });
             }

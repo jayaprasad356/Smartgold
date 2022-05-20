@@ -91,7 +91,7 @@ if (isset($_GET['table']) && $_GET['table'] == 'offers') {
     foreach ($res as $row) {
         $operate = ' <a href="edit-offer.php?id=' . $row['id'] . '"><i class="fa fa-edit"></i></a>'; 
         //$operate .= '<a href="view-product.php?id=' . $row['id'] . '" class="label label-primary" title="View">View</a>';
-        $tempRow['status'] = ($row['status'] == 1)? "<label class='label label-success'>Active</label>": (($row['status'] == 0)? "<label class='label label-danger'>Deactive</label>": "<label class='label label-warning'>Deactive</label>");
+        $tempRow['status'] = ($row['status'] == 1)? "<label class='text-success'>Active</label>": (($row['status'] == 0)? "<label class='text-danger'>Deactive</label>": "<label class='label label-warning'>Deactive</label>");
         $currency = "Rs.";
         if($row['budget_id'] == 1){
             $budget = "upto 1 lakh";
@@ -160,7 +160,7 @@ if (isset($_GET['table']) && $_GET['table'] == 'orders') {
         $order = $db->escapeString($_GET['order']);
     }
 
-    if (isset($_GET['product_id']) && $_GET['product_id'] != 'All') {
+    if (isset($_GET['product_id']) && $_GET['product_id'] != '') {
         $product_id = $db->escapeString($_GET['product_id']);
         $where .= ' AND orders.product_id =' . $product_id;
     }
@@ -199,7 +199,7 @@ if (isset($_GET['table']) && $_GET['table'] == 'orders') {
         $dc  = $row['date_created'];
         $dc = explode(" ", $dc); 
         if($row['status']!='Completed'){
-            $update = '<a href="updateorders.php?id=' . $row['id'] . '" class="label label-primary" title="Update">Update Orders</a>';
+            $update = '<a href="updateorders.php?id=' . $row['id'] . '" class="label  label-primary" title="Update">Update Orders</a>';
         }
         else{
             $update = '';
@@ -386,7 +386,7 @@ if (isset($_GET['table']) && $_GET['table'] == 'products') {
         $tempRow['price'] = $currency . " " . $row['price'];
         
 
-        $tempRow['status'] = ($row['status'] == 1)? "<label class='label label-success'>Active</label>": (($row['status'] == 0)? "<label class='label label-danger'>Deactive</label>": "<label class='label label-warning'>Deactive</label>");
+        $tempRow['status'] = ($row['status'] == 1)? "<label class='text-success'>Active</label>": (($row['status'] == 0)? "<label class='text-danger'>Deactive</label>": "<label class='label label-warning'>Deactive</label>");
         $tempRow['description'] = $row['description'];
         $tempRow['discounted_price'] = $discounted_price;
         $tempRow['weight'] = $row['weight'];

@@ -170,7 +170,6 @@ $res = $db->getResult();
                     $('#result').html(result);
                     $('#result').show().delay(6000).fadeOut();
                     $('#submit_btn').html('Update');
-                    alert("Plans Updated Successfully")
                     location.reload(true);
                 }
             });

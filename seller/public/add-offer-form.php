@@ -142,11 +142,21 @@ $res = $db->getResult();
                     processData: false,
                     success: function(result) {
                         $('#result').html(result);
-                        $('#result').show().delay(6000).fadeOut();
-                        alert("Offer Added Successfully");
+                                               
                         $('#submit_btn').html('Add');
-                    
+                        
                         $('#add_offer_form')[0].reset();
+                        
+                        $('#result').show();
+
+                          // place this within dom ready function
+                        function showpanel() {     
+                            
+
+                            window.location.replace("offers.php");
+                        }
+
+                        setTimeout(showpanel, 3000)
                         
                     }
                 });

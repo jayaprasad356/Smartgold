@@ -357,9 +357,16 @@ $res = $db->getResult();
                     $('#cat_ids').select2({
                         placeholder: "type in category name to search"
                     });
-                    alert("Profile Updated Successfully");
+                    //alert("Profile Updated Successfully");
                     //$('#submit_btn').html('Update');
-                    location.reload(true);
+                    
+                    function showpanel() {     
+                            
+
+                        location.reload(true);
+                    }
+
+                    setTimeout(showpanel, 3000)
                 }
             });
         }

@@ -192,9 +192,9 @@ if (isset($_GET['table']) && $_GET['table'] == 'seller') {
         $tempRow['account_name'] = $row['account_name'];
         $tempRow['plan'] = $row['plan'];
         if ($row['status'] == 2)
-            $tempRow['status'] = "<label class='label label-warning'>Not-Approved</label>";
+            $tempRow['status'] = "<label class='text-danger'>Not-Approved</label>";
         else if ($row['status'] == 1)
-            $tempRow['status'] = "<label class='label label-success'>Approved</label>";
+            $tempRow['status'] = "<label class='text-success'>Approved</label>";
         else if ($row['status'] == 0)
             $tempRow['status'] = "<label class='label label-danger'>Deactive</label>";
         //$tempRow['status'] = $row['status'];

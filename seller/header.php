@@ -197,6 +197,11 @@ $path = 'upload/seller/';
                         <i class="fa fa-credit-card" class="active"></i> <span>Upgrade</span>
                     </a>
                 </li>
+                <li class="treeview">
+                    <a href="help.php">
+                        <i class="fa fa-info" class="active"></i> <span>Help</span>
+                    </a>
+                </li>
                     
                 
             </ul>

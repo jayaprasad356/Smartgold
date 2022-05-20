@@ -17,7 +17,7 @@
                 <div class="box-header">
                         <div class="form-group col-md-3">
                             <h4 class="box-title">Filter by Product ID</h4>
-                            <input id='product_id' name="product_id[]" class='form-control'></input>
+                            <input id='product_id' name="product_id[]" class='form-control products'></input>
                         </div>
                         <div class="form-group col-md-3">
                             <h4 class="box-title">Filter by Status</h4>
@@ -81,16 +81,20 @@
         id = $('#status').val();
         $('#orders_table').bootstrapTable('refresh');
     });
-    $('#product_id').on('change', function() {
-        id = $('#product_id').val();
-        $('#orders_table').bootstrapTable('refresh');
-    });
+    // $('#product_id').on('change', function() {
+    //     id = $('#product_id').val();
+    //     $('#orders_table').bootstrapTable('refresh');
+    // });
     $('#buy_method').on('change', function() {
         id = $('#buy_method').val();
         $('#orders_table').bootstrapTable('refresh');
     });
     $('#payment_status').on('change', function() {
         id = $('#payment_status').val();
+        $('#orders_table').bootstrapTable('refresh');
+    });
+    $(document).on('input', '.products', function(){
+        id = $('#product_id').val();
         $('#orders_table').bootstrapTable('refresh');
     });
     function queryParams_1(p) {

@@ -201,6 +201,11 @@ $db->sql("SET NAMES 'utf8'");
                         <i class="fa fa-cubes" class="active"></i> <span>Admin Access</span>
                     </a>
                 </li>
+                <li class="treeview">
+                    <a href="help.php">
+                        <i class="fa fa-info" class="active"></i> <span>Help</span>
+                    </a>
+                </li>
                 <?php
                 
 

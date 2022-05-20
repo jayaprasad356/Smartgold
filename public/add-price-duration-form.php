@@ -53,7 +53,6 @@ $res = $db->getResult();
                         </div><!-- /.box-body -->
                         <div class="box-footer">
                             <button type="submit" class="btn btn-primary" id="submit_btn" name="btnAdd">Update</button>
-                            <input type="reset" class="btn-warning btn" value="Clear" />
                             <div id="result" style="display: none;"></div>
                         </div>
                     </form>
