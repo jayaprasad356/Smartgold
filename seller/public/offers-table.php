@@ -22,7 +22,7 @@
                             <h4 class="box-title">Filter by Budget</h4>
                             <select id="budget_id" name="budget_id" placeholder="Select budget range" required class="form-control col-xs-3" style="width: 300px;">
                                     <?php
-                                    $Query = "select budget, id from budget desc";
+                                    $Query = "select budget, id from budget order by id desc";
                                     $db->sql($Query);
                                     $result = $db->getResult();
                                     if ($result) {

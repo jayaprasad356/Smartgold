@@ -10,7 +10,7 @@ if (!isset($_SESSION['seller_id']) && !isset($_SESSION['seller_name'])) {
 } else {
     $ID = $_SESSION['seller_id'];
 }
-$sql_query = "SELECT id, budget FROM budget DESC";
+$sql_query = "SELECT id, budget FROM budget ORDER BY id DESC";
 $db->sql($sql_query);
 
 $res = $db->getResult();
