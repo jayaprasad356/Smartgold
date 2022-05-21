@@ -10,7 +10,7 @@ if (!isset($_SESSION['seller_id']) && !isset($_SESSION['seller_name'])) {
 } else {
     $ID = $_SESSION['seller_id'];
 }
-$sql_query = "SELECT id, budget FROM budget";
+$sql_query = "SELECT id, budget FROM budget DESC";
 $db->sql($sql_query);
 
 $res = $db->getResult();

@@ -27,7 +27,7 @@ if (isset($_POST['btnUpdate'])) {
 $sql_query = "SELECT * FROM offers WHERE id = '$offer_id'";
 $db->sql($sql_query);
 $res = $db->getResult();
-$sql_query = "SELECT id, budget FROM budget";
+$sql_query = "SELECT id, budget FROM budget DESC";
 $db->sql($sql_query);
 
 $resbudget = $db->getResult();
