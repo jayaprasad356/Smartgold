@@ -32,7 +32,7 @@ if (empty($_POST['user_id'])) {
     return false;
 }
 $user_id = $db->escapeString($_POST['user_id']);
-$sql = "SELECT *,orders.payment_status,orders.id AS id,products.id AS product_id,orders.status AS status FROM orders,products WHERE orders.product_id = products.id AND orders.user_id = '" . $user_id . "'";
+$sql = "SELECT *,orders.payment_status,orders.id AS id,products.id AS product_id,orders.status AS status FROM orders,products WHERE orders.product_id = products.id AND orders.user_id = '" . $user_id . "' ORDER BY orders.id DESC";
 $db->sql($sql);
 $res = $db->getResult();
 $num = $db->numRows($res);

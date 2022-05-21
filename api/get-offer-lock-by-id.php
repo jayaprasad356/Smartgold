@@ -31,7 +31,7 @@ if (empty($_POST['user_id'])) {
     return false;
 }
 $user_id = $db->escapeString($_POST['user_id']);
-$sql = "SELECT *,ol.id AS id,ol.status AS status from offer_lock ol INNER JOIN offers o on ol.offer_id = o.id INNER JOIN seller s ON o.seller_id = s.id WHERE ol.user_id = '" . $user_id . "'";
+$sql = "SELECT *,ol.id AS id,ol.status AS status from offer_lock ol INNER JOIN offers o on ol.offer_id = o.id INNER JOIN seller s ON o.seller_id = s.id WHERE ol.user_id = '" . $user_id . "' ORDER BY ol.id DESC";
 $db->sql($sql);
 $res = $db->getResult();
 $num = $db->numRows($res);
