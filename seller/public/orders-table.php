@@ -52,8 +52,8 @@
                         <thead>
                             <tr>
                                 
-                                <th data-field="id" data-sortable="true">ID</th>
-                                <th data-field="order_date" >Order - Date</th>
+                                <th data-field="id">ID</th>
+                                <th data-field="order_date" data-sortable="true" >Order - Date</th>
                                 <th data-field="product_id" data-sortable="true">Product ID</th>
                                 <th data-field="name" data-sortable="true">Name</th>
                                 <th data-field="quantity" data-sortable="true">Quantity</th>
