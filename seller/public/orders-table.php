@@ -53,7 +53,7 @@
                             <tr>
                                 
                                 <th data-field="id" data-sortable="true">ID</th>
-                                <th data-field="date_created" >Order Date</th>
+                                <th data-field="date_created" >Order - Date</th>
                                 <th data-field="product_id" data-sortable="true">Product ID</th>
                                 <th data-field="name" data-sortable="true">Name</th>
                                 <th data-field="quantity" data-sortable="true">Quantity</th>

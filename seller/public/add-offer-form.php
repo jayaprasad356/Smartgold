@@ -48,7 +48,7 @@ $res = $db->getResult();
                     <div class="form-group">
                             <label for="budget_id">Budget :</label> <i class="text-danger asterik">*</i><?php echo isset($error['budget_id']) ? $error['budget_id'] : ''; ?>
                             <select name="budget_id" id="budget_id" class="form-control" required>
-                                <option value="">--Select Budget--</option>
+                                <!-- <option value="">--Select Budget--</option> -->
                                 <?php foreach ($res as $row) { ?>
                                     
                                         <option value="<?php echo $row['id']; ?>"><?php echo $row['budget']; ?></option>

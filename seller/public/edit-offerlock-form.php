@@ -21,8 +21,16 @@ if (isset($_POST['btnUpdate'])) {
     $error = array();
     $sql_query = "UPDATE offer_lock SET status = $status,`seller_product_name` = '$product_name',`seller_product_price` = '$product_price',`seller_description` = '$description' WHERE id = $offer_lock_id";
 
-    $db->sql($sql_query);
-    $error['update_data'] = "<span class='label label-success'>Offer Lock updated Successfully</span>";
+    $result = $db->sql($sql_query);
+    if (!empty($result)) {
+        $error['update_data'] = "<span id='success' class='label label-success'>Offer Lock updated Successfully</span>";
+
+    }
+    else{
+        $error['update_data'] = " <span class='label label-danger'>Failed</span>";
+
+    }
+    
 }
 $sql_query = "SELECT *,users.name,users.mobile,offer_lock.status FROM offer_lock,users WHERE offer_lock.id = '$offer_lock_id' AND offer_lock.user_id = users.id";
 $db->sql($sql_query);
@@ -73,7 +81,7 @@ $reslock = $db->getResult();
                             <div class="form-group col-md-6">
                                 <label for="status">Offer Lock Status :</label> <i class="text-danger asterik">*</i>
                                 <select name="status" id="status" class="form-control" required>
-                                    <option value="">Received</option>
+                                    <option value="">Offer Locked</option>
                                     <?php foreach ($reslock as $row) { ?>
                                         
                                             <option value="<?php echo $row['id']; ?>"<?= ($row['id'] == $res[0]['status']) ? "selected" : ""; ?>><?php echo $row['title']; ?></option>
@@ -116,6 +124,15 @@ $reslock = $db->getResult();
     </div>
 </section>
 <div class="separator"> </div>
-
+<script>
+    if ($("#success").text() == "Offer Lock updated Successfully")
+    {
+        setTimeout(showpanel, 1000);
+        
+    }
+    function showpanel() {     
+        window.location.replace("offers.php");
+ }
+</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>
 

@@ -36,7 +36,7 @@ if (isset($_POST['btnUpdate'])) {
         }
         if ($product_result == 1 ) {
             $error['add_menu'] = "<section class='content-header'>
-                                                <span class='label label-success'>Updated Successfully</span>
+                                                <span id='success' class='label label-success'>Updated Successfully</span>
                                                 
                                                  </section>";
         } else {
@@ -120,5 +120,15 @@ $res = $db->getResult();
     </div>
 </section>
 <div class="separator"> </div>
+<script>
+    if ($("#success").text() == "Updated Successfully")
+    {
+        setTimeout(showpanel, 1000);
+        
+    }
+    function showpanel() {     
+        window.location.replace("orders.php");
+ }
+</script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>

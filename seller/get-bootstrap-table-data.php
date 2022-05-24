@@ -123,8 +123,13 @@ if (isset($_GET['table']) && $_GET['table'] == 'offers') {
         $tempRow['valid_date'] = $row['valid_date'];
         $tempRow['budget_range'] = $budget;
 
+        if ($num != 0) {
+            $tempRow['locked'] = $locked;
+        }
+        else{
+            $tempRow['locked'] = "No Locked Customers";
+        }
 
-        $tempRow['locked'] = $locked;
         $tempRow['operate'] = $operate;
         $rows[] = $tempRow;
     }

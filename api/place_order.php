@@ -70,8 +70,9 @@ if($productcount > 0){
         
         $delivery_charges = $resdeliver[0]['charges'];
         $seller_id = $res[$i]['seller_id'];
+        $order_date = date('Y-m-d');
         
-        $sql = "INSERT INTO orders(`user_id`,`product_id`,`seller_id`,`quantity`,`status`,`delivery_charges`,`buy_method`,`payment_status`,`total`)VALUES('$user_id','$product_id','$seller_id','$quantity','Received',$delivery_charges,'$buy_method','$payment_status','$total_price')";
+        $sql = "INSERT INTO orders(`user_id`,`product_id`,`seller_id`,`order_date`,`quantity`,`status`,`delivery_charges`,`buy_method`,`payment_status`,`total`)VALUES('$user_id','$product_id','$seller_id','$order_date','$quantity','Received',$delivery_charges,'$buy_method','$payment_status','$total_price')";
         $db->sql($sql);
         $sql = "DELETE FROM cart WHERE product_id = '" . $product_id . "' AND user_id = '$user_id'";
         $db->sql($sql);
