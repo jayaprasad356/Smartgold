@@ -15,11 +15,15 @@
                 <!-- <div class="col-xs-6"> -->
                 
                 <div class="box-header">
-                        <div class="form-group col-md-3">
-                            <h4 class="box-title">Filter by Product ID</h4>
+                        <div class="form-group col-md-2">
+                            <h4 class="box-title">Find Order ID</h4>
+                            <input id='order_id' name="order_id[]" class='form-control orders'></input>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <h4 class="box-title">Find Product ID</h4>
                             <input id='product_id' name="product_id[]" class='form-control products'></input>
                         </div>
-                        <div class="form-group col-md-3">
+                        <div class="form-group col-md-2">
                             <h4 class="box-title">Filter by Status</h4>
                             <select id="status" name="status" class="form-control" required>
                                 <option value="">All</option>
@@ -97,10 +101,15 @@
         id = $('#product_id').val();
         $('#orders_table').bootstrapTable('refresh');
     });
+    $(document).on('input', '.orders', function(){
+        id = $('#order_id').val();
+        $('#orders_table').bootstrapTable('refresh');
+    });
     function queryParams_1(p) {
         return {
             "status": $('#status').val(),
             "product_id": $('#product_id').val(),
+            "order_id": $('#order_id').val(),
             "buy_method": $('#buy_method').val(),
             "payment_status": $('#payment_status').val(),
             limit: p.limit,

@@ -18,6 +18,10 @@
             <div class="box">
                 <!-- <div class="col-xs-6"> -->
                 <div class="box-header">
+                        <div class="form-group col-md-3">
+                            <h4 class="box-title">Find by Offer ID</h4>
+                            <input id='offer_id' name="offer_id[]" class='form-control offers'></input>
+                        </div>
                        <div class="form-group col-md-3">
                             <h4 class="box-title">Filter by Budget</h4>
                             <select id="budget_id" name="budget_id" placeholder="Select budget range" required class="form-control col-xs-3" style="width: 300px;">
@@ -54,7 +58,7 @@
                             <tr>
                                 <th class="main" data-field="operate" data-events="actionEvents">Action </th>
                                 <th class="main" data-field="id" data-sortable="true">ID</th>
-                                <th  data-field="valid_date" data-sortable="true">Offer <br> Date</th>
+                                <th  data-field="valid_date" data-sortable="true">Offer Date</th>
                                 <th  data-field="gram_price" data-sortable="true">Discount <br> Per Gram(₹)</th>
                                 <th class="main" data-field="wastage" data-sortable="true">Wastage <br> Discount(%)</th>
                                 <th class="main" data-field="max_locked" data-sortable="true">Max <br> Locked Items</th>
@@ -91,10 +95,15 @@
         id = $('#status').val();
         $('#products_table').bootstrapTable('refresh');
     });
+    $(document).on('input', '.offers', function(){
+        id = $('#offer_id').val();
+        $('#products_table').bootstrapTable('refresh');
+    });
     function queryParams_1(p) {
         return {
             "status": $('#status').val(),
             "budget_id": $('#budget_id').val(),
+            "offer_id": $('#offer_id').val(),
             limit: p.limit,
             sort: p.sort,
             order: p.order,

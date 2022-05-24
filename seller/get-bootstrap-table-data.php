@@ -51,7 +51,7 @@ if (isset($_GET['table']) && $_GET['table'] == 'offers') {
 
     if (isset($_GET['search']) && !empty($_GET['search'])) {
         $search = $db->escapeString($_GET['search']);
-        $where .= "Where gram_price like '%" . $search . "%' OR wastage like '%" . $search . "%' OR max_locked like '%" . $search . "%' OR valid_date like '%" . $search . "%' AND seller_id = $id";
+        $where .= "Where valid_date like '%" . $search . "%' OR gram_price like '%" . $search . "%' OR wastage like '%" . $search . "%' OR max_locked like '%" . $search . "%' OR valid_date like '%" . $search . "%' AND seller_id = $id";
     }
     else{
         $where .= "Where seller_id = $id";
@@ -64,6 +64,10 @@ if (isset($_GET['table']) && $_GET['table'] == 'offers') {
     if (isset($_GET['order'])){
         $order = $db->escapeString($_GET['order']);
 
+    }
+    if (isset($_GET['offer_id']) && $_GET['offer_id'] != '') {
+        $offer_id = $db->escapeString($_GET['offer_id']);
+        $where .= ' AND id =' . $offer_id;
     }
     if (isset($_GET['budget_id']) && $_GET['budget_id'] != '') {
         $budget_id = $db->escapeString($_GET['budget_id']);
@@ -105,6 +109,13 @@ if (isset($_GET['table']) && $_GET['table'] == 'offers') {
         else if($row['budget_id'] == 4){
             $budget = "above 10 lakhs";
         }
+        else if($row['budget_id'] == 5){
+            $budget = "Any Budget";
+        }
+        else{
+            $budget = "Not Specified";
+        }
+        
         
         $locked = '<a href="offers_lock.php?id=' . $row['id'] . '" class="label label-primary" title="Show Locked Customers">Show Locked Customers</a>';
         $tempRow['id'] = $row['id'];
@@ -152,7 +163,7 @@ if (isset($_GET['table']) && $_GET['table'] == 'orders') {
 
     if (isset($_GET['search']) && !empty($_GET['search'])) {
         $search = $db->escapeString($_GET['search']);
-        $where .= "WHERE orders.product_id = products.id AND products.name like '%" . $search ."%' OR orders.quantity like '%" . $search . "%' OR orders.order_date like '%" . $search . "%' AND orders.seller_id = $id";
+        $where .= "WHERE orders.product_id = products.id AND products.name like '%" . $search ."%' OR orders.order_date like '%" . $search . "%' OR orders.quantity like '%" . $search . "%' OR orders.delivery_charges like '%" . $search . "%' AND orders.seller_id = $id";
         //$where .= "Where gram_price like '%" . $search . "%' OR wastage like '%" . $search . "%' OR max_locked like '%" . $search . "%' OR valid_date like '%" . $search . "%' AND seller_id = $id";
     }
     else{
@@ -168,6 +179,10 @@ if (isset($_GET['table']) && $_GET['table'] == 'orders') {
     if (isset($_GET['product_id']) && $_GET['product_id'] != '') {
         $product_id = $db->escapeString($_GET['product_id']);
         $where .= ' AND orders.product_id =' . $product_id;
+    }
+    if (isset($_GET['order_id']) && $_GET['order_id'] != '') {
+        $order_id = $db->escapeString($_GET['order_id']);
+        $where .= ' AND orders.id =' . $order_id;
     }
     if (isset($_GET['buy_method']) && $_GET['buy_method'] != '') {
         $buy_method = $db->escapeString($_GET['buy_method']);
@@ -307,7 +322,7 @@ if (isset($_GET['table']) && $_GET['table'] == 'lockoffers') {
         $tempRow['name'] = $row['name'];
         $tempRow['mobile'] = $row['mobile'];
         $tempRow['email'] = $row['email'];
-        $tempRow['time'] = $row['lock_date'];
+        $tempRow['lock_date'] = $row['lock_date'];
         if($row['status'] == 0){
             $tempRow['status'] = 'Received';
         }
@@ -344,7 +359,7 @@ if (isset($_GET['table']) && $_GET['table'] == 'products') {
 
     if (isset($_GET['search']) && !empty($_GET['search'])) {
         $search = $db->escapeString($_GET['search']);
-        $where .= "Where name like '%" . $search . "%' OR weight like '%" . $search . "%' OR price like '%" . $search . "%' OR discounted_price like '%" . $search . "%' AND seller_id = $id";
+        $where .= "Where id like '%" . $search . "%' OR name like '%" . $search . "%' OR weight like '%" . $search . "%' OR price like '%" . $search . "%' OR discounted_price like '%" . $search . "%' AND seller_id = $id";
     }
     else{
         $where .= "WHERE seller_id = $id";
