@@ -339,7 +339,7 @@ if (isset($_GET['table']) && $_GET['table'] == 'products') {
 
     if (isset($_GET['search']) && !empty($_GET['search'])) {
         $search = $db->escapeString($_GET['search']);
-        $where .= "Where name like '%" . $search . "%' OR gender like '%" . $search . "%' OR price like '%" . $search . "%' OR discounted_price like '%" . $search . "%' AND seller_id = $id";
+        $where .= "Where name like '%" . $search . "%' OR weight like '%" . $search . "%' OR price like '%" . $search . "%' OR discounted_price like '%" . $search . "%' AND seller_id = $id";
     }
     else{
         $where .= "WHERE seller_id = $id";

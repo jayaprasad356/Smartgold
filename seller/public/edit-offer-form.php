@@ -47,7 +47,7 @@ $resbudget = $db->getResult();
             <!-- general form elements -->
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Edit Offer</h3>
+                    <h3 class="box-title">Edit Offer <small><a href='offers.php'><i class='fa fa-angle-double-left'></i>&nbsp;&nbsp;&nbsp;Back to Offer</a></small></h3>
                 </div>
                 <div class="box-header">
                     <?php echo isset($error['cancelable']) ? '<span class="label label-danger">Till status is required.</span>' : ''; ?>

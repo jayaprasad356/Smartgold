@@ -135,7 +135,7 @@ pointer-events:none;
             <!-- general form elements -->
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Edit Product</h3>
+                    <h3 class="box-title">Edit Product <small><a href='products.php'><i class='fa fa-angle-double-left'></i>&nbsp;&nbsp;&nbsp;Back to Product</a></small></h3>
                 </div>
                 <div class="box-header">
                     <?php echo isset($error['cancelable']) ? '<span class="label label-danger">Till status is required.</span>' : ''; ?>
