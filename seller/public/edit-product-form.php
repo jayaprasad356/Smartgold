@@ -92,7 +92,7 @@ if (isset($_POST['btnUpdate'])) {
 
         }
         $db->sql($sql_query);
-        $error['update_data'] = "<span class='label label-success'>Product updated Successfully</span>";
+        $error['update_data'] = "<span id='success' class='label label-success'>Product updated Successfully</span>";
         
         
 
@@ -323,5 +323,15 @@ pointer-events:none;
                 reader.readAsDataURL(input.files[0]);
             }
         }
+</script>
+<script>
+    if ($("#success").text() == "Product updated Successfully")
+    {
+        setTimeout(showpanel, 1000);
+        
+    }
+    function showpanel() {     
+        window.location.replace("products.php");
+ }
 </script>
 

@@ -22,7 +22,7 @@ if (isset($_POST['btnUpdate'])) {
     $error = array();
     $sql_query = "UPDATE offers SET gram_price = '$ppg', budget_id = '$budget_id', wastage = '$wastage', max_locked = '$maxilock', status = '$status', valid_date = '$valid', description = '$description' WHERE id = $offer_id";
     $db->sql($sql_query);
-    $error['update_data'] = "<span class='label label-success'>Offer Updated Successfully</span>";
+    $error['update_data'] = "<span id='success' class='label label-success'>Offer Updated Successfully</span>";
 }
 $sql_query = "SELECT * FROM offers WHERE id = '$offer_id'";
 $db->sql($sql_query);
@@ -120,6 +120,16 @@ $resbudget = $db->getResult();
     </div>
 </section>
 <div class="separator"> </div>
+<script>
+    if ($("#success").text() == "Offer Updated Successfully")
+    {
+        setTimeout(showpanel, 1000);
+        
+    }
+    function showpanel() {     
+        window.location.replace("offers.php");
+ }
+</script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>
 
