@@ -152,7 +152,7 @@ if (isset($_GET['table']) && $_GET['table'] == 'orders') {
 
     if (isset($_GET['search']) && !empty($_GET['search'])) {
         $search = $db->escapeString($_GET['search']);
-        $where .= "WHERE orders.product_id = products.id AND products.name like '%" . $search ."%' OR orders.quantity like '%" . $search . "%' AND orders.seller_id = $id";
+        $where .= "WHERE orders.product_id = products.id AND products.name like '%" . $search ."%' OR orders.quantity like '%" . $search . "%' OR orders.order_date like '%" . $search . "%' AND orders.seller_id = $id";
         //$where .= "Where gram_price like '%" . $search . "%' OR wastage like '%" . $search . "%' OR max_locked like '%" . $search . "%' OR valid_date like '%" . $search . "%' AND seller_id = $id";
     }
     else{
@@ -211,7 +211,7 @@ if (isset($_GET['table']) && $_GET['table'] == 'orders') {
         }
         
         $tempRow['id'] = $row['id'];
-        $tempRow['date_created'] = $dc[0];
+        $tempRow['order_date'] = $row['order_date'];
         $tempRow['product_id'] = $row['product_id'];
         $tempRow['name'] = $row['name'];
         $tempRow['quantity'] = $row['quantity'];
