@@ -235,8 +235,8 @@ pointer-events:none;
                         
                         <div class="form-group">
                             <label for="image">Main Image : <i class="text-danger asterik">*</i>&nbsp;&nbsp;&nbsp;*Please choose square image of larger than 350px*350px & smaller than 550px*550px.</label><?php echo isset($error['image']) ? $error['image'] : ''; ?>
-                            <input type="file" name="image" accept="image/png,  image/jpeg" id="image">
-                            <img src="<?php echo DOMAIN_URL.$res[0]['image']; ?>" width="210" height="160" />
+                            <input type="file" name="image" accept="image/png,  image/jpeg" onchange="openIMG(this);" id="image">
+                            <img id="productimage" src="<?php echo DOMAIN_URL.$res[0]['image']; ?>" width="210" height="160" />
                         </div>
                         
                         <div class="form-group">
@@ -308,4 +308,20 @@ pointer-events:none;
 </script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>
+<script>
+    function openIMG(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#productimage')
+                        .attr('src', e.target.result)
+                        .width(150)
+                        .height(200);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+</script>
 
