@@ -288,7 +288,7 @@ if (isset($_GET['table']) && $_GET['table'] == 'lockoffers') {
     foreach ($res as $row)
         $total = $row['total'];
 
-    $sql = "SELECT *,offer_lock.id AS id,offer_lock.date_created AS date_created FROM users LEFT JOIN offer_lock  ON users.id = offer_lock.user_id WHERE offer_lock.offer_id = '$offerid'" . $where ;
+    $sql = "SELECT *,offer_lock.id AS id,offer_lock.lock_date AS lock_date FROM users LEFT JOIN offer_lock  ON users.id = offer_lock.user_id WHERE offer_lock.offer_id = '$offerid'" . $where ;
     $db->sql($sql);
     $res = $db->getResult();
     $bulkData = array();
@@ -307,7 +307,7 @@ if (isset($_GET['table']) && $_GET['table'] == 'lockoffers') {
         $tempRow['name'] = $row['name'];
         $tempRow['mobile'] = $row['mobile'];
         $tempRow['email'] = $row['email'];
-        $tempRow['time'] = $row['date_created'];
+        $tempRow['time'] = $row['lock_date'];
         if($row['status'] == 0){
             $tempRow['status'] = 'Received';
         }

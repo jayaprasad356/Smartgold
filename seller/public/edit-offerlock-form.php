@@ -76,6 +76,10 @@ $reslock = $db->getResult();
                                 <label for="exampleInputEmail1">Customer Mobile Number</label><?php echo isset($error['mobile']) ? $error['mobile'] : ''; ?>
                                 <p><?php echo $res[0]['mobile'] ?></p>
                         </div>
+                        <div class="form-group">
+                                <label for="exampleInputEmail1">Offer Lock Date</label><?php echo isset($error['lock_date']) ? $error['lock_date'] : ''; ?>
+                                <p><?php echo $res[0]['lock_date'] ?></p>
+                        </div>
 
                         <div class="row">
                             <div class="form-group col-md-6">

@@ -184,7 +184,7 @@ $path = 'upload/seller/';
                 </li>
                 <li class="treeview">
                     <a href="offers.php">
-                        <i class="fa fa-cubes" class="active"></i> <span>Locked Offers</span>
+                        <i class="fa fa-cubes" class="active"></i> <span>Locking Offers</span>
                     </a>
                 </li>
                 <li class="treeview">

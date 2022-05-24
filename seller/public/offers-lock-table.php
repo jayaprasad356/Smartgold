@@ -1,6 +1,6 @@
 <section class="content-header">
     <h1>
-        Customers Locked Offers /
+        Customers Who Locked Offers /
         <small><a href="home.php"><i class="fa fa-home"></i> Home</a></small>
     </h1>
 
@@ -26,7 +26,7 @@
                                 <th data-field="name" data-sortable="true">Name</th>
                                 <th data-field="mobile" data-sortable="true">Mobile</th>
                                 <th data-field="email" data-sortable="true">Email</th>
-                                <th data-field="time" data-sortable="true">Time</th>
+                                <th data-field="lock_date" data-sortable="true">Lock Date</th>
                                 <th data-field="status">Status</th>
                                 
                                 
