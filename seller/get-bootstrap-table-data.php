@@ -324,7 +324,7 @@ if (isset($_GET['table']) && $_GET['table'] == 'lockoffers') {
         $tempRow['email'] = $row['email'];
         $tempRow['lock_date'] = $row['lock_date'];
         if($row['status'] == 0){
-            $tempRow['status'] = 'Received';
+            $tempRow['status'] = 'Offer Locked';
         }
         else{
             $status = $row['status'];
@@ -384,17 +384,18 @@ if (isset($_GET['table']) && $_GET['table'] == 'products') {
         $gender = $db->escapeString($_GET['gender']);
         //$where .= "AND gender = '$gender'";
     }
-    $sql = "SELECT COUNT(`id`) as total FROM `products` "  . $where;
+    $sql = "SELECT p.*,(SELECT name FROM category c WHERE c.id=p.category_id) as category_name FROM `products` p " . $where . " AND gender = '$gender' ";
     $db->sql($sql);
     $res = $db->getResult();
-    foreach ($res as $row)
-        $total = $row['total'];
+    $num = $db->numRows($res);
+    // foreach ($res as $row)
+    //     $total = $row['total'];
     $sql = "SELECT p.*,(SELECT name FROM category c WHERE c.id=p.category_id) as category_name FROM `products` p " . $where . " AND gender = '$gender' ORDER BY " . $sort . " " . $order . " LIMIT " . $offset . ", " . $limit;
     $db->sql($sql);
     $res = $db->getResult();
 
     $bulkData = array();
-    $bulkData['total'] = $total;
+    $bulkData['total'] = $num;
     $rows = array();
     $tempRow = array();
     foreach ($res as $row) {

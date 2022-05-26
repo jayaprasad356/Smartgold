@@ -85,8 +85,8 @@ $res = $db->getResult();
                                     <div class="form-group">
                                         <label for="exampleInputFile">Logo</label><i class="text-danger asterik">*</i>
                                         
-                                        <input type="file" name="store_logo" id="store_logo">
-                                        <p class="help-block"><img src="<?php echo DOMAIN_URL . 'upload/seller/' . $res[0]['logo']; ?>" style="max-width:100%" /></p>
+                                        <input type="file" name="store_logo" accept="image/png,  image/jpeg" id="store_logo" onchange="openIMG(this);">
+                                        <p class="help-block"><img id="logoimage" src="<?php echo DOMAIN_URL . 'upload/seller/' . $res[0]['logo']; ?>" style="max-width:100%" /></p>
                                     </div>
                                 </div>
                                 <div class="form-group col-md-3">
@@ -371,6 +371,22 @@ $res = $db->getResult();
             });
         }
     });
+</script>
+<script>
+    function openIMG(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#logoimage')
+                        .attr('src', e.target.result)
+                        .width(150)
+                        .height(200);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
 </script>
 <script type="text/javascript">
     function changePassword() {

@@ -168,7 +168,7 @@ if (isset($_POST['update_seller'])  && !empty($_POST['update_seller'])) {
         //     return false;
         //     exit();
         // }
-        $target_path = '../upload/seller/';
+        $target_path = '../../upload/seller/';
         $filename = microtime(true) . '.' . strtolower($extension);
         $full_path = $target_path . "" . $filename;
         if (!move_uploaded_file($_FILES["store_logo"]["tmp_name"], $full_path)) {
@@ -193,7 +193,7 @@ if (isset($_POST['update_seller'])  && !empty($_POST['update_seller'])) {
         //     return false;
         //     exit();
         // }
-        $target_path = '../upload/seller/';
+        $target_path = '../../upload/seller/';
         $national_id_card = microtime(true) . '.' . strtolower($extension);
         $full_path = $target_path . "" . $national_id_card;
         if (!move_uploaded_file($_FILES["national_id_card"]["tmp_name"], $full_path)) {
@@ -218,7 +218,7 @@ if (isset($_POST['update_seller'])  && !empty($_POST['update_seller'])) {
         //     return false;
         //     exit();
         // }
-        $target_path = '../upload/seller/';
+        $target_path = '../../upload/seller/';
         $address_proof = microtime(true) . '.' . strtolower($extension);
         $full_path = $target_path . "" . $address_proof;
         if (!move_uploaded_file($_FILES["address_proof"]["tmp_name"], $full_path)) {
