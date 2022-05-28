@@ -12,26 +12,7 @@ if (!isset($_SESSION['seller_id']) && !isset($_SESSION['seller_name'])) {
 }
 $offer_lock_id = $_GET['id'];
 
-if (isset($_POST['btnUpdate'])) {
-    $seller_id = $ID;
-    $status = (isset($_POST['status']) && $_POST['status'] != "") ? $db->escapeString($_POST['status']) : "";
-    $product_name = (isset($_POST['product_name']) && $_POST['product_name'] != "") ? $db->escapeString($_POST['product_name']) : "";
-    $product_price = (isset($_POST['product_price']) && $_POST['product_price'] != "") ? $db->escapeString($_POST['product_price']) : "";
-    $description = (isset($_POST['description']) && $_POST['description'] != "") ? $db->escapeString($_POST['description']) : "";
-    $error = array();
-    $sql_query = "UPDATE offer_lock SET status = '$status',`seller_product_name` = '$product_name',`seller_product_price` = '$product_price',`seller_description` = '$description' WHERE id = $offer_lock_id";
 
-    $result = $db->sql($sql_query);
-    if (!empty($result)) {
-        $error['update_data'] = "<span id='success' class='label label-success'>Offer Lock updated Successfully</span>";
-
-    }
-    else{
-        $error['update_data'] = " <span class='label label-danger'>Failed</span>";
-
-    }
-    
-}
 $sql_query = "SELECT *,users.name,users.mobile,offer_lock.status FROM offer_lock,users WHERE offer_lock.id = '$offer_lock_id' AND offer_lock.user_id = users.id";
 $db->sql($sql_query);
 
@@ -84,22 +65,14 @@ $reslock = $db->getResult();
                         <div class="row">
                             <div class="form-group col-md-6">
                                 <label for="status">Offer Lock Status :</label> <i class="text-danger asterik">*</i>
-                                <select name="status" id="status" class="form-control" required>
-                                    <option value="">Offer Locked</option>
-                                    <?php foreach ($reslock as $row) { ?>
-                                        
-                                            <option value="<?php echo $row['title']; ?>"<?= ($row['title'] == $res[0]['status']) ? "selected" : ""; ?>><?php echo $row['title']; ?></option>
-                                    <?php 
-                                    } ?>
-                                    
-                                </select>
+                                <p><?php echo $res[0]['status'] ?></p>
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-group col-md-4">
                                 <div class="form-group">
                                     <label for="">Product Name</label>
-                                    <input type="text" class="form-control" name="product_name" id="product_name" value="<?= $res[0]['seller_product_name']; ?>">
+                                    <input type="text" class="form-control" name="product_name" id="product_name" value="<?= $res[0]['seller_product_name']; ?>" disabled>
                                 </div>
                             </div>
                         </div>
@@ -107,20 +80,14 @@ $reslock = $db->getResult();
                             <div class="form-group col-md-4">
                                 <div class="form-group">
                                     <label for="">Product Price</label>
-                                    <input type="text" class="form-control" name="product_price" id="product_price" value="<?= $res[0]['seller_product_price']; ?>">
+                                    <input type="text" class="form-control" name="product_price" id="product_price" value="<?= $res[0]['seller_product_price']; ?>" disabled>
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="description">Description :</label>
-                            <textarea name="description" id="description" class="form-control" rows="8"><?= $res[0]['seller_description']; ?></textarea>
+                            <textarea name="description" id="description" class="form-control" rows="8" disabled><?= $res[0]['seller_description']; ?></textarea>
                         </div>
-                    <!-- /.box-body -->
-                    <div class="box-footer">
-                        <input type="submit" class="btn-primary btn" value="Update" name="btnUpdate" />&nbsp;
-                        <!-- <input type="reset" class="btn-danger btn" value="Clear" id="btnClear" /> -->
-                        <!--<div  id="res"></div>-->
-                    </div>
                 </form>
             </div>
             <!-- /.box -->

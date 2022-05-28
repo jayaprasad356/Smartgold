@@ -68,7 +68,7 @@ $maxlocked = $res[0]['max_locked'];
 
 if($maxlocked > $lockcount){
     $lock_date = date('Y-m-d h:i A');
-    $sql = "INSERT INTO offer_lock(`user_id`,`offer_id`, `paid_amt`,`lock_date`)VALUES($user_id,$offer_id,$paid_amt,'$lock_date')";
+    $sql = "INSERT INTO offer_lock(`user_id`,`offer_id`, `paid_amt`,`lock_date`,`status`)VALUES($user_id,$offer_id,$paid_amt,'$lock_date','Offer Locked')";
     $db->sql($sql);
     $res = $db->getResult();
     $sql = "SELECT * FROM offer_lock ORDER BY ID DESC";

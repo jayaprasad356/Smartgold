@@ -313,6 +313,7 @@ if (isset($_GET['table']) && $_GET['table'] == 'lockoffers') {
     $tempRow = array();
     foreach ($res as $row) {
         $operate = '<a href="edit-offer-lock.php?id=' . $row['id'] . '" class="label label-primary" title="Update">Update</a>';
+        $viewoperate = '<a href="view-offer-lock.php?id=' . $row['id'] . '" class="label label-primary" title="View">View</a>';
         
         //$operate = ' <a href="edit-offer-lock.php?id=' . $row['id'] . '" title="Edit"><i class="fa fa-edit"></i></a>';
         // $operate = '<a href="view-product-variants.php?id=' . $row['id'] . '" class="label label-success" title="View">View</a>';
@@ -323,18 +324,16 @@ if (isset($_GET['table']) && $_GET['table'] == 'lockoffers') {
         $tempRow['mobile'] = $row['mobile'];
         $tempRow['email'] = $row['email'];
         $tempRow['lock_date'] = $row['lock_date'];
-        if($row['status'] == 0){
-            $tempRow['status'] = 'Offer Locked';
-        }
-        else{
-            $status = $row['status'];
-            $sql = "SELECT * FROM offer_lock_status WHERE id = '$status'";
-            $db->sql($sql);
-            $res = $db->getResult();
-            $tempRow['status'] = $res[0]['title'];
+        $tempRow['status'] = $row['status'];
+        
+        if($row['status'] == 'Offer Locked'){
+            $tempRow['operate'] = $operate;
 
         }
-        $tempRow['operate'] = $operate;
+        else{
+            $tempRow['operate'] = $viewoperate;
+
+        }
         
         $rows[] = $tempRow;
     }
