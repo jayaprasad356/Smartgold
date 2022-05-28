@@ -80,9 +80,6 @@ $res = $db->getResult();
                                         </div>
                                     </div>
                                 </div>
-                                <!-- </div> -->
-
-                                <!-- </div> -->
 
                             </div>
                             

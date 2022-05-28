@@ -293,7 +293,8 @@ if (isset($_POST['update_category'])  && !empty($_POST['update_category'])) {
 if (isset($_POST['update_offer_lock_status'])  && !empty($_POST['update_offer_lock_status'])) {
     $id = $db->escapeString($_POST['update_id']);
     $title = $db->escapeString($_POST['title']);
-    $sql = "UPDATE offer_lock_status SET `title`= '$title' WHERE `id`=" . $id;
+    $status = $db->escapeString($_POST['status']);
+    $sql = "UPDATE offer_lock_status SET `title`= '$title' , `status` = '$status' WHERE `id`=" . $id;
     if ($db->sql($sql)) {
         echo "<label class='alert alert-success'>Offer Lock Status Updated Successfully.</label>";
     } else {

@@ -193,6 +193,7 @@ $db->sql("SET NAMES 'utf8'");
                         <li><a href="delivery_settings.php"><i class="fa fa-sliders"></i>Delivery Charges</a></li>
                         <li><a href="offer-lock-status.php"><i class="fa fa-sliders"></i>Offer Lock Status</a></li>
                         <li><a href="manage-plans.php"><i class="fa fa-sliders"></i>Manage Plans</a></li>
+                        <li><a href="todaygold.php"><i class="fa fa-sliders"></i>Today Gold Price</a></li>
                     </ul>
                 </li>
                 <?php if($_SESSION['role'] == 'Super Admin'){?>

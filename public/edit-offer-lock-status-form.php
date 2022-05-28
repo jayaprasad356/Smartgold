@@ -51,6 +51,23 @@ $res = $db->getResult();
                                     </div>
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="form-group col-md-5">
+                                    <div class="form-group">
+                                        <label class="control-label">Status</label>
+                                        <div id="status" class="btn-group">
+                                            <label class="btn btn-primary" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
+                                                <input type="radio" name="status" value="1" <?= ($res[0]['status'] == 1) ? 'checked' : ''; ?>> Active
+                                            </label>
+                                            <label class="btn btn-danger" data-toggle-class="btn-default" data-toggle-passive-class="btn-default">
+                                                <input type="radio" name="status" value="0" <?= ($res[0]['status'] == 0) ? 'checked' : ''; ?>> Deactive
+                                            </label>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
                             
                             <div class="box-footer">
                                 <button type="submit" class="btn btn-primary" id="submit_btn">Update</button><br>

@@ -36,7 +36,7 @@ $sql_query = "SELECT *,users.name,users.mobile,offer_lock.status FROM offer_lock
 $db->sql($sql_query);
 
 $res = $db->getResult();
-$sql_query = "SELECT id, title FROM offer_lock_status";
+$sql_query = "SELECT id, title FROM offer_lock_status WHERE status = 1";
 $db->sql($sql_query);
 $reslock = $db->getResult();
 ?>
