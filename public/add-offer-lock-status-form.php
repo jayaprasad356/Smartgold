@@ -20,7 +20,7 @@ if (isset($_POST['btnAdd'])) {
 
 
     if (!empty($title)) {
-        $sql_query = "INSERT INTO offer_lock_status (title)VALUES('$title')";
+        $sql_query = "INSERT INTO offer_lock_status (title,status)VALUES('$title',1)";
         $db->sql($sql_query);
         $result = $db->getResult();
         if (!empty($result)) {
