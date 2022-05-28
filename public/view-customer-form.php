@@ -71,7 +71,7 @@ $res = $db->getResult();
                             ?>
                             <tr>
                                 <th style="width: 200px">Order Id  <?php echo $index ?></th>
-                                <td><?php echo 'Product Id - ' . $row['product_id'] .' Product Name - ' . $row['name']. ' Quantity - ' . $row['quantity']. ' Buy Method - ' . $row['buy_method'].' Status - ' . $row['status']. 'Delivery Charges - ' . $row['delivery_charges'].' Payment Status - ' . $row['payment_status']. ' Total - ' . $row['total'] ?></td>
+                                <td><?php echo 'Product Id - ' . $row['product_id'] .', Product Name - ' . $row['name']. ', Quantity - ' . $row['quantity']. ', Buy Method - ' . $row['buy_method'].', Status - ' . $row['status']. ', Delivery Charges - ' . $row['delivery_charges'].', Payment Status - ' . $row['payment_status']. ', Total - ' . $row['total'] ?></td>
                             </tr>
                             <?php
                             $index++;
@@ -89,7 +89,7 @@ $res = $db->getResult();
                             <tr>
                                
                                 <th style="width: 200px">Offers  <?php echo $index ?></th>
-                                <td><?php echo 'Seller Id - ' . $row['seller_id'] .' Budget Id - ' . $row['budget_id']. 'Gram Price- ' . $row['gram_price']. ' Wastage - ' . $row['wastage'].' Max Locked - ' . $row['max_locked']. 'Status - ' . $row['status'].' Paid Amount - ' . $row['paid_amt']. 'Seller Product Name - ' . $row['seller_product_name']. 'Seller Product Price - ' . $row['seller_product_price'] .'User Id -'.$row['user_id']?></td>
+                                <td><?php echo 'Seller Id - ' . $row['seller_id'] .', Budget Id - ' . $row['budget_id']. ', Gram Price- ' . $row['gram_price']. ', Wastage - ' . $row['wastage'].', Max Locked - ' . $row['max_locked']. ', Status - ' . $row['status'].', Paid Amount - ' . $row['paid_amt'].', User Id -'.$row['user_id']?></td>
                             </tr>
                             <?php
                             $index++;

@@ -179,8 +179,6 @@ if (isset($_GET['table']) && $_GET['table'] == 'seller') {
         $tempRow['store_name'] = $row['store_name'];
         $tempRow['store_url'] = $row['store_url'];
         $tempRow['logo'] = "<a data-lightbox='product' href='" . DOMAIN_URL . $path . $row['logo'] . "'><img src='" . DOMAIN_URL . $path . $row['logo'] . "' height='50' /></a>";
-        
-        
         $tempRow['store_description'] = $row['store_description'];
         $tempRow['street'] = $row['street'];
         $tempRow['pincode'] = $row['pincode'];
@@ -192,11 +190,11 @@ if (isset($_GET['table']) && $_GET['table'] == 'seller') {
         $tempRow['account_name'] = $row['account_name'];
         $tempRow['plan'] = $row['plan'];
         if ($row['status'] == 2)
-            $tempRow['status'] = "<label class='text-danger'>Not-Approved</label>";
+            $tempRow['status'] = "<label class='text-primary'>Not-Approved</label>";
         else if ($row['status'] == 1)
             $tempRow['status'] = "<label class='text-success'>Approved</label>";
         else if ($row['status'] == 0)
-            $tempRow['status'] = "<label class='label label-danger'>Deactive</label>";
+            $tempRow['status'] = "<label style='color:brown;'>Deactive</label>";
         //$tempRow['status'] = $row['status'];
         $tempRow['address_proof'] = "<a data-lightbox='product' href='" . DOMAIN_URL . $path . $row['address_proof'] . "'><img src='" . DOMAIN_URL . $path . $row['address_proof'] . "' height='50' /></a>";
         $tempRow['national_identity_card'] = "<a data-lightbox='product' href='" . DOMAIN_URL . $path . $row['national_identity_card'] . "'><img src='" . DOMAIN_URL . $path . $row['national_identity_card'] . "' height='50' /></a>";
