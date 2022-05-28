@@ -56,21 +56,9 @@ if ($num >= 1) {
         $temp['wastage'] = $row['wastage'];
         $temp['total_locked'] = $lockcount;
 
-        $status = $row['status'];
-        if($status == 0){
-            $status = 'Offer Locked';
-        }
-        else{
-            $sql = "SELECT id,title FROM offer_lock_status WHERE id='$status'";
-            $db->sql($sql);
-            $res = $db->getResult();
-            $status = $res[0]['title'];
-
-        }
 
 
-
-        $temp['status'] = $status;
+        $temp['status'] = $row['status'];
         
         
         $temp1[] = $temp;

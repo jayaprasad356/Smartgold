@@ -23,7 +23,7 @@ $reslock = $db->getResult();
 ?>
 <section class="content-header">
     <h1>
-    Update Offer Lock<small><a href='offers.php'><i class='fa fa-angle-double-left'></i>&nbsp;&nbsp;&nbsp;Back to Offers List</a></small></h1>
+    View Offer Lock<small><a href='offers.php'><i class='fa fa-angle-double-left'></i>&nbsp;&nbsp;&nbsp;Back to Offers List</a></small></h1>
 
     <small><?php echo isset($error['update_data']) ? $error['update_data'] : ''; ?></small>
     <ol class="breadcrumb">
@@ -38,7 +38,7 @@ $reslock = $db->getResult();
             <!-- general form elements -->
             <div class="box box-primary">
                 <div class="box-header with-border">
-                    <h3 class="box-title">Update Offer Lock</h3>
+                    <h3 class="box-title">View Offer Lock</h3>
                 </div>
                 <div class="box-header">
                     <?php echo isset($error['cancelable']) ? '<span class="label label-danger">Till status is required.</span>' : ''; ?>
