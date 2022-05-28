@@ -17,10 +17,36 @@
                     <!-- <div class="col-xs-6"> -->
                     
                     <div class="box-header">
+                        <div class="form-group col-md-3">
+                            <h4 class="box-title">Filter by Status</h4>
+                            <select id="status" name="status" class='form-control'>
+                                <option value="">Select</option>
+                                <option value="0">Deactivate</option>
+                                <option value="1">Approved</option>
+                                <option value="2">Not-Approved</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <h4 class="box-title">Filter by Plan</h4>
+                            <select id="plan" name="plan" class='form-control'>
+                                            <option value="">Select Plan</option>
+                                            <option value="free-trial">Free Trial</option>
+                                            <option value="basic-monthly">Basic Monthly</option>
+                                            <option value="deluxe-monthly">Deluxe Monthly</option>
+                                            <option value="premium-monthly">Premium Monthly</option>
+                                            <option value="basic-quarterly">Basic Quarterly</option>
+                                            <option value="deluxe-quarterly">Deluxe Quarterly</option>
+                                            <option value="premium-quarterly">Premium Quarterly</option>
+                                            <option value="basic-annually">Basic Annually</option>
+                                            <option value="deluxe-annually">Deluxe Annually</option>
+                                            <option value="premium-annually">Premium Annually</option>
+                                
+                            </select>
+                        </div>
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body table-responsive">
-                        <table id='products_table' class="table table-hover" data-toggle="table" data-search="true" data-url="api/get-bootstrap-table-data.php?table=seller" data-page-list="[5, 10, 20, 50, 100, 200]" data-show-refresh="true"  data-side-pagination="server" data-pagination="true" data-query-params="queryParams_1"  data-trim-on-search="false" data-filter-control="true" data-sort-name="id" data-sort-order="desc"  data-export-types='["txt","excel"]' >
+                        <table id='seller_table' class="table table-hover" data-toggle="table" data-search="true" data-url="api/get-bootstrap-table-data.php?table=seller" data-page-list="[5, 10, 20, 50, 100, 200]" data-show-refresh="true"  data-side-pagination="server" data-pagination="true" data-query-params="queryParams_1"  data-trim-on-search="false" data-filter-control="true" data-sort-name="id" data-sort-order="desc"  data-export-types='["txt","excel"]' >
                             <thead>
                                 <tr>
                                     <th data-field="operate" data-events="actionEvents">Action</th>
@@ -57,10 +83,21 @@
         </div>
         <!-- /.row (main row) -->
     </section>
-<script>
+    <script>
+    $('#status').on('change', function() {
+        $('#seller_table').bootstrapTable('refresh');
+    });
+    $('#plan').on('change', function() {
+        $('#seller_table').bootstrapTable('refresh');
+    });
+    
+   
+    
 
     function queryParams_1(p) {
         return {
+            "plan": $('#plan').val(),
+            "status": $('#status').val(),
             limit: p.limit,
             sort: p.sort,
             order: p.order,

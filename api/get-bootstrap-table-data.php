@@ -127,6 +127,7 @@ if (isset($_GET['table']) && $_GET['table'] == 'seller') {
     $where = '';
     $sort = 'id';
     $order = 'DESC';
+
     if (isset($_GET['offset']))
         $offset = $db->escapeString($_GET['offset']);
     if (isset($_GET['limit']))
@@ -138,7 +139,7 @@ if (isset($_GET['table']) && $_GET['table'] == 'seller') {
 
     if (isset($_GET['search']) && !empty($_GET['search'])) {
         $search = $db->escapeString($_GET['search']);
-        $where .= "WHERE name like '%" . $search . "%' OR id like '%" . $search . "%' OR email like '%" . $search . "%' OR mobile like '%" . $search . "%' OR store_name like '%" . $search . "%' OR store_url like '%" . $search . "%' OR store_description like '%" . $search . "%' OR street like '%" . $search . "%' OR pincode like '%" . $search . "%' OR city like '%" . $search . "%' OR state like '%" . $search . "%'";
+        $where .= "AND name like '%" . $search . "%' OR id like '%" . $search . "%' OR email like '%" . $search . "%' OR mobile like '%" . $search . "%' OR store_name like '%" . $search . "%' OR store_url like '%" . $search . "%' OR store_description like '%" . $search . "%' OR street like '%" . $search . "%' OR pincode like '%" . $search . "%' OR city like '%" . $search . "%' OR state like '%" . $search . "%'";
     }
     if (isset($_GET['sort'])){
         $sort = $db->escapeString($_GET['sort']);
@@ -148,14 +149,22 @@ if (isset($_GET['table']) && $_GET['table'] == 'seller') {
         $order = $db->escapeString($_GET['order']);
 
     }
-    $sql = "SELECT COUNT(`id`) as total FROM `seller` " . $where;
+    if (isset($_GET['status']) && $_GET['status'] != '') {
+        $status = $db->escapeString($_GET['status']);
+        $where .= " AND status = '$status' ";
+    }
+    if (isset($_GET['plan']) && $_GET['plan'] != '') {
+        $plan = $db->escapeString($_GET['plan']);
+        $where .= " AND plan = '$plan' ";
+    }
+    $sql = "SELECT COUNT(`id`) as total FROM `seller` WHERE ID IS NOT NULL " . $where;
     $db->sql($sql);
     $res = $db->getResult();
     foreach ($res as $row)
         $total = $row['total'];
 
 
-    $sql = "SELECT * FROM seller $where ORDER BY $sort $order";
+    $sql = "SELECT * FROM seller WHERE ID IS NOT NULL $where ORDER BY $sort $order";
     $db->sql($sql);
     $res = $db->getResult();
     
