@@ -25,7 +25,7 @@ if (!isset($_POST['accesskey'])  || trim($_POST['accesskey']) != $access_key) {
     exit();
 }
 
-$sql = "SELECT * FROM budget ";
+$sql = "SELECT * FROM budget ORDER BY id DESC";
 $db->sql($sql);
 $res = $db->getResult();
 $num = $db->numRows($res);
