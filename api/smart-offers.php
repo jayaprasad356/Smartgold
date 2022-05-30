@@ -56,16 +56,7 @@ $budget_range_id = $db->escapeString($_POST['budget_range_id']);
 $range_to = $db->escapeString($_POST['range_to']);
 $currentdate = new DateTime(date('Y-m-d'));
 $cdate = $currentdate->format('Y-m-d');
-if($budget_range_id == 5){
-    $sql = "SELECT *,offers.id AS id,offers.description AS description FROM offers,seller,budget WHERE offers.seller_id = seller.id AND offers.valid_date >= '$cdate' AND seller.valid >= '$cdate' AND offers.status = 1";
-
-
-}
-else{
-    $sql = "SELECT *,offers.id AS id,offers.description AS description FROM offers,seller,budget WHERE offers.seller_id = seller.id AND offers.budget_id = budget.id AND offers.budget_id = $budget_range_id AND offers.valid_date >= '$cdate' AND seller.valid >= '$cdate' AND offers.status = 1";
-
-
-}
+$sql = "SELECT *,offers.id AS id,offers.description AS description FROM offers,seller,budget WHERE offers.seller_id = seller.id AND offers.budget_id = budget.id AND offers.budget_id = $budget_range_id AND offers.valid_date >= '$cdate' AND seller.valid >= '$cdate' AND offers.status = 1";
 $db->sql($sql);
 $res = $db->getResult();
 $num = $db->numRows($res);
