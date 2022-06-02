@@ -297,13 +297,22 @@ $res = $db->getResult();
 
                                     </div>
                                 </div>
+
+
+                            </div>
+                            <div class="row">
                                 <div class="form-group col-md-4">
                                     <div class="form-group">
-                                        <label for="">PAN Number</label><i class="text-danger asterik">*</i><p id="pan_valid" class="text-danger"></p>
-                                        <input type="text" class="form-control pan_number" name="pan_number" id="pan_number" value="<?= $res[0]['pan_number']; ?>" required>
+                                        <label for="">Latitude</label><i class="text-danger asterik">*</i>
+                                        <input type="number" class="form-control" name="latitude" id="latitude" value="<?= $res[0]['latitude']; ?>" required>
                                     </div>
                                 </div>
-
+                                <div class="form-group col-md-4">
+                                    <div class="form-group">
+                                        <label for="">Longitude</label><i class="text-danger asterik">*</i>
+                                        <input type="text" class="form-control" name="longitude" id="longitude" value="<?= $res[0]['longitude']; ?>" required>
+                                    </div>
+                                </div>
                             </div>
                             <div class="row">
                             <div class="form-group col-md-4">
@@ -312,7 +321,14 @@ $res = $db->getResult();
                                         <input type="text" class="form-control" name="gst_number" value="<?= $res[0]['gst_number']; ?>" required>
                                     </div>
                                 </div>
+                                <div class="form-group col-md-4">
+                                    <div class="form-group">
+                                        <label for="">PAN Number</label><i class="text-danger asterik">*</i><p id="pan_valid" class="text-danger"></p>
+                                        <input type="text" class="form-control pan_number" name="pan_number" id="pan_number" value="<?= $res[0]['pan_number']; ?>" required>
+                                    </div>
+                                </div>
                             </div>
+
                             
                             <div class="row">
                                 <div class="form-group col-md-4">
@@ -344,24 +360,11 @@ $res = $db->getResult();
                                 </div>
                             </div>
 
-                            <div class="row">
-                                <div class="form-group col-md-4">
-                                    <div class="form-group">
-                                        <label for="">Latitude</label><i class="text-danger asterik">*</i>
-                                        <input type="number" class="form-control" name="latitude" id="latitude" value="<?= $res[0]['latitude']; ?>" required>
-                                    </div>
-                                </div>
-                                <div class="form-group col-md-4">
-                                    <div class="form-group">
-                                        <label for="">Longitude</label><i class="text-danger asterik">*</i>
-                                        <input type="text" class="form-control" name="longitude" id="longitude" value="<?= $res[0]['longitude']; ?>" required>
-                                    </div>
-                                </div>
-                            </div>
+
 
 
                             <div class="row">
-                                <div class="form-group col-md-8">
+                                <div class="form-group col-md-12">
                                     <div class="form-group">
                                         <label for="description">Store Description :</label>
                                         <textarea name="description" id="description" class="form-control" rows="10"><?php echo $res[0]['store_description']; ?></textarea>

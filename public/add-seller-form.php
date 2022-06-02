@@ -246,20 +246,46 @@
 
                                     </div>
                                 </div>
-                                <div class="form-group col-md-4">
+
+                            </div>
+                            <div class="row">
+
+                            <div class="form-group col-md-4">
+                                <div class="form-group">
+                                    <label for="">Latitude</label><i class="text-danger asterik">*</i>
+                                    <input type="number" class="form-control" name="latitude" id="latitude" required>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <div class="form-group">
+                                    <label for="">Longitude</label><i class="text-danger asterik">*</i>
+                                    <input type="text" class="form-control" name="longitude" id="longitude" required>
+                                </div>
+                            </div>
+
+                            </div>
+                            <div class="row">
+                            <div class="form-group col-md-4">
                                     <div class="form-group">
                                         <label for="">Account Number</label>
                                         <input type="number" class="form-control" name="account_number">
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
                                 <div class="form-group col-md-4">
                                     <div class="form-group">
                                         <label for="">Bank's IFSC Code</label>
                                         <input type="text" class="form-control" name="ifsc_code">
                                     </div>
                                 </div>
+                            </div>
+                            <div class="row">
+                            <div class="form-group col-md-4">
+                                    <div class="form-group">
+                                        <label for="">Bank Account Name</label>
+                                        <input type="text" class="form-control" name="account_name">
+                                    </div>
+                                </div>
+
                                 <div class="form-group col-md-4">
                                     <div class="form-group">
                                         <label for="">Bank Name</label>
@@ -268,21 +294,13 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="form-group col-md-4">
-                                    <div class="form-group">
-                                        <label for="">Bank Account Name</label>
-                                        <input type="text" class="form-control" name="account_name">
-                                    </div>
-                                </div>
+
                                 <div class="form-group col-md-4">
                                     <div class="form-group">
                                         <label for="">PAN Number</label><i class="text-danger asterik">*</i><p id="pan_valid" class="text-danger"></p>
                                         <input type="text" class="form-control pan_number" name="pan_number" id="pan_number" required>
                                     </div>
                                 </div>
-                                
-                            </div>
-                            <div class="row">
                                 <div class="form-group col-md-4">
                                     <div class="form-group">
                                         <label for="">GST Number</label><i class="text-danger asterik">*</i>
@@ -306,24 +324,9 @@
                                 </div>
                             </div>
                             
-                            <div class="row">
 
-                                <div class="form-group col-md-4">
-                                    <div class="form-group">
-                                        <label for="">Latitude</label><i class="text-danger asterik">*</i>
-                                        <input type="number" class="form-control" name="latitude" id="latitude" required>
-                                    </div>
-                                </div>
-                                <div class="form-group col-md-4">
-                                    <div class="form-group">
-                                        <label for="">Longitude</label><i class="text-danger asterik">*</i>
-                                        <input type="text" class="form-control" name="longitude" id="longitude" required>
-                                    </div>
-                                </div>
-
-                            </div>
                             <div class="row">
-                                <div class="form-group col-md-8">
+                                <div class="form-group col-md-12">
                                     <div class="form-group">
                                         <label for="description">Store Description :</label><i class="text-danger asterik">*</i>
                                         <textarea name="description" id="description" class="form-control" rows="8"></textarea>

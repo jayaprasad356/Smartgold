@@ -267,7 +267,7 @@ pointer-events:none;
                         function showpanel() {     
                             
 
-                            window.location.replace("products.php");
+                            window.location.replace("add-product.php");
                         }
 
                         setTimeout(showpanel, 3000)

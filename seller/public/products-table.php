@@ -42,6 +42,7 @@
                             <h4 class="box-title">Filter by Gender</h4>
                             <select id="gender" name="gender" class="form-control" required>
                             
+                                <option value="">All</option>
                                 <option value="Male">Male</option>
                                 <option value="Female" selected>Female</option>
                                 <option value="Kids" >Kids</option>

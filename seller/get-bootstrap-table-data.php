@@ -381,15 +381,15 @@ if (isset($_GET['table']) && $_GET['table'] == 'products') {
 
     if (isset($_GET['gender']) && $_GET['gender'] != '') {
         $gender = $db->escapeString($_GET['gender']);
-        //$where .= "AND gender = '$gender'";
+        $where .= " AND gender = '$gender'";
     }
-    $sql = "SELECT p.*,(SELECT name FROM category c WHERE c.id=p.category_id) as category_name FROM `products` p " . $where . " AND gender = '$gender' ";
+    $sql = "SELECT p.*,(SELECT name FROM category c WHERE c.id=p.category_id) as category_name FROM `products` p " . $where;
     $db->sql($sql);
     $res = $db->getResult();
     $num = $db->numRows($res);
     // foreach ($res as $row)
     //     $total = $row['total'];
-    $sql = "SELECT p.*,(SELECT name FROM category c WHERE c.id=p.category_id) as category_name FROM `products` p " . $where . " AND gender = '$gender' ORDER BY " . $sort . " " . $order . " LIMIT " . $offset . ", " . $limit;
+    $sql = "SELECT p.*,(SELECT name FROM category c WHERE c.id=p.category_id) as category_name FROM `products` p " . $where . " ORDER BY " . $sort . " " . $order . " LIMIT " . $offset . ", " . $limit;
     $db->sql($sql);
     $res = $db->getResult();
 
