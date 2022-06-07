@@ -252,6 +252,7 @@ if (isset($_POST['add_offer'])  && !empty($_POST['add_offer'])) {
     $maxilock= $db->escapeString($_POST['maxilock']);
     $status = $db->escapeString($_POST['serve_for']);
     $valid = $db->escapeString($_POST['valid']);
+    $claim = $db->escapeString($_POST['claim']);
     $description = $db->escapeString($_POST['description']);
 
 
@@ -272,17 +273,20 @@ if (isset($_POST['add_offer'])  && !empty($_POST['add_offer'])) {
     if (empty($valid)) {
         echo " <span class='label label-danger'>Required!</span>";
     }
+    if (empty($claim)) {
+        echo " <span class='label label-danger'>Required!</span>";
+    }
     if (empty($description)) {
         echo " <span class='label label-danger'>Required!</span>";
     }
     
     
-    if (!empty($budget_id) && !empty($maxilock) && !empty($status) && !empty($valid) && !empty($description)) {
+    if (!empty($budget_id) && !empty($maxilock) && !empty($status) && !empty($valid) && !empty($claim) && !empty($description)) {
 
         
 
         // insert new data to product table
-        $sql = "INSERT INTO offers (seller_id,budget_id,gram_price,wastage,max_locked,status,valid_date,description) VALUES('$seller_id','$budget_id','$ppg','$wastage','$maxilock','$status','$valid','$description')";
+        $sql = "INSERT INTO offers (seller_id,budget_id,gram_price,wastage,max_locked,status,valid_date,claim_validity,description) VALUES('$seller_id','$budget_id','$ppg','$wastage','$maxilock','$status','$valid','$claim','$description')";
         $db->sql($sql);
         $product_result = $db->getResult();
 

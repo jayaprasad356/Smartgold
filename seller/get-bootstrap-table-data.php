@@ -132,6 +132,7 @@ if (isset($_GET['table']) && $_GET['table'] == 'offers') {
         $tempRow['wastage'] = $row['wastage'] . ' grams';
         $tempRow['max_locked'] = $row['max_locked'];
         $tempRow['valid_date'] = $row['valid_date'];
+        $tempRow['claim_validity'] = $row['claim_validity'];
         $tempRow['budget_range'] = $budget;
 
         if ($num != 0) {

@@ -91,6 +91,14 @@ $res = $db->getResult();
                                 </div>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Offer Claim validity</label> <i class="text-danger asterik">*</i><?php echo isset($error['claim']) ? $error['claim'] : ''; ?>
+                                    <input type="date" class="form-control" id="claim" name="claim" required>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <!-- /.box-body -->
                     <div class="box-footer">
@@ -175,5 +183,12 @@ $res = $db->getResult();
 </script>
 <script>
     document.getElementById('valid').valueAsDate = new Date();
+
+</script>
+<script>
+   var tomorrow = new Date();
+ tomorrow.setDate(tomorrow.getDate() + 1);
+
+document.getElementById('claim').valueAsDate= tomorrow;
 
 </script>

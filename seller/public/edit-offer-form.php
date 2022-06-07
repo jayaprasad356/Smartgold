@@ -18,9 +18,10 @@ if (isset($_POST['btnUpdate'])) {
     $maxilock= $db->escapeString($_POST['maxilock']);
     $status = $db->escapeString($_POST['status']);
     $valid = $db->escapeString($_POST['valid']);
+    $claim = $db->escapeString($_POST['claim']);
     $description = $db->escapeString($_POST['description']);
     $error = array();
-    $sql_query = "UPDATE offers SET gram_price = '$ppg', budget_id = '$budget_id', wastage = '$wastage', max_locked = '$maxilock', status = '$status', valid_date = '$valid', description = '$description' WHERE id = $offer_id";
+    $sql_query = "UPDATE offers SET gram_price = '$ppg', budget_id = '$budget_id', wastage = '$wastage', max_locked = '$maxilock', status = '$status', valid_date = '$valid',claim_validity = '$claim', description = '$description' WHERE id = $offer_id";
     $db->sql($sql_query);
     $error['update_data'] = "<span id='success' class='label label-success'>Offer Updated Successfully</span>";
 }
@@ -103,6 +104,14 @@ $resbudget = $db->getResult();
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Valid Date</label> <i class="text-danger asterik">*</i><?php echo isset($error['valid']) ? $error['valid'] : ''; ?>
                                     <input type="date" class="form-control" id="valid" name="valid" value="<?php echo $res[0]['valid_date'] ?>" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Offer Claim Validity</label> <i class="text-danger asterik">*</i><?php echo isset($error['claim']) ? $error['claim'] : ''; ?>
+                                    <input type="date" class="form-control" id="claim" name="claim" value="<?php echo $res[0]['claim_validity'] ?>" required>
                                 </div>
                             </div>
                         </div>

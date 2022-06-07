@@ -12,6 +12,8 @@ if (!isset($_SESSION['seller_id']) && !isset($_SESSION['seller_name'])) {
 }
 $sql_query = "SELECT id, name FROM category";
 $db->sql($sql_query);
+$sql_query = "SELECT * FROM today_gold";
+$db->sql($sql_query);
 
 $res = $db->getResult();
 
@@ -63,8 +65,7 @@ pointer-events:none;
                                         
                                             <option value="<?php echo $row['id']; ?>"><?php echo $row['name']; ?></option>
                                     <?php 
-                                    } ?>
-                                    
+                                    } ?>     
                                 </select>
                             </div>
                         </div>
@@ -90,7 +91,7 @@ pointer-events:none;
                                 <div class="col-md-4">
                                     <div class="form-group packate_div">
                                         <label for="price">Price (₹):</label> <i class="text-danger asterik">*</i>
-                                        <input type="number" step="any" min='0' class="form-control price" name="price" id="price" required />
+                                        <input type="number" step="any"  value="<?php echo $res[0]['price'] ?>" min='0' class="form-control price" name="price" id="price" required />
                                     </div>
                                 </div>
                                 <div class="col-md-4">

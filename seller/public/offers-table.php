@@ -59,6 +59,7 @@
                                 <th class="main" data-field="operate" data-events="actionEvents">Action </th>
                                 <th class="main" data-field="id" data-sortable="true">ID</th>
                                 <th  data-field="valid_date" data-sortable="true">Offer Date</th>
+                                <th  data-field="claim_validity" data-sortable="true">Offer Claim validity</th>
                                 <th  data-field="gram_price" data-sortable="true">Discount <br> Per Gram(₹)</th>
                                 <th class="main" data-field="wastage" data-sortable="true">Wastage <br> Discount(%)</th>
                                 <th class="main" data-field="max_locked" data-sortable="true">Max <br> Locked Items</th>

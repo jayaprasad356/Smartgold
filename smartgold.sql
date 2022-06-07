@@ -2,10 +2,10 @@
 -- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1:3306
--- Generation Time: May 26, 2022 at 03:46 AM
--- Server version: 10.5.13-MariaDB-cll-lve
--- PHP Version: 7.2.34
+-- Host: 127.0.0.1
+-- Generation Time: Jun 07, 2022 at 11:51 PM
+-- Server version: 10.4.22-MariaDB
+-- PHP Version: 7.4.27
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `u194698150_smartgold`
+-- Database: `smartgold`
 --
 
 -- --------------------------------------------------------
@@ -47,9 +47,9 @@ CREATE TABLE `address` (
 
 INSERT INTO `address` (`id`, `name`, `user_id`, `address`, `landmark`, `area`, `city`, `pincode`, `default_address`, `last_updated`, `date_created`) VALUES
 (1, 'prasad', 1, '26 uppukara street', '', 'sholapuram', 'Kumbakonam', '612503', 1, NULL, '2022-04-07 11:13:23'),
-(2, 'Vijay', 2, 'HQ9Q+HPM', '', 'HQ9Q+HPM, Ezhil Nagar, Keeranur, Tamil Nadu 622502, India', 'Keeranur', '622502', 0, '2022-05-21 14:57:27', '2022-04-07 11:13:23'),
-(3, 'subha', 3, '438/89', 'temple', '438/89, G.V. Residency, Uppili Palayam, Coimbatore, Tamil Nadu 641015, India', 'Coimbatore', '641015', 0, '2022-05-19 21:49:34', '2022-04-07 11:13:23'),
-(4, 'subha', 3, '8', '', 'Ezhil nagar old', 'keeranur', '622502', 1, '2022-05-21 15:12:02', '2022-04-07 11:13:23'),
+(2, 'Vijay', 2, 'HQ9Q+HPM', '', 'HQ9Q+HPM, Ezhil Nagar, Keeranur, Tamil Nadu 622502, India', 'Keeranur', '622502', 0, '2022-05-29 09:25:10', '2022-04-07 11:13:23'),
+(3, 'subha', 3, '438/95', 'temple', '438/95, G.V. Residency, Uppili Palayam, Coimbatore, Tamil Nadu 641015, India', 'Coimbatore', '641015', 1, '2022-05-29 09:27:00', '2022-04-07 11:13:23'),
+(4, 'subha', 3, '71', '', 'Ezhil nagar old', 'keeranur', '622502', 0, '2022-06-01 20:11:25', '2022-04-07 11:13:23'),
 (5, 'Office 2', 2, 'Tiruchirappalli', '', 'No 4/72 Supramaniyan Street Airport, Thirunagar, Tiruchirappalli, Tamil Nadu 620007, India', 'Tiruchirappalli', '620007', 0, '2022-05-21 05:06:11', '2022-04-07 11:13:23'),
 (6, 'Jerusalen', 4, 'Jiron Jerusalen', '', 'Jr. Jerusalen, San Juan de Lurigancho 15408, Peru', 'San Juan de Lurigancho', '154085', 1, NULL, '2022-04-07 11:13:23'),
 (7, 'Otra', 4, 'prueba', '', 'prueba', 'prueba', '123123', 0, NULL, '2022-04-07 11:13:23'),
@@ -57,13 +57,29 @@ INSERT INTO `address` (`id`, `name`, `user_id`, `address`, `landmark`, `area`, `
 (9, 'Segunda direccion', 4, 'Direccion de prueba 2', 'Landmark prueba', 'Area de prueba', 'ciudad de prueba', '105231', 0, NULL, '2022-04-07 11:13:23'),
 (10, 'Chandra', 5, 'T.Nagar', 'rathinagiri road', 'vilankurichi', 'Coimbatore', '641035', 1, NULL, '2022-04-16 10:20:14'),
 (11, 'chandrasekar', 6, 'no1', 'Near Bharat gas', 'ammapalayam', 'Tirupur', '641652', 1, NULL, '2022-04-22 05:28:36'),
-(12, 'Coimbatore Address', 2, '114/1', '', '114/1, Udayampalayam, Tamil Nadu 641028, India', 'Udayampalayam', '641028', 1, '2022-05-21 14:57:27', '2022-04-26 09:09:32'),
+(12, 'Coimbatore Address', 2, '114/1', '', '114/1, Udayampalayam, Tamil Nadu 641028, India', 'Udayampalayam', '641028', 1, '2022-05-29 09:25:10', '2022-04-26 09:09:32'),
 (13, 'venkat', 7, 'Tiruppur', 'near Bharath gas', 'NO.25. G.K.Tex St, Bridgeway Colony Extn., ( Backside Om Sakthi Kovil), Lakshmi Nagar, Thaneerpanthal, Anupparpalayam Pu', 'Avinashi', '641652', 0, '2022-04-28 07:17:56', '2022-04-28 05:55:41'),
 (14, 'suba', 7, 'gv resi', 'back to fun mall', 'p n palayam', 'Coimbatore', '641015', 1, '2022-04-28 07:17:56', '2022-04-28 07:17:46'),
 (15, 'test', 8, 'Unnamed Road', '', 'Unnamed Road, Gujarat 394345, India', 'Surat', '394345', 1, NULL, '2022-05-01 12:53:24'),
 (16, 'sekar', 9, 'fkdnfld', 'shop', 'sha', 'kum', '454343', 1, '2022-05-21 05:03:57', '2022-05-07 08:09:44'),
 (17, 'Care', 2, 'QJMR+GP9', '', 'QJMR+GP9, Trichy - Dindugal Rd, Tiruchirappalli, Tamil Nadu 620009, India', 'Tiruchirappalli', '620009', 0, NULL, '2022-05-10 11:24:41'),
-(18, 'Vijay 2', 2, '4a', 'Kattess school', 'Ezhil Nagar', 'Keeranur', '622502', 0, NULL, '2022-05-18 13:30:58');
+(18, 'Vijay 2', 2, '4a', 'Kattess school', 'Ezhil Nagar', 'Keeranur', '622502', 0, NULL, '2022-05-18 13:30:58'),
+(19, 'asda', 11, 'asdasd', '', 'asdasdasd', '12312312', '153333', 0, '2022-05-26 22:13:39', '2022-05-26 15:31:41'),
+(20, 'asdasd', 11, 'County Road 3900', '', 'County Rd 3900, Independence, KS 67301, USA', 'Independence', '673011', 0, NULL, '2022-05-26 17:02:17'),
+(21, 'Prueba', 11, 'Jirón Zorritos 721, Cercado de Lima 15082, Perú', '', 'Perú', 'Cercado de Lima', '15082', 0, '2022-06-02 00:36:10', '2022-05-26 19:30:44'),
+(22, 'jjj', 11, 'Jirón Zorritos 721, Cercado de Lima 15082, Perú', '', 'Perú', 'Cercado de Lima', '15082', 0, NULL, '2022-05-26 19:32:41'),
+(23, 'asdasd', 11, 'Jirón Zorritos 721, Cercado de Lima 15082, Perú', '', 'Perú', 'Cercado de Lima', '15082', 0, NULL, '2022-05-26 19:37:04'),
+(24, 'hhhhhh', 11, 'Jirón Zorritos 721, Cercado de Lima 15082, Perú', '', 'Perú', 'Cercado de Lima', '15082', 0, NULL, '2022-05-26 19:37:59'),
+(25, 'asdasdasdasd', 11, 'Jirón Zorritos 721, Cercado de Lima 15082, Perú', '', 'Perú', 'Cercado de Lima', '15082', 0, NULL, '2022-05-26 19:38:55'),
+(26, 'aaa', 11, 'Jirón Zorritos 721, Cercado de Lima 15082, Perú', '', 'Perú', 'Cercado de Lima', '15082', 0, NULL, '2022-05-26 19:45:09'),
+(27, 'asd', 11, 'Jirón Zorritos 721, Cercado de Lima 15082, Perú', '', 'Perú', 'Cercado de Lima', '15082', 0, NULL, '2022-05-26 19:46:30'),
+(28, 'asdasd', 11, 'Jirón Zorritos 721, Cercado de Lima 15082, Perú', '', 'Perú', 'Cercado de Lima', '150821', 0, NULL, '2022-05-26 19:47:44'),
+(29, 'My address', 11, '341', '', '341, near Amaravathipalayam, Varuthiangara Palayam, Seth Narang Das Layout, Peruntholuvu, Coimbatore, Tamil Nadu 641665,', 'Coimbatore', '641665', 0, '2022-06-02 15:53:34', '2022-05-26 22:13:27'),
+(30, 'My', 11, '109u230210382193213', '293i2ooweo', '103773', 'lsa,dñlmasd', '102123', 0, NULL, '2022-05-27 14:29:34'),
+(31, 'asda0000', 11, 'asdasd', 'undefined', 'asdasdasd', '12312312', '153333', 0, NULL, '2022-05-27 14:29:57'),
+(32, 'Thane', 11, '7, Kolshet Rd, Thane West, Thane, Maharashtra, India', 'Prueba', 'India', 'Thane', '400606', 0, '2022-05-27 14:54:45', '2022-05-27 14:33:56'),
+(33, 'My location', 11, 'Coimbatore North, Sivananda Colony, Tatabad, Coimbatore, Tamil Nadu 641001, India', '', 'India', 'Coimbatore', '641012', 0, NULL, '2022-06-02 00:38:03'),
+(34, 'Coimbatore', 11, 'Venkitapuram', '', 'Venkitapuram, Tatabad, Coimbatore, Tamil Nadu, India', 'Coimbatore', '641665', 1, '2022-06-02 15:53:34', '2022-06-02 15:53:26');
 
 -- --------------------------------------------------------
 
@@ -162,15 +178,9 @@ INSERT INTO `cart` (`id`, `user_id`, `product_id`, `quantity`, `last_updated`, `
 (79, 8, 13, 1, NULL, '2022-05-01 12:52:54'),
 (80, 8, 39, 2, NULL, '2022-05-01 17:54:38'),
 (82, 9, 15, 1, NULL, '2022-05-07 08:11:46'),
-(86, 2, 41, 1, NULL, '2022-05-18 12:29:43'),
-(90, 3, 25, 1, NULL, '2022-05-21 14:13:20'),
-(91, 3, 14, 1, NULL, '2022-05-23 08:34:13'),
 (97, 12, 22, 1, '2022-05-25 19:52:13', '2022-05-25 19:44:00'),
 (102, 12, 14, 1, NULL, '2022-05-25 20:15:08'),
 (104, 12, 12, 39, NULL, '2022-05-25 20:24:08'),
-(112, 3, 47, 1, NULL, '2022-05-25 20:37:00'),
-(118, 11, 1, 1, '2022-05-25 23:11:07', '2022-05-25 21:19:46'),
-(119, 11, 29, 3, NULL, '2022-05-25 23:06:58'),
 (120, 10, 1, 2, NULL, '2022-05-25 23:16:01'),
 (121, 12, 29, 3, NULL, '2022-05-26 01:08:07');
 
@@ -267,6 +277,7 @@ CREATE TABLE `offers` (
   `max_locked` int(10) NOT NULL,
   `status` tinyint(1) NOT NULL,
   `valid_date` varchar(20) NOT NULL,
+  `claim_validity` varchar(20) NOT NULL,
   `description` text NOT NULL,
   `last_updated` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
   `date_created` timestamp NOT NULL DEFAULT current_timestamp()
@@ -276,30 +287,32 @@ CREATE TABLE `offers` (
 -- Dumping data for table `offers`
 --
 
-INSERT INTO `offers` (`id`, `seller_id`, `budget_id`, `gram_price`, `wastage`, `max_locked`, `status`, `valid_date`, `description`, `last_updated`, `date_created`) VALUES
-(1, 3, 2, 4000, 100, 1, 1, '2022-03-10', '', NULL, '2022-04-07 11:28:04'),
-(2, 3, 2, 3456, 20, 8, 1, '2022-03-28', '', NULL, '2022-04-07 11:28:04'),
-(3, 9, 2, 200, 2, 4, 1, '2022-03-28', 'Ear rings, chains and bangles are available in latest design for locking', NULL, '2022-04-07 11:28:04'),
-(4, 9, 1, 200, 3, 10, 1, '2022-03-31', 'Offer applicable on some of our latest designs (bangles, chains, ear rings etc)', NULL, '2022-04-07 11:28:04'),
-(5, 9, 1, 200, 3, 10, 1, '2022-04-07', 'Offer applicable on some of our latest designs (Bangles, Chains, Ear Rings etc)', NULL, '2022-04-07 11:28:04'),
-(6, 9, 1, 200, 3, 8, 1, '2022-04-01', 'Offer applicable on some of our latest designs (Bangles, Chains, Ear Rings etc)', NULL, '2022-04-07 11:28:04'),
-(7, 9, 3, 100, 2, 14, 1, '2022-04-07', 'Offer valid on chains ONLY', NULL, '2022-04-07 11:28:04'),
-(8, 9, 1, 100, 8, 8, 1, '2022-04-07', 'Offer applicable only on bangles.', NULL, '2022-04-07 11:28:04'),
-(9, 9, 4, 150, 8, 14, 1, '2022-03-31', 'Offer applicable only on sets.', NULL, '2022-04-07 11:28:04'),
-(10, 9, 4, 0, 2, 8, 1, '2022-04-02', 'Offer is applicable of Necklace Sets', NULL, '2022-04-07 11:28:04'),
-(11, 1, 3, 5000, 5, 5, 1, '2022-04-08', 'fgfg', NULL, '2022-04-08 15:21:01'),
-(12, 11, 1, 100, 2, 5, 1, '2022-04-29', '₹100 Discount per gram, 2% wastage discount upto 5 items', '2022-04-29 05:06:29', '2022-04-18 05:09:29'),
-(13, 9, 4, 1000, 0, 1, 1, '2022-05-31', 'Chandra task 1 jimikki', '2022-05-18 18:23:57', '2022-04-23 14:59:21'),
-(14, 9, 3, 200, 0, 2, 1, '2022-06-01', 'The offer is applicable on chains', '2022-05-18 18:23:31', '2022-04-26 08:24:12'),
-(15, 9, 2, 100, 0, 8, 1, '2022-05-31', 'Offer is available on bangles', '2022-05-18 18:22:40', '2022-04-28 07:04:59'),
-(16, 9, 1, 300, 5, 10, 1, '2022-05-31', 'test', '2022-05-18 18:22:13', '2022-05-07 08:26:58'),
-(17, 9, 1, 133, 2, 33, 0, '2022-05-08', 'Offer valid only for rings', '2022-05-15 09:35:52', '2022-05-08 16:11:18'),
-(18, 11, 1, 200, 4, 10, 1, '2022-05-09', '200 discount per gram, 4% on wastage upto 10 items.', NULL, '2022-05-09 12:37:38'),
-(19, 1, 3, 34, 33, 4, 1, '2022-05-17', '4r4', NULL, '2022-05-17 14:54:32'),
-(20, 1, 2, 4, 5, 5, 1, '2022-05-25', 'gr', NULL, '2022-05-17 14:55:48'),
-(21, 9, 5, 500, 1, 50, 1, '2022-05-21', 'Offer applicable on chains only', NULL, '2022-05-21 08:58:41'),
-(22, 9, 5, 222, 2, 6, 1, '2022-05-21', 'Rings only', NULL, '2022-05-21 12:45:54'),
-(23, 9, 5, 700, 3, 8, 1, '2022-05-24', 'applicable on rings', NULL, '2022-05-24 19:56:42');
+INSERT INTO `offers` (`id`, `seller_id`, `budget_id`, `gram_price`, `wastage`, `max_locked`, `status`, `valid_date`, `claim_validity`, `description`, `last_updated`, `date_created`) VALUES
+(1, 3, 2, 4000, 100, 1, 1, '2022-03-10', '', '', NULL, '2022-04-07 11:28:04'),
+(2, 3, 2, 3456, 20, 8, 1, '2022-03-28', '', '', NULL, '2022-04-07 11:28:04'),
+(3, 9, 2, 200, 2, 4, 1, '2022-03-28', '', 'Ear rings, chains and bangles are available in latest design for locking', NULL, '2022-04-07 11:28:04'),
+(4, 9, 1, 200, 3, 10, 1, '2022-03-31', '', 'Offer applicable on some of our latest designs (bangles, chains, ear rings etc)', NULL, '2022-04-07 11:28:04'),
+(5, 9, 1, 200, 3, 10, 1, '2022-04-07', '', 'Offer applicable on some of our latest designs (Bangles, Chains, Ear Rings etc)', NULL, '2022-04-07 11:28:04'),
+(6, 9, 1, 200, 3, 8, 1, '2022-04-01', '', 'Offer applicable on some of our latest designs (Bangles, Chains, Ear Rings etc)', NULL, '2022-04-07 11:28:04'),
+(7, 9, 3, 100, 2, 14, 1, '2022-04-07', '', 'Offer valid on chains ONLY', NULL, '2022-04-07 11:28:04'),
+(8, 9, 1, 100, 8, 8, 1, '2022-04-07', '', 'Offer applicable only on bangles.', NULL, '2022-04-07 11:28:04'),
+(9, 9, 4, 150, 8, 14, 1, '2022-03-31', '', 'Offer applicable only on sets.', NULL, '2022-04-07 11:28:04'),
+(10, 9, 4, 0, 2, 8, 1, '2022-04-02', '', 'Offer is applicable of Necklace Sets', NULL, '2022-04-07 11:28:04'),
+(11, 1, 3, 5000, 5, 5, 1, '2022-04-08', '', 'fgfg', NULL, '2022-04-08 15:21:01'),
+(12, 11, 1, 100, 2, 5, 1, '2022-04-29', '', '₹100 Discount per gram, 2% wastage discount upto 5 items', '2022-04-29 05:06:29', '2022-04-18 05:09:29'),
+(13, 9, 4, 1000, 0, 1, 1, '2022-05-31', '', 'Chandra task 1 jimikki', '2022-05-18 18:23:57', '2022-04-23 14:59:21'),
+(14, 9, 3, 200, 0, 2, 1, '2022-06-01', '', 'The offer is applicable on chains', '2022-05-18 18:23:31', '2022-04-26 08:24:12'),
+(15, 9, 2, 100, 0, 8, 1, '2022-05-31', '', 'Offer is available on bangles', '2022-05-18 18:22:40', '2022-04-28 07:04:59'),
+(16, 9, 1, 300, 5, 10, 1, '2022-06-10', '', 'test', '2022-06-02 18:12:08', '2022-05-07 08:26:58'),
+(17, 9, 1, 133, 2, 33, 0, '2022-05-08', '', 'Offer valid only for rings', '2022-05-15 09:35:52', '2022-05-08 16:11:18'),
+(18, 11, 1, 200, 4, 10, 1, '2022-05-09', '', '200 discount per gram, 4% on wastage upto 10 items.', NULL, '2022-05-09 12:37:38'),
+(19, 1, 3, 34, 33, 4, 1, '2022-05-17', '', '4r4', NULL, '2022-05-17 14:54:32'),
+(20, 1, 2, 4, 5, 5, 1, '2022-05-25', '', 'gr', NULL, '2022-05-17 14:55:48'),
+(21, 9, 5, 500, 1, 50, 1, '2022-05-31', '', 'Offer applicable on chains only', '2022-05-30 07:50:37', '2022-05-21 08:58:41'),
+(22, 9, 5, 222, 2, 6, 1, '2022-06-08', '', 'Rings only', '2022-06-02 18:12:50', '2022-05-21 12:45:54'),
+(23, 9, 4, 700, 3, 8, 1, '2022-06-10', '', 'applicable on rings', '2022-06-02 18:11:51', '2022-05-24 19:56:42'),
+(24, 9, 5, 200, 2, 5, 1, '2022-06-10', '', 'Only Rings', '2022-06-02 18:07:14', '2022-05-29 06:39:05'),
+(25, 9, 3, 150, 1, 8, 1, '2022-06-09', '', 'Bangles', '2022-06-02 18:04:17', '2022-05-29 09:25:40');
 
 -- --------------------------------------------------------
 
@@ -313,7 +326,7 @@ CREATE TABLE `offer_lock` (
   `offer_id` int(10) NOT NULL,
   `lock_date` text DEFAULT NULL,
   `paid_amt` int(20) NOT NULL,
-  `status` tinyint(4) NOT NULL,
+  `status` text DEFAULT NULL,
   `seller_product_name` text DEFAULT NULL,
   `seller_product_price` text DEFAULT NULL,
   `seller_description` text DEFAULT NULL,
@@ -326,17 +339,23 @@ CREATE TABLE `offer_lock` (
 --
 
 INSERT INTO `offer_lock` (`id`, `user_id`, `offer_id`, `lock_date`, `paid_amt`, `status`, `seller_product_name`, `seller_product_price`, `seller_description`, `last_updated`, `date_created`) VALUES
-(1, 3, 2, '2022-04-07 11:28 AM', 1000, 0, '', '', '', '2022-05-24 16:42:40', '2022-04-07 11:28:41'),
-(2, 3, 2, '2022-04-07 11:28 AM', 1000, 0, '', '', '', '2022-05-24 16:42:58', '2022-04-07 11:28:41'),
-(3, 2, 2, '2022-04-07 11:28 AM', 1000, 0, '', '', '', '2022-05-24 16:43:22', '2022-04-07 11:28:41'),
-(4, 1, 11, '2022-04-16 08:37 AM', 500, 4, 'Gold Chain', '50000', '', '2022-05-24 16:43:39', '2022-04-16 08:37:36'),
-(5, 2, 1, '2022-04-18 05:44 AM', 500, 0, NULL, NULL, NULL, '2022-05-24 16:43:52', '2022-04-18 05:44:58'),
-(6, 2, 12, '2022-04-23 07:37 AM', 500, 2, '', '', '', '2022-05-24 16:44:04', '2022-04-23 07:37:53'),
-(7, 9, 16, '2022-05-07 08:28 AM', 500, 4, '', '', '', '2022-05-24 16:44:18', '2022-05-07 08:28:58'),
-(8, 3, 17, '2022-05-08 04:13 PM', 500, 0, NULL, NULL, NULL, '2022-05-24 16:44:38', '2022-05-08 16:13:16'),
-(9, 2, 18, '2022-05-09 12:42 AM', 500, 1, '', '', '', '2022-05-24 16:44:53', '2022-05-09 12:42:00'),
-(10, 3, 16, '2022-05-15 11:06 AM', 500, 0, NULL, NULL, NULL, '2022-05-24 16:45:05', '2022-05-15 11:06:11'),
-(11, 2, 16, '2022-05-21 02:58 PM', 500, 0, NULL, NULL, NULL, '2022-05-24 16:45:27', '2022-05-21 14:58:10');
+(1, 3, 2, '2022-04-07 11:28 AM', 1000, 'Offer Locked', '', '', '', '2022-05-28 12:22:07', '2022-04-07 11:28:41'),
+(2, 3, 2, '2022-04-07 11:28 AM', 1000, 'Offer Locked', '', '', '', '2022-05-28 12:22:29', '2022-04-07 11:28:41'),
+(3, 2, 2, '2022-04-07 11:28 AM', 1000, 'Offer Locked', '', '', '', '2022-05-28 12:22:29', '2022-04-07 11:28:41'),
+(4, 1, 11, '2022-04-16 08:37 AM', 500, 'Offer Claimed', 'Gold Chain', '50000', '', '2022-05-28 12:23:15', '2022-04-16 08:37:36'),
+(5, 2, 1, '2022-04-18 05:44 AM', 500, 'Offer Locked', NULL, NULL, NULL, '2022-05-28 12:22:29', '2022-04-18 05:44:58'),
+(6, 2, 12, '2022-04-23 07:37 AM', 500, 'Offer Locked', '', '', '', '2022-05-28 12:22:29', '2022-04-23 07:37:53'),
+(7, 9, 16, '2022-05-07 08:28 AM', 500, 'Offer Locked', '', '', '', '2022-05-28 12:22:29', '2022-05-07 08:28:58'),
+(8, 3, 17, '2022-05-08 04:13 PM', 500, 'Offer Locked', NULL, NULL, NULL, '2022-05-28 12:22:29', '2022-05-08 16:13:16'),
+(9, 2, 18, '2022-05-09 12:42 AM', 500, 'Offer Locked', '', '', '', '2022-05-28 12:22:29', '2022-05-09 12:42:00'),
+(10, 3, 16, '2022-05-15 11:06 AM', 500, 'Offer Locked', NULL, NULL, NULL, '2022-05-28 12:22:29', '2022-05-15 11:06:11'),
+(11, 2, 16, '2022-05-21 02:58 PM', 500, 'Offer Locked', NULL, NULL, NULL, '2022-05-28 12:22:29', '2022-05-21 14:58:10'),
+(12, 3, 24, '2022-05-29 09:35 AM', 500, 'Offer Claimed', '', '', '', '2022-05-29 09:39:17', '2022-05-29 09:35:32'),
+(13, 3, 25, '2022-05-30 07:47 AM', 500, 'Offer Locked', NULL, NULL, NULL, NULL, '2022-05-30 07:47:07'),
+(14, 3, 14, '2022-05-30 07:47 AM', 500, 'Offer Locked', NULL, NULL, NULL, NULL, '2022-05-30 07:47:52'),
+(15, 3, 21, '2022-05-30 11:08 AM', 500, 'Offer Locked', NULL, NULL, NULL, NULL, '2022-05-30 11:08:03'),
+(16, 11, 22, '2022-06-02 07:00 PM', 500, 'Offer Locked', NULL, NULL, NULL, NULL, '2022-06-02 19:00:34'),
+(17, 11, 24, '2022-06-03 02:02 AM', 500, 'Offer Locked', NULL, NULL, NULL, NULL, '2022-06-03 02:02:40');
 
 -- --------------------------------------------------------
 
@@ -347,6 +366,7 @@ INSERT INTO `offer_lock` (`id`, `user_id`, `offer_id`, `lock_date`, `paid_amt`, 
 CREATE TABLE `offer_lock_status` (
   `id` int(11) NOT NULL,
   `title` text NOT NULL,
+  `status` tinyint(4) NOT NULL,
   `last_updated` timestamp NULL DEFAULT NULL ON UPDATE current_timestamp(),
   `date_created` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -355,11 +375,11 @@ CREATE TABLE `offer_lock_status` (
 -- Dumping data for table `offer_lock_status`
 --
 
-INSERT INTO `offer_lock_status` (`id`, `title`, `last_updated`, `date_created`) VALUES
-(1, 'Offer Claimed', '2022-04-16 04:35:12', '2022-04-16 03:20:36'),
-(2, 'Visited Store But not Purchased', '2022-05-24 15:07:39', '2022-04-16 04:25:15'),
-(3, 'Offer Missed', '2022-05-25 13:57:56', '2022-04-16 08:27:32'),
-(4, 'Buy Later', '2022-04-16 08:39:03', '2022-04-16 08:38:52');
+INSERT INTO `offer_lock_status` (`id`, `title`, `status`, `last_updated`, `date_created`) VALUES
+(1, 'Offer Claimed', 1, '2022-05-28 15:40:30', '2022-04-16 03:20:36'),
+(2, 'Visited Store But not Purchased', 1, '2022-05-28 15:40:38', '2022-04-16 04:25:15'),
+(3, 'Offer Missed', 0, '2022-05-28 15:40:44', '2022-04-16 08:27:32'),
+(4, 'Buy Later', 1, '2022-05-28 15:40:47', '2022-04-16 08:38:52');
 
 -- --------------------------------------------------------
 
@@ -427,7 +447,30 @@ INSERT INTO `orders` (`id`, `user_id`, `seller_id`, `product_id`, `order_date`, 
 (37, 2, 11, 41, '2022-05-09', 1, '2', 'Received', 100, 'Paid', 15360, '2022-05-24 16:09:36', '2022-05-09 12:46:01'),
 (38, 3, 9, 23, '2022-05-15', 1, '1', 'Completed', 100, 'Paid', 29700, '2022-05-24 16:09:48', '2022-05-15 11:11:46'),
 (39, 3, 1, 1, '2022-05-19', 1, '1', 'Received', 100, 'UnPaid', 20000, '2022-05-24 16:09:57', '2022-05-19 21:49:57'),
-(40, 3, 9, 5, '2022-05-19', 1, '1', 'Completed', 100, 'Paid', 1000, '2022-05-24 16:10:06', '2022-05-19 21:49:57');
+(40, 3, 9, 5, '2022-05-19', 1, '1', 'Completed', 100, 'Paid', 1000, '2022-05-24 16:10:06', '2022-05-19 21:49:57'),
+(41, 11, 1, 1, '2022-05-26', 1, '1', 'Received', 100, 'UnPaid', 20000, NULL, '2022-05-26 22:28:43'),
+(42, 11, 9, 29, '2022-05-26', 3, '1', 'Received', 100, 'UnPaid', 75000, NULL, '2022-05-26 22:28:43'),
+(43, 11, 1, 10, '2022-05-26', 2, '1', 'Received', 100, 'UnPaid', 60000, NULL, '2022-05-26 22:28:43'),
+(44, 11, 9, 51, '2022-05-27', 12, '1', 'Received', 100, 'UnPaid', 4800000, NULL, '2022-05-27 14:23:56'),
+(45, 3, 9, 25, '2022-05-29', 1, '2', 'Received', 100, 'UnPaid', 60000, NULL, '2022-05-29 06:25:00'),
+(46, 3, 9, 14, '2022-05-29', 1, '2', 'Received', 100, 'UnPaid', 342000, NULL, '2022-05-29 06:25:00'),
+(47, 3, 9, 47, '2022-05-29', 1, '2', 'Received', 100, 'UnPaid', 25000, NULL, '2022-05-29 06:25:00'),
+(48, 3, 1, 1, '2022-05-29', 1, '2', 'Received', 100, 'UnPaid', 20000, NULL, '2022-05-29 06:25:00'),
+(49, 3, 9, 6, '2022-05-29', 1, '2', 'Received', 100, 'UnPaid', 0, NULL, '2022-05-29 06:29:13'),
+(50, 3, 9, 51, '2022-05-29', 1, '1', 'Received', 100, 'UnPaid', 400000, NULL, '2022-05-29 06:31:28'),
+(51, 3, 1, 1, '2022-05-29', 1, '1', 'Received', 100, 'UnPaid', 20000, NULL, '2022-05-29 06:32:53'),
+(52, 2, 11, 41, '2022-05-29', 1, '1', 'Received', 100, 'Paid', 15360, NULL, '2022-05-29 06:39:09'),
+(53, 3, 9, 47, '2022-05-30', 1, '2', 'Received', 100, 'UnPaid', 25000, NULL, '2022-05-30 11:03:32'),
+(54, 3, 9, 51, '2022-05-30', 1, '2', 'Received', 100, 'UnPaid', 400000, NULL, '2022-05-30 11:03:32'),
+(55, 3, 9, 5, '2022-06-01', 1, '1', 'Received', 100, 'UnPaid', 1000, NULL, '2022-06-01 20:21:55'),
+(56, 11, 1, 11, '2022-06-03', 3, '1', 'Received', 100, 'UnPaid', 15, NULL, '2022-06-03 02:12:25'),
+(57, 11, 1, 1, '2022-06-03', 1, '1', 'Received', 100, 'UnPaid', 20000, NULL, '2022-06-03 02:12:25'),
+(58, 11, 9, 51, '2022-06-03', 2, '1', 'Received', 100, 'UnPaid', 800000, NULL, '2022-06-03 02:12:25'),
+(59, 11, 9, 15, '2022-06-03', 2, '1', 'Received', 100, 'UnPaid', 86000, NULL, '2022-06-03 02:12:25'),
+(60, 11, 1, 1, '2022-06-03', 2, '1', 'Received', 100, 'Paid', 40000, NULL, '2022-06-03 02:13:15'),
+(61, 11, 1, 1, '2022-06-03', 2, '1', 'Received', 100, 'UnPaid', 40000, NULL, '2022-06-03 02:23:08'),
+(62, 11, 9, 51, '2022-06-03', 1, '1', 'Received', 100, 'Paid', 400000, NULL, '2022-06-03 02:24:17'),
+(63, 11, 1, 1, '2022-06-03', 2, '1', 'Received', 100, 'Paid', 40000, NULL, '2022-06-03 02:30:09');
 
 -- --------------------------------------------------------
 
@@ -493,6 +536,7 @@ CREATE TABLE `products` (
 
 INSERT INTO `products` (`id`, `seller_id`, `name`, `category_id`, `image`, `description`, `status`, `discounted_price`, `price`, `stock`, `date_added`, `is_approved`, `gender`, `weight`, `last_updated`, `date_created`) VALUES
 (1, 1, 'Female  Beautiful Ring ', 1, 'upload/images/7789-2021-12-25.jpg', '', 1, 20000, 25000, 10, '2021-12-24 19:28:37', 1, 'Female', 4, '2022-04-08 05:06:28', '2022-04-07 11:30:49'),
+(51, 9, 'Necklace', 9, 'upload/images/7881-2022-05-27.jpg', '', 1, 400000, 400000, 6, '2022-05-27 08:30:47', 1, 'Female', 35, NULL, '2022-05-27 08:30:47'),
 (5, 9, 'Gold Ring', 1, 'upload/images/3649-2022-03-31.png', 'Stone ring', 1, 1000, 50000, 4, '2022-03-31 08:22:14', 1, NULL, NULL, '2022-04-08 05:06:48', '2022-04-07 11:30:49'),
 (6, 9, 'Timeless 18 Karat Yellow Gold Bali-Style Hoop Earrings', 3, 'upload/images/4079-2022-03-31.jpg', 'These 18 Karat gold earrings feature two rings and a multi-faceted gold bead with tiny dots all over it strung on a smooth, easy-on-hinged gold hoop', 1, 0, 34000, 5, '2022-03-31 08:34:01', 1, NULL, NULL, '2022-04-08 05:06:48', '2022-04-07 11:30:49'),
 (22, 9, 'Alluring Gold Chain', 2, 'upload/images/3713-2022-04-13.jpg', 'Lustrous Cable Chain set in 22 Karat Yellow Gold', 1, 45000, 45000, 8, '2022-04-13 16:11:17', 1, 'Female', 23, NULL, '2022-04-13 16:11:17'),
@@ -522,7 +566,7 @@ INSERT INTO `products` (`id`, `seller_id`, `name`, `category_id`, `image`, `desc
 (37, 9, 'Farah Emerald And Ruby Necklace', 9, 'upload/images/4984-2022-04-14.jpg', 'Opulent Necklace set in 22 Karat Yellow Gold and studded with Emeralds and Rubies', 1, 350000, 350000, 17, '2022-04-14 07:20:32', 1, 'Female', 80, NULL, '2022-04-14 07:20:32'),
 (38, 9, 'Radiant Floral Ruby Pendant With Chain And Earrings Set', 10, 'upload/images/7705-2022-04-14.png', 'Floral pendant with chain and earrings set with rubies and chakri diamonds set in 22 karat yellow gold. Dainty floral motifs make this an elegant set', 0, 400000, 400000, 5, '2022-04-14 07:22:41', 1, 'Female', 55, '2022-05-15 09:36:01', '2022-04-14 07:22:41'),
 (39, 9, 'Thangam Gift Card', 12, 'upload/images/8999-2022-04-14.jpg', 'Gift Card', 1, 49500, 50000, 17, '2022-04-14 07:26:07', 1, 'Female', 1, NULL, '2022-04-14 07:26:07'),
-(40, 9, 'Thangam Jewelry Gift Card', 12, 'upload/images/4383-2022-04-14.jpg', '', 1, 25000, 25000, 5, '2022-04-14 07:27:48', 1, 'Female', 1, NULL, '2022-04-14 07:27:48'),
+(40, 9, 'SABARI Jewelry Gift Card', 12, 'upload/images/4383-2022-04-14.jpg', '', 1, 25000, 25000, 5, '2022-04-14 07:27:48', 1, 'Female', 1, '2022-05-28 10:39:29', '2022-04-14 07:27:48'),
 (41, 11, 'DIAMOND PENDANT', 7, 'upload/images/9179-2022-04-18.png', 'Finding inspiration from the circle of life & love! Try on this chic gold pendant', 1, 15360, 16000, 5, '2022-04-18 05:00:46', 1, 'Unisex', 7, '2022-04-18 05:01:44', '2022-04-18 05:00:46'),
 (42, 9, 'Chandra task1 jimikki', 3, 'upload/images/6669-2022-04-23.jpeg', 'Beautiful jimikkis for traditional look', 0, 83600, 88000, 10, '2022-04-23 14:55:36', 1, 'Female', 16, '2022-05-15 09:36:16', '2022-04-23 14:55:36'),
 (43, 9, 'Wedding Gift Card', 12, 'upload/images/1956-2022-04-24.jpg', '', 1, 100000, 100000, 20, '2022-04-24 05:44:58', 1, 'Unisex', 0, NULL, '2022-04-24 05:44:58'),
@@ -532,7 +576,15 @@ INSERT INTO `products` (`id`, `seller_id`, `name`, `category_id`, `image`, `desc
 (47, 9, 'Ring', 1, 'upload/images/2211-2022-05-23.jpg', '', 1, 25000, 25000, 7, '2022-05-23 09:22:37', 1, 'Female', 5, NULL, '2022-05-23 09:22:37'),
 (48, 9, 'Stud', 3, 'upload/images/4412-2022-05-23.jpg', '', 1, 25000, 25000, 7, '2022-05-23 09:22:37', 1, 'Female', 5, '2022-05-23 09:26:11', '2022-05-23 09:22:37'),
 (49, 9, 'Stone Bangle', 5, 'upload/images/4828-2022-05-25.jpg', '', 1, 198000, 200000, 8, '2022-05-24 19:53:46', 1, 'Female', 19, NULL, '2022-05-24 19:53:46'),
-(50, 9, 'Necklace', 6, 'upload/images/6827-2022-05-25.jpg', '', 1, 300000, 300000, 8, '2022-05-24 19:55:35', 1, 'Female', 14, NULL, '2022-05-24 19:55:35');
+(50, 9, 'Necklace', 6, 'upload/images/6827-2022-05-25.jpg', '', 1, 300000, 300000, 8, '2022-05-24 19:55:35', 1, 'Female', 14, NULL, '2022-05-24 19:55:35'),
+(52, 9, 'Mangalyam', 8, 'upload/images/8425-2022-05-29.jpg', 'Traditional and trendy!! ', 1, 50000, 50000, 8, '2022-05-29 05:37:29', 1, 'Female', 15, NULL, '2022-05-29 05:37:29'),
+(53, 9, 'Gold Coin Peacock', 11, 'upload/images/8488-2022-05-29.jpg', 'Beautiful Peacock Design', 1, 98010, 99000, 5, '2022-05-29 05:57:42', 1, 'Unisex', 20, NULL, '2022-05-29 05:57:42'),
+(54, 9, 'Necklace SEt', 10, 'upload/images/6331-2022-06-03.jpg', '', 1, 297000, 300000, 3, '2022-06-02 19:11:17', 1, 'Female', 50, NULL, '2022-06-02 19:11:17'),
+(55, 9, 'Necklace Set', 10, 'upload/images/3284-2022-06-03.jpg', '', 1, 19800, 20000, 5, '2022-06-02 19:12:45', 1, 'Female', 50, NULL, '2022-06-02 19:12:45'),
+(56, 9, 'Necklace Set', 10, 'upload/images/2837-2022-06-03.jpg', '', 1, 99, 100, 5, '2022-06-02 19:19:57', 1, 'Female', 50, NULL, '2022-06-02 19:19:57'),
+(57, 9, 'Necklace Set', 10, 'upload/images/2072-2022-06-03.jpg', '', 1, 99, 100, 5, '2022-06-02 19:21:49', 1, 'Female', 40, NULL, '2022-06-02 19:21:49'),
+(58, 1, 'fdfef', 2, 'upload/images/8505-2022-06-06.png', 'ht56', 1, 70, 200, 565, '2022-06-06 14:03:53', 1, 'Female', 4, NULL, '2022-06-06 14:03:53'),
+(59, 1, 'trt', 2, 'upload/images/4273-2022-06-06.png', 'fdfrff', 1, 433.2, 456, 4, '2022-06-06 14:04:45', 1, 'Female', 10, NULL, '2022-06-06 14:04:45');
 
 -- --------------------------------------------------------
 
@@ -576,12 +628,14 @@ CREATE TABLE `seller` (
 --
 
 INSERT INTO `seller` (`id`, `name`, `store_name`, `email`, `mobile`, `password`, `store_url`, `logo`, `store_description`, `street`, `pincode`, `city`, `state`, `account_number`, `bank_ifsc_code`, `account_name`, `bank_name`, `status`, `last_updated`, `date_created`, `national_identity_card`, `address_proof`, `pan_number`, `gst_number`, `latitude`, `longitude`, `valid`, `plan`) VALUES
-(1, 'JP', 'Jewel Shop', 'jp@gmail.com', '9876543210', 'e807f1fcf82d132f9bb018ca6738a19f', 'https://www.apple.com/in/', '1648975386.2208.jpg', 'JPMart Gold Seller\r\n', 'Kalyan Jewellers, APHB Colony, Kukatpally, Hyderabad, Telangana 500072, India', '612503', 'Kumbakonam', 'Tamil Nadu', '34325325235', 'TRGRGRGG', 'jp', 'Indian Bank', 1, '2022-04-29 07:28:33', '2021-12-24 19:08:33', '1648975386.2216.jpeg', '1648975386.2221.jpg', 'GNQPD6996D', '1234', '17.4855015', '78.4105536', '2022-05-29', 'basic-monthly'),
+(1, 'JP', 'Jewel Shop', 'jp@gmail.com', '9876543210', 'e807f1fcf82d132f9bb018ca6738a19f', 'https://www.apple.com/in/', '1648975386.2208.jpg', 'JPMart Gold Seller\r\n', 'Kalyan Jewellers, APHB Colony, Kukatpally, Hyderabad, Telangana 500072, India', '612503', 'Kumbakonam', 'Tamil Nadu', '34325325235', 'TRGRGRGG', 'jp', 'Indian Bank', 1, '2022-06-02 10:41:00', '2021-12-24 19:08:33', '1648975386.2216.jpeg', '1648975386.2221.jpg', 'GNQPD6996D', '1234', '17.4855015', '78.4105536', '2022-07-02', 'basic-monthly'),
 (5, 'SuperGoldMart', 'Super Gold Mart', 'subha.sellimuthu@gmail.com', '9655790843', '25d55ad283aa400af464c76d713c07ad', '', '1648975535.6976.jpg', 'test', 'Coimbatore, Tamil Nadu 641015, India', '876653', 'cbe', 'Tamil Nadu', '', '', '', '', 1, '2022-04-03 08:45:35', '2022-03-17 13:19:33', '1648975535.701.jpeg', '1648975535.7018.jpg', '76439876', NULL, '11.0076142', '77.0132643', '2023-10-10', '0'),
 (8, 'PD Shop', 'Shop', 'prasad@gmail.com', '8778624681', '25d55ad283aa400af464c76d713c07ad', '', '1648300727.0855.png', 'Test', 'test', '612503', 'Kumbakonam', 'Tamil Nadu', '', '', '', '', 2, '2022-04-05 19:24:52', '2022-03-26 13:18:47', '1648300727.086.png', '1648300727.0863.png', '23243454', NULL, '10.9601852', '79.3844976', '', NULL),
-(9, 'Sabari Jewels', 'Sabari Jewels', 's_subha@hotmail.com', '9944017666', 'cc03e747a6afbbcbf8be7668acfebee5', 'https://www.facebook.com/Sabari-Diamonds-Jewels-299406417209839/', '1653294813.675.png', 'The best jewelry in the world', '1, east street', '641028', 'coimbatore', 'Tamil Nadu', '', '', '', '', 1, '2022-05-24 05:22:29', '2022-03-27 08:20:46', '1648372706.0891.jpeg', '1648372706.0898.jpg', '7896549', '123456788990', '11.0126517', '77.0017465', '2022-06-23', 'basic-monthly'),
-(10, 'Chandra', 'Chand Jewellers', 'cppsgcas@gmail.com', '7204323367', '97da1ae5301b259baa5b080b71c47c18', '', '1650103619.7903.jpg', 'Unique designs an affordable cost', '1, cross cut street', '641012', 'Coimbatore', 'Tamil Nadu', '', '', '', '', 1, '2022-05-23 09:11:51', '2022-04-16 10:06:59', '1650103619.7908.jpg', '1650103619.7912.jpg', 'AP1234543', '12345678', '-1', '14', '2023-05-22', 'premium-annually'),
-(11, 'Vijay', 'Jos Alukkas', 'vjdeveloper2020@gmail.com', '9751665327', 'ba59d642c891bca824b843ed9986d958', 'https://www.josalukkasonline.com/', '1650256797.1784.jpg', 'A Tradition Of Fine Jewellery', 'Keezha raja Veedhi, Melaraja Vidi, Brindavan, Tamil Nadu 622001, India', '622001', 'Pudukkottai', 'Tamil Nadu', '1234567890', 'TEST1234', 'Vijay', 'Test Bank of India', 1, '2022-04-20 09:45:09', '2022-04-18 04:39:57', '1650256797.179.jpg', '1650256797.1793.jpg', 'AKKPI6289', '12345678', '10.3831671', '78.82189559999999', '2022-05-18', 'free-trial');
+(9, 'Sabari Jewels', 'Sabari Jewels', 's_subha@hotmail.com', '9944017666', 'cc03e747a6afbbcbf8be7668acfebee5', 'https://www.facebook.com/Sabari-Diamonds-Jewels-299406417209839/', '1653294813.675.png', 'The best jewelry in the world', '1, east street', '641028', 'coimbatore', 'Tamil Nadu', '', '', 'admin@gmail.com', '', 1, '2022-05-28 10:27:05', '2022-03-27 08:20:46', '1648372706.0891.jpeg', '1648372706.0898.jpg', '7896549', '123456788990', '11.0126517', '77.0017465', '2023-05-27', 'premium-annually'),
+(10, 'Chandra', 'Chand Jewellers', 'cppsgcas@gmail.com', '7204323367', '97da1ae5301b259baa5b080b71c47c18', '', '1650103619.7903.jpg', 'Unique designs an affordable cost', '1, cross cut street', '641012', 'Coimbatore', 'Tamil Nadu', '', '', 'admin@gmail.com', '', 0, '2022-06-02 20:42:58', '2022-04-16 10:06:59', '1650103619.7908.jpg', '1650103619.7912.jpg', 'AP1234543', '12345678', '-1', '14', '2023-05-27', 'deluxe-annually'),
+(11, 'Vijay', 'Jos Alukkas', 'vjdeveloper2020@gmail.com', '9751665327', 'ba59d642c891bca824b843ed9986d958', 'https://www.josalukkasonline.com/', '1650256797.1784.jpg', 'A Tradition Of Fine Jewellery', 'Keezha raja Veedhi, Melaraja Vidi, Brindavan, Tamil Nadu 622001, India', '622001', 'Pudukkottai', 'Tamil Nadu', '1234567890', 'TEST1234', 'Vijay', 'Test Bank of India', 1, '2022-05-29 09:54:15', '2022-04-18 04:39:57', '1650256797.179.jpg', '1650256797.1793.jpg', 'AKKPI6289', '12345678', '10.3831671', '78.82189559999999', '2022-06-28', 'basic-monthly'),
+(12, 'Suman Jewellery', 'Suman Jewellery', 'suman@gmail.com', '9751644898', 'cc03e747a6afbbcbf8be7668acfebee5', 'http://sumanjewellery.in/', '1653733159.3132.png', 'Finest collection encrusted with years and years of meticulous artistry and craftsmanship', '25, 11th St, Tatabad, Gandhipuram, Tamil Nadu 641012, India', '641012', 'Gandhipuram', 'Tamil Nadu', '112233445566', 'HDFC00012', 'admin@gmail.com', 'HDFC', 1, '2022-05-28 10:25:10', '2022-05-28 10:19:19', '1653733159.3136.jpeg', '1653733159.3139.jpg', 'AAAPZ1234C', '1865437839', '11.0179308', '76.9628209', '2023-05-27', 'premium-annually'),
+(13, 'Sumangali Jewellers', 'Sumangali Jewellery', 'sumangali@gmail.com', '9655790854', 'cc03e747a6afbbcbf8be7668acfebee5', 'http://sumangalijewellery.in/', '1653804679.425.png', 'A leading and largest jewellery store', '380, Cross Cut Rd, near GRT Jewellers, Peranaidu Layout, Ram Nagar, Gandhipuram, Tamil Nadu 641012, India', '641012', 'Gandhipuram', 'Tamil Nadu', '', '', 'admin@gmail.com', '', 1, NULL, '2022-05-29 06:11:19', '1653804679.4254.jpeg', '1653804679.4257.jpg', 'AAAPZ1234D', '1865437839', '11.0168899', '76.96236499999999', '2023-05-28', 'premium-annually');
 
 -- --------------------------------------------------------
 
@@ -603,6 +657,24 @@ CREATE TABLE `settings` (
 
 INSERT INTO `settings` (`id`, `price`, `days`, `last_updated`, `date_created`) VALUES
 (1, 500, 1, '2022-05-09 16:26:35', '2022-04-07 11:31:45');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `today_gold`
+--
+
+CREATE TABLE `today_gold` (
+  `id` int(11) NOT NULL,
+  `price` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `today_gold`
+--
+
+INSERT INTO `today_gold` (`id`, `price`) VALUES
+(1, 3000);
 
 -- --------------------------------------------------------
 
@@ -634,11 +706,20 @@ INSERT INTO `users` (`id`, `name`, `mobile`, `email`, `last_updated`, `date_crea
 (8, 'Ankit Gabani', '7096859504', 'gabani7004@gmail.com', NULL, '2022-05-01 12:52:25'),
 (9, 'chandra sekar', '9894910000', 'geekaygroups@gmail.com', NULL, '2022-05-07 08:03:40'),
 (10, 'asdasd', '7081309853', 'asdasd@gmail.com', NULL, '2022-05-21 20:45:33'),
-(11, 'Prueba', '9876543210', 'prueba@gmail.com', NULL, '2022-05-22 12:47:28'),
+(11, 'Prueba23', '9876543210', 'test@gmail.com', '2022-06-03 04:03:44', '2022-05-22 12:47:28'),
 (12, 'Sara', '9444038834', 'sara@hotmail.com', NULL, '2022-05-25 19:28:41'),
 (13, 'mkm', 'oiiuuyytr', 'tvvy@gmail.com', NULL, '2022-05-26 00:10:49'),
 (14, 'mkm', 'oiiuuyytr0', '909vy@gmail.com', NULL, '2022-05-26 00:11:07'),
-(15, 'sfsd', '0poiuytrew', 'asd@gmail.com', NULL, '2022-05-26 00:12:08');
+(15, 'sfsd', '0poiuytrew', 'asd@gmail.com', NULL, '2022-05-26 00:12:08'),
+(16, 'PRueba', '8728963926', 'prueba@gmail.com', NULL, '2022-05-26 04:45:27'),
+(17, 'Prueba', '7428730894', 'prueba@gmail.com', NULL, '2022-05-27 01:58:53'),
+(18, 'Prueba', '7428731249', 'prueba@gmail.com', NULL, '2022-05-27 15:16:53'),
+(19, 'Prueba', '7428723247', 'nuevo@gmail.com', NULL, '2022-05-27 19:57:05'),
+(20, 'Junior', '7235083526', 'jmcf@gmail.com', NULL, '2022-05-27 20:02:23'),
+(21, 'Krueba', '7237897654', 'kk@gmail.com', NULL, '2022-05-27 20:44:51'),
+(22, 'KRUEBA2', '7707909733', 'Pruebaq@gmail.com', NULL, '2022-05-27 21:13:41'),
+(23, 'Rpueba', '9506543991', 'rpeuba@gmail.com', NULL, '2022-06-03 16:23:42'),
+(24, 'Prueba', '7617046325', 'prueba@gmail.com', NULL, '2022-06-03 17:07:51');
 
 --
 -- Indexes for dumped tables
@@ -741,6 +822,12 @@ ALTER TABLE `settings`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `today_gold`
+--
+ALTER TABLE `today_gold`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -754,7 +841,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `address`
 --
 ALTER TABLE `address`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `admin`
@@ -778,7 +865,7 @@ ALTER TABLE `budget`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=122;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=145;
 
 --
 -- AUTO_INCREMENT for table `category`
@@ -802,13 +889,13 @@ ALTER TABLE `nickname`
 -- AUTO_INCREMENT for table `offers`
 --
 ALTER TABLE `offers`
-  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `offer_lock`
 --
 ALTER TABLE `offer_lock`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `offer_lock_status`
@@ -820,7 +907,7 @@ ALTER TABLE `offer_lock_status`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 
 --
 -- AUTO_INCREMENT for table `plans`
@@ -832,13 +919,13 @@ ALTER TABLE `plans`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
 
 --
 -- AUTO_INCREMENT for table `seller`
 --
 ALTER TABLE `seller`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `settings`
@@ -847,10 +934,16 @@ ALTER TABLE `settings`
   MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT for table `today_gold`
+--
+ALTER TABLE `today_gold`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
