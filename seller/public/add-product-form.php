@@ -96,6 +96,14 @@ pointer-events:none;
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group packate_div">
+                                        <label for="gst">GST:</label> <i class="text-danger asterik">*</i>
+                                        <input type="number" step="any" min='0' class="form-control gst" name="gst" id="gst" required />
+                                    </div>
+                                </div>
+                        </div>
+                        <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group packate_div">
                                         <label for="discounted_price">Discount In (%):</label>
                                         <input type="number" step="any" min='0' class="form-control discounted_percentage" name="discounted_percentage"  id="discounted_percentage" />
                                     </div>

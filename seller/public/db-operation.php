@@ -312,6 +312,7 @@ if (isset($_POST['add_product'])  && !empty($_POST['add_product'])) {
     $status = $db->escapeString($_POST['status']);
     $stock = $db->escapeString($_POST['stock']);
     $price= $db->escapeString($_POST['price']);
+    $gst= $db->escapeString($_POST['gst']);
     $gender= $db->escapeString($_POST['gender']);
     $weight = (isset($_POST['weight']) && $_POST['weight'] != "") ? $db->escapeString($_POST['weight']) : 0;
     $discounted_price = (isset($_POST['discounted_price']) && $_POST['discounted_price'] != "") ? $db->escapeString($_POST['discounted_price']) : "";
@@ -354,7 +355,7 @@ if (isset($_POST['add_product'])  && !empty($_POST['add_product'])) {
         $upload_image = 'upload/images/' . $image;
 
         // insert new data to product table
-        $sql = "INSERT INTO products (name,seller_id,category_id,image,description,is_approved,status,price,discounted_price,stock,weight,gender) VALUES('$name','$seller_id','$category_id','$upload_image','$description','$is_approved','$status',$price,$discounted_price,$stock,$weight,'$gender')";
+        $sql = "INSERT INTO products (name,seller_id,category_id,image,description,is_approved,status,price,gst,discounted_price,stock,weight,gender) VALUES('$name','$seller_id','$category_id','$upload_image','$description','$is_approved','$status',$price,$gst,$discounted_price,$stock,$weight,'$gender')";
         $db->sql($sql);
         $product_result = $db->getResult();
 

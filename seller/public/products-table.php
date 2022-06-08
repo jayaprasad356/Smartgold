@@ -71,6 +71,7 @@
                                 <th data-field="weight" data-sortable="true">Weight</th>
                                 <th data-field="gender" data-sortable="true">Gender</th>
                                 <th data-field="price" data-sortable="true">Price</th>
+                                <th data-field="gst" data-sortable="true">GST</th>
                                 <th data-field="discounted_price" data-sortable="true">D.Price</th>
                                 
                                 <th data-field="status" data-sortable="true">Status</th>

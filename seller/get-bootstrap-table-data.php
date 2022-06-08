@@ -417,7 +417,7 @@ if (isset($_GET['table']) && $_GET['table'] == 'products') {
         $tempRow['category_name'] = $row['category_name'];
         
         $tempRow['price'] = $currency . " " . $row['price'];
-        
+        $tempRow['gst'] = $row['gst'];
 
         $tempRow['status'] = ($row['status'] == 1)? "<label class='text-success'>Active</label>": (($row['status'] == 0)? "<label class='text-danger'>Deactive</label>": "<label class='label label-warning'>Deactive</label>");
         $tempRow['description'] = $row['description'];

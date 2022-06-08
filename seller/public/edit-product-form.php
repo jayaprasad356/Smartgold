@@ -18,6 +18,7 @@ if (isset($_POST['btnUpdate'])) {
     $status = $db->escapeString($_POST['status']);
     $stock = $db->escapeString($_POST['stock']);
     $price= $db->escapeString($_POST['price']);
+    $gst= $db->escapeString($_POST['gst']);
     $discounted_price = (isset($_POST['discounted_price']) && $_POST['discounted_price'] != "") ? $db->escapeString($_POST['discounted_price']) : "";
     $category_id = $db->escapeString($_POST['category_id']);
     $gender= $db->escapeString($_POST['gender']);
@@ -82,12 +83,12 @@ if (isset($_POST['btnUpdate'])) {
             // upload new image
             $upload = move_uploaded_file($_FILES['image']['tmp_name'], '../upload/images/' . $image);
             $upload_image = 'upload/images/' . $image;
-            $sql_query = "UPDATE products SET name = '$name' ,seller_id= '$seller_id',category_id= '$category_id',image = '$upload_image',description = '$description' ,status = '$status' , price = '$price', discounted_price = '$discounted_price', stock = '$stock', gender = '$gender', weight = '$weight' WHERE id = $product_id";
+            $sql_query = "UPDATE products SET name = '$name' ,seller_id= '$seller_id',category_id= '$category_id',image = '$upload_image',description = '$description' ,status = '$status' , price = '$price', gst = '$gst', discounted_price = '$discounted_price', stock = '$stock', gender = '$gender', weight = '$weight' WHERE id = $product_id";
             
 
         }
         else{
-            $sql_query = "UPDATE products SET name = '$name' ,seller_id= '$seller_id',category_id= '$category_id',description = '$description' ,status = '$status' , price = '$price', discounted_price = '$discounted_price', stock = '$stock', gender = '$gender', weight = '$weight' WHERE id = $product_id";
+            $sql_query = "UPDATE products SET name = '$name' ,seller_id= '$seller_id',category_id= '$category_id',description = '$description' ,status = '$status' , price = '$price', gst = '$gst', discounted_price = '$discounted_price', stock = '$stock', gender = '$gender', weight = '$weight' WHERE id = $product_id";
             
 
         }
@@ -199,6 +200,14 @@ pointer-events:none;
                                         <input type="number" step="any" min='0' class="form-control price" value="<?php echo $res[0]['price'] ?>" name="price" id="price" required />
                                     </div>
                                 </div>
+                                <div class="col-md-4">
+                                    <div class="form-group packate_div">
+                                        <label for="gst">GST:</label> <i class="text-danger asterik">*</i>
+                                        <input type="number" step="any" min='0' class="form-control gst" value="<?php echo $res[0]['gst'] ?>" name="gst" id="gst" required />
+                                    </div>
+                                </div>
+                        </div>
+                        <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group packate_div">
                                         <label for="discounted_percentage">Discount In (%):</label>
