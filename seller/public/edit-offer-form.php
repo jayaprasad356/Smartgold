@@ -20,10 +20,20 @@ if (isset($_POST['btnUpdate'])) {
     $valid = $db->escapeString($_POST['valid']);
     $claim = $db->escapeString($_POST['claim']);
     $description = $db->escapeString($_POST['description']);
-    $error = array();
-    $sql_query = "UPDATE offers SET gram_price = '$ppg', budget_id = '$budget_id', wastage = '$wastage', max_locked = '$maxilock', status = '$status', valid_date = '$valid',claim_validity = '$claim', description = '$description' WHERE id = $offer_id";
-    $db->sql($sql_query);
-    $error['update_data'] = "<span id='success' class='label label-success'>Offer Updated Successfully</span>";
+    $claimstr=strtotime($claim);
+    $validstr=strtotime($valid);
+
+    if($validstr > $claimstr)
+    {
+        $error['update_data'] = " <span class='label label-danger'>Claim date should be greater than valid date</span>";
+        
+    }else{
+        $error = array();
+        $sql_query = "UPDATE offers SET gram_price = '$ppg', budget_id = '$budget_id', wastage = '$wastage', max_locked = '$maxilock', status = '$status', valid_date = '$valid',claim_validity = '$claim', description = '$description' WHERE id = $offer_id";
+        $db->sql($sql_query);
+        $error['update_data'] = "<span id='success' class='label label-success'>Offer Updated Successfully</span>";
+    }
+
 }
 $sql_query = "SELECT * FROM offers WHERE id = '$offer_id'";
 $db->sql($sql_query);
@@ -103,7 +113,7 @@ $resbudget = $db->getResult();
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Valid Date</label> <i class="text-danger asterik">*</i><?php echo isset($error['valid']) ? $error['valid'] : ''; ?>
-                                    <input type="date" class="form-control" id="valid" name="valid" value="<?php echo $res[0]['valid_date'] ?>" required>
+                                    <input type="date" class="form-control" id="valid" name="valid" value="<?php echo $res[0]['valid_date'] ?>" readonly>
                                 </div>
                             </div>
                         </div>

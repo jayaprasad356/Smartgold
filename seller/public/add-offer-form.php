@@ -138,7 +138,12 @@ $res = $db->getResult();
         
         if ($("#add_offer_form").validate().form()) {
             if(document.getElementById("wastage").value != '' || document.getElementById("pricegram").value != ''){
-                $.ajax({
+                claimdate = document.getElementById('claim').valueAsDate;
+                validdate = document.getElementById('valid').valueAsDate;
+                if(new Date(validdate) > new Date(claimdate)){
+                    alert("Claim date should be greater than valid date");
+                }else{
+                    $.ajax({
                     type: 'POST',
                     url: $(this).attr('action'),
                     data: formData,
@@ -167,7 +172,9 @@ $res = $db->getResult();
                         setTimeout(showpanel, 3000)
                         
                     }
-                });
+                }); 
+                }
+
 
             }else{
                 alert("Enter Atleast Wastage or Discount Per gram")

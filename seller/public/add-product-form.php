@@ -18,11 +18,6 @@ $db->sql($sql_query);
 $res = $db->getResult();
 
 ?>
-<style>
-    .disable{
-pointer-events:none;
-}
-</style>
 <section class="content-header">
     <h1>Add Product</h1>
     <?php echo isset($error['add_menu']) ? $error['add_menu'] : ''; ?>
@@ -49,6 +44,7 @@ pointer-events:none;
                 <form id='add_product_form' action="public/db-operation.php" method="post" enctype="multipart/form-data">
                     <input type="hidden" id="add_product" name="add_product" required="" value="1" aria-required="true">
                     <input type="hidden" id="seller_id" name="seller_id" required="" value="<?php echo $ID ?>" aria-required="true">
+                    <input type="hidden" id="todayprice" name="todayprice" required="" value="<?php echo $res[0]['price'] ?>" aria-required="true">
                     <div class="box-body">
                         <div class="row">
                             <div class="col-md-6">
@@ -72,36 +68,40 @@ pointer-events:none;
 
 
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                     <div class="form-group packate_div">
                                         <label for="qty">Stock:</label> <i class="text-danger asterik">*</i>
                                         <input type="number" step="any" min="0" class="form-control" name="stock" required="" />
                                     </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                     <div class="form-group packate_div">
                                         <label for="weight">Gross Weight (in grams)</label><i class="text-danger asterik">*</i>
-                                        <input type="number" step="any" min='0' class="form-control" name="weight" id="weight" required />
+                                        <input type="number" step="any" min='0' class="form-control weight" name="weight" id="weight" required />
                                     </div>
                             </div>
 
 
+
                         </div>
                         <div class="row">
-                                <div class="col-md-4">
+                            <div class="col-md-4">
                                     <div class="form-group packate_div">
-                                        <label for="price">Price (₹):</label> <i class="text-danger asterik">*</i>
-                                        <input type="number" step="any"  value="<?php echo $res[0]['price'] ?>" min='0' class="form-control price" name="price" id="price" required />
+                                        <label for="weight"> Stone Detail Price</label><i class="text-danger asterik">*</i>
+                                        <input type="number" step="any" min='0' class="form-control detail_price" name="detail_price" id="detail_price" required />
                                     </div>
-                                </div>
-                                <div class="col-md-4">
+                            </div>
+                            <div class="col-md-4">
                                     <div class="form-group packate_div">
-                                        <label for="gst">GST:</label> <i class="text-danger asterik">*</i>
-                                        <input type="number" step="any" min='0' class="form-control gst" name="gst" id="gst" required />
+                                        <label for="weight"> Making Charges (%)</label><i class="text-danger asterik">*</i>
+                                        <input type="number" step="any" min='0' class="form-control mcharges" name="making_charges" id="making_charges" required />
                                     </div>
-                                </div>
+                            </div>
+
                         </div>
+
                         <div class="row">
+
                                 <div class="col-md-4">
                                     <div class="form-group packate_div">
                                         <label for="discounted_price">Discount In (%):</label>
@@ -110,8 +110,29 @@ pointer-events:none;
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group packate_div">
+                                        <label for="gst">GST(%):</label> <i class="text-danger asterik">*</i>
+                                        <input type="number" step="any" min='0' value="3" class="form-control gst" name="gst" id="gst" required />
+                                    </div>
+                                </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <p class="text-danger">Today Gold Price : ₹<b><?php echo $res[0]['price'] ?></b>/gram</p>
+                            </div>
+                            
+                        </div>
+                        <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group packate_div">
+                                        <label for="price">Total Price (₹):</label>
+                                        <input type="number" step="any"  min='0' class="form-control price" name="price" id="price" readonly required />
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group packate_div">
                                         <label for="discounted_price">Discounted Price(₹):</label>
-                                        <input type="number" step="any" min='0' class="form-control disable" name="discounted_price" value="" id="discounted_price" />
+                                        <input type="number" step="any" min='0' class="form-control discounted_price" name="discounted_price" value="" id="discounted_price" readonly />
                                     </div>
                                 </div>
                         </div>
@@ -195,42 +216,147 @@ pointer-events:none;
             }
         }
 </script>
+<script>
+    function setTotal(){
+        let weight = $('#weight').val();
+        let todayprice = $('#todayprice').val(); 
+        let making_charges = $('#making_charges').val(); 
+        let gst = $('#gst').val(); 
+        let discountedpercent = $('#discounted_percentage').val(); 
+        let detail_price = $('#detail_price').val(); 
+        if(discountedpercent == ''){
+            discountedpercent = 0;
+        }
+        if(weight != '' && todayprice != '' && making_charges != '' && gst != '' && detail_price != ''){
+            let weightprice,makeprice,gstprice,totalprice,grandtotal,discountedprice,finaltotal,billingtotal,actualtotal,actualgstprice;
+            weightprice = (parseFloat(weight) * parseFloat(todayprice)).toFixed(2);
+            makeprice = parseFloat(making_charges)/100 * parseFloat(weightprice);
+            totalprice = parseFloat(weightprice) + parseFloat(makeprice);
+            grandtotal = parseFloat(totalprice) + parseFloat(detail_price);
+            discountedprice = parseFloat(discountedpercent)/100 * parseFloat(grandtotal);
+            finaltotal = parseFloat(grandtotal) - parseFloat(discountedprice);
+            gstprice = parseFloat(gst)/100 * parseFloat(finaltotal);
+            billingtotal = parseFloat(finaltotal) + parseFloat(gstprice);
+            actualgstprice = parseFloat(gst)/100 * parseFloat(grandtotal);
+            actualtotal = parseFloat(grandtotal) + parseFloat(actualgstprice);
+
+            $('#price').val(actualtotal);
+            $('#discounted_price').val(billingtotal);
+
+        }
+        else{
+            $('#price').val('');
+            $('#discounted_price').val('');
+
+        }
+
+    }
+</script>
 
 <script>
+    $(document).on('input', '.weight', function(){
+        setTotal();
+
+
+    });
+    $(document).on('input', '.detail_price', function(){
+        setTotal();
+
+
+    });
+    $(document).on('input', '.mcharges', function(){
+        setTotal();
+
+
+    });
     $(document).on('input', '.discounted_percentage', function(){
-        let dp = $('#discounted_percentage').val();
-        let price = $('#price').val(); 
-        if(price != '' && dp != ''){
-            var sale;
-            sale = calculateSale(price, dp);
-            $('#discounted_price').val(sale);
+        setTotal();
 
-        }
-        else{
-            $('#discounted_price').val('');
-
-        }
 
     });
-    $(document).on('input', '.price', function(){
-        let dp = $('#discounted_percentage').val();
-        let price = $('#price').val(); 
-        if(price != '' && dp != ''){
-            var sale;
-            sale = calculateSale(price, dp);
-            $('#discounted_price').val(sale);
+    $(document).on('input', '.gst', function(){
+        setTotal();
 
-        }
-        else{
-            $('#discounted_price').val('');
 
-        }
     });
-    const calculateSale = (listPrice, discount) => {
-        listPrice = parseFloat(listPrice);
-        discount  = parseFloat(discount);
-        return (listPrice - ( listPrice * discount / 100 )).toFixed(2); // Sale price
-    }
+    // $(document).on('input', '.mcharges', function(){
+    //     let mcharges = $('#mcharges').val();
+    //     let todayprice = $('#todayprice').val();
+    //     let weight = $('#weight').val();
+    //     let todayprice = $('#todayprice').val();  
+
+    //     if(weight != '' && todayprice != '' && mcharges != '' && price != ''){
+    //         var totalprice;
+    //         totalprice = (parseFloat(weight) * parseFloat(todayprice)).toFixed(2);
+    //         $('#price').val(totalprice);
+
+    //     }
+    //     else{
+    //         $('#price').val('');
+
+    //     }
+
+    // });
+    // $(document).on('input', '.discounted_percentage', function(){
+    //     let dp = $('#discounted_percentage').val();
+    //     let price = $('#price').val(); 
+    //     let gst = $('#gst').val(); 
+
+    //     if(price != '' && dp != ''&& gst != ''){
+    //         var sale,gstval,discount;
+    //         sale = calculateSale(price, dp);
+    //         gstval = gst / 100 * sale;
+    //         discount = parseFloat(sale) + parseFloat(gstval);
+    //         $('#discounted_price').val(discount);
+
+    //     }
+    //     else{
+    //         $('#discounted_price').val('');
+
+    //     }
+
+    // });
+    // $(document).on('input', '.price', function(){
+    //     let dp = $('#discounted_percentage').val();
+    //     let price = $('#price').val(); 
+    //     let gst = $('#gst').val(); 
+
+    //     if(price != '' && dp != ''&& gst != ''){
+    //         var sale,gstval,discount;
+    //         sale = calculateSale(price, dp);
+    //         gstval = gst / 100 * sale;
+    //         discount = parseFloat(sale) + parseFloat(gstval);
+    //         $('#discounted_price').val(discount);
+
+    //     }
+    //     else{
+    //         $('#discounted_price').val('');
+
+    //     }
+    // });
+    // $(document).on('input', '.gst', function(){
+    //     let dp = $('#discounted_percentage').val();
+    //     let price = $('#price').val(); 
+    //     let gst = $('#gst').val(); 
+
+    //     if(price != '' && dp != ''&& gst != ''){
+    //         var sale,gstval,discount;
+    //         sale = calculateSale(price, dp);
+    //         gstval = gst / 100 * sale;
+    //         discount = parseFloat(sale) + parseFloat(gstval);
+    //         $('#discounted_price').val(discount);
+
+    //     }
+    //     else{
+    //         $('#discounted_price').val('');
+
+    //     }
+    // });
+    // const calculateSale = (listPrice, discount) => {
+    //     listPrice = parseFloat(listPrice);
+    //     discount  = parseFloat(discount);
+    //     return (listPrice - ( listPrice * discount / 100 )).toFixed(2); // Sale price
+    // }
 </script>
 
 <script>

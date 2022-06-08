@@ -254,6 +254,14 @@ if (isset($_POST['add_offer'])  && !empty($_POST['add_offer'])) {
     $valid = $db->escapeString($_POST['valid']);
     $claim = $db->escapeString($_POST['claim']);
     $description = $db->escapeString($_POST['description']);
+    $claimstr=strtotime($claim);
+    $validstr=strtotime($valid);
+
+    if($validstr > $claimstr)
+    {
+        echo " <span class='label label-danger'>Claim Date Should Not Less than Valid Date</span>";
+        return false;
+    }
 
 
 
